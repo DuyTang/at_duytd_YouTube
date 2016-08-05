@@ -25,6 +25,8 @@
 		F39A2CD31D5512BB003FC772 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CD21D5512BB003FC772 /* APIRequest.swift */; };
 		F39A2CD51D5512F1003FC772 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CD41D5512F1003FC772 /* UIColor.swift */; };
 		F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CD61D551309003FC772 /* AppDefine.swift */; };
+		F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CE21D551745003FC772 /* Neutra Text TF Light Demi.ttf */; };
+		F39A2CE51D551745003FC772 /* ufont.otf in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CE31D551745003FC772 /* ufont.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		F39A2CD21D5512BB003FC772 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		F39A2CD41D5512F1003FC772 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F39A2CD61D551309003FC772 /* AppDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
+		F39A2CE21D551745003FC772 /* Neutra Text TF Light Demi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Neutra Text TF Light Demi.ttf"; path = "../../../../../Define/Fonts/Neutra Text TF Light Demi.ttf"; sourceTree = "<group>"; };
+		F39A2CE31D551745003FC772 /* ufont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ufont.otf; path = ../../../../../Define/Fonts/ufont.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,10 @@
 		F39A2CA61D550F2C003FC772 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F39A2CDE1D5516FE003FC772 /* CategoryCell */,
+				F39A2CDF1D5516FE003FC772 /* FavoriteCell */,
+				F39A2CE01D5516FE003FC772 /* HistoryCell */,
+				F39A2CE11D5516FE003FC772 /* HomeCell */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -215,6 +223,12 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
+				F39A2CD91D5516AA003FC772 /* ContentViewController */,
+				F39A2CDA1D5516AA003FC772 /* DetailFavoriteController */,
+				F39A2CDB1D5516AA003FC772 /* DetailVideoController */,
+				F39A2CDC1D5516AA003FC772 /* FavoriteViewController */,
+				F39A2CDD1D5516AA003FC772 /* HistoryController */,
 				F39A2CBB1D5510E5003FC772 /* HomeViewController */,
 			);
 			path = ViewControllers;
@@ -223,6 +237,8 @@
 		F39A2CBA1D551072003FC772 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F39A2CE21D551745003FC772 /* Neutra Text TF Light Demi.ttf */,
+				F39A2CE31D551745003FC772 /* ufont.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -234,6 +250,76 @@
 				F39A2CBD1D5510F8003FC772 /* HomeViewController.xib */,
 			);
 			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddFavoriteViewController;
+			sourceTree = "<group>";
+		};
+		F39A2CD91D5516AA003FC772 /* ContentViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ContentViewController;
+			sourceTree = "<group>";
+		};
+		F39A2CDA1D5516AA003FC772 /* DetailFavoriteController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DetailFavoriteController;
+			sourceTree = "<group>";
+		};
+		F39A2CDB1D5516AA003FC772 /* DetailVideoController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DetailVideoController;
+			sourceTree = "<group>";
+		};
+		F39A2CDC1D5516AA003FC772 /* FavoriteViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FavoriteViewController;
+			sourceTree = "<group>";
+		};
+		F39A2CDD1D5516AA003FC772 /* HistoryController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HistoryController;
+			sourceTree = "<group>";
+		};
+		F39A2CDE1D5516FE003FC772 /* CategoryCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CategoryCell;
+			sourceTree = "<group>";
+		};
+		F39A2CDF1D5516FE003FC772 /* FavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FavoriteCell;
+			sourceTree = "<group>";
+		};
+		F39A2CE01D5516FE003FC772 /* HistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HistoryCell;
+			sourceTree = "<group>";
+		};
+		F39A2CE11D5516FE003FC772 /* HomeCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +386,8 @@
 			files = (
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
 				F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */,
+				F39A2CE51D551745003FC772 /* ufont.otf in Resources */,
+				F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */,
 				F39A2CBF1D5510F8003FC772 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
