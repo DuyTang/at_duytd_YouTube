@@ -27,6 +27,16 @@
 		F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CD61D551309003FC772 /* AppDefine.swift */; };
 		F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CE21D551745003FC772 /* Neutra Text TF Light Demi.ttf */; };
 		F39A2CE51D551745003FC772 /* ufont.otf in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CE31D551745003FC772 /* ufont.otf */; };
+		F39A2CE81D551AA9003FC772 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CE61D551AA9003FC772 /* HistoryViewController.swift */; };
+		F39A2CE91D551AA9003FC772 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CE71D551AA9003FC772 /* HistoryViewController.xib */; };
+		F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */; };
+		F39A2CED1D551AB7003FC772 /* FavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */; };
+		F3B097BD1D555E90000D9E84 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097BB1D555E90000D9E84 /* ContentViewController.swift */; };
+		F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097BC1D555E90000D9E84 /* ContentViewController.xib */; };
+		F3B097C11D5561CF000D9E84 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */; };
+		F3B097C21D5561CF000D9E84 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097C01D5561CF000D9E84 /* CategoryCell.xib */; };
+		F3B097C51D5562EB000D9E84 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097C31D5562EB000D9E84 /* HomeCell.swift */; };
+		F3B097C61D5562EB000D9E84 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097C41D5562EB000D9E84 /* HomeCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +64,16 @@
 		F39A2CD61D551309003FC772 /* AppDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		F39A2CE21D551745003FC772 /* Neutra Text TF Light Demi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Neutra Text TF Light Demi.ttf"; path = "../../../../../Define/Fonts/Neutra Text TF Light Demi.ttf"; sourceTree = "<group>"; };
 		F39A2CE31D551745003FC772 /* ufont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ufont.otf; path = ../../../../../Define/Fonts/ufont.otf; sourceTree = "<group>"; };
+		F39A2CE61D551AA9003FC772 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		F39A2CE71D551AA9003FC772 /* HistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
+		F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
+		F3B097BB1D555E90000D9E84 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		F3B097BC1D555E90000D9E84 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
+		F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		F3B097C01D5561CF000D9E84 /* CategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
+		F3B097C31D5562EB000D9E84 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		F3B097C41D5562EB000D9E84 /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +282,8 @@
 		F39A2CD91D5516AA003FC772 /* ContentViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F3B097BB1D555E90000D9E84 /* ContentViewController.swift */,
+				F3B097BC1D555E90000D9E84 /* ContentViewController.xib */,
 			);
 			path = ContentViewController;
 			sourceTree = "<group>";
@@ -283,6 +305,8 @@
 		F39A2CDC1D5516AA003FC772 /* FavoriteViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */,
+				F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */,
 			);
 			path = FavoriteViewController;
 			sourceTree = "<group>";
@@ -290,6 +314,8 @@
 		F39A2CDD1D5516AA003FC772 /* HistoryController */ = {
 			isa = PBXGroup;
 			children = (
+				F39A2CE61D551AA9003FC772 /* HistoryViewController.swift */,
+				F39A2CE71D551AA9003FC772 /* HistoryViewController.xib */,
 			);
 			path = HistoryController;
 			sourceTree = "<group>";
@@ -297,6 +323,8 @@
 		F39A2CDE1D5516FE003FC772 /* CategoryCell */ = {
 			isa = PBXGroup;
 			children = (
+				F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */,
+				F3B097C01D5561CF000D9E84 /* CategoryCell.xib */,
 			);
 			path = CategoryCell;
 			sourceTree = "<group>";
@@ -318,6 +346,8 @@
 		F39A2CE11D5516FE003FC772 /* HomeCell */ = {
 			isa = PBXGroup;
 			children = (
+				F3B097C31D5562EB000D9E84 /* HomeCell.swift */,
+				F3B097C41D5562EB000D9E84 /* HomeCell.xib */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -387,8 +417,13 @@
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
 				F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */,
 				F39A2CE51D551745003FC772 /* ufont.otf in Resources */,
+				F39A2CED1D551AB7003FC772 /* FavoriteViewController.xib in Resources */,
+				F3B097C61D5562EB000D9E84 /* HomeCell.xib in Resources */,
+				F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */,
 				F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */,
 				F39A2CBF1D5510F8003FC772 /* HomeViewController.xib in Resources */,
+				F3B097C21D5561CF000D9E84 /* CategoryCell.xib in Resources */,
+				F39A2CE91D551AA9003FC772 /* HistoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,9 +484,14 @@
 			files = (
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
+				F3B097C51D5562EB000D9E84 /* HomeCell.swift in Sources */,
+				F3B097BD1D555E90000D9E84 /* ContentViewController.swift in Sources */,
 				F39A2CBE1D5510F8003FC772 /* HomeViewController.swift in Sources */,
+				F39A2CE81D551AA9003FC772 /* HistoryViewController.swift in Sources */,
+				F3B097C11D5561CF000D9E84 /* CategoryCell.swift in Sources */,
 				F39A2CCF1D5511D6003FC772 /* BaseTabbarViewController.swift in Sources */,
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
+				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,
 				F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */,
 				F39A2CCD1D5511AE003FC772 /* BaseViewController.swift in Sources */,
