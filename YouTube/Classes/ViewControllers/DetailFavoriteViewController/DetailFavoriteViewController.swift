@@ -10,8 +10,8 @@ import UIKit
 
 class DetailFavoriteViewController: BaseViewController {
 
-    @IBOutlet weak var nameListFavoriteLabel: UILabel!
-    @IBOutlet weak var listVideoFavoriteTableView: UITableView!
+    @IBOutlet weak private var nameListFavoriteLabel: UILabel!
+    @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 

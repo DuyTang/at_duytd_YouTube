@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24E01A7442F83911BDB4C608 /* Pods_YouTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */; };
+		F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */; };
+		F37A0C5C1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */; };
 		F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CAC1D550F51003FC772 /* AppDelegate.swift */; };
 		F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB41D550FC0003FC772 /* Assets.xcassets */; };
 		F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB61D550FC7003FC772 /* LaunchScreen.storyboard */; };
@@ -41,12 +43,20 @@
 		F3B097DF1D557264000D9E84 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097DD1D557264000D9E84 /* HistoryViewController.xib */; };
 		F3B097E21D5572A2000D9E84 /* DetailFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097E01D5572A2000D9E84 /* DetailFavoriteViewController.swift */; };
 		F3B097E31D5572A2000D9E84 /* DetailFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097E11D5572A2000D9E84 /* DetailFavoriteViewController.xib */; };
+		F3B097E61D5575A5000D9E84 /* DetailVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097E41D5575A5000D9E84 /* DetailVideoViewController.swift */; };
+		F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097E51D5575A5000D9E84 /* DetailVideoViewController.xib */; };
+		F3B097FD1D557FC2000D9E84 /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */; };
+		F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		435F9E24889FD396A037DDA8 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
 		70E2451E2A40AB9366DF073C /* Pods-YouTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YouTube-Bridging-Header.h"; sourceTree = "<group>"; };
+		F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
+		F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
+		F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		F39A2C8C1D550E8F003FC772 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39A2C9B1D550E8F003FC772 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		F39A2CAC1D550F51003FC772 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +92,10 @@
 		F3B097DD1D557264000D9E84 /* HistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		F3B097E01D5572A2000D9E84 /* DetailFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailFavoriteViewController.swift; sourceTree = "<group>"; };
 		F3B097E11D5572A2000D9E84 /* DetailFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailFavoriteViewController.xib; sourceTree = "<group>"; };
+		F3B097E41D5575A5000D9E84 /* DetailVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVideoViewController.swift; sourceTree = "<group>"; };
+		F3B097E51D5575A5000D9E84 /* DetailVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailVideoViewController.xib; sourceTree = "<group>"; };
+		F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
+		F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFavoriteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +152,10 @@
 				F39A2CA91D550F2C003FC772 /* Libraries */,
 				F39A2CB31D550F81003FC772 /* Resources */,
 				F39A2CAB1D550F2C003FC772 /* Target */,
+				F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */,
+				F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */,
+				F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */,
+				F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */,
 			);
 			path = YouTube;
 			sourceTree = "<group>";
@@ -283,6 +301,8 @@
 		F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */,
+				F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */,
 			);
 			path = AddFavoriteViewController;
 			sourceTree = "<group>";
@@ -351,6 +371,8 @@
 		F3B097DA1D557235000D9E84 /* DetailVideoViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F3B097E41D5575A5000D9E84 /* DetailVideoViewController.swift */,
+				F3B097E51D5575A5000D9E84 /* DetailVideoViewController.xib */,
 			);
 			path = DetailVideoViewController;
 			sourceTree = "<group>";
@@ -426,18 +448,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
 				F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */,
 				F3B097E31D5572A2000D9E84 /* DetailFavoriteViewController.xib in Resources */,
 				F39A2CE51D551745003FC772 /* ufont.otf in Resources */,
 				F39A2CED1D551AB7003FC772 /* FavoriteViewController.xib in Resources */,
 				F3B097C61D5562EB000D9E84 /* HomeCell.xib in Resources */,
+				F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */,
 				F3B097DF1D557264000D9E84 /* HistoryViewController.xib in Resources */,
 				F3B097CA1D556DCE000D9E84 /* FavoriteCell.xib in Resources */,
 				F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */,
 				F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */,
 				F39A2CBF1D5510F8003FC772 /* HomeViewController.xib in Resources */,
 				F3B097C21D5561CF000D9E84 /* CategoryCell.xib in Resources */,
+				F37A0C5C1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,13 +535,16 @@
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,
 				F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */,
 				F39A2CCD1D5511AE003FC772 /* BaseViewController.swift in Sources */,
+				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,
 				F39A2CD11D5512A3003FC772 /* APIDefine.swift in Sources */,
 				F39A2CC71D551161003FC772 /* BaseTableView.swift in Sources */,
 				F39A2CD51D5512F1003FC772 /* UIColor.swift in Sources */,
+				F3B097FD1D557FC2000D9E84 /* AddFavoriteViewController.swift in Sources */,
 				F39A2CC11D55111F003FC772 /* BaseCollectionView.swift in Sources */,
 				F3B097C91D556DCE000D9E84 /* FavoriteCell.swift in Sources */,
 				F39A2CD31D5512BB003FC772 /* APIRequest.swift in Sources */,
 				F39A2CCB1D551191003FC772 /* BaseView.swift in Sources */,
+				F3B097E61D5575A5000D9E84 /* DetailVideoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,10 +650,13 @@
 			baseConfigurationReference = 70E2451E2A40AB9366DF073C /* Pods-YouTube.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = YouTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duytang.YouTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YouTube/YouTube-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -634,10 +665,12 @@
 			baseConfigurationReference = 435F9E24889FD396A037DDA8 /* Pods-YouTube.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = YouTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duytang.YouTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YouTube/YouTube-Bridging-Header.h";
 			};
 			name = Release;
 		};

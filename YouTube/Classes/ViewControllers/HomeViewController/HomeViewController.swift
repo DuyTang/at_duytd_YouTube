@@ -87,16 +87,6 @@ class HomeViewController: BaseViewController {
 
         pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
     }
-
-    private func loadCategories() {
-        MyCategory.getVideoCatetogories { (success, error) in
-            if success {
-                self.setUpData()
-            } else {
-
-            }
-        }
-    }
 }
 //MARK:- UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {

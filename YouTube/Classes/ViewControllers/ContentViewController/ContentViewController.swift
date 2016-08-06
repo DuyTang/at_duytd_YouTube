@@ -43,7 +43,7 @@ extension ContentViewController: UITableViewDataSource {
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.idVideo = "_esoNnEflzM"
+        detailVideoVC.idVideo = "Y7nkqZvQcBQ"
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }

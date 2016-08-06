@@ -28,6 +28,7 @@ class FavoriteViewController: BaseViewController {
 
     // MARK:- Set Up UI
     override func setUpUI() {
+        self.navigationController?.navigationBarHidden = true
         configureFavoriteController()
     }
     // MARK:- Set Up Data
