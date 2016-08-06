@@ -1,5 +1,5 @@
 //
-//  ContentViewController.swift
+//  DetailFavoriteViewController.swift
 //  YouTube
 //
 //  Created by Duy Tang on 8/6/16.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ContentViewController: BaseViewController {
+class DetailFavoriteViewController: BaseViewController {
 
-    @IBOutlet weak private var contentTableView: UITableView!
-    var pageIndex = 0
+    @IBOutlet weak var nameListFavoriteLabel: UILabel!
+    @IBOutlet weak var listVideoFavoriteTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,17 +19,26 @@ class ContentViewController: BaseViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-
-    private func configureContentViewCOntroller() {
-        self.contentTableView.registerNib(HomeCell)
+    private func configureDetailFavoriteViewController() {
+        self.listVideoFavoriteTableView.registerNib(HomeCell)
     }
-
+    // MARK:- Set Up UI
     override func setUpUI() {
-        configureContentViewCOntroller()
+
+    }
+    // MARK:- Set Up Data
+    override func setUpData() {
+
+    }
+
+    @IBAction func clickBack(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
-extension ContentViewController: UITableViewDataSource {
+//MARK:- UITableViewDataSource
+extension DetailFavoriteViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -37,7 +46,7 @@ extension ContentViewController: UITableViewDataSource {
         return 10
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.contentTableView.dequeue(HomeCell)
+        let cell = tableView.dequeue(HomeCell.self)
         cell.configureCell()
         return cell
     }
@@ -47,10 +56,10 @@ extension ContentViewController: UITableViewDataSource {
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
-
-extension ContentViewController: UITableViewDelegate {
+//MARK:- UITableViewDelegate
+extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 112
     }
 }
 

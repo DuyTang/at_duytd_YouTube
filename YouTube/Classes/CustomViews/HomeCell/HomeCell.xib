@@ -23,26 +23,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
-                        <rect key="frame" x="8" y="8" width="130" height="90"/>
+                        <rect key="frame" x="16" y="8" width="130" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="130" id="HJL-nR-Rnd"/>
                             <constraint firstAttribute="height" constant="90" id="pPu-UC-Yqp"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwS-mR-7Dg">
-                        <rect key="frame" x="146" y="13" width="158" height="17.5"/>
+                        <rect key="frame" x="154" y="13" width="150" height="17.5"/>
                         <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-n3-4tY">
-                        <rect key="frame" x="146" y="38" width="158" height="17.5"/>
+                        <rect key="frame" x="154" y="38" width="150" height="17.5"/>
                         <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cL-aN-iHY">
-                        <rect key="frame" x="146" y="63" width="158" height="17.5"/>
+                        <rect key="frame" x="154" y="63" width="150" height="17.5"/>
                         <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="V1t-n3-4tY" firstAttribute="width" secondItem="uwS-mR-7Dg" secondAttribute="width" id="1IF-69-gj4"/>
-                    <constraint firstItem="wdG-h7-UTA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2sb-a3-HsO"/>
+                    <constraint firstItem="wdG-h7-UTA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="2sb-a3-HsO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uwS-mR-7Dg" secondAttribute="trailing" constant="8" id="3lO-qv-fPl"/>
                     <constraint firstItem="0cL-aN-iHY" firstAttribute="height" secondItem="V1t-n3-4tY" secondAttribute="height" id="HBA-py-78M"/>
                     <constraint firstItem="0cL-aN-iHY" firstAttribute="top" secondItem="V1t-n3-4tY" secondAttribute="bottom" constant="8" id="QQJ-Nc-nNq"/>
