@@ -8,17 +8,51 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: BaseViewController {
 
+    @IBOutlet weak var historyTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    // MARK:- Configure HistoryViewController
+    private func configureHistoryController() {
+        self.historyTableView.registerNib(HomeCell)
+    }
+    // MARK:- Set Up UI
+    override func setUpUI() {
+        self.navigationController?.navigationBarHidden = true
+        self.configureHistoryController()
+    }
+    // MARK:- Set Up Data
+    override func setUpData() {
+
+    }
+}
+//MARK:- UITableViewDataSource
+extension HistoryViewController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
 
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.historyTableView.dequeue(HomeCell)
+        cell.configureCell()
+        return cell
+    }
 }
+//MARK:- UITableViewDelegate
+extension HistoryViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+    }
+}
+

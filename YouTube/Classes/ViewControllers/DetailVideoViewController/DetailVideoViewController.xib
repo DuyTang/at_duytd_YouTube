@@ -38,14 +38,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewe-pB-eDU">
-                            <rect key="frame" x="326" y="22" width="33" height="33"/>
+                            <rect key="frame" x="334" y="22" width="33" height="33"/>
                             <state key="normal" backgroundImage="bt_star"/>
                             <connections>
                                 <action selector="addVideoToFavoriteList:" destination="-1" eventType="touchUpInside" id="cfP-iH-LM9"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e1-4b-Wb4">
-                            <rect key="frame" x="16" y="22" width="32" height="32"/>
+                            <rect key="frame" x="8" y="22" width="32" height="32"/>
                             <state key="normal" backgroundImage="bt_back"/>
                             <connections>
                                 <action selector="clickBack:" destination="-1" eventType="touchUpInside" id="fPB-aR-54w"/>
@@ -57,10 +57,10 @@
                         <constraint firstAttribute="bottom" secondItem="xwl-RD-Lrq" secondAttribute="bottom" constant="8" id="D7K-H4-vaK"/>
                         <constraint firstAttribute="height" constant="64" id="GOT-n4-Kl4"/>
                         <constraint firstItem="9e1-4b-Wb4" firstAttribute="top" secondItem="wEi-nX-c8c" secondAttribute="top" constant="22" id="OZx-jP-9sa"/>
-                        <constraint firstItem="9e1-4b-Wb4" firstAttribute="leading" secondItem="wEi-nX-c8c" secondAttribute="leading" constant="16" id="OlM-4o-cgk"/>
+                        <constraint firstItem="9e1-4b-Wb4" firstAttribute="leading" secondItem="wEi-nX-c8c" secondAttribute="leading" constant="8" id="OlM-4o-cgk"/>
                         <constraint firstItem="xwl-RD-Lrq" firstAttribute="centerX" secondItem="wEi-nX-c8c" secondAttribute="centerX" id="TkP-im-hKr"/>
                         <constraint firstItem="Ewe-pB-eDU" firstAttribute="top" secondItem="wEi-nX-c8c" secondAttribute="top" constant="22" id="siI-Vb-Ke8"/>
-                        <constraint firstAttribute="trailing" secondItem="Ewe-pB-eDU" secondAttribute="trailing" constant="16" id="vBI-42-TBd"/>
+                        <constraint firstAttribute="trailing" secondItem="Ewe-pB-eDU" secondAttribute="trailing" constant="8" id="vBI-42-TBd"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hari Won - Anh Cứ Đi Đi (Official MV)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pw9-eC-TaS">

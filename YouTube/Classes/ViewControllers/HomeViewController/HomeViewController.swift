@@ -32,14 +32,27 @@ class HomeViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    // MARK:- Register CollectionCell
     private func configureHomeViewController() {
         self.categoryCollectionView.registerNib(CategoryCell)
     }
-
+    // MARK:- Add Page Controller
+    private func addContentToPageViewController() {
+        self.pageViewController = UIPageViewController(transitionStyle: .Scroll,
+            navigationOrientation: .Horizontal, options: nil)
+        self.pageViewController?.dataSource = self
+        let viewController = viewControllers[0]
+        self.pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
+        self.pageViewController?.view.frame = CGRect(x: contentView.bounds.minX,
+            y: contentView.bounds.minY, width: contentView.bounds.width, height: contentView.bounds.height)
+        addChildViewController(pageViewController!)
+        self.contentView.addSubview((pageViewController?.view)!)
+        self.pageViewController?.didMoveToParentViewController(self)
+    }
+    // MARK:- Set Up UI
     override func setUpUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        configureHomeViewController()
+        self.configureHomeViewController()
         self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 70, height: 2))
         self.selectedCategoryView.backgroundColor = UIColor.init(hex: 0xCC181E)
         self.categoryCollectionView.addSubview(selectedCategoryView)
@@ -48,27 +61,12 @@ class HomeViewController: BaseViewController {
             viewController.pageIndex = i
             viewControllers.append(viewController)
         }
-        addContent()
+        self.addContentToPageViewController()
+        self.pageViewController?.dataSource = self
+        self.pageViewController?.delegate = self
     }
-
+    // MARK:- Set Up Data
     override func setUpData() {
-        pageViewController?.dataSource = self
-        pageViewController?.delegate = self
-
-    }
-    // MARK:- Add Page Controller
-
-    private func addContent() {
-        pageViewController = UIPageViewController(transitionStyle: .Scroll,
-            navigationOrientation: .Horizontal, options: nil)
-        pageViewController?.dataSource = self
-        let viewController = viewControllers[0]
-        pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
-        pageViewController?.view.frame = CGRect(x: contentView.bounds.minX,
-            y: contentView.bounds.minY, width: contentView.bounds.width, height: contentView.bounds.height)
-        addChildViewController(pageViewController!)
-        contentView.addSubview((pageViewController?.view)!)
-        pageViewController?.didMoveToParentViewController(self)
 
     }
     // MARK:- Show SearchBar
@@ -79,13 +77,11 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Move Page
     func backPage(viewController: UIViewController) {
-
-        pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
+        self.pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
     }
 
     func nextPage(viewController: UIViewController) {
-
-        pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
+        self.pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
     }
 }
 //MARK:- UICollectionViewDataSource
@@ -93,9 +89,11 @@ extension HomeViewController: UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.categoryCollectionView.dequeue(CategoryCell.self, forIndexPath: indexPath)
         cell.configureCategoryCell()
@@ -111,8 +109,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 UIView.animateWithDuration(0.3) {
                     self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
                 }
-
-                pageViewController?.delegate = self
+                self.pageViewController?.delegate = self
                 let viewController = viewControllers[indexPath.row]
                 if currentIndex > indexPath.row {
                     nextPage(viewController)
@@ -127,7 +124,6 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 //MARK:- UIPageViewControllerDataSource
 extension HomeViewController: UIPageViewControllerDataSource {
-
     func pageViewController(pageViewController: UIPageViewController,
         viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
             var index = (viewController as? ContentViewController)!.pageIndex
@@ -155,19 +151,20 @@ extension HomeViewController: UIPageViewControllerDataSource {
 extension HomeViewController: UIPageViewControllerDelegate {
     func pageViewController(pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
             if let viewControl = pageViewController.viewControllers![0] as? ContentViewController {
                 currentIndex = viewControl.pageIndex
                 let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
                 categoryCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: true)
-                let selectedCell = collectionView(categoryCollectionView, cellForItemAtIndexPath: indexPath)
+                let isSelected = currentIndex == indexPath.row ? true : false
+                let selectedCell = collectionView(categoryCollectionView, cellForItemAtIndexPath: indexPath) as! CategoryCell
+                selectedCell.changFont(isSelected)
                 let frame = selectedCell.frame
                 UIView.animateWithDuration(0.05) {
                     self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
                 }
+                currentIndex = indexPath.row
+                categoryCollectionView.reloadSections(NSIndexSet(index: 0))
             }
-
     }
-
 }
 

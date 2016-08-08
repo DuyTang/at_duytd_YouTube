@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeCell: UITableViewCell {
+class HomeCell: BaseTableViewCell {
 
     @IBOutlet weak var thumbailVideo: UIImageView!
     @IBOutlet weak var nameVideoLabel: UILabel!
@@ -21,12 +21,12 @@ class HomeCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
-
+    // MARK:- Configure Cell
     func configureCell() {
         self.nameVideoLabel.text = "Video"
     }
-
-    private func setUpUI() {
+    // MARk:- Set Up UI
+    override func setUpUI() {
         configureCell()
     }
 

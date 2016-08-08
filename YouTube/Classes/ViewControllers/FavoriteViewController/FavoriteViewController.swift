@@ -29,7 +29,7 @@ class FavoriteViewController: BaseViewController {
     // MARK:- Set Up UI
     override func setUpUI() {
         self.navigationController?.navigationBarHidden = true
-        configureFavoriteController()
+        self.configureFavoriteController()
     }
     // MARK:- Set Up Data
     override func setUpData() {
@@ -38,7 +38,6 @@ class FavoriteViewController: BaseViewController {
 
 }
 extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
-
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }

@@ -15,8 +15,11 @@ class BaseTableViewCell: UITableViewCell {
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.mainScreen().scale
     }
-
+    // MARK:- Set Up
     func configInit() {
         // setup constants data for cell
+    }
+    func setUpUI() {
+
     }
 }

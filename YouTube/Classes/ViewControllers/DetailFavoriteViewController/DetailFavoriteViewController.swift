@@ -14,25 +14,23 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     private func configureDetailFavoriteViewController() {
         self.listVideoFavoriteTableView.registerNib(HomeCell)
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-
+        self.configureDetailFavoriteViewController()
     }
     // MARK:- Set Up Data
     override func setUpData() {
 
     }
-
+    // MARK:- Action
     @IBAction func clickBack(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -53,13 +51,14 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
         detailVideoVC.idVideo = "_esoNnEflzM"
+        detailVideoVC.isFavorite = true
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
 //MARK:- UITableViewDelegate
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 112
+        return 100
     }
 }
 

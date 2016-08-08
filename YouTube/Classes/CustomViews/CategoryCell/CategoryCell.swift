@@ -15,7 +15,7 @@ class CategoryCell: UICollectionViewCell {
         super.awakeFromNib()
         setUpUI()
     }
-
+    // MARK:- Action
     func changFont(isSelected: Bool) {
         if isSelected {
             nameCategoryLabel.font = UIFont(name: "Neutra Text TF", size: 19)
@@ -23,11 +23,11 @@ class CategoryCell: UICollectionViewCell {
             nameCategoryLabel.font = UIFont(name: "Neutra Text", size: 19)
         }
     }
-
+    // MARK:- Configure Cell
     func configureCategoryCell() {
         self.nameCategoryLabel.text = "Category"
     }
-
+    // MARK:- Set Up UI
     private func setUpUI() {
         self.layer.cornerRadius = 5.0
         self.clipsToBounds = true

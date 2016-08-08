@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteCell: UITableViewCell {
+class FavoriteCell: BaseTableViewCell {
 
     @IBOutlet weak private var thumbnailFavoriteList: UIImageView!
 
@@ -28,7 +28,7 @@ class FavoriteCell: UITableViewCell {
         self.nameFavoriteListLabel.text = "Favorite"
     }
 
-    private func setUpUI() {
+    override func setUpUI() {
         configureFavoriteCell()
     }
 

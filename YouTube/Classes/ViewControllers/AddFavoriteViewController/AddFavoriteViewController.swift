@@ -28,15 +28,28 @@ class AddFavoriteViewController: BaseViewController {
         view.layer.borderWidth = 1.0
         view.layer.borderColor = UIColor.init(hex: AppDefine.backgroundColor).CGColor
     }
+    private func setAttributeViewController() {
+        providesPresentationContextTransitionStyle = true
+        definesPresentationContext = true
+        modalPresentationStyle = .OverCurrentContext
+        modalTransitionStyle = .CrossDissolve
+    }
     // MARK:- Set Up UI
     override func setUpUI() {
-        setBoder(addFavoriteView)
+        self.setBoder(addFavoriteView)
+        self.setAttributeViewController()
     }
     // MARK:- Set Up Data
     override func setUpData() {
 
     }
+    // MARK:- Set Up
+    override func setUp() {
+        self.setAttributeViewController()
+    }
+    // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
+
     }
 
     @IBAction func clickCancel(sender: AnyObject) {

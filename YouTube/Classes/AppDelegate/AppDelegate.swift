@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabbar = BaseTabbarViewController()
         tabbar.viewControllers = [favoriteNavi, homeNavi, historyNavi]
         tabbar.selectedIndex = 1
-
+        
         self.window?.rootViewController = tabbar
         self.window?.makeKeyAndVisible()
         return true
