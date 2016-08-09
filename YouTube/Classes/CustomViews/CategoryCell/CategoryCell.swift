@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
+class CategoryCell: BaseCollectionViewCell {
 
     @IBOutlet weak var nameCategoryLabel: UILabel!
     override func awakeFromNib() {
@@ -18,9 +18,9 @@ class CategoryCell: UICollectionViewCell {
     // MARK:- Action
     func changFont(isSelected: Bool) {
         if isSelected {
-            nameCategoryLabel.font = UIFont(name: "Neutra Text TF", size: 19)
+            nameCategoryLabel.font = UIFont(name: AppDefine.SelectedFont, size: AppDefine.FontSize)
         } else {
-            nameCategoryLabel.font = UIFont(name: "Neutra Text", size: 19)
+            nameCategoryLabel.font = UIFont(name: AppDefine.Font, size: AppDefine.FontSize)
         }
     }
     // MARK:- Configure Cell
@@ -29,8 +29,7 @@ class CategoryCell: UICollectionViewCell {
     }
     // MARK:- Set Up UI
     private func setUpUI() {
-        self.layer.cornerRadius = 5.0
-        self.clipsToBounds = true
+
     }
 
 }

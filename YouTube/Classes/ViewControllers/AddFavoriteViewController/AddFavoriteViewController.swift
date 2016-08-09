@@ -22,12 +22,6 @@ class AddFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    private func setBoder(view: UIView) {
-        view.layer.cornerRadius = 5.0
-        view.clipsToBounds = true
-        view.layer.borderWidth = 1.0
-        view.layer.borderColor = UIColor.init(hex: AppDefine.backgroundColor).CGColor
-    }
     private func setAttributeViewController() {
         providesPresentationContextTransitionStyle = true
         definesPresentationContext = true
@@ -36,7 +30,7 @@ class AddFavoriteViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.setBoder(addFavoriteView)
+        UIView.setBorder(addFavoriteView, cornerRadius: 5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
         self.setAttributeViewController()
     }
     // MARK:- Set Up Data

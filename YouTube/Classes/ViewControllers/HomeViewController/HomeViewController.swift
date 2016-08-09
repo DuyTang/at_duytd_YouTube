@@ -12,7 +12,7 @@ import SwiftUtils
 class HomeViewController: BaseViewController {
 
     @IBOutlet weak private var searchView: UIView!
-    @IBOutlet weak private var serachTextField: UITextField!
+    @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var titleView: UIView!
 
     @IBOutlet weak var contentView: UIView!

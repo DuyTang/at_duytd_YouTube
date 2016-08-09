@@ -19,4 +19,8 @@ struct AppDefine {
     static let ImageHome = "ic_home"
     static let ImageFavorite = "ic_favorite"
     static let ImageHistory = "ic_history"
+    static let Font = "Neutra Text"
+    static let SelectedFont = "Neutra Text TF"
+    static let FontSize: CGFloat = 19
+
 }
