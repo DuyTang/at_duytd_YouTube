@@ -10,8 +10,8 @@ import UIKit
 
 class HomeCell: BaseTableViewCell {
 
-    @IBOutlet weak var thumbailVideo: UIImageView!
-    @IBOutlet weak var nameVideoLabel: UILabel!
+    @IBOutlet weak private var thumbailVideo: UIImageView!
+    @IBOutlet weak private var nameVideoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpUI()

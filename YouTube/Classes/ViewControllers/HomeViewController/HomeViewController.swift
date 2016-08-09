@@ -15,14 +15,14 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var titleView: UIView!
 
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak private var contentView: UIView!
+    @IBOutlet weak private var categoryCollectionView: UICollectionView!
     private var selectedCategoryView: UIView!
     private var isShowSearchBar = false
     private var pageViewController: UIPageViewController?
     private var currentIndex = 0
-    var lastIndex: NSIndexPath?
-    var viewControllers: [ContentViewController] = []
+    private var lastIndex: NSIndexPath?
+    private var viewControllers: [ContentViewController] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,11 +76,11 @@ class HomeViewController: BaseViewController {
         self.isShowSearchBar = !isShowSearchBar
     }
     // MARK:- Move Page
-    func backPage(viewController: UIViewController) {
+    private func backPage(viewController: UIViewController) {
         self.pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
     }
 
-    func nextPage(viewController: UIViewController) {
+    private func nextPage(viewController: UIViewController) {
         self.pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
     }
 }

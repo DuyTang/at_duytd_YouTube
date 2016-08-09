@@ -10,7 +10,7 @@ import UIKit
 
 class CategoryCell: BaseCollectionViewCell {
 
-    @IBOutlet weak var nameCategoryLabel: UILabel!
+    @IBOutlet weak private var nameCategoryLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpUI()
