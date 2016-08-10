@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ufont.otf">
+            <string>NeutraText-Book</string>
+            <string>NeutraText-Book</string>
+            <string>NeutraText-Book</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="107" id="KGk-i7-Jjw" customClass="FavoriteCell" customModule="YouTube" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="106.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="ITO-Yq-X8q">
+                        <rect key="frame" x="16" y="8" width="130" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="MOo-c4-SEr"/>
+                            <constraint firstAttribute="width" constant="130" id="Phm-KV-zqi"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGu-xv-Y7e">
+                        <rect key="frame" x="154" y="15" width="150" height="17.5"/>
+                        <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nb-eW-k5W">
+                        <rect key="frame" x="154" y="40" width="150" height="17.5"/>
+                        <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aN-vg-7HD">
+                        <rect key="frame" x="154" y="65" width="150" height="17.5"/>
+                        <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RGu-xv-Y7e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="2GB-WM-tPR"/>
+                    <constraint firstItem="9aN-vg-7HD" firstAttribute="centerX" secondItem="3nb-eW-k5W" secondAttribute="centerX" id="2Xj-kJ-bO0"/>
+                    <constraint firstItem="9aN-vg-7HD" firstAttribute="top" secondItem="3nb-eW-k5W" secondAttribute="bottom" constant="7.5" id="D2E-xh-KZq"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RGu-xv-Y7e" secondAttribute="trailing" constant="8" id="FEC-lT-B1T"/>
+                    <constraint firstItem="9aN-vg-7HD" firstAttribute="height" secondItem="3nb-eW-k5W" secondAttribute="height" id="Ndw-Zb-2BD"/>
+                    <constraint firstItem="9aN-vg-7HD" firstAttribute="width" secondItem="3nb-eW-k5W" secondAttribute="width" id="Nni-ng-24T"/>
+                    <constraint firstItem="RGu-xv-Y7e" firstAttribute="leading" secondItem="ITO-Yq-X8q" secondAttribute="trailing" constant="8" id="ROF-Fb-kIO"/>
+                    <constraint firstItem="3nb-eW-k5W" firstAttribute="top" secondItem="RGu-xv-Y7e" secondAttribute="bottom" constant="7.5" id="Tnu-vh-ibU"/>
+                    <constraint firstItem="ITO-Yq-X8q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Uub-eW-04L"/>
+                    <constraint firstItem="3nb-eW-k5W" firstAttribute="height" secondItem="RGu-xv-Y7e" secondAttribute="height" id="X7i-Co-BNF"/>
+                    <constraint firstItem="ITO-Yq-X8q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dyy-7G-y7c"/>
+                    <constraint firstItem="3nb-eW-k5W" firstAttribute="width" secondItem="RGu-xv-Y7e" secondAttribute="width" id="t7l-nl-CLY"/>
+                    <constraint firstItem="3nb-eW-k5W" firstAttribute="centerX" secondItem="RGu-xv-Y7e" secondAttribute="centerX" id="xJV-uj-GWL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameFavoriteListLabel" destination="RGu-xv-Y7e" id="mfV-W6-ajV"/>
+                <outlet property="thumbnailFavoriteList" destination="ITO-Yq-X8q" id="1VK-ce-W6r"/>
+            </connections>
+            <point key="canvasLocation" x="280" y="258.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_image" width="160" height="120"/>
+    </resources>
+</document>
