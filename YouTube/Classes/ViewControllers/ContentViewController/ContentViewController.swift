@@ -13,7 +13,7 @@ class ContentViewController: BaseViewController {
 
     @IBOutlet weak private var contentTableView: UITableView!
     var pageIndex = 0
-    var pageId = "1"
+    var pageId = ""
     private var dataOfVideo: Results<Video>?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,17 +22,19 @@ class ContentViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        loadData()
-    }
     // MARK:- Set Up UI
     override func setUpUI() {
         self.configureContentViewCOntroller()
     }
     // MARK:- Set Up Data
     override func setUpData() {
-        loadData()
+        if let videos = Video.getVideos(pageId) where videos.count > 0 {
+            dataOfVideo = videos
+            print(dataOfVideo)
+            loadData()
+        } else {
+            loadVideos(pageId, pageToken: "")
+        }
     }
     // MARK:- Register Cell
     private func configureContentViewCOntroller() {
@@ -48,6 +50,15 @@ class ContentViewController: BaseViewController {
             print(error.localizedDescription)
         }
     }
+    private func loadVideos(id: String, pageToken: String) {
+        MyVideo.loadDataFromAPI({ (success, error) in
+            if success {
+                self.loadData()
+            } else {
+                print("load video fail")
+            }
+            }, id: pageId, pageToken: "")
+    }
 }
 //MARK:- UITableViewDataSource
 extension ContentViewController: UITableViewDataSource {
@@ -56,7 +67,11 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataOfVideo?.count)!
+        if let videos = dataOfVideo {
+            return videos.count
+        } else {
+            return 0
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

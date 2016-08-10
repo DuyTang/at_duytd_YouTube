@@ -44,10 +44,10 @@ class Video: Object, Mappable {
         thumbnail = AppDefine.UrlImage + idVideo + AppDefine.StandardImage
     }
 
-    class func getVideos() -> Results<Video>? {
+    class func getVideos(id: String) -> Results<Video>? {
         do {
             let realm = try Realm()
-            let videos = realm.objects(self)
+            let videos = realm.objects(self).filter("idCategory = '\(id)'")
             return videos
         } catch {
             return nil

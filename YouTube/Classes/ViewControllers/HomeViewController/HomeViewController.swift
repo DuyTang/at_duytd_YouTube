@@ -53,9 +53,6 @@ class HomeViewController: BaseViewController {
     override func setUpData() {
         if let categories = Category.getCategories() where categories.count > 0 {
             dataOfCategory = categories
-            if let videos = Video.getVideos() where videos.count > 0 {
-                dataOfVideo = videos
-            }
             loadData()
             addContentToPageViewController()
         } else {
@@ -98,23 +95,11 @@ class HomeViewController: BaseViewController {
         MyCategory.getVideoCatetogories { (success, error) in
             if success {
                 self.loadData()
-                for index in 0...9 {
-                    self.loadVideos(self.dataOfCategory![index].id, pageToken: "")
-                }
                 self.addContentToPageViewController()
             } else {
                 print(AppDefine.LoadCategoryFail)
             }
         }
-    }
-    private func loadVideos(id: String, pageToken: String) {
-        MyVideo.loadDataFromAPI({ (success, error) in
-            if success {
-                print(AppDefine.LoadVideoSuccess)
-            } else {
-                print(AppDefine.LoadVideoFail)
-            }
-            }, id: id, pageToken: pageToken)
     }
     // MARK:- Show SearchBar
     @IBAction private func showSearchBar(sender: AnyObject) {
