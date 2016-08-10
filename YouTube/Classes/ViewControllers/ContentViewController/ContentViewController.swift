@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContentViewController: BaseViewController {
 
     @IBOutlet weak private var contentTableView: UITableView!
     var pageIndex = 0
+    var pageId = "1"
+    private var dataOfVideo: Results<Video>?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,13 +22,31 @@ class ContentViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    // MARK:- Register Cell
-    private func configureContentViewCOntroller() {
-        self.contentTableView.registerNib(HomeCell)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        loadData()
     }
     // MARK:- Set Up UI
     override func setUpUI() {
         self.configureContentViewCOntroller()
+    }
+    // MARK:- Set Up Data
+    override func setUpData() {
+        loadData()
+    }
+    // MARK:- Register Cell
+    private func configureContentViewCOntroller() {
+        self.contentTableView.registerNib(HomeCell)
+    }
+    // MARK:- Load Data
+    func loadData() {
+        do {
+            let realm = try Realm()
+            dataOfVideo = realm.objects(Video).filter("idCategory = '\(pageId)'")
+            self.contentTableView.reloadData()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
 }
 //MARK:- UITableViewDataSource
@@ -35,19 +56,19 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return (dataOfVideo?.count)!
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.contentTableView.dequeue(HomeCell)
-        cell.configureCell()
+        let video = self.dataOfVideo![indexPath.row]
+        cell.configureCell(video)
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.idVideo = "Y7nkqZvQcBQ"
-        detailVideoVC.isFavorite = false
+        detailVideoVC.video = dataOfVideo![indexPath.row]
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }

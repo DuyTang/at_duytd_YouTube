@@ -15,11 +15,11 @@ class DetailVideoViewController: BaseViewController {
     @IBOutlet weak private var nameVideoLabel: UILabel!
     @IBOutlet weak private var nameChannelLabel: UILabel!
     @IBOutlet weak private var thumbnailVideo: UIImageView!
-    var idVideo = ""
-    var isFavorite = true
+    @IBOutlet weak private var viewCountLabel: UILabel!
+    var video = Video()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.playVideoView.loadWithVideoId(idVideo)
+        self.playVideoView.loadWithVideoId(video.idVideo)
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +28,11 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Config DetailVideoViewController
     func configureDetailVideoViewController() {
-        self.favoriteButton.hidden = isFavorite
+        self.favoriteButton.hidden = video.isFavorite
+        self.nameVideoLabel.text = video.title
+        self.nameChannelLabel.text = video.channelTitle
+        self.thumbnailVideo.downloadImage(video.thumbnail)
+        self.viewCountLabel.text = "\(video.viewCount) views"
     }
 
     // MARK:- Set Up UI
@@ -39,6 +43,7 @@ class DetailVideoViewController: BaseViewController {
     override func setUpData() {
 
     }
+
     // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
         let addFavoriteVC = AddFavoriteViewController()

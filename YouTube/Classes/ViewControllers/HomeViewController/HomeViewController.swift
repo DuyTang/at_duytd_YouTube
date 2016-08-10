@@ -8,13 +8,13 @@
 
 import UIKit
 import SwiftUtils
+import RealmSwift
 
 class HomeViewController: BaseViewController {
 
     @IBOutlet weak private var searchView: UIView!
     @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var titleView: UIView!
-
     @IBOutlet weak private var contentView: UIView!
     @IBOutlet weak private var categoryCollectionView: UICollectionView!
     private var selectedCategoryView: UIView!
@@ -23,9 +23,12 @@ class HomeViewController: BaseViewController {
     private var currentIndex = 0
     private var lastIndex: NSIndexPath?
     private var viewControllers: [ContentViewController] = []
+    private var dataOfCategory: Results<Category>?
+    private var dataOfVideo: Results<Video>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Realm.Configuration.defaultConfiguration.path)
 
     }
 
@@ -36,8 +39,40 @@ class HomeViewController: BaseViewController {
     private func configureHomeViewController() {
         self.categoryCollectionView.registerNib(CategoryCell)
     }
+    // MARK:- Set Up UI
+    override func setUpUI() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.configureHomeViewController()
+        self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 136.5, height: 2))
+        self.selectedCategoryView.backgroundColor = UIColor.init(hex: 0xCC181E)
+        self.categoryCollectionView.addSubview(selectedCategoryView)
+        self.pageViewController?.dataSource = self
+        self.pageViewController?.delegate = self
+    }
+    // MARK:- Set Up Data
+    override func setUpData() {
+        if let categories = Category.getCategories() where categories.count > 0 {
+            dataOfCategory = categories
+            if let videos = Video.getVideos() where videos.count > 0 {
+                dataOfVideo = videos
+            }
+            loadData()
+            addContentToPageViewController()
+        } else {
+            loadCategories()
+        }
+    }
     // MARK:- Add Page Controller
+    private func createViewController() {
+        for i in 0...9 {
+            let viewController = ContentViewController()
+            viewController.pageIndex = i
+            viewController.pageId = dataOfCategory![i].id
+            viewControllers.append(viewController)
+        }
+    }
     private func addContentToPageViewController() {
+        createViewController()
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll,
             navigationOrientation: .Horizontal, options: nil)
         self.pageViewController?.dataSource = self
@@ -49,25 +84,37 @@ class HomeViewController: BaseViewController {
         self.contentView.addSubview((pageViewController?.view)!)
         self.pageViewController?.didMoveToParentViewController(self)
     }
-    // MARK:- Set Up UI
-    override func setUpUI() {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.configureHomeViewController()
-        self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 70, height: 2))
-        self.selectedCategoryView.backgroundColor = UIColor.init(hex: 0xCC181E)
-        self.categoryCollectionView.addSubview(selectedCategoryView)
-        for i in 0...9 {
-            let viewController = ContentViewController()
-            viewController.pageIndex = i
-            viewControllers.append(viewController)
+    // MARK:- Load Data
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            dataOfCategory = realm.objects(Category)
+            categoryCollectionView.reloadData()
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
-        self.addContentToPageViewController()
-        self.pageViewController?.dataSource = self
-        self.pageViewController?.delegate = self
     }
-    // MARK:- Set Up Data
-    override func setUpData() {
-
+    private func loadCategories() {
+        MyCategory.getVideoCatetogories { (success, error) in
+            if success {
+                self.loadData()
+                for index in 0...9 {
+                    self.loadVideos(self.dataOfCategory![index].id, pageToken: "")
+                }
+                self.addContentToPageViewController()
+            } else {
+                print(AppDefine.LoadCategoryFail)
+            }
+        }
+    }
+    private func loadVideos(id: String, pageToken: String) {
+        MyVideo.loadDataFromAPI({ (success, error) in
+            if success {
+                print(AppDefine.LoadVideoSuccess)
+            } else {
+                print(AppDefine.LoadVideoFail)
+            }
+            }, id: id, pageToken: pageToken)
     }
     // MARK:- Show SearchBar
     @IBAction private func showSearchBar(sender: AnyObject) {
@@ -91,12 +138,21 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        if let categories = dataOfCategory {
+            if categories.count > 10 {
+                return 10
+            } else {
+                return categories.count
+            }
+        } else {
+            return 0
+        }
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.categoryCollectionView.dequeue(CategoryCell.self, forIndexPath: indexPath)
-        cell.configureCategoryCell()
+        let category = self.dataOfCategory![indexPath.row]
+        cell.configureCategoryCell(category)
         let isSelected = currentIndex == indexPath.row ? true : false
         cell.changFont(isSelected)
         return cell
@@ -121,6 +177,17 @@ extension HomeViewController: UICollectionViewDataSource {
             collectionView.reloadSections(NSIndexSet(index: 0))
         }
     }
+}
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            let category = dataOfCategory![indexPath.row]
+            let textLabel = UILabel()
+            textLabel.text = category.title
+            let labelTextWidth = textLabel.intrinsicContentSize().width
+            return CGSize(width: labelTextWidth + 4 * 2, height: collectionView.frame.height)
+    }
+
 }
 //MARK:- UIPageViewControllerDataSource
 extension HomeViewController: UIPageViewControllerDataSource {

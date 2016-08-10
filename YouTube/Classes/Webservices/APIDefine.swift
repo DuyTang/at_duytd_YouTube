@@ -21,6 +21,11 @@ class APIDefine {
         }
 
         // API List Video From Id Video Category
+        func getListVideo() -> String {
+            return EndPoint + "/videos"
+        }
+
+        // API List Video From Id Video Category
         // func getListVideoFromIdCategory() -> String {
         // return "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=10&" +
         // "key=AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io&videoCategoryId=" +

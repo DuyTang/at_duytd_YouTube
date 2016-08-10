@@ -31,5 +31,8 @@ struct AppDefine {
     static let HighImage = "/hqdefault.jpg"
     static let StandardImage = "/sddefault.jpg"
     static let MaxresImage = "/maxresdefault.jpg"
-
+    // MARK:- Message
+    static let LoadVideoSuccess = "Load Video Success"
+    static let LoadVideoFail = "Load Video Fail"
+    static let LoadCategoryFail = "Load Category Fail"
 }

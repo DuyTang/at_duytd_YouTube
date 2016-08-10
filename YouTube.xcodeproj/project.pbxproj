@@ -11,6 +11,8 @@
 		F37778141D5AE6A000AC2075 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778131D5AE6A000AC2075 /* Category.swift */; };
 		F37778161D5AE6E700AC2075 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778151D5AE6E700AC2075 /* Video.swift */; };
 		F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778171D5AEA9A00AC2075 /* UIImageView.swift */; };
+		F377781A1D5AF33700AC2075 /* MyCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778191D5AF33700AC2075 /* MyCategory.swift */; };
+		F377781D1D5AF3CF00AC2075 /* MyVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F377781C1D5AF3CF00AC2075 /* MyVideo.swift */; };
 		F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */; };
 		F37A0C5C1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */; };
 		F39598951D59B9120030BF82 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39598941D59B9120030BF82 /* UIView.swift */; };
@@ -60,6 +62,8 @@
 		F37778131D5AE6A000AC2075 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F37778151D5AE6E700AC2075 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		F37778171D5AEA9A00AC2075 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		F37778191D5AF33700AC2075 /* MyCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCategory.swift; sourceTree = "<group>"; };
+		F377781C1D5AF3CF00AC2075 /* MyVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVideo.swift; sourceTree = "<group>"; };
 		F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YouTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
 		F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
@@ -135,6 +139,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F377781B1D5AF3C400AC2075 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				F377781C1D5AF3CF00AC2075 /* MyVideo.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		F39A2C831D550E8F003FC772 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +183,7 @@
 		F39A2CA11D550F2C003FC772 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F377781B1D5AF3C400AC2075 /* Video */,
 				F39A2CA21D550F2C003FC772 /* AppDelegate */,
 				F39A2CA31D550F2C003FC772 /* Base */,
 				F39A2CA41D550F2C003FC772 /* Categories */,
@@ -209,6 +222,7 @@
 		F39A2CA41D550F2C003FC772 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				F37778191D5AF33700AC2075 /* MyCategory.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -552,6 +566,7 @@
 				F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */,
 				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,
 				F39A2CD11D5512A3003FC772 /* APIDefine.swift in Sources */,
+				F377781A1D5AF33700AC2075 /* MyCategory.swift in Sources */,
 				F39A2CC71D551161003FC772 /* BaseTableView.swift in Sources */,
 				F39A2CD51D5512F1003FC772 /* UIColor.swift in Sources */,
 				F3B097FD1D557FC2000D9E84 /* AddFavoriteViewController.swift in Sources */,
@@ -561,6 +576,7 @@
 				F39A2CD31D5512BB003FC772 /* APIRequest.swift in Sources */,
 				F39A2CCB1D551191003FC772 /* BaseView.swift in Sources */,
 				F3B097E61D5575A5000D9E84 /* DetailVideoViewController.swift in Sources */,
+				F377781D1D5AF3CF00AC2075 /* MyVideo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

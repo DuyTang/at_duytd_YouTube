@@ -28,10 +28,11 @@ class HomeCell: BaseTableViewCell {
         thumbnailVideo.downloadImage(video.thumbnail)
         self.nameVideoLabel.text = video.title
         self.nameChannelLabel.text = video.channelTitle
-        self.numberViewLabel.text = video.viewCount
+        self.numberViewLabel.text = "\(video.viewCount) views"
     }
     // MARk:- Set Up UI
     override func setUpUI() {
+
     }
 
 }
