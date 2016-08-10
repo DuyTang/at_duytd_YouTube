@@ -65,8 +65,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="nameChannelLabel" destination="V1t-n3-4tY" id="j3R-V8-epk"/>
                 <outlet property="nameVideoLabel" destination="uwS-mR-7Dg" id="hiV-CQ-6nj"/>
-                <outlet property="thumbailVideo" destination="wdG-h7-UTA" id="Lki-Sl-2cP"/>
+                <outlet property="numberViewLabel" destination="0cL-aN-iHY" id="2VZ-Vr-dPm"/>
+                <outlet property="thumbnailVideo" destination="wdG-h7-UTA" id="8gu-iv-QZh"/>
             </connections>
             <point key="canvasLocation" x="364" y="270.5"/>
         </tableViewCell>
