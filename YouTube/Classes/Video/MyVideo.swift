@@ -13,18 +13,11 @@ import ObjectMapper
 class MyVideo {
     var dataOfVideo: Results<Video>?
 
-    class func loadDataFromAPI(completion: APIRequestCompletion, id: String, pageToken: String) {
+    class func loadDataFromAPI(id: String, pageToken: String?, parameters: [String: AnyObject], completion: APIRequestCompletion) {
         let api = APIDefine.YouTube().getListVideo()
-        var parameters = [String: AnyObject]()
-        parameters["part"] = "snippet,contentDetails,statistics"
-        parameters["maxResults"] = "10"
-        parameters["chart"] = "mostPopular"
-        parameters["videoCategoryId"] = id
-        parameters["regionCode"] = "VN"
-        parameters["pageToken"] = ""
-        Video.cleanData()
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
+                let pageToken = data["nextPageToken"] as? String
                 if let items = data["items"] as? NSArray {
                     for item in items {
                         let video = Mapper<Video>().map(item)
@@ -38,23 +31,11 @@ class MyVideo {
                         }
                     }
                 }
+                completion(success: true, nextPageToken: pageToken, error: nil)
             }
-            completion(success: true, error: nil)
         }) { (error) in
-            completion(success: false, error: error)
+            completion(success: false, nextPageToken: nil, error: error)
         }
-    }
-    class func getNumberView(completion: APIRequestCompletion, id: String) {
-        let api = APIDefine.YouTube().getListVideo()
-        var parameters = [String: AnyObject]()
-        parameters["part"] = "statistics"
-        parameters["id"] = id
-        APIRequest.GET(api, parameter: parameters, success: { (response) in
-            completion(success: true, error: nil)
-        }) { (error) in
-            completion(success: false, error: error)
-        }
-
     }
 
 }

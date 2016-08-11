@@ -13,11 +13,8 @@ import ObjectMapper
 
 class MyCategory {
     var dataOfCategory: Results<Category>!
-    class func getVideoCatetogories(completion: APIRequestCompletion) {
+    class func getVideoCatetogories(parameters: [String: AnyObject], completion: APIRequestCompletion) {
         let api = APIDefine.YouTube().getListCategory()
-        var parameters = [String: AnyObject]()
-        parameters["part"] = "snippet"
-        parameters["regionCode"] = "VN"
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
                 if let items = data["items"] as? NSArray {
@@ -36,10 +33,10 @@ class MyCategory {
                     }
                 }
             }
-            completion(success: true, error: nil)
+            completion(success: true, nextPageToken: nil, error: nil)
 
         }) { (error) in
-            completion(success: false, error: error)
+            completion(success: false, nextPageToken: nil, error: error)
         }
 
     }

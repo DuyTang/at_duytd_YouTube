@@ -22,13 +22,13 @@ class HomeViewController: BaseViewController {
     private var pageViewController: UIPageViewController?
     private var currentIndex = 0
     private var lastIndex: NSIndexPath?
+    private var padding: CGFloat = 10
     private var viewControllers: [ContentViewController] = []
     private var dataOfCategory: Results<Category>?
     private var dataOfVideo: Results<Video>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Realm.Configuration.defaultConfiguration.path)
 
     }
 
@@ -43,7 +43,7 @@ class HomeViewController: BaseViewController {
     override func setUpUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.configureHomeViewController()
-        self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 136.5, height: 2))
+        self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
         self.selectedCategoryView.backgroundColor = UIColor.init(hex: 0xCC181E)
         self.categoryCollectionView.addSubview(selectedCategoryView)
         self.pageViewController?.dataSource = self
@@ -61,7 +61,7 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Add Page Controller
     private func createViewController() {
-        for i in 0...9 {
+        for i in 0...(dataOfCategory?.count)! - 1 {
             let viewController = ContentViewController()
             viewController.pageIndex = i
             viewController.pageId = dataOfCategory![i].id
@@ -87,17 +87,18 @@ class HomeViewController: BaseViewController {
             let realm = try Realm()
             dataOfCategory = realm.objects(Category)
             categoryCollectionView.reloadData()
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        } catch {
         }
     }
+
     private func loadCategories() {
-        MyCategory.getVideoCatetogories { (success, error) in
+        var parameters = [String: AnyObject]()
+        parameters["part"] = AppDefine.PartCategory
+        parameters["regionCode"] = AppDefine.RegionCode
+        MyCategory.getVideoCatetogories(parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()
                 self.addContentToPageViewController()
-            } else {
-                print(AppDefine.LoadCategoryFail)
             }
         }
     }
@@ -170,7 +171,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
             let textLabel = UILabel()
             textLabel.text = category.title
             let labelTextWidth = textLabel.intrinsicContentSize().width
-            return CGSize(width: labelTextWidth + 4 * 2, height: collectionView.frame.height)
+            return CGSize(width: labelTextWidth + self.padding * 2, height: collectionView.frame.height)
     }
 
 }

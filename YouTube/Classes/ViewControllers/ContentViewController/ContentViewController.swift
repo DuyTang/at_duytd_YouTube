@@ -14,6 +14,7 @@ class ContentViewController: BaseViewController {
     @IBOutlet weak private var contentTableView: UITableView!
     var pageIndex = 0
     var pageId = ""
+    var pageToken: String?
     private var dataOfVideo: Results<Video>?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,9 @@ class ContentViewController: BaseViewController {
     override func setUpData() {
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             dataOfVideo = videos
-            print(dataOfVideo)
             loadData()
         } else {
-            loadVideos(pageId, pageToken: "")
+            loadVideos(pageId, pageToken: nil)
         }
     }
     // MARK:- Register Cell
@@ -46,18 +46,27 @@ class ContentViewController: BaseViewController {
             let realm = try Realm()
             dataOfVideo = realm.objects(Video).filter("idCategory = '\(pageId)'")
             self.contentTableView.reloadData()
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        } catch {
+
         }
     }
-    private func loadVideos(id: String, pageToken: String) {
-        MyVideo.loadDataFromAPI({ (success, error) in
+
+    private func loadVideos(id: String, pageToken: String?) {
+        var parameters = [String: AnyObject]()
+        parameters["part"] = AppDefine.Part
+        parameters["maxResults"] = AppDefine.MaxResult
+        parameters["chart"] = AppDefine.Chart
+        parameters["videoCategoryId"] = id
+        parameters["regionCode"] = AppDefine.RegionCode
+        parameters["pageToken"] = pageToken
+        MyVideo.loadDataFromAPI(pageId, pageToken: pageToken, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()
+                self.pageToken = nextPageToken
             } else {
-                print("load video fail")
+
             }
-            }, id: pageId, pageToken: "")
+        }
     }
 }
 //MARK:- UITableViewDataSource
