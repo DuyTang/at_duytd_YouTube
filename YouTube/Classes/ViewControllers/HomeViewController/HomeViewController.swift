@@ -93,8 +93,8 @@ class HomeViewController: BaseViewController {
 
     private func loadCategories() {
         var parameters = [String: AnyObject]()
-        parameters["part"] = AppDefine.PartCategory
-        parameters["regionCode"] = AppDefine.RegionCode
+        parameters["part"] = "snippet"
+        parameters["regionCode"] = "VN"
         MyCategory.getVideoCatetogories(parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()

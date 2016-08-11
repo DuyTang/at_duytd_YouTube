@@ -27,8 +27,7 @@ class MyCategory {
                             try realm.write({ () -> Void in
                                 realm.add(category!)
                             })
-                        } catch let error as NSError {
-                            print(error.localizedDescription)
+                        } catch {
                         }
                     }
                 }

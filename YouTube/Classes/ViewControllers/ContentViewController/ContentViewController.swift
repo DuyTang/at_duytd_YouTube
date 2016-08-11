@@ -53,11 +53,11 @@ class ContentViewController: BaseViewController {
 
     private func loadVideos(id: String, pageToken: String?) {
         var parameters = [String: AnyObject]()
-        parameters["part"] = AppDefine.Part
-        parameters["maxResults"] = AppDefine.MaxResult
-        parameters["chart"] = AppDefine.Chart
+        parameters["part"] = "snippet,contentDetails,statistics"
+        parameters["maxResults"] = "10"
+        parameters["chart"] = "mostPopular"
         parameters["videoCategoryId"] = id
-        parameters["regionCode"] = AppDefine.RegionCode
+        parameters["regionCode"] = "VN"
         parameters["pageToken"] = pageToken
         MyVideo.loadDataFromAPI(pageId, pageToken: pageToken, parameters: parameters) { (success, nextPageToken, error) in
             if success {

@@ -35,11 +35,4 @@ struct AppDefine {
     static let LoadVideoSuccess = "Load Video Success"
     static let LoadVideoFail = "Load Video Fail"
     static let LoadCategoryFail = "Load Category Fail"
-    // MARK:- Dictionary API
-    static let Part = "snippet,contentDetails,statistics"
-    static let PartCategory = "snippet"
-    static let MaxResult = "10"
-    static let Chart = "mostPopular"
-    static let RegionCode = "VN"
-
 }
