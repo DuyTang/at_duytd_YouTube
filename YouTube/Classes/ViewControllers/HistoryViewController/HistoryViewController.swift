@@ -45,7 +45,7 @@ extension HistoryViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.historyTableView.dequeue(HomeCell)
-        cell.configureCell()
+        // cell.configureCell()
         return cell
     }
 }

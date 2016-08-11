@@ -24,8 +24,8 @@ class CategoryCell: BaseCollectionViewCell {
         }
     }
     // MARK:- Configure Cell
-    func configureCategoryCell() {
-        self.nameCategoryLabel.text = "Category"
+    func configureCategoryCell(category: Category) {
+        self.nameCategoryLabel.text = category.title
     }
     // MARK:- Set Up UI
     private func setUpUI() {

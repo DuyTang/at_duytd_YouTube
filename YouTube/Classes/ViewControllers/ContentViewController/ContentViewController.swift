@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContentViewController: BaseViewController {
 
     @IBOutlet weak private var contentTableView: UITableView!
     var pageIndex = 0
+    var pageId = ""
+    var pageToken: String?
+    private var dataOfVideo: Results<Video>?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,13 +23,50 @@ class ContentViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    // MARK:- Set Up UI
+    override func setUpUI() {
+        self.configureContentViewCOntroller()
+    }
+    // MARK:- Set Up Data
+    override func setUpData() {
+        if let videos = Video.getVideos(pageId) where videos.count > 0 {
+            dataOfVideo = videos
+            loadData()
+        } else {
+            loadVideos(pageId, pageToken: nil)
+        }
+    }
     // MARK:- Register Cell
     private func configureContentViewCOntroller() {
         self.contentTableView.registerNib(HomeCell)
     }
-    // MARK:- Set Up UI
-    override func setUpUI() {
-        self.configureContentViewCOntroller()
+    // MARK:- Load Data
+    func loadData() {
+        do {
+            let realm = try Realm()
+            dataOfVideo = realm.objects(Video).filter("idCategory = '\(pageId)'")
+            self.contentTableView.reloadData()
+        } catch {
+
+        }
+    }
+
+    private func loadVideos(id: String, pageToken: String?) {
+        var parameters = [String: AnyObject]()
+        parameters["part"] = "snippet,contentDetails,statistics"
+        parameters["maxResults"] = "10"
+        parameters["chart"] = "mostPopular"
+        parameters["videoCategoryId"] = id
+        parameters["regionCode"] = "VN"
+        parameters["pageToken"] = pageToken
+        MyVideo.loadDataFromAPI(pageId, pageToken: pageToken, parameters: parameters) { (success, nextPageToken, error) in
+            if success {
+                self.loadData()
+                self.pageToken = nextPageToken
+            } else {
+
+            }
+        }
     }
 }
 //MARK:- UITableViewDataSource
@@ -35,19 +76,23 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let videos = dataOfVideo {
+            return videos.count
+        } else {
+            return 0
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.contentTableView.dequeue(HomeCell)
-        cell.configureCell()
+        let video = self.dataOfVideo![indexPath.row]
+        cell.configureCell(video)
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.idVideo = "Y7nkqZvQcBQ"
-        detailVideoVC.isFavorite = false
+        detailVideoVC.video = dataOfVideo![indexPath.row]
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }

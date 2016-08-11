@@ -38,7 +38,7 @@ struct APIError {
 
 typealias APIRequestSuccess = (response: AnyObject?) -> Void
 typealias APIRequestFailure = (error: APIError?) -> Void
-typealias APIRequestCompletion = (success: Bool, error: APIError?) -> Void
+typealias APIRequestCompletion = (success: Bool,nextPageToken: String?, error: APIError?) -> Void
 
 class APIRequest {
 
