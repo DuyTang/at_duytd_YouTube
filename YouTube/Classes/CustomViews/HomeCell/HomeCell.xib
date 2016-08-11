@@ -22,7 +22,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="106.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
                         <rect key="frame" x="16" y="8" width="100" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="JJ5-qV-RWn"/>
@@ -71,6 +71,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_image" width="160" height="120"/>
+        <image name="ic_video" width="170" height="170"/>
     </resources>
 </document>

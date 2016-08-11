@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FavoriteCell: BaseTableViewCell {
 
     @IBOutlet weak private var thumbnailFavoriteList: UIImageView!
 
     @IBOutlet weak private var nameFavoriteListLabel: UILabel!
+    @IBOutlet weak private var numberVideoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,12 +26,25 @@ class FavoriteCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureFavoriteCell() {
-        self.nameFavoriteListLabel.text = "Favorite"
+    func configureFavoriteCell(favorite: Favorite) {
+        self.nameFavoriteListLabel.text = favorite.name
+        self.numberVideoLabel.text = String(favorite.numberVideo) + " videos"
+        self.thumbnailFavoriteList.downloadImage(selectImageFavorite(favorite.id))
     }
 
     override func setUpUI() {
-        configureFavoriteCell()
+
     }
 
+    func selectImageFavorite(idFavorite: String) -> String {
+        var thumbnailFavorite: String?
+        do {
+            let realm = try Realm()
+            let video = realm.objects(Video).filter("idListFavorite = '\(idFavorite)'").first
+            thumbnailFavorite = video!.thumbnail
+        } catch {
+
+        }
+        return thumbnailFavorite!
+    }
 }

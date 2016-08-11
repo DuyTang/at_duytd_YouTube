@@ -37,6 +37,10 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="g5F-ML-6Z2"/>
                             </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="CsM-u9-Saj"/>
+                                <outlet property="delegate" destination="-1" id="FOq-Kz-SG6"/>
+                            </connections>
                         </pickerView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyP-o0-3Nw">
                             <rect key="frame" x="0.0" y="196" width="300" height="1"/>

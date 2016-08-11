@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import SwiftUtils
+import RealmSwift
 
 class DetailFavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
+    var favorite = Favorite()
+    var listVideo: Results<Video>?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,10 +29,19 @@ class DetailFavoriteViewController: BaseViewController {
     // MARK:- Set Up UI
     override func setUpUI() {
         self.configureDetailFavoriteViewController()
+        self.nameListFavoriteLabel.text = favorite.name
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        self.loadData()
+    }
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            listVideo = realm.objects(Video).filter("idListFavorite = '\(favorite.id)'")
+        } catch {
 
+        }
     }
     // MARK:- Action
     @IBAction func clickBack(sender: AnyObject) {
@@ -41,15 +54,17 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return (listVideo?.count)!
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(HomeCell.self)
-        // cell.configureCell()
+        let video = listVideo![indexPath.row]
+        cell.configureCell(video)
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
+        detailVideoVC.video = listVideo![indexPath.row]
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }

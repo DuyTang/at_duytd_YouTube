@@ -70,7 +70,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="LmE-bU-bM0">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="LmE-bU-bM0">
                     <rect key="frame" x="16" y="330.5" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="CV6-s6-GHB"/>
@@ -130,6 +130,6 @@
     <resources>
         <image name="bt_back" width="32" height="32"/>
         <image name="bt_star" width="33" height="33"/>
-        <image name="ic_image" width="160" height="120"/>
+        <image name="ic_video" width="170" height="170"/>
     </resources>
 </document>

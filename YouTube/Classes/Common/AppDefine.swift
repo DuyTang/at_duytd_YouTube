@@ -21,6 +21,7 @@ struct AppDefine {
     static let ImageFavorite = "ic_favorite"
     static let ImageHistory = "ic_history"
     static let ImageTrending = "ic_trending"
+    static let ImageVideo = "ic_video"
     static let Font = "Neutra Text"
     static let SelectedFont = "Neutra Text TF"
     static let FontSize: CGFloat = 19

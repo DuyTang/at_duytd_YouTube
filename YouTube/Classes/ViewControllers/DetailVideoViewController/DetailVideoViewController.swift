@@ -47,6 +47,7 @@ class DetailVideoViewController: BaseViewController {
     // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
         let addFavoriteVC = AddFavoriteViewController()
+        addFavoriteVC.idVideo = video.idVideo
         presentViewController(addFavoriteVC, animated: false, completion: nil)
     }
     @IBAction func clickBack(sender: AnyObject) {
