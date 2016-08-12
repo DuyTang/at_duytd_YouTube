@@ -15,7 +15,7 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
-    var listVideo: Results<Video>?
+    var listVideo: Results<ListVideoFavorite>?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -24,7 +24,7 @@ class DetailFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     private func configureDetailFavoriteViewController() {
-        self.listVideoFavoriteTableView.registerNib(HomeCell)
+        self.listVideoFavoriteTableView.registerNib(VideoFavoriteCell)
     }
     // MARK:- Set Up UI
     override func setUpUI() {
@@ -38,7 +38,7 @@ class DetailFavoriteViewController: BaseViewController {
     private func loadData() {
         do {
             let realm = try Realm()
-            listVideo = realm.objects(Video).filter("idListFavorite = '\(favorite.id)'")
+            listVideo = realm.objects(ListVideoFavorite).filter("idListFavorite = '\(favorite.id)'")
         } catch {
 
         }
@@ -54,17 +54,29 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (listVideo?.count)!
+        if let numberListFavorite = listVideo?.count {
+            return numberListFavorite
+        } else {
+            return 0
+        }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(HomeCell.self)
+        let cell = tableView.dequeue(VideoFavoriteCell.self)
         let video = listVideo![indexPath.row]
         cell.configureCell(video)
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.video = listVideo![indexPath.row]
+        let item = listVideo![indexPath.row]
+        let video = Video()
+        video.channelTitle = item.channelTitle
+        video.idVideo = item.idVideo
+        video.descript = item.descript
+        video.duration = item.duration
+        video.isFavorite = item.isFavorite
+        video.viewCount = item.viewCount
+        detailVideoVC.video = video
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }

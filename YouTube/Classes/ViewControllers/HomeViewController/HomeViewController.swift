@@ -88,6 +88,7 @@ class HomeViewController: BaseViewController {
             dataOfCategory = realm.objects(Category)
             categoryCollectionView.reloadData()
         } catch {
+
         }
     }
 

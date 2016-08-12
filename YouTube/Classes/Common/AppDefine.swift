@@ -22,6 +22,8 @@ struct AppDefine {
     static let ImageHistory = "ic_history"
     static let ImageTrending = "ic_trending"
     static let ImageVideo = "ic_video"
+    static let ImageButton = "bt_star"
+    static let ImageSelectedButton = "bt_starfill"
     static let Font = "Neutra Text"
     static let SelectedFont = "Neutra Text TF"
     static let FontSize: CGFloat = 19
@@ -36,4 +38,10 @@ struct AppDefine {
     static let LoadVideoSuccess = "Load Video Success"
     static let LoadVideoFail = "Load Video Fail"
     static let LoadCategoryFail = "Load Category Fail"
+    // MARK:- Alert
+    static let OkButton = "OK"
+    static let CancelButton = "Cancel"
+    static let MessageEnterList = "Enter your list"
+    static let TitleAddNewList = "Enter Name"
+    static let TextPlaceHolder = "Name List Favorite"
 }

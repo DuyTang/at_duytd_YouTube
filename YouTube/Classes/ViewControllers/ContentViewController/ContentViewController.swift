@@ -16,6 +16,7 @@ class ContentViewController: BaseViewController {
     var pageId = ""
     var pageToken: String?
     private var dataOfVideo: Results<Video>?
+    @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -30,9 +31,11 @@ class ContentViewController: BaseViewController {
     // MARK:- Set Up Data
     override func setUpData() {
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
+            self.indicatorView.hidden = true
             dataOfVideo = videos
             loadData()
         } else {
+            self.indicatorView.startAnimating()
             loadVideos(pageId, pageToken: nil)
         }
     }
@@ -61,10 +64,11 @@ class ContentViewController: BaseViewController {
         parameters["pageToken"] = pageToken
         MyVideo.loadDataFromAPI(pageId, pageToken: pageToken, parameters: parameters) { (success, nextPageToken, error) in
             if success {
+                self.indicatorView.stopAnimating()
+                self.indicatorView.hidden = true
                 self.loadData()
                 self.pageToken = nextPageToken
             } else {
-
             }
         }
     }
@@ -95,11 +99,23 @@ extension ContentViewController: UITableViewDataSource {
         detailVideoVC.video = dataOfVideo![indexPath.row]
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+
+        if scrollView == contentTableView {
+
+            if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height {
+                if pageToken != nil {
+                    loadVideos(pageId, pageToken: pageToken!)
+                    contentTableView.reloadData()
+                }
+            }
+        }
+    }
 }
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 }
 

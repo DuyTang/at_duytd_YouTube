@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ufont.otf">
+            <string>NeutraText-Book</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="KGk-i7-Jjw" customClass="DecriptVideoCell" customModule="YouTube" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XB-jD-qgg">
+                        <rect key="frame" x="8" y="8" width="304" height="17.5"/>
+                        <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojX-FP-DTq">
+                        <rect key="frame" x="8" y="29.5" width="304" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="yYA-qu-UAW"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Label">
+                                <attributes>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="2" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="topMargin" secondItem="6XB-jD-qgg" secondAttribute="top" id="BNv-cZ-zb8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="6XB-jD-qgg" secondAttribute="trailing" id="FVb-bF-1km"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="ojX-FP-DTq" secondAttribute="leading" id="ImO-PX-gkQ"/>
+                    <constraint firstItem="ojX-FP-DTq" firstAttribute="centerX" secondItem="6XB-jD-qgg" secondAttribute="centerX" id="LXH-Tr-6lp"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="6XB-jD-qgg" secondAttribute="leading" id="RC4-6Q-sYu"/>
+                    <constraint firstAttribute="bottom" secondItem="ojX-FP-DTq" secondAttribute="bottom" constant="8.5" id="W0V-7y-YEF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ojX-FP-DTq" secondAttribute="trailing" id="ZiO-aw-thI"/>
+                    <constraint firstItem="ojX-FP-DTq" firstAttribute="top" secondItem="6XB-jD-qgg" secondAttribute="bottom" constant="4" id="unc-Zg-t5o"/>
+                    <constraint firstItem="6XB-jD-qgg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="vHl-6S-bQZ"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="vHl-6S-bQZ"/>
+                        <exclude reference="LXH-Tr-6lp"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="decriptVideoLabel" destination="6XB-jD-qgg" id="eBv-TE-7mY"/>
+                <outlet property="detailDecriptVideoLabel" destination="ojX-FP-DTq" id="gOu-Ts-kCj"/>
+            </connections>
+            <point key="canvasLocation" x="379" y="82"/>
+        </tableViewCell>
+    </objects>
+</document>

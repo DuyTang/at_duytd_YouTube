@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Favorite: Object {
-    dynamic var id = ""
+    dynamic var id = "0"
     dynamic var name = ""
     dynamic var numberVideo = 0
 

@@ -22,21 +22,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="106.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
-                        <rect key="frame" x="16" y="8" width="100" height="90"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="JJ5-qV-RWn"/>
-                            <constraint firstAttribute="height" constant="90" id="zd9-WH-Xs4"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwS-mR-7Dg">
-                        <rect key="frame" x="124" y="13" width="183" height="17.5"/>
+                        <rect key="frame" x="124" y="13" width="188" height="17.5"/>
                         <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-n3-4tY">
-                        <rect key="frame" x="124" y="33.5" width="183" height="13.5"/>
+                        <rect key="frame" x="124" y="33" width="188" height="13.5"/>
                         <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -47,25 +40,49 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
+                        <rect key="frame" x="16" y="8" width="100" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="JJ5-qV-RWn"/>
+                            <constraint firstAttribute="height" constant="90" id="zd9-WH-Xs4"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="wdG-h7-UTA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="DKX-qN-UWw"/>
+                    <constraint firstAttribute="bottom" secondItem="wdG-h7-UTA" secondAttribute="bottom" constant="8.5" id="Pcd-6o-A5C"/>
+                    <constraint firstAttribute="trailing" secondItem="uwS-mR-7Dg" secondAttribute="trailing" constant="8" id="Pez-dP-xzO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uwS-mR-7Dg" secondAttribute="trailing" constant="5" id="QDA-bt-EKd"/>
                     <constraint firstItem="wdG-h7-UTA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="RVU-Gv-gze"/>
                     <constraint firstItem="uwS-mR-7Dg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="SjH-3r-mvj"/>
+                    <constraint firstItem="wdG-h7-UTA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="SnW-5w-thb"/>
                     <constraint firstItem="V1t-n3-4tY" firstAttribute="width" secondItem="uwS-mR-7Dg" secondAttribute="width" id="YA0-0M-BH3"/>
                     <constraint firstItem="uwS-mR-7Dg" firstAttribute="leading" secondItem="wdG-h7-UTA" secondAttribute="trailing" constant="8" id="YYt-VM-0D0"/>
+                    <constraint firstItem="V1t-n3-4tY" firstAttribute="leading" secondItem="wdG-h7-UTA" secondAttribute="trailing" constant="8" id="ada-7n-3JI"/>
                     <constraint firstItem="0cL-aN-iHY" firstAttribute="leading" secondItem="wdG-h7-UTA" secondAttribute="trailing" constant="8" id="dhY-GL-HxX"/>
+                    <constraint firstAttribute="trailing" secondItem="V1t-n3-4tY" secondAttribute="trailing" constant="8" id="eJE-Us-hIf"/>
+                    <constraint firstItem="wdG-h7-UTA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="lkD-fl-KPN"/>
+                    <constraint firstAttribute="bottom" secondItem="wdG-h7-UTA" secondAttribute="bottom" constant="8" id="r1c-Em-PYX"/>
                     <constraint firstItem="V1t-n3-4tY" firstAttribute="centerX" secondItem="uwS-mR-7Dg" secondAttribute="centerX" id="tgA-WV-OIg"/>
                     <constraint firstItem="0cL-aN-iHY" firstAttribute="top" secondItem="V1t-n3-4tY" secondAttribute="bottom" constant="3" id="vtV-nN-Iuc"/>
                     <constraint firstItem="V1t-n3-4tY" firstAttribute="top" secondItem="uwS-mR-7Dg" secondAttribute="bottom" constant="3" id="wTA-eJ-CDw"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="RVU-Gv-gze"/>
+                        <exclude reference="SnW-5w-thb"/>
+                        <exclude reference="r1c-Em-PYX"/>
+                        <exclude reference="QDA-bt-EKd"/>
+                        <exclude reference="YA0-0M-BH3"/>
+                        <exclude reference="tgA-WV-OIg"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameChannelLabel" destination="V1t-n3-4tY" id="j3R-V8-epk"/>
                 <outlet property="nameVideoLabel" destination="uwS-mR-7Dg" id="hiV-CQ-6nj"/>
                 <outlet property="numberViewLabel" destination="0cL-aN-iHY" id="2VZ-Vr-dPm"/>
-                <outlet property="thumbnailVideo" destination="wdG-h7-UTA" id="8gu-iv-QZh"/>
+                <outlet property="thumbnailVideo" destination="wdG-h7-UTA" id="LOM-La-LRL"/>
             </connections>
             <point key="canvasLocation" x="364" y="270.5"/>
         </tableViewCell>
