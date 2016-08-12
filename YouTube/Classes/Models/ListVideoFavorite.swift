@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-class ListVideoFavorite: Object {
+class VideoFavorite: Object {
     dynamic var idVideo = ""
     dynamic var idCategory = ""
     dynamic var title = ""
@@ -19,10 +19,9 @@ class ListVideoFavorite: Object {
     dynamic var channelTitle = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
-    dynamic var isFavorite = false
     dynamic var idListFavorite = ""
 
-    class func getVideos(id: String) -> Results<ListVideoFavorite>? {
+    class func getVideos(id: String) -> Results<VideoFavorite>? {
         do {
             let realm = try Realm()
             let videos = realm.objects(self).filter("idCategory = '\(id)'")

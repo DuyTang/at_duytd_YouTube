@@ -29,16 +29,13 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Config DetailVideoViewController
     func configureDetailVideoViewController() {
-        // self.favoriteButton.hidden = video.isFavorite
-        if video.isFavorite == true || checkFavorite(video.idVideo) == true {
-            self.favoriteButton.setImage(UIImage(named: AppDefine.ImageSelectedButton), forState: .Normal)
+        if checkFavorite(video.idVideo) == true {
+            self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
             self.favoriteButton.enabled = false
         } else {
-            self.favoriteButton.setImage(UIImage(named: AppDefine.ImageButton), forState: .Normal)
+            self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
             self.favoriteButton.enabled = true
         }
-        // self.nameVideoLabel.text = video.title
-
         self.detailVideoTable.registerNib(PlayVideoCell)
         self.detailVideoTable.registerNib(DecriptVideoCell)
         self.detailVideoTable.registerNib(HomeCell)
@@ -47,7 +44,6 @@ class DetailVideoViewController: BaseViewController {
     // MARK:- Set Up UI
     override func setUpUI() {
         configureDetailVideoViewController()
-        // UIView.setBorder(self.subscribeButton, cornerRadius: 5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
     }
     // MARK:- Set Up Data
     override func setUpData() {
@@ -57,7 +53,7 @@ class DetailVideoViewController: BaseViewController {
         var isFavorite = false
         do {
             let realm = try Realm()
-            let listVideo = realm.objects(ListVideoFavorite).filter("idVideo = %@", video.idVideo)
+            let listVideo = realm.objects(VideoFavorite).filter("idVideo = %@", video.idVideo)
             if listVideo.count > 0 {
                 isFavorite = true
             }

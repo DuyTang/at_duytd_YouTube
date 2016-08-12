@@ -15,7 +15,7 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
-    var listVideo: Results<ListVideoFavorite>?
+    var listVideo: Results<VideoFavorite>?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -38,7 +38,7 @@ class DetailFavoriteViewController: BaseViewController {
     private func loadData() {
         do {
             let realm = try Realm()
-            listVideo = realm.objects(ListVideoFavorite).filter("idListFavorite = '\(favorite.id)'")
+            listVideo = realm.objects(VideoFavorite).filter("idListFavorite = '\(favorite.id)'")
         } catch {
 
         }
@@ -74,7 +74,6 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         video.idVideo = item.idVideo
         video.descript = item.descript
         video.duration = item.duration
-        video.isFavorite = item.isFavorite
         video.viewCount = item.viewCount
         detailVideoVC.video = video
         self.navigationController?.pushViewController(detailVideoVC, animated: true)

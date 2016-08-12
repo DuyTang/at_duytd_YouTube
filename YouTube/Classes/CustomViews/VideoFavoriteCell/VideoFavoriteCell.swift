@@ -25,12 +25,12 @@ class VideoFavoriteCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     // MARK:- Configure Cell
-    func configureCell(video: ListVideoFavorite) {
+    func configureCell(video: VideoFavorite) {
         thumbnailVideo.downloadImage(video.thumbnail)
         self.nameVideoLabel.text = video.title
         self.channelLabel.text = video.channelTitle
         self.countViewLabel.text = "\(video.viewCount) views"
-        
+
     }
     // MARk:- Set Up UI
     override func setUpUI() {

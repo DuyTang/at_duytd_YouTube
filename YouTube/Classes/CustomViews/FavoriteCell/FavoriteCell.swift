@@ -25,26 +25,38 @@ class FavoriteCell: BaseTableViewCell {
 
         // Configure the view for the selected state
     }
+    override func setUpUI() {
+
+    }
 
     func configureFavoriteCell(favorite: Favorite) {
         self.nameFavoriteListLabel.text = favorite.name
-        if favorite.numberVideo > 1 {
-            self.numberVideoLabel.text = String(favorite.numberVideo) + " videos"
+        let numberVideo = getNumberVideo(favorite.id)
+        if numberVideo >= 1 {
+            self.numberVideoLabel.text = String(numberVideo) + " videos"
         } else {
-            self.numberVideoLabel.text = String(favorite.numberVideo) + " video"
+            self.numberVideoLabel.text = String(numberVideo) + " video"
         }
         self.thumbnailFavoriteList.downloadImage(selectImageFavorite(String(favorite.id)))
     }
 
-    override func setUpUI() {
+    func getNumberVideo(idListFavorite: String) -> Int {
+        var count = 0
+        do {
+            let realm = try Realm()
+            let listVideo = realm.objects(VideoFavorite).filter("idListFavorite = %@", idListFavorite)
+            count = listVideo.count
+        } catch {
 
+        }
+        return count
     }
 
     func selectImageFavorite(idFavorite: String) -> String {
         var thumbnailFavorite: String?
         do {
             let realm = try Realm()
-            let video = realm.objects(ListVideoFavorite).filter("idListFavorite = '\(idFavorite)'").first
+            let video = realm.objects(VideoFavorite).filter("idListFavorite = %@", idFavorite).first
             thumbnailFavorite = video!.thumbnail
         } catch {
 

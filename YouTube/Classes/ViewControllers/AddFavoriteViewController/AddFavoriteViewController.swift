@@ -9,21 +9,20 @@
 import UIKit
 import RealmSwift
 protocol AddFavoriteDelegate {
-    func AddSuccess(isSuccess: Bool)
+    func addSuccess(isSuccess: Bool)
 }
 
 class AddFavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var addFavoriteView: UIView!
     @IBOutlet weak private var listFavoritePicker: UIPickerView!
+    private var dataOfFavorite: Results<Favorite>!
+    private var delegate: AddFavoriteDelegate!
     var idVideo = ""
     var idListFavorite = "1"
-    var dataOfFavorite: Results<Favorite>!
     var video = Video()
-    private var delegate: AddFavoriteDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Realm.Configuration.defaultConfiguration.path)
         // Do any additional setup after loading the view.
     }
 
@@ -64,8 +63,7 @@ class AddFavoriteViewController: BaseViewController {
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
         do {
             let realm = try Realm()
-            let videoFavorite = ListVideoFavorite()
-            let favorite = realm.objects(Favorite).filter("id = '\(idListFavorite)'").first!
+            let videoFavorite = VideoFavorite()
             videoFavorite.idVideo = video.idVideo
             videoFavorite.channelTitle = video.channelTitle
             videoFavorite.descript = video.descript
@@ -75,10 +73,8 @@ class AddFavoriteViewController: BaseViewController {
             videoFavorite.thumbnail = video.thumbnail
             videoFavorite.title = video.title
             videoFavorite.idListFavorite = idListFavorite
-            videoFavorite.isFavorite = true
             try realm.write({ () -> Void in
                 realm.add(videoFavorite)
-                favorite.numberVideo = favorite.numberVideo + 1
             })
         } catch {
 

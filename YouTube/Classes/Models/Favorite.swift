@@ -22,7 +22,6 @@ class Favorite: Object {
                 id = Int(realm.objects(Favorite).last!.id)!
             }
         } catch {
-
         }
         return id
     }

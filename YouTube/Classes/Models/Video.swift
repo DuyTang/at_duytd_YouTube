@@ -19,8 +19,6 @@ class Video: Object, Mappable {
     dynamic var channelTitle = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
-    dynamic var isFavorite = false
-    dynamic var idListFavorite = ""
 
     required convenience init(_ map: Map) {
         self.init()
@@ -65,6 +63,5 @@ class Video: Object, Mappable {
 
         }
     }
-
 }
 

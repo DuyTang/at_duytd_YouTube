@@ -21,7 +21,6 @@ struct AppDefine {
     static let ImageFavorite = "ic_favorite"
     static let ImageHistory = "ic_history"
     static let ImageTrending = "ic_trending"
-    static let ImageVideo = "ic_video"
     static let ImageButton = "bt_star"
     static let ImageSelectedButton = "bt_starfill"
     static let Font = "Neutra Text"
