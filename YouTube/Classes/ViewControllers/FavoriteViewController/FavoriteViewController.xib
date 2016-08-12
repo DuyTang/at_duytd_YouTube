@@ -4,11 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="ufont.otf">
-            <string>NeutraText-Book</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
@@ -25,8 +20,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7b-7Q-3Or">
-                            <rect key="frame" x="136" y="29" width="102" height="27"/>
-                            <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="30"/>
+                            <rect key="frame" x="132" y="21.5" width="110.5" height="34.5"/>
+                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
                             <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

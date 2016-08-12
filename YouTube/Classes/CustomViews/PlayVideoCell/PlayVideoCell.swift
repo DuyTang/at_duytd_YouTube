@@ -10,11 +10,11 @@ import UIKit
 
 class PlayVideoCell: BaseTableViewCell {
 
-    @IBOutlet weak var playVideoView: YTPlayerView!
-    @IBOutlet weak var nameVideoLabel: UILabel!
-    @IBOutlet weak var thumbnailVideo: UIImageView!
-    @IBOutlet weak var channelLabel: UILabel!
-    @IBOutlet weak var viewCountLabel: UILabel!
+    @IBOutlet weak private var playVideoView: YTPlayerView!
+    @IBOutlet weak private var nameVideoLabel: UILabel!
+    @IBOutlet weak private var thumbnailVideo: UIImageView!
+    @IBOutlet weak private var channelLabel: UILabel!
+    @IBOutlet weak private var viewCountLabel: UILabel!
     @IBOutlet weak private var subcribeButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,12 +22,20 @@ class PlayVideoCell: BaseTableViewCell {
         // Initialization code
     }
 
+    func configPlayVideoCell(video: Video) {
+        self.playVideoView.loadWithVideoId(video.idVideo)
+        self.nameVideoLabel.text = video.title
+        self.thumbnailVideo.downloadImage(video.thumbnail)
+        self.channelLabel.text = video.channelTitle
+        self.viewCountLabel.text = video.viewCount
+    }
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
     override func setUpUI() {
-        UIView.setBorder(self.subcribeButton, cornerRadius: 4.0, borderWidth: 1, borderColor: AppDefine.backgroundColor)
+        self.subcribeButton.setBorder(4.0, borderWidth: 1, borderColor: AppDefine.backgroundColor)
     }
 
 }

@@ -32,7 +32,7 @@ class FavoriteCell: BaseTableViewCell {
     func configureFavoriteCell(favorite: Favorite) {
         self.nameFavoriteListLabel.text = favorite.name
         let numberVideo = getNumberVideo(favorite.id)
-        if numberVideo >= 1 {
+        if numberVideo > 1 {
             self.numberVideoLabel.text = String(numberVideo) + " videos"
         } else {
             self.numberVideoLabel.text = String(numberVideo) + " video"

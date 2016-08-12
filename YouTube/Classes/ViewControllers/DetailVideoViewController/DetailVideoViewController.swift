@@ -86,11 +86,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = self.detailVideoTable.dequeue(PlayVideoCell.self)
-            cell.nameVideoLabel.text = video.title
-            cell.channelLabel.text = video.channelTitle
-            cell.thumbnailVideo.downloadImage(video.thumbnail)
-            cell.viewCountLabel.text = "\(video.viewCount) views"
-            cell.playVideoView.loadWithVideoId(video.idVideo)
+            cell.configPlayVideoCell(video)
             return cell
         } else {
             if indexPath.row == 1 {
@@ -99,21 +95,25 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.detailDecriptVideoLabel.text = video.descript
                 return cell
             } else {
-                if indexPath.row == 2 {
-                    let cell = self.detailVideoTable.dequeue(DecriptVideoCell.self)
-                    cell.decriptVideoLabel.text = "Related Video"
-                    cell.detailDecriptVideoLabel.hidden = true
-                    return cell
-                } else {
-                    let cell = self.detailVideoTable.dequeue(HomeCell.self)
-                    return cell
-                }
+                let cell = self.detailVideoTable.dequeue(HomeCell.self)
+                return cell
             }
         }
     }
 
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        if indexPath.row <= 1 {
+            return UITableViewAutomaticDimension
+        } else {
+            return 100
+        }
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row > 1 {
+            return 100
+        } else {
+            return UITableViewAutomaticDimension
+        }
     }
 
 }

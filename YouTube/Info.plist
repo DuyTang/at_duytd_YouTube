@@ -26,6 +26,10 @@
 	<array>
 		<string>ufont.otf</string>
 		<string>Neutra Text TF Light Demi.ttf</string>
+		<string>Arial.ttf</string>
+		<string>ArialBold.ttf</string>
+		<string>TimesNewRoman.ttf</string>
+		<string>PhoneKeyCaps.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

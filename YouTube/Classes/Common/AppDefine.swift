@@ -9,7 +9,7 @@
 import Foundation
 
 struct AppDefine {
-
+    
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
     static let mainColor = 0xFF2515
     static let backgroundColor = 0xF9F9F4

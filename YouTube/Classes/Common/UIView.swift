@@ -7,10 +7,10 @@
 //
 
 extension UIView {
-    class func setBorder(view: UIView, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: Int) {
-        view.layer.cornerRadius = cornerRadius
-        view.clipsToBounds = true
-        view.layer.borderWidth = borderWidth
-        view.layer.borderColor = UIColor.init(hex: borderColor).CGColor
+    func setBorder(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: Int) {
+        self.layer.cornerRadius = cornerRadius
+        self.clipsToBounds = true
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = UIColor.init(hex: borderColor).CGColor
     }
 }

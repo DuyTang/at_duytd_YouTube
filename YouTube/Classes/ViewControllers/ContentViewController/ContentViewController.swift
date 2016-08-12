@@ -100,9 +100,7 @@ extension ContentViewController: UITableViewDataSource {
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-
         if scrollView == contentTableView {
-
             if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height {
                 if pageToken != nil {
                     loadVideos(pageId, pageToken: pageToken!)
@@ -114,8 +112,11 @@ extension ContentViewController: UITableViewDataSource {
 }
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
     }
 }
 

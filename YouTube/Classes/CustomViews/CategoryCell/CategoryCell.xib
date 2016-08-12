@@ -4,11 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="ufont.otf">
-            <string>NeutraText-Book</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,9 +14,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="70" height="40"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcE-9C-V91">
-                        <rect key="frame" x="13" y="11.5" width="44" height="17.5"/>
+                        <rect key="frame" x="12" y="9.5" width="46.5" height="22"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="19"/>
+                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="19"/>
                         <color key="textColor" red="0.60392156862745094" green="0.61568627450980395" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

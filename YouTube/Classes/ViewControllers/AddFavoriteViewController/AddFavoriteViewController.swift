@@ -18,6 +18,8 @@ class AddFavoriteViewController: BaseViewController {
     @IBOutlet weak private var listFavoritePicker: UIPickerView!
     private var dataOfFavorite: Results<Favorite>!
     private var delegate: AddFavoriteDelegate!
+    @IBOutlet weak private var addNewListFavoriteView: UIView!
+    @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
     var idVideo = ""
     var idListFavorite = "1"
     var video = Video()
@@ -38,7 +40,8 @@ class AddFavoriteViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        UIView.setBorder(addFavoriteView, cornerRadius: 5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
+        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
+        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
         self.setAttributeViewController()
     }
     // MARK:- Set Up Data
@@ -82,41 +85,35 @@ class AddFavoriteViewController: BaseViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func clickCancel(sender: AnyObject) {
+    @IBAction func clickBack(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func addNewFavoriteList(sender: AnyObject) {
-        var inputTextField: UITextField!
-        let nameFavoritePrompt = UIAlertController(title: AppDefine.TitleAddNewList,
-            message: AppDefine.MessageEnterList, preferredStyle: .Alert)
-        nameFavoritePrompt.addAction(UIAlertAction(title: AppDefine.CancelButton, style: .Cancel, handler: nil))
-        nameFavoritePrompt.addAction(UIAlertAction(title: AppDefine.OkButton, style: .Destructive,
-            handler: { (action) -> Void in
-                let textfield = nameFavoritePrompt.textFields![0]
-                let favorite = Favorite()
-                favorite.name = textfield.text!
-                favorite.id = String(Favorite.getId() + 1)
-                favorite.numberVideo = 0
-                do {
-                    let realm = try Realm()
-                    try realm.write({
-                        realm.add(favorite)
-                        self.listFavoritePicker.reloadAllComponents()
-                    })
-                } catch {
+        self.showSubView(false)
+    }
+    @IBAction func addNameNewFavoriteList(sender: AnyObject) {
+        let favorite = Favorite()
+        favorite.name = self.nameNewListFavoriteTextField.text!
+        favorite.id = String(Favorite.getId() + 1)
+        do {
+            let realm = try Realm()
+            try realm.write({
+                realm.add(favorite)
+                self.listFavoritePicker.reloadAllComponents()
+            })
+        } catch {
 
-                }
-            }))
-        nameFavoritePrompt.addTextFieldWithConfigurationHandler({ (textField: UITextField!) in
-            textField.placeholder = AppDefine.TextPlaceHolder
-            inputTextField = textField
-            inputTextField.layer.cornerRadius = 4.0
-            inputTextField.clipsToBounds = true
-        })
-
-        presentViewController(nameFavoritePrompt, animated: true, completion: nil)
+        }
+        self.showSubView(true)
     }
 
+    @IBAction func clickCancel(sender: AnyObject) {
+        self.showSubView(true)
+    }
+    private func showSubView(isShow: Bool) {
+        self.addFavoriteView.hidden = !isShow
+        self.addNewListFavoriteView.hidden = isShow
+    }
 }
 extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

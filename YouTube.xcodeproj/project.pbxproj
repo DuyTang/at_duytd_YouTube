@@ -80,6 +80,10 @@
 		F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
 		F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
 		F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
+		F393C0441D5DBF7C000F6818 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
+		F393C0451D5DBF7C000F6818 /* ArialBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArialBold.ttf; sourceTree = "<group>"; };
+		F393C0461D5DBF7C000F6818 /* TimesNewRoman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimesNewRoman.ttf; sourceTree = "<group>"; };
+		F393C04A1D5DC122000F6818 /* PhoneKeyCaps.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhoneKeyCaps.ttf; sourceTree = "<group>"; };
 		F39598941D59B9120030BF82 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		F39A2C8C1D550E8F003FC772 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39A2C9B1D550E8F003FC772 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
@@ -348,6 +352,10 @@
 		F39A2CBA1D551072003FC772 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F393C04A1D5DC122000F6818 /* PhoneKeyCaps.ttf */,
+				F393C0441D5DBF7C000F6818 /* Arial.ttf */,
+				F393C0451D5DBF7C000F6818 /* ArialBold.ttf */,
+				F393C0461D5DBF7C000F6818 /* TimesNewRoman.ttf */,
 				F39A2CE21D551745003FC772 /* Neutra Text TF Light Demi.ttf */,
 				F39A2CE31D551745003FC772 /* ufont.otf */,
 			);
