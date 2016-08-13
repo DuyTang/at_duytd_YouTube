@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-protocol AddFavoriteDelegate {
+protocol AddFavoriteDelegate: NSObjectProtocol {
     func addSuccess(isSuccess: Bool)
 }
 
@@ -17,12 +17,13 @@ class AddFavoriteViewController: BaseViewController {
     @IBOutlet weak private var addFavoriteView: UIView!
     @IBOutlet weak private var listFavoritePicker: UIPickerView!
     private var dataOfFavorite: Results<Favorite>!
-    private var delegate: AddFavoriteDelegate!
+    weak var delegate: AddFavoriteDelegate?
     @IBOutlet weak private var addNewListFavoriteView: UIView!
     @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
     var idVideo = ""
     var idListFavorite = "1"
     var video = Video()
+    var isSaved = false
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -67,21 +68,15 @@ class AddFavoriteViewController: BaseViewController {
         do {
             let realm = try Realm()
             let videoFavorite = VideoFavorite()
-            videoFavorite.idVideo = video.idVideo
-            videoFavorite.channelTitle = video.channelTitle
-            videoFavorite.descript = video.descript
-            videoFavorite.idCategory = video.idCategory
-            videoFavorite.duration = video.duration
-            videoFavorite.viewCount = video.viewCount
-            videoFavorite.thumbnail = video.thumbnail
-            videoFavorite.title = video.title
-            videoFavorite.idListFavorite = idListFavorite
+            videoFavorite.initializate(video, idListFavorite: idListFavorite)
             try realm.write({ () -> Void in
                 realm.add(videoFavorite)
+                self.isSaved = true
             })
         } catch {
 
         }
+        self.delegate?.addSuccess(isSaved)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

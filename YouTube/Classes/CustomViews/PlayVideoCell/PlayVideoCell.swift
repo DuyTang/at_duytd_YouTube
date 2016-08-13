@@ -16,18 +16,23 @@ class PlayVideoCell: BaseTableViewCell {
     @IBOutlet weak private var channelLabel: UILabel!
     @IBOutlet weak private var viewCountLabel: UILabel!
     @IBOutlet weak private var subcribeButton: UIButton!
+    private var isRun = false
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUpUI()
+     
         // Initialization code
     }
 
     func configPlayVideoCell(video: Video) {
-        self.playVideoView.loadWithVideoId(video.idVideo)
-        self.nameVideoLabel.text = video.title
-        self.thumbnailVideo.downloadImage(video.thumbnail)
-        self.channelLabel.text = video.channelTitle
-        self.viewCountLabel.text = video.viewCount
+        if !isRun {
+            isRun = true
+            self.playVideoView.loadWithVideoId(video.idVideo)
+            self.nameVideoLabel.text = video.title.isEmpty ? " " : video.title
+            self.thumbnailVideo.downloadImage(video.thumbnail)
+            self.channelLabel.text = video.channelTitle
+            self.viewCountLabel.text = video.viewCount + " views"
+        }
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

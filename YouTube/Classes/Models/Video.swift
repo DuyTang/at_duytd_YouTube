@@ -52,6 +52,17 @@ class Video: Object, Mappable {
         }
     }
 
+    func initializate(videoFavorite: VideoFavorite) {
+        self.idVideo = videoFavorite.idVideo ?? ""
+        self.idCategory = videoFavorite.idCategory ?? ""
+        self.title = videoFavorite.title ?? ""
+        self.viewCount = videoFavorite.viewCount ?? ""
+        self.duration = videoFavorite.duration ?? ""
+        self.channelTitle = videoFavorite.channelTitle ?? ""
+        self.thumbnail = videoFavorite.thumbnail ?? ""
+        self.descript = videoFavorite.descript ?? ""
+    }
+
     class func cleanData() {
         do {
             let realm = try Realm()

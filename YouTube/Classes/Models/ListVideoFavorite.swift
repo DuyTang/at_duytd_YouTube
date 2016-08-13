@@ -31,6 +31,18 @@ class VideoFavorite: Object {
         }
     }
 
+    func initializate(video: Video, idListFavorite: String) {
+        self.idVideo = video.idVideo ?? ""
+        self.idCategory = video.idCategory ?? ""
+        self.title = video.title ?? ""
+        self.viewCount = video.viewCount ?? ""
+        self.duration = video.duration ?? ""
+        self.channelTitle = video.channelTitle ?? ""
+        self.descript = video.descript ?? ""
+        self.thumbnail = video.thumbnail ?? ""
+        self.idListFavorite = idListFavorite
+    }
+
     class func cleanData() {
         do {
             let realm = try Realm()

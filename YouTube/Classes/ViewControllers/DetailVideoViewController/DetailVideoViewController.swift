@@ -10,17 +10,11 @@ import UIKit
 import RealmSwift
 
 class DetailVideoViewController: BaseViewController {
-
-    // @IBOutlet weak private var playVideoView: YTPlayerView!
     @IBOutlet weak private var favoriteButton: UIButton!
-    // @IBOutlet weak private var nameVideoLabel: UILabel!
-    // @IBOutlet weak private var nameChannelLabel: UILabel!
-    // @IBOutlet weak private var thumbnailVideo: UIImageView!
     var video = Video()
     @IBOutlet weak private var detailVideoTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // self.playVideoView.loadWithVideoId(video.idVideo)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +43,7 @@ class DetailVideoViewController: BaseViewController {
     override func setUpData() {
 
     }
+    // MARK:- Check Favorite
     private func checkFavorite(idVideo: String) -> Bool {
         var isFavorite = false
         do {
@@ -58,7 +53,6 @@ class DetailVideoViewController: BaseViewController {
                 isFavorite = true
             }
         } catch {
-
         }
         return isFavorite
     }
@@ -67,13 +61,14 @@ class DetailVideoViewController: BaseViewController {
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
         let addFavoriteVC = AddFavoriteViewController()
         addFavoriteVC.idVideo = video.idVideo
+        addFavoriteVC.delegate = self
         presentViewController(addFavoriteVC, animated: false, completion: nil)
     }
     @IBAction func clickBack(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
-
+// MARK:- Extension
 extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -102,12 +97,9 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row <= 1 {
-            return UITableViewAutomaticDimension
-        } else {
-            return 100
-        }
+        return UITableViewAutomaticDimension
     }
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row > 1 {
             return 100
@@ -115,5 +107,11 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             return UITableViewAutomaticDimension
         }
     }
-
+}
+extension DetailVideoViewController: AddFavoriteDelegate {
+    func addSuccess(isSuccess: Bool) {
+        if isSuccess == true {
+            self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
+        }
+    }
 }
