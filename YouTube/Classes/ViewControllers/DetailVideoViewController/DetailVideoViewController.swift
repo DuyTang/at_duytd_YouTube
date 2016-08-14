@@ -13,8 +13,12 @@ class DetailVideoViewController: BaseViewController {
     @IBOutlet weak private var favoriteButton: UIButton!
     var video = Video()
     @IBOutlet weak private var detailVideoTable: UITableView!
+    @IBOutlet weak private var playerVideoView: YTPlayerView!
+    private var dataOfRelatedVideo: Results<RelatedVideo>!
+    var pageToken: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.playerVideoView.loadWithVideoId(video.idVideo)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,8 +45,43 @@ class DetailVideoViewController: BaseViewController {
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        RelatedVideo.cleanData()
+        if let relatedVideo = RelatedVideo.getRelatedVideo() where relatedVideo.count > 0 {
+            dataOfRelatedVideo = relatedVideo
+            loadData()
+        } else {
+            loadRelatedVideo(video.idVideo, pageToken: pageToken)
+        }
+    }
+    // MARK:- Load related video
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            dataOfRelatedVideo = realm.objects(RelatedVideo)
+            self.detailVideoTable.reloadData()
+        } catch {
+
+        }
 
     }
+
+    private func loadRelatedVideo(id: String, pageToken: String?) {
+        var parameters = [String: AnyObject]()
+        parameters["part"] = "snippet"
+        parameters["maxResults"] = "10"
+        parameters["relatedToVideoId"] = video.idVideo
+        parameters["type"] = "video"
+        parameters["pageToken"] = pageToken
+        MyVideo.loadListVideoRelated(pageToken, parameters: parameters) { (success, nextPageToken, error) in
+            if success {
+                self.loadData()
+                self.pageToken = nextPageToken
+            } else {
+            }
+        }
+
+    }
+
     // MARK:- Check Favorite
     private func checkFavorite(idVideo: String) -> Bool {
         var isFavorite = false
@@ -75,7 +114,12 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let videos = dataOfRelatedVideo {
+            let numberRow = videos.count + 2
+            return numberRow
+        } else {
+            return 2
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -91,6 +135,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
                 return cell
             } else {
                 let cell = self.detailVideoTable.dequeue(HomeCell.self)
+                let video = dataOfRelatedVideo[indexPath.row - 2]
                 return cell
             }
         }
@@ -102,7 +147,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row > 1 {
-            return 100
+            return 216
         } else {
             return UITableViewAutomaticDimension
         }

@@ -14,9 +14,10 @@ class HomeCell: BaseTableViewCell {
     @IBOutlet weak private var nameVideoLabel: UILabel!
     @IBOutlet weak private var nameChannelLabel: UILabel!
     @IBOutlet weak private var numberViewLabel: UILabel!
+    @IBOutlet weak private var thumbnailChannel: UIImageView!
+    @IBOutlet weak private var timeUploadLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUpUI()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -25,14 +26,16 @@ class HomeCell: BaseTableViewCell {
     }
     // MARK:- Configure Cell
     func configureCell(video: Video) {
-        thumbnailVideo.downloadImage(video.thumbnail)
+        self.thumbnailVideo.downloadImage(video.thumbnail)
+        self.thumbnailChannel.downloadImage(video.thumbnail)
         self.nameVideoLabel.text = video.title
         self.nameChannelLabel.text = video.channelTitle
         self.numberViewLabel.text = "\(video.viewCount) views"
+
     }
     // MARk:- Set Up UI
     override func setUpUI() {
-
+        self.thumbnailChannel.setCircle(1.0, borderColor: AppDefine.backgroundColor)
     }
 
 }

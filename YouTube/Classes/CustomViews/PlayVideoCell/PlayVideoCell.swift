@@ -19,14 +19,12 @@ class PlayVideoCell: BaseTableViewCell {
     private var isRun = false
     override func awakeFromNib() {
         super.awakeFromNib()
-     
         // Initialization code
     }
 
     func configPlayVideoCell(video: Video) {
         if !isRun {
             isRun = true
-            self.playVideoView.loadWithVideoId(video.idVideo)
             self.nameVideoLabel.text = video.title.isEmpty ? " " : video.title
             self.thumbnailVideo.downloadImage(video.thumbnail)
             self.channelLabel.text = video.channelTitle
@@ -40,7 +38,8 @@ class PlayVideoCell: BaseTableViewCell {
 
     }
     override func setUpUI() {
-        self.subcribeButton.setBorder(4.0, borderWidth: 1, borderColor: AppDefine.backgroundColor)
+        self.subcribeButton.setCircle(1.0, borderColor: 0x000000)
+        self.thumbnailVideo.setCircle(1.0, borderColor: AppDefine.backgroundColor)
     }
 
 }

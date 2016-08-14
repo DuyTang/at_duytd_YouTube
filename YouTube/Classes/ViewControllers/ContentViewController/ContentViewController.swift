@@ -113,7 +113,10 @@ extension ContentViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 216
     }
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
 }
 
