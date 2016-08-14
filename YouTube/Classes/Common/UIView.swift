@@ -13,4 +13,10 @@ extension UIView {
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = UIColor.init(hex: borderColor).CGColor
     }
+    func setCircle(borderWidth: CGFloat, borderColor: Int) {
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.clipsToBounds = true
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = UIColor.init(hex: borderColor).CGColor
+    }
 }
