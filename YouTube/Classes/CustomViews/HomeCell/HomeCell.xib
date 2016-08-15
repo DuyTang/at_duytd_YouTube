@@ -15,40 +15,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="214.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
-                        <rect key="frame" x="8" y="3" width="304" height="170"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="wdG-h7-UTA">
+                        <rect key="frame" x="16" y="3" width="288" height="170"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="170" id="RBm-pi-VBw"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seth Rogen shows the people of New York that our food has feelings. #SausagePartyMovie, in" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwS-mR-7Dg">
-                        <rect key="frame" x="8" y="138" width="304" height="34.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="16" y="138" width="288" height="34.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="0.84216056029999997" colorSpace="calibratedRGB"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-n3-4tY">
-                        <rect key="frame" x="56" y="174" width="256" height="17.5"/>
+                        <rect key="frame" x="64" y="174" width="240" height="17.5"/>
                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzL-5j-aIS">
-                        <rect key="frame" x="275" y="195" width="37" height="17.5"/>
+                        <rect key="frame" x="267" y="195" width="37" height="17.5"/>
                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cL-aN-iHY">
-                        <rect key="frame" x="56" y="195" width="37" height="17.5"/>
+                        <rect key="frame" x="64" y="195" width="37" height="17.5"/>
                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="KFH-5p-tKy">
-                        <rect key="frame" x="8" y="174" width="40" height="40"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="KFH-5p-tKy">
+                        <rect key="frame" x="16" y="174" width="40" height="40"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="ChE-sn-lTC"/>
                             <constraint firstAttribute="width" constant="40" id="wFO-us-5ad"/>
@@ -58,16 +59,16 @@
                 <constraints>
                     <constraint firstItem="uwS-mR-7Dg" firstAttribute="width" secondItem="wdG-h7-UTA" secondAttribute="width" id="7my-mu-Lru"/>
                     <constraint firstItem="uwS-mR-7Dg" firstAttribute="centerX" secondItem="wdG-h7-UTA" secondAttribute="centerX" id="7rL-g8-XJT"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="wdG-h7-UTA" secondAttribute="trailing" id="9qA-kX-5Kr"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="wdG-h7-UTA" secondAttribute="trailing" constant="8" id="9qA-kX-5Kr"/>
                     <constraint firstItem="KFH-5p-tKy" firstAttribute="top" secondItem="wdG-h7-UTA" secondAttribute="bottom" constant="1" id="Amb-M7-YeC"/>
                     <constraint firstItem="V1t-n3-4tY" firstAttribute="leading" secondItem="KFH-5p-tKy" secondAttribute="trailing" constant="8" id="TwF-df-frK"/>
-                    <constraint firstItem="KFH-5p-tKy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="WmL-de-pqg"/>
+                    <constraint firstItem="KFH-5p-tKy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="WmL-de-pqg"/>
                     <constraint firstItem="KFH-5p-tKy" firstAttribute="top" secondItem="uwS-mR-7Dg" secondAttribute="bottom" constant="1.5" id="cdf-6g-KJS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="TzL-5j-aIS" secondAttribute="trailing" id="ckc-AQ-BO1"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="V1t-n3-4tY" secondAttribute="trailing" id="d8U-Vk-Akt"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="TzL-5j-aIS" secondAttribute="trailing" constant="8" id="ckc-AQ-BO1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="V1t-n3-4tY" secondAttribute="trailing" constant="8" id="d8U-Vk-Akt"/>
                     <constraint firstItem="0cL-aN-iHY" firstAttribute="leading" secondItem="KFH-5p-tKy" secondAttribute="trailing" constant="8" id="dud-Qa-zqh"/>
                     <constraint firstItem="TzL-5j-aIS" firstAttribute="top" secondItem="V1t-n3-4tY" secondAttribute="bottom" constant="3.5" id="gHO-rA-ugM"/>
-                    <constraint firstItem="wdG-h7-UTA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="gI0-Pv-jGD"/>
+                    <constraint firstItem="wdG-h7-UTA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="gI0-Pv-jGD"/>
                     <constraint firstItem="0cL-aN-iHY" firstAttribute="top" secondItem="V1t-n3-4tY" secondAttribute="bottom" constant="3.5" id="hn4-MQ-YSx"/>
                     <constraint firstItem="wdG-h7-UTA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-5" id="oaG-H2-jXU"/>
                     <constraint firstItem="V1t-n3-4tY" firstAttribute="top" secondItem="wdG-h7-UTA" secondAttribute="bottom" constant="1" id="zXQ-3b-wHA"/>

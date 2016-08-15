@@ -52,15 +52,25 @@ class Video: Object, Mappable {
         }
     }
 
-    func initializate(videoFavorite: VideoFavorite) {
-        self.idVideo = videoFavorite.idVideo ?? ""
-        self.idCategory = videoFavorite.idCategory ?? ""
-        self.title = videoFavorite.title ?? ""
-        self.viewCount = videoFavorite.viewCount ?? ""
-        self.duration = videoFavorite.duration ?? ""
-        self.channelTitle = videoFavorite.channelTitle ?? ""
-        self.thumbnail = videoFavorite.thumbnail ?? ""
-        self.descript = videoFavorite.descript ?? ""
+    func initializate(favoriteVideo: VideoFavorite) {
+        self.idVideo = favoriteVideo.idVideo ?? ""
+        self.idCategory = favoriteVideo.idCategory ?? ""
+        self.title = favoriteVideo.title ?? ""
+        self.viewCount = favoriteVideo.viewCount ?? ""
+        self.duration = favoriteVideo.duration ?? ""
+        self.channelTitle = favoriteVideo.channelTitle ?? ""
+        self.thumbnail = favoriteVideo.thumbnail ?? ""
+        self.descript = favoriteVideo.descript ?? ""
+    }
+
+    func initFromRelatedVideo(relatedVideo: RelatedVideo) {
+        self.idVideo = relatedVideo.idVideo ?? ""
+        self.title = relatedVideo.title ?? ""
+        self.viewCount = relatedVideo.viewCount ?? ""
+        self.duration = relatedVideo.duration ?? ""
+        self.channelTitle = relatedVideo.channelTitle ?? ""
+        self.thumbnail = relatedVideo.thumbnail ?? ""
+        self.descript = relatedVideo.descript ?? ""
     }
 
     class func cleanData() {

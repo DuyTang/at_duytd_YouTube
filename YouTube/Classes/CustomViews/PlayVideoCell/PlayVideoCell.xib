@@ -42,17 +42,32 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1c-WN-HrT">
-                        <rect key="frame" x="84" y="60.5" width="37" height="17.5"/>
+                        <rect key="frame" x="84" y="60" width="37" height="17.5"/>
                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZw-PG-uOe">
+                        <rect key="frame" x="243" y="78" width="69" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="hPP-j7-UUm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <state key="normal" title="Decription">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="clickExpandDescription:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dNc-6Q-IXK"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="Q3l-lO-m6G" secondAttribute="bottom" id="1Q9-Cg-q9u"/>
                     <constraint firstAttribute="bottomMargin" secondItem="W1c-WN-HrT" secondAttribute="bottom" constant="19.5" id="84c-zZ-QbC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="iZw-PG-uOe" secondAttribute="trailing" id="Bgu-8S-E6y"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vRS-XD-G4x" secondAttribute="bottom" id="C6D-5d-zIG"/>
                     <constraint firstItem="vRS-XD-G4x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="42" id="FOI-1k-BIw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="iZw-PG-uOe" secondAttribute="bottom" constant="0.5" id="NbJ-s0-k4M"/>
                     <constraint firstItem="f54-zS-jKt" firstAttribute="leading" secondItem="Q3l-lO-m6G" secondAttribute="trailing" constant="15" id="Qsy-DT-AYY"/>
                     <constraint firstItem="f54-zS-jKt" firstAttribute="top" secondItem="1m3-yt-WOX" secondAttribute="bottom" constant="8" id="VZs-g5-phn"/>
                     <constraint firstItem="Q3l-lO-m6G" firstAttribute="top" secondItem="1m3-yt-WOX" secondAttribute="bottom" constant="4" id="YKN-TQ-Yfb"/>

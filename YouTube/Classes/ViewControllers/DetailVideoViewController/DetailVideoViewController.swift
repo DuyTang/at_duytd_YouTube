@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import XCDYouTubeVideoPlayerViewController
 
 class DetailVideoViewController: BaseViewController {
     @IBOutlet weak private var favoriteButton: UIButton!
@@ -16,9 +17,17 @@ class DetailVideoViewController: BaseViewController {
     @IBOutlet weak private var playerVideoView: YTPlayerView!
     private var dataOfRelatedVideo: Results<RelatedVideo>!
     var pageToken: String?
+    private var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
+    private var isExpandDescription = false
+    private var width = UIScreen.mainScreen().bounds.width
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.playerVideoView.loadWithVideoId(video.idVideo)
+        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
+        let viewPlayer = UIView(frame: CGRect(x: 0, y: 64, width: self.width, height: 180))
+        self.youtubeVideoPlayer?.presentInView(viewPlayer)
+        self.youtubeVideoPlayer?.preferredVideoQualities
+        youtubeVideoPlayer?.moviePlayer.play()
+        self.view.addSubview(viewPlayer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +52,7 @@ class DetailVideoViewController: BaseViewController {
     override func setUpUI() {
         configureDetailVideoViewController()
     }
+
     // MARK:- Set Up Data
     override func setUpData() {
         RelatedVideo.cleanData()
@@ -53,6 +63,7 @@ class DetailVideoViewController: BaseViewController {
             loadRelatedVideo(video.idVideo, pageToken: pageToken)
         }
     }
+
     // MARK:- Load related video
     private func loadData() {
         do {
@@ -103,6 +114,7 @@ class DetailVideoViewController: BaseViewController {
         addFavoriteVC.delegate = self
         presentViewController(addFavoriteVC, animated: false, completion: nil)
     }
+
     @IBAction func clickBack(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -125,17 +137,19 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = self.detailVideoTable.dequeue(PlayVideoCell.self)
+            cell.delegate = self
             cell.configPlayVideoCell(video)
             return cell
         } else {
             if indexPath.row == 1 {
                 let cell = self.detailVideoTable.dequeue(DecriptVideoCell.self)
-                cell.decriptVideoLabel.text = "Decription"
                 cell.detailDecriptVideoLabel.text = video.descript
                 return cell
             } else {
                 let cell = self.detailVideoTable.dequeue(HomeCell.self)
-                let video = dataOfRelatedVideo[indexPath.row - 2]
+                let video = Video()
+                video.initFromRelatedVideo(dataOfRelatedVideo[indexPath.row - 2])
+                cell.configureCell(video)
                 return cell
             }
         }
@@ -146,17 +160,37 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row > 1 {
-            return 216
-        } else {
+        if indexPath.row == 0 {
             return UITableViewAutomaticDimension
+        } else {
+            if indexPath.row == 1 {
+                return !isExpandDescription ? 70 : UITableViewAutomaticDimension
+            } else {
+                return 216
+            }
         }
     }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let newVideo = Video()
+        newVideo.initFromRelatedVideo(dataOfRelatedVideo[indexPath.row - 2])
+        self.video = newVideo
+        self.loadData()
+    }
 }
+
 extension DetailVideoViewController: AddFavoriteDelegate {
     func addSuccess(isSuccess: Bool) {
         if isSuccess == true {
             self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
         }
+    }
+}
+
+extension DetailVideoViewController: PlayVideoCellDelegate {
+    func clickExpandDescription(cell: PlayVideoCell) {
+        isExpandDescription = !isExpandDescription
+        detailVideoTable.beginUpdates()
+        detailVideoTable.endUpdates()
     }
 }
