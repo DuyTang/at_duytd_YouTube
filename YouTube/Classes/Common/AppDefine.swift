@@ -11,9 +11,9 @@ import Foundation
 struct AppDefine {
 
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
-    static let mainColor = 0xFF2515
-    static let backgroundColor = 0xF9F9F4
-    static let borderColor = 0xCC181E
+    static let mainColor = UIColor.RGB(255, 37, 21)
+    static let backgroundColor = UIColor.RGB(249, 249, 249)
+    static let borderColor = UIColor.RGB(204, 24, 30)
     static let Home = "Home"
     static let Favorite = "Favorite"
     static let History = "History"
@@ -44,4 +44,6 @@ struct AppDefine {
     static let MessageEnterList = "Enter your list"
     static let TitleAddNewList = "Enter Name"
     static let TextPlaceHolder = "Name List Favorite"
+    // MARK:- Table
+    static let heightOfHomeCell: CGFloat = 216
 }

@@ -37,10 +37,10 @@ class FavoriteCell: BaseTableViewCell {
         } else {
             self.numberVideoLabel.text = String(numberVideo) + " video"
         }
-        self.thumbnailFavoriteList.downloadImage(selectImageFavorite(String(favorite.id)))
+        self.thumbnailFavoriteList.downloadImage(selectImageFavorite(favorite.id))
     }
 
-    func getNumberVideo(idListFavorite: String) -> Int {
+    func getNumberVideo(idListFavorite: Int) -> Int {
         var count = 0
         do {
             let realm = try Realm()
@@ -52,7 +52,7 @@ class FavoriteCell: BaseTableViewCell {
         return count
     }
 
-    func selectImageFavorite(idFavorite: String) -> String {
+    func selectImageFavorite(idFavorite: Int) -> String {
         var thumbnailFavorite: String?
         do {
             let realm = try Realm()

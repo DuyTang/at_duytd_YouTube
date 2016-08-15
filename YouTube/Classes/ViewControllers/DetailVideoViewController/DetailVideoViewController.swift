@@ -166,7 +166,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             if indexPath.row == 1 {
                 return !isExpandDescription ? 70 : UITableViewAutomaticDimension
             } else {
-                return 216
+                return AppDefine.heightOfHomeCell
             }
         }
     }

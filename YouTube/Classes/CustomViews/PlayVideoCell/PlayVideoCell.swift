@@ -43,7 +43,7 @@ class PlayVideoCell: BaseTableViewCell {
 
     }
     override func setUpUI() {
-        self.subcribeButton.setCircle(1.0, borderColor: 0x000000)
+        self.subcribeButton.setCircle(1.0, borderColor: UIColor.blackColor())
         self.thumbnailVideo.setCircle(1.0, borderColor: AppDefine.backgroundColor)
     }
 

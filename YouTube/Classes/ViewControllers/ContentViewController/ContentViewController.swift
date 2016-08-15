@@ -47,7 +47,7 @@ class ContentViewController: BaseViewController {
     func loadData() {
         do {
             let realm = try Realm()
-            dataOfVideo = realm.objects(Video).filter("idCategory = '\(pageId)'")
+            dataOfVideo = realm.objects(Video).filter("idCategory = %@", pageId)
             self.contentTableView.reloadData()
         } catch {
 
@@ -113,10 +113,8 @@ extension ContentViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 216
+        return AppDefine.heightOfHomeCell
     }
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
+
 }
 

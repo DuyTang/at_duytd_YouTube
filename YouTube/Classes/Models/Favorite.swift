@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Favorite: Object {
-    dynamic var id = "0"
+    dynamic var id = 0
     dynamic var name = ""
 
     class func getId() -> Int {
@@ -18,7 +18,7 @@ class Favorite: Object {
         do {
             let realm = try Realm()
             if realm.objects(Favorite).count > 0 {
-                id = Int(realm.objects(Favorite).last!.id)!
+                id = realm.objects(Favorite).last!.id
             }
         } catch {
         }

@@ -44,13 +44,14 @@ class HomeViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.configureHomeViewController()
         self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
-        self.selectedCategoryView.backgroundColor = UIColor.init(hex: AppDefine.borderColor)
+        self.selectedCategoryView.backgroundColor = AppDefine.borderColor
         self.categoryCollectionView.addSubview(selectedCategoryView)
         self.pageViewController?.dataSource = self
         self.pageViewController?.delegate = self
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        Category.cleanData()
         if let categories = Category.getCategories() where categories.count > 0 {
             dataOfCategory = categories
             loadData()

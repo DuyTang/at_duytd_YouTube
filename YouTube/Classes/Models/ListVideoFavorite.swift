@@ -19,19 +19,19 @@ class VideoFavorite: Object {
     dynamic var channelTitle = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
-    dynamic var idListFavorite = ""
+    dynamic var idListFavorite = 0
 
     class func getVideos(id: String) -> Results<VideoFavorite>? {
         do {
             let realm = try Realm()
-            let videos = realm.objects(self).filter("idCategory = '\(id)'")
+            let videos = realm.objects(self).filter("idCategory = %@", id)
             return videos
         } catch {
             return nil
         }
     }
 
-    func initializate(video: Video, idListFavorite: String) {
+    func initializate(video: Video, idListFavorite: Int) {
         self.idVideo = video.idVideo ?? ""
         self.idCategory = video.idCategory ?? ""
         self.title = video.title ?? ""

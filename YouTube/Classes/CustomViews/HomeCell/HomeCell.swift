@@ -18,6 +18,7 @@ class HomeCell: BaseTableViewCell {
     @IBOutlet weak private var timeUploadLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .None
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

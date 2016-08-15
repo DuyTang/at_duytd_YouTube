@@ -12,8 +12,8 @@ class BaseTabbarViewController: UITabBarController {
     var arrayNavigationControllers = [BaseNavigationController]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.barTintColor = UIColor.init(hex: AppDefine.backgroundColor)
-        self.tabBar.tintColor = UIColor.init(hex: AppDefine.mainColor)
+        self.tabBar.barTintColor = AppDefine.backgroundColor
+        self.tabBar.tintColor = AppDefine.mainColor
     }
 
     override func didReceiveMemoryWarning() {
