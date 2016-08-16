@@ -20,14 +20,16 @@ class DetailVideoViewController: BaseViewController {
     private var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
     private var isExpandDescription = false
     private var width = UIScreen.mainScreen().bounds.width
+
     override func viewDidLoad() {
         super.viewDidLoad()
         youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
-        let viewPlayer = UIView(frame: CGRect(x: 0, y: 64, width: self.width, height: 180))
+        let viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
         self.youtubeVideoPlayer?.presentInView(viewPlayer)
         self.youtubeVideoPlayer?.preferredVideoQualities
         youtubeVideoPlayer?.moviePlayer.play()
-        self.view.addSubview(viewPlayer)
+        self.playerVideoView.addSubview(viewPlayer)
+        self.tabBarController?.tabBar.layer.zPosition = -1
     }
 
     override func didReceiveMemoryWarning() {
@@ -164,7 +166,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             return UITableViewAutomaticDimension
         } else {
             if indexPath.row == 1 {
-                return !isExpandDescription ? 70 : UITableViewAutomaticDimension
+                return !isExpandDescription ? 0 : UITableViewAutomaticDimension
             } else {
                 return AppDefine.heightOfHomeCell
             }

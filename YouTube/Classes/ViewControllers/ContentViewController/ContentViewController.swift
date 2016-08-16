@@ -16,7 +16,10 @@ class ContentViewController: BaseViewController {
     var pageId = ""
     var pageToken: String?
     private var dataOfVideo: Results<Video>?
+    private var isLoading = false
+    private var loadmoreActive = true
     @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -30,10 +33,10 @@ class ContentViewController: BaseViewController {
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             self.indicatorView.hidden = true
             dataOfVideo = videos
-            loadData()
         } else {
             self.indicatorView.startAnimating()
             loadVideos(pageId, pageToken: nil)
@@ -55,6 +58,10 @@ class ContentViewController: BaseViewController {
     }
 
     private func loadVideos(id: String, pageToken: String?) {
+        if isLoading {
+            return
+        }
+        isLoading = true
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["maxResults"] = "10"
@@ -62,16 +69,20 @@ class ContentViewController: BaseViewController {
         parameters["videoCategoryId"] = id
         parameters["regionCode"] = "VN"
         parameters["pageToken"] = pageToken
-        MyVideo.loadDataFromAPI(pageId, pageToken: pageToken, parameters: parameters) { (success, nextPageToken, error) in
+        MyVideo.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.indicatorView.stopAnimating()
                 self.indicatorView.hidden = true
-                self.loadData()
+                self.contentTableView.reloadData()
                 self.pageToken = nextPageToken
-            } else {
+                if nextPageToken == nil {
+                    self.loadmoreActive = false
+                }
             }
+            self.isLoading = false
         }
     }
+
 }
 //MARK:- UITableViewDataSource
 extension ContentViewController: UITableViewDataSource {
@@ -99,16 +110,15 @@ extension ContentViewController: UITableViewDataSource {
         detailVideoVC.video = dataOfVideo![indexPath.row]
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView == contentTableView {
-            if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height {
-                if pageToken != nil {
-                    loadVideos(pageId, pageToken: pageToken!)
-                    contentTableView.reloadData()
-                }
-            }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset.y
+        let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
+        if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            loadVideos(pageId, pageToken: pageToken)
         }
     }
+
 }
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {

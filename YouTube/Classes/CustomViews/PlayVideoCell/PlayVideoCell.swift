@@ -20,8 +20,10 @@ class PlayVideoCell: BaseTableViewCell {
     @IBOutlet weak private var channelLabel: UILabel!
     @IBOutlet weak private var viewCountLabel: UILabel!
     @IBOutlet weak private var subcribeButton: UIButton!
+    @IBOutlet weak var showDecriptionButton: UIButton!
     private var isRun = false
     private var isSubscribe = false
+    private var isShow = false
     var delegate: PlayVideoCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,4 +65,13 @@ class PlayVideoCell: BaseTableViewCell {
         }
     }
 
+    @IBAction func showDecriptionVideo(sender: AnyObject) {
+        if isShow == false {
+            self.showDecriptionButton.setImage(UIImage(named: "bt_collapse"), forState: .Normal)
+            isShow = true
+        } else {
+            self.showDecriptionButton.setImage(UIImage(named: "bt_expand"), forState: .Normal)
+            isShow = false
+        }
+    }
 }

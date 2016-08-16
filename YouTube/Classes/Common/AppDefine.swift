@@ -46,5 +46,5 @@ struct AppDefine {
     static let TitleAddNewList = "Enter Name"
     static let TextPlaceHolder = "Name List Favorite"
     // MARK:- Table
-    static let heightOfHomeCell: CGFloat = 216
+    static let heightOfHomeCell: CGFloat = 230
 }

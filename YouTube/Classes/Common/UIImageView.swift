@@ -19,5 +19,33 @@ extension UIImageView {
             self.image = UIImage(named: "ic_video")
         }
     }
+
+    func imageFromUrlScalltoFill(urlString: String, placeHolder: UIImage?) {
+        let cache = Shared.imageCache
+        let imageResize = ImageResizer(size: self.bounds.size, scaleMode: .AspectFill, allowUpscaling: true, compressionQuality: 1)
+
+        let homeFormat = Format<UIImage>(name: "home", diskCapacity: 10 * 1024 * 1024) { image in
+            return imageResize.resizeImage(image)
+        }
+        cache.addFormat(homeFormat)
+
+        if let imagePlaceHolder = placeHolder {
+            if urlString != "" {
+                self.hnk_setImageFromURL(NSURL(string: urlString)!,
+                    placeholder: imagePlaceHolder,
+                    format: homeFormat,
+                    failure: { (error) -> () in
+                    }, success: { (image) -> () in
+                        UIView.transitionWithView(self, duration: 0,
+                            options: UIViewAnimationOptions.TransitionCrossDissolve,
+                            animations: { () -> Void in
+                                self.image = image
+                            }, completion: nil)
+                })
+            } else {
+                self.image = placeHolder
+            }
+        }
+    }
 }
 

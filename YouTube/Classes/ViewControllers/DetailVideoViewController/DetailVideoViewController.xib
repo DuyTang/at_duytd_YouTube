@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVideoViewController" customModule="YouTube" customModuleProvider="target">
@@ -53,7 +54,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="00B-Xv-9Mo">
-                    <rect key="frame" x="0.0" y="244" width="375" height="383"/>
+                    <rect key="frame" x="0.0" y="279.5" width="375" height="382.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="3WA-vU-p0D"/>
@@ -61,11 +62,17 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDk-1W-wh4" customClass="YTPlayerView">
-                    <rect key="frame" x="0.0" y="64" width="375" height="180"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="215.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="180" id="UNU-NQ-ESB"/>
+                        <constraint firstAttribute="width" secondItem="FDk-1W-wh4" secondAttribute="height" multiplier="4:2.3" id="gew-30-jdg"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="UNU-NQ-ESB"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -74,7 +81,7 @@
                 <constraint firstAttribute="trailing" secondItem="wEi-nX-c8c" secondAttribute="trailing" id="PQH-29-W16"/>
                 <constraint firstAttribute="trailing" secondItem="00B-Xv-9Mo" secondAttribute="trailing" id="SaR-QJ-eZl"/>
                 <constraint firstItem="00B-Xv-9Mo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Skv-tN-lxs"/>
-                <constraint firstAttribute="bottom" secondItem="00B-Xv-9Mo" secondAttribute="bottom" constant="40" id="j2F-Dl-zlZ"/>
+                <constraint firstAttribute="bottom" secondItem="00B-Xv-9Mo" secondAttribute="bottom" constant="5" id="j2F-Dl-zlZ"/>
                 <constraint firstAttribute="trailing" secondItem="FDk-1W-wh4" secondAttribute="trailing" id="keR-5P-2FM"/>
                 <constraint firstItem="wEi-nX-c8c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nwy-dX-LjB"/>
                 <constraint firstItem="FDk-1W-wh4" firstAttribute="top" secondItem="wEi-nX-c8c" secondAttribute="bottom" id="ppy-yF-LIb"/>

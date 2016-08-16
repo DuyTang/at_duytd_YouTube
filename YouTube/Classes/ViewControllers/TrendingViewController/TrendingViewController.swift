@@ -10,15 +10,16 @@ import UIKit
 import RealmSwift
 
 class TrendingViewController: BaseViewController {
-
     @IBOutlet weak var trendingTableView: UITableView!
     private var trendingVideos: Results<Video>!
     private var idCategory = "0"
     private var nextPage: String?
     private var isLoading = false
+    private var loadmoreActive = true
+    @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,10 +38,12 @@ class TrendingViewController: BaseViewController {
 
     // MARK:- Set Up Data
     override func setUpData() {
+        loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
+            self.indicatorView.hidden = true
             trendingVideos = videos
-            loadData()
         } else {
+            self.indicatorView.startAnimating()
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
@@ -58,18 +61,28 @@ class TrendingViewController: BaseViewController {
     }
 
     func loadTrendingVideo(id: String, pageToken: String?) {
+
+        if isLoading {
+            return
+        }
+        isLoading = true
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["chart"] = "mostPopular"
         parameters["regionCode"] = "VN"
         parameters["maxResults"] = "10"
-        parameters["pageToken"] = pageToken
-        MyVideo.loadDataFromAPI(idCategory, pageToken: nextPage, parameters: parameters) { (success, nextPageToken, error) in
+        parameters["pageToken"] = nextPage
+        MyVideo.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
             if success {
-                self.loadData()
-                self.isLoading = false
+                self.indicatorView.stopAnimating()
+                self.indicatorView.hidden = true
+                self.trendingTableView.reloadData()
                 self.nextPage = nextPageToken
+                if nextPageToken == nil {
+                    self.loadmoreActive = false
+                }
             }
+            self.isLoading = false
         }
     }
 }
@@ -104,13 +117,8 @@ extension TrendingViewController: UITableViewDataSource {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
-        if scrollMaxSize - contentOffset < 50 {
-            if isLoading == false {
-                isLoading = true
-                loadTrendingVideo(idCategory, pageToken: nextPage)
-                trendingTableView.reloadData()
-            }
-
+        if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            loadTrendingVideo(idCategory, pageToken: nextPage)
         }
     }
 }
