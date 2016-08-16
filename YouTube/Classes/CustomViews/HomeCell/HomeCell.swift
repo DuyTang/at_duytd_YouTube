@@ -39,4 +39,9 @@ class HomeCell: BaseTableViewCell {
         self.thumbnailChannel.setCircle(1.0, borderColor: AppDefine.backgroundColor)
     }
 
+    override func prepareForReuse() {
+        thumbnailVideo.image = nil
+        thumbnailChannel.image = nil
+    }
+
 }

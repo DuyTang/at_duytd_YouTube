@@ -9,9 +9,7 @@
 import UIKit
 
 class DecriptVideoCell: BaseTableViewCell {
-
-    @IBOutlet weak var decriptVideoLabel: UILabel!
-    @IBOutlet weak var detailDecriptVideoLabel: UILabel!
+    @IBOutlet private weak var detailDecriptVideoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,6 +19,10 @@ class DecriptVideoCell: BaseTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    func configureDecriptVideoCell(video: Video) {
+        self.detailDecriptVideoLabel.text = video.descript
     }
 
 }

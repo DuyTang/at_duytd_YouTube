@@ -31,8 +31,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New List Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cU-Xd-JIv">
-                                    <rect key="frame" x="71" y="8" width="156.5" height="23"/>
-                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
+                                    <rect key="frame" x="71.5" y="8" width="155.5" height="23"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                     <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -50,11 +50,11 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Icl-IB-nNU">
-                            <rect key="frame" x="56" y="90" width="67" height="32"/>
+                            <rect key="frame" x="56" y="90" width="67" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="67" id="FEw-Ij-nhA"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Cancel"/>
                             <connections>
                                 <action selector="backToListFavoriteButton:" destination="-1" eventType="touchUpInside" id="02w-hb-KoV"/>
@@ -69,11 +69,11 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mud-io-2L9">
-                            <rect key="frame" x="170" y="90" width="70" height="32"/>
+                            <rect key="frame" x="170" y="90" width="70" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="pI8-tX-u7d"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Add"/>
                             <connections>
                                 <action selector="addNewFavoriteListButton:" destination="-1" eventType="touchUpInside" id="7sr-vo-6EI"/>
@@ -130,8 +130,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="300" height="64"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgm-9R-sp5">
-                                    <rect key="frame" x="80" y="27" width="140" height="28.5"/>
-                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="25"/>
+                                    <rect key="frame" x="81" y="26" width="137" height="29.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                     <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -152,26 +152,26 @@
                                 <constraint firstItem="g4n-5h-vR6" firstAttribute="top" secondItem="DOh-Xb-lRP" secondAttribute="top" constant="22" id="l4E-Gr-heG"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbG-TK-Grj">
-                            <rect key="frame" x="18" y="202" width="115" height="32"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="115" id="WbS-zV-hbI"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
-                            <state key="normal" title="Cancel"/>
-                            <connections>
-                                <action selector="backToDetailVideoControllerButton:" destination="-1" eventType="touchUpInside" id="jLV-Eb-2nE"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeL-1R-bfr">
-                            <rect key="frame" x="166" y="202" width="89" height="32"/>
+                            <rect key="frame" x="166" y="202" width="89" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="89" id="7tQ-17-xLQ"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Add"/>
                             <connections>
                                 <action selector="addFavoriteButton:" destination="-1" eventType="touchUpInside" id="MAv-Zs-v9s"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbG-TK-Grj">
+                            <rect key="frame" x="18" y="202" width="115" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="115" id="WbS-zV-hbI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="backToDetailVideoControllerButton:" destination="-1" eventType="touchUpInside" id="jLV-Eb-2nE"/>
                             </connections>
                         </button>
                     </subviews>

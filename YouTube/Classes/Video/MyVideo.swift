@@ -13,8 +13,9 @@ import ObjectMapper
 class MyVideo {
     var dataOfVideo: Results<Video>?
 
-    class func loadDataFromAPI(id: String, pageToken: String?, parameters: [String: AnyObject], completion: APIRequestCompletion) {
+    class func loadDataFromAPI(id: String, parameters: [String: AnyObject], completion: APIRequestCompletion) {
         let api = APIDefine.YouTube().getListVideo()
+//        print(api)
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
                 let pageToken = data["nextPageToken"] as? String
