@@ -49,8 +49,8 @@
                             <rect key="frame" x="127" y="24" width="120" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YouTube" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UF-y0-q0a">
-                                    <rect key="frame" x="0.5" y="-2.5" width="119.5" height="34.5"/>
-                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
+                                    <rect key="frame" x="12.5" y="2.5" width="96" height="29.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                     <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -64,7 +64,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-HH-LSB">
-                            <rect key="frame" x="325" y="22" width="34" height="34"/>
+                            <rect key="frame" x="325" y="26" width="34" height="34"/>
                             <state key="normal" backgroundImage="bt_searchWhite"/>
                         </button>
                     </subviews>
@@ -73,7 +73,7 @@
                         <constraint firstItem="gzC-Hc-zBp" firstAttribute="width" secondItem="K4Z-BQ-Y04" secondAttribute="width" multiplier="2/3" id="Dbi-PS-8Gk"/>
                         <constraint firstItem="dDX-lW-qfP" firstAttribute="top" secondItem="K4Z-BQ-Y04" secondAttribute="top" constant="24" id="JxL-Rd-hEh"/>
                         <constraint firstAttribute="trailing" secondItem="SWg-HH-LSB" secondAttribute="trailing" constant="16" id="Mby-RB-w37"/>
-                        <constraint firstItem="SWg-HH-LSB" firstAttribute="top" secondItem="K4Z-BQ-Y04" secondAttribute="top" constant="22" id="eFn-6j-1QL"/>
+                        <constraint firstItem="SWg-HH-LSB" firstAttribute="top" secondItem="K4Z-BQ-Y04" secondAttribute="top" constant="26" id="eFn-6j-1QL"/>
                         <constraint firstAttribute="height" constant="64" id="jeo-HU-3B8"/>
                         <constraint firstItem="dDX-lW-qfP" firstAttribute="centerX" secondItem="K4Z-BQ-Y04" secondAttribute="centerX" id="stg-fi-LpH"/>
                         <constraint firstItem="gzC-Hc-zBp" firstAttribute="centerX" secondItem="K4Z-BQ-Y04" secondAttribute="centerX" id="zrg-TN-C2P"/>
