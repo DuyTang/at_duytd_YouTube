@@ -4,11 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="ufont.otf">
-            <string>NeutraText-Book</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HistoryViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
@@ -24,9 +19,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHd-lJ-otw">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvK-6P-6LE">
-                            <rect key="frame" x="142.5" y="29" width="90" height="27"/>
-                            <fontDescription key="fontDescription" name="NeutraText-Book" family="Neutra Text" pointSize="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvK-6P-6LE">
+                            <rect key="frame" x="137.5" y="21.5" width="100" height="34.5"/>
+                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
                             <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -38,8 +33,8 @@
                         <constraint firstAttribute="bottom" secondItem="gvK-6P-6LE" secondAttribute="bottom" constant="8" id="j5C-Dp-gH3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
+                    <rect key="frame" x="0.0" y="64" width="375" height="563"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="PWA-zi-ZEI"/>
@@ -54,7 +49,7 @@
                 <constraint firstAttribute="trailing" secondItem="Y4l-XT-yIv" secondAttribute="trailing" id="K8A-Zo-xAa"/>
                 <constraint firstItem="Y4l-XT-yIv" firstAttribute="top" secondItem="cHd-lJ-otw" secondAttribute="bottom" id="Ppv-hh-tbh"/>
                 <constraint firstItem="cHd-lJ-otw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ePO-t0-AbW"/>
-                <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" id="fvI-WH-RJx"/>
+                <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" constant="40" id="fvI-WH-RJx"/>
                 <constraint firstAttribute="trailing" secondItem="cHd-lJ-otw" secondAttribute="trailing" id="trY-IO-HCn"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

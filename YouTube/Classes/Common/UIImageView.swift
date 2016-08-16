@@ -13,10 +13,10 @@ extension UIImageView {
             if let url = NSURL(string: urlString) {
                 self.hnk_setImageFromURL(url)
             } else {
-                self.image = UIImage(named: "image")
+                self.image = UIImage(named: "ic_video")
             }
         } else {
-            self.image = UIImage(named: "image")
+            self.image = UIImage(named: "ic_video")
         }
     }
 }

@@ -7,10 +7,16 @@
 //
 
 extension UIView {
-    class func setBorder(view: UIView, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: Int) {
-        view.layer.cornerRadius = cornerRadius
-        view.clipsToBounds = true
-        view.layer.borderWidth = borderWidth
-        view.layer.borderColor = UIColor.init(hex: borderColor).CGColor
+    func setBorder(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) {
+        self.layer.cornerRadius = cornerRadius
+        self.clipsToBounds = true
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.CGColor
+    }
+    func setCircle(borderWidth: CGFloat, borderColor: UIColor) {
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.clipsToBounds = true
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.CGColor
     }
 }

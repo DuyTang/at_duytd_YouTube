@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
+import SwiftUtils
 
 class FavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var favoriteTableView: UITableView!
+    private var dataOfFavorite: Results<Favorite>!
+    private var listFavorite: Results<Favorite>!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,11 +25,10 @@ class FavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    // MARK:- Configure FavoriteController
-    private func configureFavoriteController() {
-        self.favoriteTableView.registerNib(FavoriteCell)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.favoriteTableView.reloadData()
     }
-
     // MARK:- Set Up UI
     override func setUpUI() {
         self.navigationController?.navigationBarHidden = true
@@ -33,18 +36,39 @@ class FavoriteViewController: BaseViewController {
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        loadData()
+    }
+    // MARK:- Configure FavoriteController
+    private func configureFavoriteController() {
+        self.favoriteTableView.registerNib(FavoriteCell)
+    }
+    // MARK:- Load Data
+    func loadData() {
+        do {
+            let realm = try Realm()
+            dataOfFavorite = realm.objects(Favorite)
+        } catch {
 
+        }
     }
 
 }
 extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if let favorites = dataOfFavorite {
+            return favorites.count
+        } else {
+            return 0
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.favoriteTableView.dequeue(FavoriteCell)
-        cell.configureFavoriteCell()
+        let favorite = dataOfFavorite[indexPath.row]
+        cell.configureFavoriteCell(favorite)
         return cell
     }
 
@@ -54,6 +78,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailFavoriteVC = DetailFavoriteViewController()
+        detailFavoriteVC.favorite = dataOfFavorite[indexPath.row]
         self.navigationController?.pushViewController(detailFavoriteVC, animated: true)
     }
 }

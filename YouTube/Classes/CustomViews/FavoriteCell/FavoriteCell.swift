@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FavoriteCell: BaseTableViewCell {
 
     @IBOutlet weak private var thumbnailFavoriteList: UIImageView!
 
     @IBOutlet weak private var nameFavoriteListLabel: UILabel!
+    @IBOutlet weak private var numberVideoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,13 +25,42 @@ class FavoriteCell: BaseTableViewCell {
 
         // Configure the view for the selected state
     }
-
-    func configureFavoriteCell() {
-        self.nameFavoriteListLabel.text = "Favorite"
-    }
-
     override func setUpUI() {
-        configureFavoriteCell()
+
     }
 
+    func configureFavoriteCell(favorite: Favorite) {
+        self.nameFavoriteListLabel.text = favorite.name
+        let numberVideo = getNumberVideo(favorite.id)
+        if numberVideo > 1 {
+            self.numberVideoLabel.text = String(numberVideo) + " videos"
+        } else {
+            self.numberVideoLabel.text = String(numberVideo) + " video"
+        }
+        self.thumbnailFavoriteList.downloadImage(selectImageFavorite(favorite.id))
+    }
+
+    func getNumberVideo(idListFavorite: Int) -> Int {
+        var count = 0
+        do {
+            let realm = try Realm()
+            let listVideo = realm.objects(VideoFavorite).filter("idListFavorite = %@", idListFavorite)
+            count = listVideo.count
+        } catch {
+
+        }
+        return count
+    }
+
+    func selectImageFavorite(idFavorite: Int) -> String {
+        var thumbnailFavorite: String?
+        do {
+            let realm = try Realm()
+            let video = realm.objects(VideoFavorite).filter("idListFavorite = %@", idFavorite).first
+            thumbnailFavorite = video!.thumbnail
+        } catch {
+
+        }
+        return thumbnailFavorite!
+    }
 }

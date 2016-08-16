@@ -11,8 +11,9 @@ import Foundation
 struct AppDefine {
 
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
-    static let mainColor = 0xFF2515
-    static let backgroundColor = 0xF9F9F4
+    static let mainColor = UIColor.RGB(255, 37, 21)
+    static let backgroundColor = UIColor.RGB(249, 249, 249)
+    static let borderColor = UIColor.RGB(204, 24, 30)
     static let Home = "Home"
     static let Favorite = "Favorite"
     static let History = "History"
@@ -21,6 +22,8 @@ struct AppDefine {
     static let ImageFavorite = "ic_favorite"
     static let ImageHistory = "ic_history"
     static let ImageTrending = "ic_trending"
+    static let ImageButton = "bt_star"
+    static let ImageSelectedButton = "bt_starfill"
     static let Font = "Neutra Text"
     static let SelectedFont = "Neutra Text TF"
     static let FontSize: CGFloat = 19
@@ -35,4 +38,12 @@ struct AppDefine {
     static let LoadVideoSuccess = "Load Video Success"
     static let LoadVideoFail = "Load Video Fail"
     static let LoadCategoryFail = "Load Category Fail"
+    // MARK:- Alert
+    static let OkButton = "OK"
+    static let CancelButton = "Cancel"
+    static let MessageEnterList = "Enter your list"
+    static let TitleAddNewList = "Enter Name"
+    static let TextPlaceHolder = "Name List Favorite"
+    // MARK:- Table
+    static let heightOfHomeCell: CGFloat = 216
 }

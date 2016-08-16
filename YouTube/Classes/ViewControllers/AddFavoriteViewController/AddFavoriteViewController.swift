@@ -7,14 +7,25 @@
 //
 
 import UIKit
+import RealmSwift
+protocol AddFavoriteDelegate: NSObjectProtocol {
+    func addSuccess(isSuccess: Bool)
+}
 
 class AddFavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var addFavoriteView: UIView!
     @IBOutlet weak private var listFavoritePicker: UIPickerView!
+    private var favorites: Results<Favorite>!
+    weak var delegate: AddFavoriteDelegate?
+    @IBOutlet weak private var addNewListFavoriteView: UIView!
+    @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
+    var idVideo = ""
+    var idListFavorite = 1
+    var video = Video()
+    var isSaved = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -30,40 +41,96 @@ class AddFavoriteViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        UIView.setBorder(addFavoriteView, cornerRadius: 5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
+        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
+        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
         self.setAttributeViewController()
     }
     // MARK:- Set Up Data
     override func setUpData() {
-
+        loadData()
     }
     // MARK:- Set Up
     override func setUp() {
         self.setAttributeViewController()
     }
-    // MARK:- Action
-    @IBAction func addVideoToFavoriteList(sender: AnyObject) {
+    // MARK:- Load Data
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            favorites = realm.objects(Favorite)
+            video = realm.objects(Video).filter("idVideo = %@", idVideo).first!
+        } catch {
 
+        }
     }
+    // MARK:- Action
+    @IBAction func addFavoriteButton(sender: AnyObject) {
+        do {
+            let realm = try Realm()
+            let videoFavorite = VideoFavorite()
+            videoFavorite.initializate(video, idListFavorite: idListFavorite)
+            try realm.write({ () -> Void in
+                realm.add(videoFavorite)
+                self.isSaved = true
+            })
+        } catch {
 
-    @IBAction func clickCancel(sender: AnyObject) {
+        }
+        self.delegate?.addSuccess(isSaved)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    @IBAction func addNewFavoriteList(sender: AnyObject) {
-        var inputTextField: UITextField!
-        let nameFavoritePrompt = UIAlertController(title: "Enter Name",
-            message: "Enter your list", preferredStyle: .Alert)
-        nameFavoritePrompt.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        nameFavoritePrompt.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: { (action) -> Void in
-            }))
-        nameFavoritePrompt.addTextFieldWithConfigurationHandler({ (textField: UITextField!) in
-            textField.placeholder = "Name List Favorite"
-            inputTextField = textField
-            inputTextField.layer.cornerRadius = 4.0
-            inputTextField.clipsToBounds = true
-        })
 
-        presentViewController(nameFavoritePrompt, animated: true, completion: nil)
+    @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
+        self.showSubView(false)
+    }
+    @IBAction func addNewFavoriteListButton(sender: AnyObject) {
+        if self.nameNewListFavoriteTextField.text! != "" {
+            let favorite = Favorite()
+            favorite.name = self.nameNewListFavoriteTextField.text!
+            favorite.id = Favorite.getId() + 1
+            do {
+                let realm = try Realm()
+                try realm.write({
+                    realm.add(favorite)
+                    self.listFavoritePicker.reloadAllComponents()
+                })
+            } catch {
+
+            }
+            self.showSubView(true)
+        }
     }
 
+    @IBAction func backToListFavoriteButton(sender: AnyObject) {
+        self.showSubView(true)
+    }
+    private func showSubView(isShow: Bool) {
+        self.addFavoriteView.hidden = !isShow
+        self.addNewListFavoriteView.hidden = isShow
+    }
 }
+extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let favorites = favorites {
+            return favorites.count
+        } else {
+            return 0
+        }
+    }
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return favorites[row].name
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.idListFavorite = favorites[row].id
+    }
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 40
+    }
+}
+

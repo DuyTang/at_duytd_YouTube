@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import SwiftUtils
+import RealmSwift
 
 class DetailFavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
+    var favorite = Favorite()
+    var videoFavorites: Results<VideoFavorite>?
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,10 +29,19 @@ class DetailFavoriteViewController: BaseViewController {
     // MARK:- Set Up UI
     override func setUpUI() {
         self.configureDetailFavoriteViewController()
+        self.nameListFavoriteLabel.text = favorite.name
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        self.loadData()
+    }
+    private func loadData() {
+        do {
+            let realm = try Realm()
+            videoFavorites = realm.objects(VideoFavorite).filter("idListFavorite = %@", favorite.id)
+        } catch {
 
+        }
     }
     // MARK:- Action
     @IBAction func clickBack(sender: AnyObject) {
@@ -41,22 +54,31 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let numberListFavorite = videoFavorites?.count {
+            return numberListFavorite
+        } else {
+            return 0
+        }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(HomeCell.self)
-        // cell.configureCell()
+        let video = Video()
+        video.initializate(videoFavorites![indexPath.row])
+        cell.configureCell(video)
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
+        let video = Video()
+        video.initializate(videoFavorites![indexPath.row])
+        detailVideoVC.video = video
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
 //MARK:- UITableViewDelegate
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return AppDefine.heightOfHomeCell
     }
 }
 
