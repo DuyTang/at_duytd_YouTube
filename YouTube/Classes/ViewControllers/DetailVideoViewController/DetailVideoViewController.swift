@@ -143,7 +143,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
         } else {
             if indexPath.row == 1 {
                 let cell = self.detailVideoTable.dequeue(DecriptVideoCell.self)
-                cell.detailDecriptVideoLabel.text = video.descript
+                cell.configureDecriptVideoCell(video)
                 return cell
             } else {
                 let cell = self.detailVideoTable.dequeue(HomeCell.self)
@@ -172,10 +172,13 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let newVideo = Video()
-        newVideo.initFromRelatedVideo(dataOfRelatedVideo[indexPath.row - 2])
-        self.video = newVideo
-        self.loadData()
+        if indexPath.row > 1 {
+            let newVideo = Video()
+            newVideo.initFromRelatedVideo(dataOfRelatedVideo[indexPath.row - 2])
+            self.video = newVideo
+            self.loadData()
+            self.reloadInputViews()
+        }
     }
 }
 

@@ -107,6 +107,15 @@ extension TrendingViewController: UITableViewDataSource {
             }
         }
     }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+        if (maximumOffset - currentOffset <= 10.0) {
+            loadTrendingVideo(idCategory, pageToken: nextPage)
+            trendingTableView.reloadData()
+        }
+    }
 }
 
 extension TrendingViewController: UITableViewDelegate {

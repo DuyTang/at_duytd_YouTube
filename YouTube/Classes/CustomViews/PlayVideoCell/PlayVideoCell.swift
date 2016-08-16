@@ -48,12 +48,12 @@ class PlayVideoCell: BaseTableViewCell {
         self.thumbnailVideo.setCircle(1.0, borderColor: AppDefine.backgroundColor)
     }
 
-    @IBAction private func clickExpandDescriptionButton(sender: UIButton) {
+    @IBAction private func clickExpandDescription(sender: UIButton) {
         delegate?.clickExpandDescription(self)
     }
-    @IBAction func changeSubscribeButton(sender: AnyObject) {
+    @IBAction func changeSubscribe(sender: AnyObject) {
         if isSubscribe == false {
-            self.subcribeButton.setCircle(1.0, borderColor: UIColor.RGB(224, 14, 69))
+            self.subcribeButton.setCircle(1.0, borderColor: AppDefine.subscribeColor)
             self.subcribeButton.setImage(UIImage(named: "bt_sub_color"), forState: .Normal)
             self.isSubscribe = true
         } else {

@@ -45,7 +45,7 @@
                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
-                            <action selector="changeSubscribeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WKa-gV-Vny"/>
+                            <action selector="changeSubscribe:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jb6-Ai-K9V"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1c-WN-HrT">
@@ -64,7 +64,7 @@
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
-                            <action selector="clickExpandDescriptionButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UQx-SV-z0E"/>
+                            <action selector="clickExpandDescription:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="btH-29-IPV"/>
                         </connections>
                     </button>
                 </subviews>
@@ -99,7 +99,7 @@
                 <outlet property="thumbnailVideo" destination="Q3l-lO-m6G" id="MTj-KC-QBf"/>
                 <outlet property="viewCountLabel" destination="W1c-WN-HrT" id="uFp-74-Huj"/>
             </connections>
-            <point key="canvasLocation" x="293" y="193"/>
+            <point key="canvasLocation" x="454" y="180"/>
         </tableViewCell>
     </objects>
     <resources>
