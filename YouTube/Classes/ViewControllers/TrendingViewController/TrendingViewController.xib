@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrendingViewController" customModule="YouTube" customModuleProvider="target">
+            <connections>
+                <outlet property="trendingTableView" destination="Nxn-my-AKV" id="DWK-EL-06A"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5p-PC-eYR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1C4-wP-N19">
+                            <rect key="frame" x="136" y="27" width="102" height="28.5"/>
+                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="25"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.1450980392" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="1C4-wP-N19" firstAttribute="centerX" secondItem="j5p-PC-eYR" secondAttribute="centerX" id="4ye-0h-E4J"/>
+                        <constraint firstAttribute="bottom" secondItem="1C4-wP-N19" secondAttribute="bottom" constant="8" id="ajS-Kg-Jfk"/>
+                        <constraint firstAttribute="height" constant="64" id="vlg-fa-jez"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nxn-my-AKV">
+                    <rect key="frame" x="0.0" y="64" width="375" height="563"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="JBQ-GY-qgr"/>
+                        <outlet property="delegate" destination="-1" id="sJB-f9-hNC"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="j5p-PC-eYR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9aE-fu-Ipi"/>
+                <constraint firstAttribute="trailing" secondItem="Nxn-my-AKV" secondAttribute="trailing" id="DNR-np-225"/>
+                <constraint firstItem="Nxn-my-AKV" firstAttribute="top" secondItem="j5p-PC-eYR" secondAttribute="bottom" id="G26-Hl-ReB"/>
+                <constraint firstItem="j5p-PC-eYR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QCj-Uk-Gv4"/>
+                <constraint firstItem="Nxn-my-AKV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="l8P-XS-nLf"/>
+                <constraint firstAttribute="bottom" secondItem="Nxn-my-AKV" secondAttribute="bottom" constant="40" id="ovp-t3-R7e"/>
+                <constraint firstAttribute="trailing" secondItem="j5p-PC-eYR" secondAttribute="trailing" id="pOB-Pa-Zt7"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="318.5" y="255.5"/>
+        </view>
+    </objects>
+</document>

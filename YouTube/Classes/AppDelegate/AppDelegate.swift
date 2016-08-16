@@ -21,15 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeNavi.setAttributeForNavigation(AppDefine.Home, image: AppDefine.ImageHome)
 
         let favoriteNavi = BaseNavigationController(rootViewController: FavoriteViewController())
-        favoriteNavi.viewControllers = [FavoriteViewController()]
         favoriteNavi.setAttributeForNavigation(AppDefine.Favorite, image: AppDefine.ImageFavorite)
 
         let historyNavi = BaseNavigationController(rootViewController: HistoryViewController())
-        historyNavi.viewControllers = [HistoryViewController()]
         historyNavi.setAttributeForNavigation(AppDefine.History, image: AppDefine.ImageHistory)
 
+        let trendingNavi = BaseNavigationController(rootViewController: TrendingViewController())
+        trendingNavi.setAttributeForNavigation(AppDefine.Trending, image: AppDefine.ImageTrending)
+
         let tabbar = BaseTabbarViewController()
-        tabbar.viewControllers = [favoriteNavi, homeNavi, historyNavi]
+        tabbar.viewControllers = [favoriteNavi, homeNavi, trendingNavi, historyNavi]
         tabbar.selectedIndex = 1
 
         self.window?.rootViewController = tabbar

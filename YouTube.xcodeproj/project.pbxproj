@@ -62,6 +62,8 @@
 		F3E07AF21D5C86F000DAB7C9 /* ListVideoFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */; };
 		F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */; };
 		F3E07AF71D5C89B200DAB7C9 /* VideoFavoriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E07AF51D5C89B200DAB7C9 /* VideoFavoriteCell.xib */; };
+		F3E825ED1D62A093005C6647 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E825EB1D62A093005C6647 /* TrendingViewController.swift */; };
+		F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E825EC1D62A093005C6647 /* TrendingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +132,8 @@
 		F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVideoFavorite.swift; sourceTree = "<group>"; };
 		F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFavoriteCell.swift; sourceTree = "<group>"; };
 		F3E07AF51D5C89B200DAB7C9 /* VideoFavoriteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoFavoriteCell.xib; sourceTree = "<group>"; };
+		F3E825EB1D62A093005C6647 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		F3E825EC1D62A093005C6647 /* TrendingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +345,7 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
 				F39A2CD91D5516AA003FC772 /* ContentViewController */,
 				F3B097D91D557235000D9E84 /* DetailFavoriteViewController */,
@@ -471,6 +476,15 @@
 			path = VideoFavoriteCell;
 			sourceTree = "<group>";
 		};
+		F3E825EA1D62A082005C6647 /* TrendingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F3E825EB1D62A093005C6647 /* TrendingViewController.swift */,
+				F3E825EC1D62A093005C6647 /* TrendingViewController.xib */,
+			);
+			path = TrendingViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -543,6 +557,7 @@
 				F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */,
 				F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */,
 				F3B097DF1D557264000D9E84 /* HistoryViewController.xib in Resources */,
+				F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */,
 				F3B097CA1D556DCE000D9E84 /* FavoriteCell.xib in Resources */,
 				F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */,
 				F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */,
@@ -636,6 +651,7 @@
 				F3E07AF01D5C5B3D00DAB7C9 /* Favorite.swift in Sources */,
 				F377781A1D5AF33700AC2075 /* MyCategory.swift in Sources */,
 				F39A2CC71D551161003FC772 /* BaseTableView.swift in Sources */,
+				F3E825ED1D62A093005C6647 /* TrendingViewController.swift in Sources */,
 				F39A2CD51D5512F1003FC772 /* UIColor.swift in Sources */,
 				F3B097FD1D557FC2000D9E84 /* AddFavoriteViewController.swift in Sources */,
 				F39A2CC11D55111F003FC772 /* BaseCollectionView.swift in Sources */,
