@@ -15,6 +15,7 @@ class TrendingViewController: BaseViewController {
     private var trendingVideos: Results<Video>!
     private var idCategory = "0"
     private var nextPage: String?
+    private var isLoading = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,6 +67,7 @@ class TrendingViewController: BaseViewController {
         MyVideo.loadDataFromAPI(idCategory, pageToken: nextPage, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()
+                self.isLoading = false
                 self.nextPage = nextPageToken
             }
         }
@@ -99,21 +101,16 @@ extension TrendingViewController: UITableViewDataSource {
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView == trendingTableView {
-            if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset.y
+        let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
+        if scrollMaxSize - contentOffset < 50 {
+            if isLoading == false {
+                isLoading = true
                 loadTrendingVideo(idCategory, pageToken: nextPage)
                 trendingTableView.reloadData()
             }
-        }
-    }
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
-        if (maximumOffset - currentOffset <= 10.0) {
-            loadTrendingVideo(idCategory, pageToken: nextPage)
-            trendingTableView.reloadData()
         }
     }
 }
