@@ -42,6 +42,7 @@
 		F39A2CE51D551745003FC772 /* ufont.otf in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CE31D551745003FC772 /* ufont.otf */; };
 		F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */; };
 		F39A2CED1D551AB7003FC772 /* FavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */; };
+		F3A1F5501D6474C2006C4C9C /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1F54F1D6474C2006C4C9C /* History.swift */; };
 		F3B097BD1D555E90000D9E84 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097BB1D555E90000D9E84 /* ContentViewController.swift */; };
 		F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097BC1D555E90000D9E84 /* ContentViewController.xib */; };
 		F3B097C11D5561CF000D9E84 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */; };
@@ -112,6 +113,7 @@
 		F39A2CE31D551745003FC772 /* ufont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ufont.otf; path = ../../../../../Define/Fonts/ufont.otf; sourceTree = "<group>"; };
 		F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
+		F3A1F54F1D6474C2006C4C9C /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		F3B097BB1D555E90000D9E84 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		F3B097BC1D555E90000D9E84 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
 		F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */,
 				F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */,
 				F30746571D606AB2001C4649 /* RelatedVideo.swift */,
+				F3A1F54F1D6474C2006C4C9C /* History.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 			files = (
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
+				F3A1F5501D6474C2006C4C9C /* History.swift in Sources */,
 				F3B097C51D5562EB000D9E84 /* HomeCell.swift in Sources */,
 				F3B097DE1D557264000D9E84 /* HistoryViewController.swift in Sources */,
 				F37778161D5AE6E700AC2075 /* Video.swift in Sources */,
