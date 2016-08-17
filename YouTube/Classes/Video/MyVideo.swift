@@ -15,7 +15,7 @@ class MyVideo {
 
     class func loadDataFromAPI(id: String, parameters: [String: AnyObject], completion: APIRequestCompletion) {
         let api = APIDefine.YouTube().getListVideo()
-//        print(api)
+        // print(api)
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
                 let pageToken = data["nextPageToken"] as? String
@@ -39,29 +39,26 @@ class MyVideo {
         }
     }
 
-    class func loadListVideoRelated(pageToken: String?, parameters: [String: AnyObject], completion: APIRequestCompletion) {
+    class func loadListVideoRelated(parameters: [String: AnyObject], completion: APIRequestSuccess) {
         let api = APIDefine.YouTube().getListVideoRelated()
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
-                let pageToken = data["nextPageToken"] as? String
-                if let items = data["items"] as? NSArray {
-                    RelatedVideo.cleanData()
-                    for item in items {
-                        let video = Mapper<RelatedVideo>().map(item)
-                        do {
-                            let realm = try Realm()
-                            try realm.write({
-                                realm.add(video!)
-                            })
-                        } catch {
-
-                        }
-                    }
-                }
-                completion(success: true, nextPageToken: pageToken, error: nil)
+                let items = data["items"] as? NSArray
+                completion(response: items)
             }
         }) { (error) in
-            completion(success: false, nextPageToken: nil, error: error)
+            completion(response: nil)
+        }
+    }
+    class func loadDetailVideoFromIdVideo(parameters: [String: AnyObject], completion: APIRequestSuccess) {
+        let api = APIDefine.YouTube().getListVideo()
+        APIRequest.GET(api, parameter: parameters, success: { (response) in
+            if let data = response as? [String: AnyObject] {
+                let items = data["items"] as? NSArray
+                completion(response: items)
+            }
+        }) { (error) in
+            completion(response: nil)
         }
     }
 

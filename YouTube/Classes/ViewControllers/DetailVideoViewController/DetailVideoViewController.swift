@@ -8,18 +8,19 @@
 
 import UIKit
 import RealmSwift
+import ObjectMapper
 import XCDYouTubeVideoPlayerViewController
 
 class DetailVideoViewController: BaseViewController {
     @IBOutlet weak private var favoriteButton: UIButton!
-    var video = Video()
     @IBOutlet weak private var detailVideoTable: UITableView!
-    @IBOutlet weak private var playerVideoView: YTPlayerView!
+    @IBOutlet weak private var playerVideoView: UIView!
     private var dataOfRelatedVideo: Results<RelatedVideo>!
-    var pageToken: String?
     private var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
     private var isExpandDescription = false
     private var width = UIScreen.mainScreen().bounds.width
+    var video = Video()
+    private var videos = [Video]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,6 @@ class DetailVideoViewController: BaseViewController {
         self.youtubeVideoPlayer?.preferredVideoQualities
         youtubeVideoPlayer?.moviePlayer.play()
         self.playerVideoView.addSubview(viewPlayer)
-        self.tabBarController?.tabBar.layer.zPosition = -1
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,52 +47,59 @@ class DetailVideoViewController: BaseViewController {
         }
         self.detailVideoTable.registerNib(PlayVideoCell)
         self.detailVideoTable.registerNib(DecriptVideoCell)
-        self.detailVideoTable.registerNib(HomeCell)
+        self.detailVideoTable.registerNib(VideoFavoriteCell)
+    }
+    override func setUp() {
+
     }
 
     // MARK:- Set Up UI
     override func setUpUI() {
+
         configureDetailVideoViewController()
     }
 
     // MARK:- Set Up Data
     override func setUpData() {
-        RelatedVideo.cleanData()
-        if let relatedVideo = RelatedVideo.getRelatedVideo() where relatedVideo.count > 0 {
-            dataOfRelatedVideo = relatedVideo
-            loadData()
-        } else {
-            loadRelatedVideo(video.idVideo, pageToken: pageToken)
-        }
+        loadData()
     }
 
     // MARK:- Load related video
     private func loadData() {
-        do {
-            let realm = try Realm()
-            dataOfRelatedVideo = realm.objects(RelatedVideo)
-            self.detailVideoTable.reloadData()
-        } catch {
-
-        }
-
+        loadRelatedVideo(video.idVideo)
     }
 
-    private func loadRelatedVideo(id: String, pageToken: String?) {
+    private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = "10"
-        parameters["relatedToVideoId"] = video.idVideo
+        parameters["maxResults"] = "2"
+        parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
-        parameters["pageToken"] = pageToken
-        MyVideo.loadListVideoRelated(pageToken, parameters: parameters) { (success, nextPageToken, error) in
-            if success {
-                self.loadData()
-                self.pageToken = nextPageToken
-            } else {
+        MyVideo.loadListVideoRelated(parameters) { (response) in
+            if let items = response as? NSArray {
+                for item in items {
+                    let video = Mapper<Video>().map(item)
+                    var parameter = [String: AnyObject]()
+                    parameter["part"] = "contentDetails,statistics"
+                    parameter["id"] = video?.idVideo
+                    MyVideo.loadDetailVideoFromIdVideo(parameter, completion: { (response) in
+                        if let detailVideo = response as? NSArray {
+                            for item in detailVideo {
+                                if let detailVideo = item.objectForKey("contentDetails") as? NSDictionary {
+                                    video?.duration = detailVideo["duration"] as? String ?? ""
+                                }
+                                if let statistics = item.objectForKey("statistics") as? NSDictionary {
+                                    video?.viewCount = statistics["viewCount"] as? String ?? ""
+                                }
+                                self.videos.append(video!)
+                                self.detailVideoTable.reloadData()
+                            }
+                        }
+                    })
+
+                }
             }
         }
-
     }
 
     // MARK:- Check Favorite
@@ -128,12 +135,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let videos = dataOfRelatedVideo {
-            let numberRow = videos.count + 2
-            return numberRow
-        } else {
-            return 2
-        }
+        return videos.count + 2
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -148,9 +150,8 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.configureDecriptVideoCell(video)
                 return cell
             } else {
-                let cell = self.detailVideoTable.dequeue(HomeCell.self)
-                let video = Video()
-                video.initFromRelatedVideo(dataOfRelatedVideo[indexPath.row - 2])
+                let cell = self.detailVideoTable.dequeue(VideoFavoriteCell.self)
+                let video = videos[indexPath.row - 2]
                 cell.configureCell(video)
                 return cell
             }
@@ -168,19 +169,13 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             if indexPath.row == 1 {
                 return !isExpandDescription ? 0 : UITableViewAutomaticDimension
             } else {
-                return AppDefine.heightOfHomeCell
+                return AppDefine.heightOfNomarlCell
             }
         }
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row > 1 {
-            let newVideo = Video()
-            newVideo.initFromRelatedVideo(dataOfRelatedVideo[indexPath.row - 2])
-            self.video = newVideo
-            self.loadData()
-            self.reloadInputViews()
-        }
+
     }
 }
 
