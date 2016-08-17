@@ -12,7 +12,6 @@ import ObjectMapper
 import XCDYouTubeVideoPlayerViewController
 
 class DetailVideoViewController: BaseViewController {
-    @IBOutlet weak private var favoriteButton: UIButton!
     @IBOutlet weak private var detailVideoTable: UITableView!
     @IBOutlet weak private var playerVideoView: UIView!
     private var dataOfRelatedVideo: Results<RelatedVideo>!
@@ -21,41 +20,49 @@ class DetailVideoViewController: BaseViewController {
     private var width = UIScreen.mainScreen().bounds.width
     var video = Video()
     private var videos = [Video]()
+    private var backButton: UIButton!
+    private var favoriteButton: UIButton!
+    var viewPlayer: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
-        let viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
-        self.youtubeVideoPlayer?.presentInView(viewPlayer)
-        self.youtubeVideoPlayer?.preferredVideoQualities
-        youtubeVideoPlayer?.moviePlayer.play()
-        self.playerVideoView.addSubview(viewPlayer)
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    // MARK:- Add Video Player View
+    func addVideoPlayerView() {
+        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
+        viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
+        self.youtubeVideoPlayer?.presentInView(viewPlayer)
+        youtubeVideoPlayer?.moviePlayer.play()
+        self.playerVideoView.addSubview(viewPlayer)
+    }
 
     // MARK:- Config DetailVideoViewController
     func configureDetailVideoViewController() {
-        if checkFavorite(video.idVideo) == true {
-            self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
-            self.favoriteButton.enabled = false
-        } else {
-            self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
-            self.favoriteButton.enabled = true
-        }
+        self.backButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
+        self.backButton.setImage(UIImage(named: "bt_close"), forState: .Normal)
+        self.backButton.addTarget(self, action: #selector(clickBack1), forControlEvents: .TouchUpInside)
+
+        self.favoriteButton = UIButton(frame: CGRect(x: width - 40, y: 0, width: 40, height: 40))
+        self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
+        self.favoriteButton.addTarget(self, action: #selector(addVideoToFavoriteList), forControlEvents: .TouchUpInside)
+        self.view.addSubview(backButton)
+        self.view.addSubview(favoriteButton)
         self.detailVideoTable.registerNib(PlayVideoCell)
         self.detailVideoTable.registerNib(DecriptVideoCell)
         self.detailVideoTable.registerNib(VideoFavoriteCell)
     }
-    override func setUp() {
-
-    }
 
     // MARK:- Set Up UI
     override func setUpUI() {
-
+        addVideoPlayerView()
         configureDetailVideoViewController()
     }
 
@@ -66,13 +73,14 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Load related video
     private func loadData() {
+        videos.removeAll()
         loadRelatedVideo(video.idVideo)
     }
 
     private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = "2"
+        parameters["maxResults"] = "20"
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         MyVideo.loadListVideoRelated(parameters) { (response) in
@@ -127,6 +135,9 @@ class DetailVideoViewController: BaseViewController {
     @IBAction func clickBack(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
+    func clickBack1() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
 // MARK:- Extension
 extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate {
@@ -175,6 +186,13 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if videos.count > 0 {
+            video = videos[indexPath.row - 2]
+            loadData()
+            youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
+            youtubeVideoPlayer?.presentInView(viewPlayer)
+            youtubeVideoPlayer?.moviePlayer.play()
+        }
 
     }
 }
