@@ -10,7 +10,11 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-class Video: Object, Mappable {
+protocol ValueObject {
+    init?(_ object: VideoFavorite)
+}
+
+class Video: Object, Mappable, ValueObject {
     dynamic var idVideo = ""
     dynamic var idCategory = ""
     dynamic var title = ""
@@ -20,11 +24,21 @@ class Video: Object, Mappable {
     dynamic var descript = ""
     dynamic var thumbnail = ""
 
-    required convenience init(_ map: Map) {
+    required convenience init?(_ map: Map) {
         self.init()
     }
 
     func mapping(map: Map) {
+        var id = ""
+        id <- map["id"]
+        if id == "" {
+            var items = [String: AnyObject]()
+            items <- map["id"]
+            idVideo = items["videoId"] as? String ?? ""
+        } else {
+            idVideo = id
+        }
+
         idVideo <- map["id"]
         var snippet = [String: AnyObject]()
         snippet <- map["snippet"]
@@ -52,25 +66,16 @@ class Video: Object, Mappable {
         }
     }
 
-    func initializate(favoriteVideo: VideoFavorite) {
-        self.idVideo = favoriteVideo.idVideo ?? ""
-        self.idCategory = favoriteVideo.idCategory ?? ""
-        self.title = favoriteVideo.title ?? ""
-        self.viewCount = favoriteVideo.viewCount ?? ""
-        self.duration = favoriteVideo.duration ?? ""
-        self.channelTitle = favoriteVideo.channelTitle ?? ""
-        self.thumbnail = favoriteVideo.thumbnail ?? ""
-        self.descript = favoriteVideo.descript ?? ""
-    }
-
-    func initFromRelatedVideo(relatedVideo: RelatedVideo) {
-        self.idVideo = relatedVideo.idVideo ?? ""
-        self.title = relatedVideo.title ?? ""
-        self.viewCount = relatedVideo.viewCount ?? ""
-        self.duration = relatedVideo.duration ?? ""
-        self.channelTitle = relatedVideo.channelTitle ?? ""
-        self.thumbnail = relatedVideo.thumbnail ?? ""
-        self.descript = relatedVideo.descript ?? ""
+    convenience required init(_ object: VideoFavorite) {
+        self.init()
+        self.idVideo = object.idVideo ?? ""
+        self.idCategory = object.idCategory ?? ""
+        self.title = object.title ?? ""
+        self.viewCount = object.viewCount ?? ""
+        self.duration = object.duration ?? ""
+        self.channelTitle = object.channelTitle ?? ""
+        self.thumbnail = object.thumbnail ?? ""
+        self.descript = object.descript ?? ""
     }
 
     class func cleanData() {

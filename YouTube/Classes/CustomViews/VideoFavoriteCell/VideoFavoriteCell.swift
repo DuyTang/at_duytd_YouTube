@@ -25,7 +25,7 @@ class VideoFavoriteCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     // MARK:- Configure Cell
-    func configureCell(video: VideoFavorite) {
+    func configureCell(video: Video) {
         thumbnailVideo.downloadImage(video.thumbnail)
         self.nameVideoLabel.text = video.title
         self.channelLabel.text = video.channelTitle
@@ -35,6 +35,9 @@ class VideoFavoriteCell: BaseTableViewCell {
     // MARk:- Set Up UI
     override func setUpUI() {
 
+    }
+    override func prepareForReuse() {
+        thumbnailVideo.image = nil
     }
 
 }

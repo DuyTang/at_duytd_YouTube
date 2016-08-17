@@ -62,15 +62,13 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(HomeCell.self)
-        let video = Video()
-        video.initializate(videoFavorites![indexPath.row])
+        let video = Video.init(videoFavorites![indexPath.row])
         cell.configureCell(video)
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        let video = Video()
-        video.initializate(videoFavorites![indexPath.row])
+        let video = Video.init(videoFavorites![indexPath.row])
         detailVideoVC.video = video
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }

@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
                         <rect key="frame" x="14" y="9" width="100" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="D1D-fn-b7S"/>
@@ -63,7 +63,4 @@
             <point key="canvasLocation" x="540" y="200"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="ic_video" width="170" height="170"/>
-    </resources>
 </document>
