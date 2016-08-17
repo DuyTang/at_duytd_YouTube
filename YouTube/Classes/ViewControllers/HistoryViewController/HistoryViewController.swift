@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class HistoryViewController: BaseViewController {
 
     @IBOutlet weak private var historyTableView: UITableView!
+    private var videos: Results<History>!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +23,7 @@ class HistoryViewController: BaseViewController {
     }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
-        self.historyTableView.registerNib(HomeCell)
+        self.historyTableView.registerNib(HistoryCell)
     }
     // MARK:- Set Up UI
     override func setUpUI() {
@@ -30,7 +32,16 @@ class HistoryViewController: BaseViewController {
     }
     // MARK:- Set Up Data
     override func setUpData() {
+        loadData()
+    }
+    // MARK:- Load Data
+    func loadData() {
+        do {
+            let realm = try Realm()
+            videos = realm.objects(History)
+        } catch {
 
+        }
     }
 }
 //MARK:- UITableViewDataSource
@@ -40,12 +51,17 @@ extension HistoryViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let videos = videos {
+            return videos.count
+        } else {
+            return 0
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.historyTableView.dequeue(HomeCell)
-        // cell.configureCell()
+        let cell = self.historyTableView.dequeue(HistoryCell.self)
+        let video = videos[indexPath.row]
+        cell.configureHistoryCell(video)
         return cell
     }
 }

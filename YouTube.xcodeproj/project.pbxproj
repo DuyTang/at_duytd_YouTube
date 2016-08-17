@@ -43,6 +43,8 @@
 		F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */; };
 		F39A2CED1D551AB7003FC772 /* FavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */; };
 		F3A1F5501D6474C2006C4C9C /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1F54F1D6474C2006C4C9C /* History.swift */; };
+		F3A1F5531D647896006C4C9C /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A1F5511D647896006C4C9C /* HistoryCell.swift */; };
+		F3A1F5541D647896006C4C9C /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A1F5521D647896006C4C9C /* HistoryCell.xib */; };
 		F3B097BD1D555E90000D9E84 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097BB1D555E90000D9E84 /* ContentViewController.swift */; };
 		F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097BC1D555E90000D9E84 /* ContentViewController.xib */; };
 		F3B097C11D5561CF000D9E84 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */; };
@@ -114,6 +116,8 @@
 		F39A2CEA1D551AB7003FC772 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		F39A2CEB1D551AB7003FC772 /* FavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
 		F3A1F54F1D6474C2006C4C9C /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		F3A1F5511D647896006C4C9C /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		F3A1F5521D647896006C4C9C /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		F3B097BB1D555E90000D9E84 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		F3B097BC1D555E90000D9E84 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
 		F3B097BF1D5561CF000D9E84 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -430,6 +434,8 @@
 		F39A2CE01D5516FE003FC772 /* HistoryCell */ = {
 			isa = PBXGroup;
 			children = (
+				F3A1F5511D647896006C4C9C /* HistoryCell.swift */,
+				F3A1F5521D647896006C4C9C /* HistoryCell.xib */,
 			);
 			path = HistoryCell;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */,
 				F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */,
 				F3B097DF1D557264000D9E84 /* HistoryViewController.xib in Resources */,
+				F3A1F5541D647896006C4C9C /* HistoryCell.xib in Resources */,
 				F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */,
 				F3B097CA1D556DCE000D9E84 /* FavoriteCell.xib in Resources */,
 				F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */,
@@ -630,6 +637,7 @@
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
 				F3A1F5501D6474C2006C4C9C /* History.swift in Sources */,
+				F3A1F5531D647896006C4C9C /* HistoryCell.swift in Sources */,
 				F3B097C51D5562EB000D9E84 /* HomeCell.swift in Sources */,
 				F3B097DE1D557264000D9E84 /* HistoryViewController.swift in Sources */,
 				F37778161D5AE6E700AC2075 /* Video.swift in Sources */,
