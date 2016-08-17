@@ -53,7 +53,7 @@ class DetailVideoViewController: BaseViewController {
     func configureDetailVideoViewController() {
         self.backButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
         self.backButton.setImage(UIImage(named: "bt_close"), forState: .Normal)
-        self.backButton.addTarget(self, action: #selector(clickBack1), forControlEvents: .TouchUpInside)
+        self.backButton.addTarget(self, action: #selector(clickBack), forControlEvents: .TouchUpInside)
 
         self.favoriteButton = UIButton(frame: CGRect(x: width - 40, y: 0, width: 40, height: 40))
         setImageForFavoriteButton()
@@ -143,8 +143,7 @@ class DetailVideoViewController: BaseViewController {
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
         if isFavorite == false {
             let addFavoriteVC = AddFavoriteViewController()
-            print(video)
-            addFavoriteVC.idVideo = video.idVideo
+            addFavoriteVC.video = video
             addFavoriteVC.delegate = self
             presentViewController(addFavoriteVC, animated: false, completion: nil)
             self.isFavorite = true
@@ -165,9 +164,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     @IBAction func clickBack(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    func clickBack1() {
+        self.youtubeVideoPlayer?.moviePlayer.stop()
         self.navigationController?.popViewControllerAnimated(true)
     }
 }

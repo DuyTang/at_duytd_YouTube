@@ -20,7 +20,6 @@ class AddFavoriteViewController: BaseViewController {
     weak var delegate: AddFavoriteDelegate?
     @IBOutlet weak private var addNewListFavoriteView: UIView!
     @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
-    var idVideo = ""
     var idListFavorite = 1
     var video = Video()
     var isSaved = false
