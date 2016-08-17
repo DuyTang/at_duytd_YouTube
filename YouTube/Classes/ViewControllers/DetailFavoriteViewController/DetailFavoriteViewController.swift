@@ -70,6 +70,7 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         let detailVideoVC = DetailVideoViewController()
         let video = Video.init(videoFavorites![indexPath.row])
         detailVideoVC.video = video
+        detailVideoVC.delegate = self
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
@@ -77,6 +78,14 @@ extension DetailFavoriteViewController: UITableViewDataSource {
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return AppDefine.heightOfHomeCell
+    }
+}
+
+extension DetailFavoriteViewController: DetailVideoDelegete {
+    func deleteFromListFavorite(isDeleted: Bool) {
+        if isDeleted == false {
+            self.listVideoFavoriteTableView.reloadData()
+        }
     }
 }
 

@@ -58,7 +58,6 @@ class AddFavoriteViewController: BaseViewController {
         do {
             let realm = try Realm()
             favorites = realm.objects(Favorite)
-            video = realm.objects(Video).filter("idVideo = %@", idVideo).first!
         } catch {
 
         }
