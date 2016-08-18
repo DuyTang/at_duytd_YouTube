@@ -110,7 +110,8 @@ extension ContentViewController: UITableViewDataSource {
         detailVideoVC.video = dataOfVideo![indexPath.row]
         do {
             let realm = try Realm()
-            let historyVideo = History.init(video: dataOfVideo![indexPath.row], time: NSDate())
+            let historyVideo = History()
+            historyVideo.initFromVideo(dataOfVideo![indexPath.row], time: NSDate())
             try realm.write({
                 realm.add(historyVideo)
             })

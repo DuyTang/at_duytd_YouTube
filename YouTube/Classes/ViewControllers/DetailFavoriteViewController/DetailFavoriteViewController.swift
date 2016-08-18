@@ -69,6 +69,17 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
         let video = Video.init(videoFavorites![indexPath.row])
+        do {
+            let realm = try Realm()
+            let historyVideo = History()
+            historyVideo.initFromVideo(video, time: NSDate())
+            try realm.write({
+                realm.add(historyVideo)
+            })
+
+        } catch {
+
+        }
         detailVideoVC.video = video
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }

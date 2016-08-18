@@ -125,6 +125,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     @IBAction func clickBack(sender: AnyObject) {
+        self.youtubeVideoPlayer?.moviePlayer.stop()
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
@@ -175,7 +176,17 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        do {
+            let realm = try Realm()
+            let historyVideo = History()
+            historyVideo.initFromVideo(videos[indexPath.row - 2], time: NSDate())
+            try realm.write({
+                realm.add(historyVideo)
+            })
 
+        } catch {
+
+        }
     }
 }
 

@@ -21,23 +21,7 @@ class History: Object {
     dynamic var thumbnail = ""
     dynamic var time = NSDate()
 
-    init(video: Video, time: NSDate) {
-        super.init()
-        self.idVideo = video.idVideo ?? ""
-        self.idCategory = video.idCategory ?? ""
-        self.title = video.title ?? ""
-        self.viewCount = video.viewCount ?? ""
-        self.duration = video.duration ?? ""
-        self.channelTitle = video.channelTitle ?? ""
-        self.descript = video.descript ?? ""
-        self.thumbnail = video.thumbnail ?? ""
-        self.time = time
-    }
-
-    required init() {
-        super.init()
-    }
-    func initFromFavoriteVideo(video: VideoFavorite, time: NSDate) {
+    func initFromVideo(video: Video, time: NSDate) {
         self.idVideo = video.idVideo ?? ""
         self.idCategory = video.idCategory ?? ""
         self.title = video.title ?? ""
