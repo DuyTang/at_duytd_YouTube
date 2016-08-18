@@ -95,7 +95,7 @@ class DetailVideoViewController: BaseViewController {
     private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = "20"
+        parameters["maxResults"] = AppDefine.maxRelatedVideo
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         MyVideo.loadListVideoRelated(parameters) { (response) in
@@ -119,7 +119,6 @@ class DetailVideoViewController: BaseViewController {
                             }
                         }
                     })
-
                 }
             }
         }

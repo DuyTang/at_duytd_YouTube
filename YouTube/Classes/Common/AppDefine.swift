@@ -50,4 +50,5 @@ struct AppDefine {
     // MARK:- Table
     static let heightOfHomeCell: CGFloat = 230
     static let heightOfNomarlCell: CGFloat = 90
+    static let maxRelatedVideo = 20
 }
