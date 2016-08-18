@@ -23,10 +23,13 @@ extension String {
         return duration
     }
 
-    func didSelectedDate(text: NSDate) -> String {
+    func getTimeUpload(text: String) -> String {
         var time = ""
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let selectedDate = dateFormatter.dateFromString(text)
         let currentDate = NSDate()
-        let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: text, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
+        let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate!, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
         if diffDateComponents.year != 0 {
             time = "\(diffDateComponents.year) years, \(diffDateComponents.month) months"
         } else {
