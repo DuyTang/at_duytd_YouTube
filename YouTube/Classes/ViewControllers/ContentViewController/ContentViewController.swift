@@ -108,6 +108,16 @@ extension ContentViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = dataOfVideo![indexPath.row]
+        do {
+            let realm = try Realm()
+            let historyVideo = History.init(video: dataOfVideo![indexPath.row], time: NSDate())
+            try realm.write({
+                realm.add(historyVideo)
+            })
+
+        } catch {
+
+        }
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
