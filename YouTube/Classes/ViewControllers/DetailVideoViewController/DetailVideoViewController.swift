@@ -10,9 +10,11 @@ import UIKit
 import RealmSwift
 import ObjectMapper
 import XCDYouTubeVideoPlayerViewController
+protocol DetailVideoDelegete {
+    func deleteFromListFavorite(isDeleted: Bool)
+}
 
 class DetailVideoViewController: BaseViewController {
-    @IBOutlet weak private var favoriteButton: UIButton!
     @IBOutlet weak private var detailVideoTable: UITableView!
     @IBOutlet weak private var playerVideoView: UIView!
     private var dataOfRelatedVideo: Results<RelatedVideo>!
@@ -21,41 +23,61 @@ class DetailVideoViewController: BaseViewController {
     private var width = UIScreen.mainScreen().bounds.width
     var video = Video()
     private var videos = [Video]()
+    private var backButton: UIButton!
+    private var favoriteButton: UIButton!
+    private var viewPlayer: UIView!
+    private var isFavorite = false
+    var delegate: DetailVideoDelegete?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
-        let viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
-        self.youtubeVideoPlayer?.presentInView(viewPlayer)
-        self.youtubeVideoPlayer?.preferredVideoQualities
-        youtubeVideoPlayer?.moviePlayer.play()
-        self.playerVideoView.addSubview(viewPlayer)
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    // MARK:- Add Video Player View
+    func addVideoPlayerView() {
+        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
+        viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
+        self.youtubeVideoPlayer?.presentInView(viewPlayer)
+        youtubeVideoPlayer?.moviePlayer.play()
+        self.playerVideoView.addSubview(viewPlayer)
+    }
 
     // MARK:- Config DetailVideoViewController
     func configureDetailVideoViewController() {
-        if checkFavorite(video.idVideo) == true {
-            self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
-            self.favoriteButton.enabled = false
-        } else {
-            self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
-            self.favoriteButton.enabled = true
-        }
+        self.backButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
+        self.backButton.setImage(UIImage(named: "bt_close"), forState: .Normal)
+        self.backButton.addTarget(self, action: #selector(clickBack), forControlEvents: .TouchUpInside)
+
+        self.favoriteButton = UIButton(frame: CGRect(x: width - 40, y: 0, width: 40, height: 40))
+        setImageForFavoriteButton()
+        self.favoriteButton.addTarget(self, action: #selector(addVideoToFavoriteList), forControlEvents: .TouchUpInside)
+        self.view.addSubview(backButton)
+        self.view.addSubview(favoriteButton)
         self.detailVideoTable.registerNib(PlayVideoCell)
         self.detailVideoTable.registerNib(DecriptVideoCell)
         self.detailVideoTable.registerNib(VideoFavoriteCell)
     }
-    override func setUp() {
 
+    func setImageForFavoriteButton() {
+        if checkFavorite(video.idVideo) == true || isFavorite == true {
+            self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
+            self.isFavorite = true
+        } else {
+            self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
+            self.isFavorite = false
+        }
     }
 
     // MARK:- Set Up UI
     override func setUpUI() {
-
+        addVideoPlayerView()
         configureDetailVideoViewController()
     }
 
@@ -66,13 +88,14 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Load related video
     private func loadData() {
+        videos.removeAll()
         loadRelatedVideo(video.idVideo)
     }
 
     private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = "2"
+        parameters["maxResults"] = AppDefine.maxRelatedVideo
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         MyVideo.loadListVideoRelated(parameters) { (response) in
@@ -96,7 +119,6 @@ class DetailVideoViewController: BaseViewController {
                             }
                         }
                     })
-
                 }
             }
         }
@@ -118,13 +140,31 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
-        let addFavoriteVC = AddFavoriteViewController()
-        addFavoriteVC.idVideo = video.idVideo
-        addFavoriteVC.delegate = self
-        presentViewController(addFavoriteVC, animated: false, completion: nil)
+        self.youtubeVideoPlayer?.moviePlayer.pause()
+        if isFavorite == false {
+            let addFavoriteVC = AddFavoriteViewController()
+            addFavoriteVC.video = video
+            addFavoriteVC.delegate = self
+            presentViewController(addFavoriteVC, animated: false, completion: nil)
+            self.isFavorite = true
+        } else {
+            do {
+                let realm = try Realm()
+                let video = realm.objects(VideoFavorite).filter("idVideo = %@", self.video.idVideo).first
+                try realm.write({
+                    realm.delete(video!)
+                })
+            } catch {
+
+            }
+            self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
+            self.isFavorite = false
+            delegate?.deleteFromListFavorite(self.isFavorite)
+        }
     }
 
     @IBAction func clickBack(sender: AnyObject) {
+        self.youtubeVideoPlayer?.moviePlayer.stop()
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
@@ -175,7 +215,17 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        if indexPath.row > 1 {
+            if videos.count > 0 {
+                video = videos[indexPath.row - 2]
+                loadData()
+                self.isFavorite = false
+                self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
+                youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
+                youtubeVideoPlayer?.presentInView(viewPlayer)
+                youtubeVideoPlayer?.moviePlayer.play()
+            }
+        }
     }
 }
 
@@ -183,6 +233,8 @@ extension DetailVideoViewController: AddFavoriteDelegate {
     func addSuccess(isSuccess: Bool) {
         if isSuccess == true {
             self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
+        } else {
+            self.isFavorite = isSuccess
         }
     }
 }
