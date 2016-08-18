@@ -215,16 +215,17 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if videos.count > 0 {
-            video = videos[indexPath.row - 2]
-            loadData()
-            self.isFavorite = false
-            self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
-            youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
-            youtubeVideoPlayer?.presentInView(viewPlayer)
-            youtubeVideoPlayer?.moviePlayer.play()
+        if indexPath.row > 1 {
+            if videos.count > 0 {
+                video = videos[indexPath.row - 2]
+                loadData()
+                self.isFavorite = false
+                self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
+                youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
+                youtubeVideoPlayer?.presentInView(viewPlayer)
+                youtubeVideoPlayer?.moviePlayer.play()
+            }
         }
-
     }
 }
 
