@@ -141,6 +141,7 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
+        self.youtubeVideoPlayer?.moviePlayer.pause()
         if isFavorite == false {
             let addFavoriteVC = AddFavoriteViewController()
             addFavoriteVC.video = video

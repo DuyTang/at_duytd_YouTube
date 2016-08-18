@@ -63,19 +63,23 @@ class AddFavoriteViewController: BaseViewController {
     }
     // MARK:- Action
     @IBAction func addFavoriteButton(sender: AnyObject) {
-        do {
-            let realm = try Realm()
-            let videoFavorite = VideoFavorite()
-            videoFavorite.initializate(video, idListFavorite: idListFavorite)
-            try realm.write({ () -> Void in
-                realm.add(videoFavorite)
-                self.isSaved = true
-            })
-        } catch {
+        if favorites.count > 0 {
+            do {
+                let realm = try Realm()
+                let videoFavorite = VideoFavorite()
+                videoFavorite.initializate(video, idListFavorite: idListFavorite)
+                try realm.write({ () -> Void in
+                    realm.add(videoFavorite)
+                    self.isSaved = true
+                })
+            } catch {
 
+            }
+            self.delegate?.addSuccess(isSaved)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            self.showAlert(AppDefine.Error, message: AppDefine.NoListFavorite, cancelButton: AppDefine.CancelButton)
         }
-        self.delegate?.addSuccess(isSaved)
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
@@ -99,6 +103,7 @@ class AddFavoriteViewController: BaseViewController {
 
             }
             self.showSubView(true)
+            self.listFavoritePicker.selectRow(favorite.id - 1, inComponent: 0, animated: true)
         }
     }
 

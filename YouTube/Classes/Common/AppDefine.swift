@@ -45,6 +45,8 @@ struct AppDefine {
     static let MessageEnterList = "Enter your list"
     static let TitleAddNewList = "Enter Name"
     static let TextPlaceHolder = "Name List Favorite"
+    static let Error = "Error"
+    static let NoListFavorite = "Create new list favorite"
     // MARK:- Table
     static let heightOfHomeCell: CGFloat = 230
     static let heightOfNomarlCell: CGFloat = 90
