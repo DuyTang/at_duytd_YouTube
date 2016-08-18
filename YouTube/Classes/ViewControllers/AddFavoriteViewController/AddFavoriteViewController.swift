@@ -83,6 +83,7 @@ class AddFavoriteViewController: BaseViewController {
     }
 
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
+        self.delegate?.addSuccess(false)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
@@ -105,6 +106,7 @@ class AddFavoriteViewController: BaseViewController {
             self.showSubView(true)
             self.listFavoritePicker.selectRow(favorite.id - 1, inComponent: 0, animated: true)
         }
+        idListFavorite = Favorite.getId()
     }
 
     @IBAction func backToListFavoriteButton(sender: AnyObject) {

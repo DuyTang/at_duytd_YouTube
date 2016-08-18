@@ -233,6 +233,8 @@ extension DetailVideoViewController: AddFavoriteDelegate {
     func addSuccess(isSuccess: Bool) {
         if isSuccess == true {
             self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
+        } else {
+            self.isFavorite = isSuccess
         }
     }
 }
