@@ -37,6 +37,17 @@ class History: Object {
     required init() {
         super.init()
     }
+    func initFromFavoriteVideo(video: VideoFavorite, time: NSDate) {
+        self.idVideo = video.idVideo ?? ""
+        self.idCategory = video.idCategory ?? ""
+        self.title = video.title ?? ""
+        self.viewCount = video.viewCount ?? ""
+        self.duration = video.duration ?? ""
+        self.channelTitle = video.channelTitle ?? ""
+        self.descript = video.descript ?? ""
+        self.thumbnail = video.thumbnail ?? ""
+        self.time = time
+    }
 
     class func cleanData() {
         do {
