@@ -43,6 +43,10 @@ class HistoryViewController: BaseViewController {
 
         }
     }
+    @IBAction func deleteAllHistory(sender: UIButton) {
+        History.cleanData()
+        self.historyTableView.reloadData()
+    }
 }
 //MARK:- UITableViewDataSource
 extension HistoryViewController: UITableViewDataSource {

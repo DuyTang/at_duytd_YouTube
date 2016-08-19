@@ -34,22 +34,36 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
-                    <rect key="frame" x="0.0" y="64" width="375" height="563"/>
+                    <rect key="frame" x="0.0" y="102" width="375" height="525"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="PWA-zi-ZEI"/>
                         <outlet property="delegate" destination="-1" id="SZX-QB-wJ7"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7x-Jq-8vT">
+                    <rect key="frame" x="290" y="68" width="77" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="77" id="Y2V-DP-X5J"/>
+                    </constraints>
+                    <state key="normal" title="DeleteAll">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteAllHistory:" destination="-1" eventType="touchUpInside" id="rzc-xk-Oyb"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="G7x-Jq-8vT" secondAttribute="trailing" constant="8" id="03f-NE-AO2"/>
                 <constraint firstItem="cHd-lJ-otw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6rS-GE-5jf"/>
                 <constraint firstItem="Y4l-XT-yIv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Kb-QU-Weu"/>
+                <constraint firstItem="G7x-Jq-8vT" firstAttribute="top" secondItem="cHd-lJ-otw" secondAttribute="bottom" constant="4" id="9xh-li-vlK"/>
                 <constraint firstAttribute="trailing" secondItem="Y4l-XT-yIv" secondAttribute="trailing" id="K8A-Zo-xAa"/>
-                <constraint firstItem="Y4l-XT-yIv" firstAttribute="top" secondItem="cHd-lJ-otw" secondAttribute="bottom" id="Ppv-hh-tbh"/>
                 <constraint firstItem="cHd-lJ-otw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ePO-t0-AbW"/>
                 <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" constant="40" id="fvI-WH-RJx"/>
+                <constraint firstItem="Y4l-XT-yIv" firstAttribute="top" secondItem="G7x-Jq-8vT" secondAttribute="bottom" constant="4" id="jXq-pO-42l"/>
                 <constraint firstAttribute="trailing" secondItem="cHd-lJ-otw" secondAttribute="trailing" id="trY-IO-HCn"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
