@@ -76,7 +76,7 @@ extension DetailFavoriteViewController: UITableViewDataSource {
             try realm.write({
                 realm.add(historyVideo)
             })
-            NSNotificationCenter.defaultCenter().postNotificationName("addVideoToHistory", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(AppDefine.AddVideoToHistory, object: nil)
         } catch {
 
         }

@@ -9,7 +9,7 @@
 import Foundation
 
 struct AppDefine {
-
+    
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
     static let mainColor = UIColor.RGB(255, 37, 21)
     static let backgroundColor = UIColor.RGB(249, 249, 249)
@@ -51,4 +51,6 @@ struct AppDefine {
     static let heightOfHomeCell: CGFloat = 230
     static let heightOfNomarlCell: CGFloat = 90
     static let maxRelatedVideo = 20
+    // MARK:- Notification
+    static let AddVideoToHistory = "addVideoToHistory"
 }
