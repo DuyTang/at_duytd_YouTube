@@ -110,11 +110,11 @@ extension ContentViewController: UITableViewDataSource {
         do {
             let realm = try Realm()
             let historyVideo = History()
-            historyVideo.initFromVideo(dataOfVideo![indexPath.row], time: NSDate())
+            historyVideo.initFromVideo(dataOfVideo![indexPath.row], datetime: NSDate())
             try realm.write({
                 realm.add(historyVideo)
             })
-
+            NSNotificationCenter.defaultCenter().postNotificationName("addVideoToHistory", object: nil)
         } catch {
 
         }

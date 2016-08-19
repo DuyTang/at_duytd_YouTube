@@ -29,7 +29,8 @@ class HistoryCell: BaseTableViewCell {
         self.thumbnailVideoImage.downloadImage(video.thumbnail)
         self.titleLabel.text = video.title
         self.channelLabel.text = video.channelTitle
-        self.timeViewLabel.text = String(video.time)
+        self.timeViewLabel.text = video.time
     }
 
 }
+

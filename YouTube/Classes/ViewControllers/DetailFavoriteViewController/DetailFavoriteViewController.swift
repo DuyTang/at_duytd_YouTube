@@ -72,11 +72,11 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         do {
             let realm = try Realm()
             let historyVideo = History()
-            historyVideo.initFromVideo(video, time: NSDate())
+            historyVideo.initFromVideo(video, datetime: NSDate())
             try realm.write({
                 realm.add(historyVideo)
             })
-
+            NSNotificationCenter.defaultCenter().postNotificationName("addVideoToHistory", object: nil)
         } catch {
 
         }
