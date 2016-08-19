@@ -14,6 +14,7 @@ class HistoryViewController: BaseViewController {
     @IBOutlet weak private var historyTableView: UITableView!
     private var videos: Results<History>!
     private var date: [String] = []
+    private var listVideo: [[History]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +25,19 @@ class HistoryViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     func addNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: "addVideoToHistory", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: AppDefine.AddVideoToHistory, object: nil)
+    }
+    override func viewWillAppear(animated: Bool) {
+        date = []
+        loadData()
     }
     func addNewVideo() {
-        self.historyTableView.beginUpdates()
-        var indexPaths = [NSIndexPath]()
-        indexPaths.append(NSIndexPath(forRow: self.videos.count - 1, inSection: 0))
-        self.historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
-        self.historyTableView.endUpdates()
+//        self.historyTableView.beginUpdates()
+//        var indexPaths = [NSIndexPath]()
+//        indexPaths.append(NSIndexPath(forRow: self.videos.count - 1, inSection: 0))
+//        self.historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+//        self.historyTableView.endUpdates()
+        self.historyTableView.reloadData()
     }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
@@ -54,28 +60,37 @@ class HistoryViewController: BaseViewController {
         } catch {
 
         }
-        var currentDate = videos[0].date
-        date.append(currentDate)
-        for i in 1...videos.count - 1 {
-            if videos[i].date != currentDate {
-                currentDate = videos[i].date
-                date.append(currentDate)
-            }
-
-        }
+        loadDate()
     }
-    func getListVideoFromDate(date: String) -> [History] {
-        var listVideo = [History]()
-        for i in 0...videos.count - 1 {
-            if videos[i].date == date {
-                listVideo.append(videos[i])
+
+    func loadDate() {
+        if videos.count > 0 {
+            var currentDate = videos[0].date
+            date.append(currentDate)
+            for i in 0...videos.count - 1 {
+                if videos[i].date != currentDate {
+                    currentDate = videos[i].date
+                    date.append(currentDate)
+                }
             }
         }
-        return listVideo
+        self.historyTableView.reloadData()
+    }
+    func getListVideo(date: String) -> [History] {
+        var list = [History]()
+        if videos.count > 0 {
+            for video in videos {
+                if video.date == date {
+                    list.append(video)
+                }
+            }
+        }
+        return list
     }
 
     @IBAction func deleteAllHistory(sender: UIButton) {
         History.cleanData()
+        date = []
         self.historyTableView.reloadData()
     }
 }
@@ -89,12 +104,18 @@ extension HistoryViewController: UITableViewDataSource {
             return date.count
         }
     }
+
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return date[section]
+        if date.count > 0 {
+            return date[section]
+        } else {
+            return "No data"
+        }
     }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if videos != nil {
-            return getListVideoFromDate(date[section]).count
+        if date.count > 0 {
+            return getListVideo(date[section]).count
         } else {
             return 0
         }
@@ -102,7 +123,7 @@ extension HistoryViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.historyTableView.dequeue(HistoryCell.self)
-        let video = getListVideoFromDate(date[indexPath.section])[indexPath.row]
+        let video = getListVideo(date[indexPath.section])[indexPath.row]
         cell.configureHistoryCell(video)
         return cell
     }
