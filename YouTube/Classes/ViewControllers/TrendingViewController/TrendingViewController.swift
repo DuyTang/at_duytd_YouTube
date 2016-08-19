@@ -16,7 +16,6 @@ class TrendingViewController: BaseViewController {
     private var nextPage: String?
     private var isLoading = false
     private var loadmoreActive = true
-    @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +39,10 @@ class TrendingViewController: BaseViewController {
     override func setUpData() {
         loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
-            self.indicatorView.hidden = true
+            self.hideLoading()
             trendingVideos = videos
         } else {
-            self.indicatorView.startAnimating()
+            self.showLoading()
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
@@ -66,6 +65,7 @@ class TrendingViewController: BaseViewController {
             return
         }
         isLoading = true
+        self.showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["chart"] = "mostPopular"
@@ -74,8 +74,7 @@ class TrendingViewController: BaseViewController {
         parameters["pageToken"] = nextPage
         MyVideo.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
             if success {
-                self.indicatorView.stopAnimating()
-                self.indicatorView.hidden = true
+                self.hideLoading()
                 self.trendingTableView.reloadData()
                 self.nextPage = nextPageToken
                 if nextPageToken == nil {

@@ -83,12 +83,13 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Set Up Data
     override func setUpData() {
+        videos.removeAll()
         loadData()
     }
 
     // MARK:- Load related video
     private func loadData() {
-        videos.removeAll()
+
         loadRelatedVideo(video.idVideo)
     }
 
@@ -98,6 +99,7 @@ class DetailVideoViewController: BaseViewController {
         parameters["maxResults"] = AppDefine.maxRelatedVideo
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
+        self.showLoading()
         MyVideo.loadListVideoRelated(parameters) { (response) in
             if let items = response as? NSArray {
                 for item in items {
@@ -120,6 +122,7 @@ class DetailVideoViewController: BaseViewController {
                         }
                     })
                 }
+                self.hideLoading()
             }
         }
     }

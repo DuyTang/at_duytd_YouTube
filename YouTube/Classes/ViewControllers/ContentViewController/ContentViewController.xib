@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContentViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
                 <outlet property="contentTableView" destination="vKB-Pm-OFs" id="vck-H9-Oaf"/>
-                <outlet property="indicatorView" destination="VCo-04-f14" id="11x-mG-ZXa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,21 +24,12 @@
                         <outlet property="delegate" destination="-1" id="pHo-UG-8kr"/>
                     </connections>
                 </tableView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VCo-04-f14">
-                    <rect key="frame" x="167" y="309" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="J1e-ac-pjj"/>
-                        <constraint firstAttribute="width" constant="40" id="xhn-n6-OJv"/>
-                    </constraints>
-                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="vKB-Pm-OFs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GZL-Mc-e5P"/>
                 <constraint firstAttribute="bottom" secondItem="vKB-Pm-OFs" secondAttribute="bottom" constant="10" id="Moc-b4-3cp"/>
                 <constraint firstItem="vKB-Pm-OFs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TdZ-pa-Tha"/>
-                <constraint firstItem="VCo-04-f14" firstAttribute="centerY" secondItem="vKB-Pm-OFs" secondAttribute="centerY" id="acA-9z-2bq"/>
-                <constraint firstItem="VCo-04-f14" firstAttribute="centerX" secondItem="vKB-Pm-OFs" secondAttribute="centerX" id="kDU-d8-MB1"/>
                 <constraint firstAttribute="trailing" secondItem="vKB-Pm-OFs" secondAttribute="trailing" id="uaz-uu-MrO"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

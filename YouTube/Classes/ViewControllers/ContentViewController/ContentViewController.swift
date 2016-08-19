@@ -18,7 +18,6 @@ class ContentViewController: BaseViewController {
     private var dataOfVideo: Results<Video>?
     private var isLoading = false
     private var loadmoreActive = true
-    @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +34,10 @@ class ContentViewController: BaseViewController {
     override func setUpData() {
         loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
-            self.indicatorView.hidden = true
+            self.hideLoading()
             dataOfVideo = videos
         } else {
-            self.indicatorView.startAnimating()
+            self.showLoading()
             loadVideos(pageId, pageToken: nil)
         }
     }
@@ -62,6 +61,7 @@ class ContentViewController: BaseViewController {
             return
         }
         isLoading = true
+        self.showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["maxResults"] = "10"
@@ -71,8 +71,7 @@ class ContentViewController: BaseViewController {
         parameters["pageToken"] = pageToken
         MyVideo.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
             if success {
-                self.indicatorView.stopAnimating()
-                self.indicatorView.hidden = true
+                self.hideLoading()
                 self.contentTableView.reloadData()
                 self.pageToken = nextPageToken
                 if nextPageToken == nil {
