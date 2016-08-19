@@ -8,50 +8,50 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="108" id="KGk-i7-Jjw" customClass="VideoFavoriteCell" customModule="YouTube" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="VideoFavoriteCell" customModule="YouTube" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
-                        <rect key="frame" x="14" y="9" width="100" height="90"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="D1D-fn-b7S"/>
-                            <constraint firstAttribute="height" constant="90" id="ggY-jc-4Jz"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovx-IO-h4S">
-                        <rect key="frame" x="122" y="61" width="37" height="17.5"/>
-                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
+                        <rect key="frame" x="122" y="56.5" width="37" height="17.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1T-N2-ILw">
-                        <rect key="frame" x="122" y="15" width="183" height="22"/>
-                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="19"/>
+                        <rect key="frame" x="122" y="15" width="183" height="17.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zo-mQ-yVY">
-                        <rect key="frame" x="122" y="40" width="183" height="17.5"/>
-                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
+                        <rect key="frame" x="122" y="35.5" width="183" height="17.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
+                        <rect key="frame" x="14" y="8" width="100" height="73"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="ZpX-lc-9Ag"/>
+                            <constraint firstAttribute="height" constant="73" id="u06-FG-Nnu"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6kI-Qt-qrF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7FM-k7-lfY"/>
-                    <constraint firstItem="E1T-N2-ILw" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="9Tv-oZ-gTe"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="E1T-N2-ILw" secondAttribute="trailing" constant="7" id="BLw-8l-k23"/>
-                    <constraint firstItem="7zo-mQ-yVY" firstAttribute="centerX" secondItem="E1T-N2-ILw" secondAttribute="centerX" id="D0o-uG-9av"/>
-                    <constraint firstItem="6kI-Qt-qrF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="Giq-XD-V3L"/>
-                    <constraint firstItem="7zo-mQ-yVY" firstAttribute="top" secondItem="E1T-N2-ILw" secondAttribute="bottom" constant="3" id="KgX-7t-ANO"/>
-                    <constraint firstItem="Ovx-IO-h4S" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="bqf-dA-awN"/>
-                    <constraint firstItem="Ovx-IO-h4S" firstAttribute="top" secondItem="7zo-mQ-yVY" secondAttribute="bottom" constant="3" id="fhY-1w-rXi"/>
-                    <constraint firstItem="7zo-mQ-yVY" firstAttribute="width" secondItem="E1T-N2-ILw" secondAttribute="width" id="mAZ-qq-HJ8"/>
-                    <constraint firstItem="E1T-N2-ILw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="xKJ-H5-9xJ"/>
+                    <constraint firstItem="7zo-mQ-yVY" firstAttribute="top" secondItem="E1T-N2-ILw" secondAttribute="bottom" constant="3" id="07M-Zw-aot"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="7zo-mQ-yVY" secondAttribute="trailing" constant="7" id="2fE-HQ-Acr"/>
+                    <constraint firstItem="E1T-N2-ILw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="6La-EZ-BEw"/>
+                    <constraint firstItem="E1T-N2-ILw" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="8Wp-Nc-14F"/>
+                    <constraint firstItem="6kI-Qt-qrF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="GEl-Pu-ywr"/>
+                    <constraint firstItem="Ovx-IO-h4S" firstAttribute="top" secondItem="7zo-mQ-yVY" secondAttribute="bottom" constant="3.5" id="PBd-1Z-hrm"/>
+                    <constraint firstItem="6kI-Qt-qrF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Wor-Pl-deP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="E1T-N2-ILw" secondAttribute="trailing" constant="7" id="k0t-A6-K4Z"/>
+                    <constraint firstItem="Ovx-IO-h4S" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="lRE-12-eqQ"/>
+                    <constraint firstItem="7zo-mQ-yVY" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="vNC-CH-unX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -60,7 +60,7 @@
                 <outlet property="nameVideoLabel" destination="E1T-N2-ILw" id="jFY-BN-YOo"/>
                 <outlet property="thumbnailVideo" destination="6kI-Qt-qrF" id="OFY-fa-F0v"/>
             </connections>
-            <point key="canvasLocation" x="540" y="200"/>
+            <point key="canvasLocation" x="540" y="191"/>
         </tableViewCell>
     </objects>
 </document>

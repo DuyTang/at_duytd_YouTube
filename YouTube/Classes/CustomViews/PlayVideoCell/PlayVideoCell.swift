@@ -31,14 +31,10 @@ class PlayVideoCell: BaseTableViewCell {
     }
 
     func configPlayVideoCell(video: Video) {
-        if !isRun {
-            isRun = true
-            self.nameVideoLabel.text = video.title.isEmpty ? " " : video.title
-            self.thumbnailVideo.downloadImage(video.thumbnail)
-            self.channelLabel.text = video.channelTitle
-            self.viewCountLabel.text = video.viewCount + " views"
-        }
-
+        self.nameVideoLabel.text = video.title.isEmpty ? " " : video.title
+        self.thumbnailVideo.downloadImage(video.thumbnail)
+        self.channelLabel.text = video.channelTitle
+        self.viewCountLabel.text = video.viewCount + " views"
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

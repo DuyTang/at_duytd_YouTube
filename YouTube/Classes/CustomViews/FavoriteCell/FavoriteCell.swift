@@ -37,7 +37,12 @@ class FavoriteCell: BaseTableViewCell {
         } else {
             self.numberVideoLabel.text = String(numberVideo) + " video"
         }
-        self.thumbnailFavoriteList.downloadImage(selectImageFavorite(favorite.id))
+        if selectImageFavorite(favorite.id) == "" {
+            self.thumbnailFavoriteList.image = UIImage(named: "ic_video")
+        } else {
+            self.thumbnailFavoriteList.downloadImage(selectImageFavorite(favorite.id))
+        }
+
     }
 
     func getNumberVideo(idListFavorite: Int) -> Int {
@@ -53,14 +58,18 @@ class FavoriteCell: BaseTableViewCell {
     }
 
     func selectImageFavorite(idFavorite: Int) -> String {
-        var thumbnailFavorite: String?
+        var thumbnailFavorite: String = ""
         do {
             let realm = try Realm()
-            let video = realm.objects(VideoFavorite).filter("idListFavorite = %@", idFavorite).first
-            thumbnailFavorite = video!.thumbnail
+            let videos = realm.objects(VideoFavorite).filter("idListFavorite = %@", idFavorite)
+            if videos.count > 0 {
+                thumbnailFavorite = videos[0].thumbnail
+            } else {
+                thumbnailFavorite = ""
+            }
         } catch {
 
         }
-        return thumbnailFavorite!
+        return thumbnailFavorite
     }
 }
