@@ -7,12 +7,10 @@
 //
 
 extension String {
-
+    // MARK:- Get time of video
     func getYoutubeFormattedDuration() -> String {
         var duration = ""
-        if self == "" {
-            duration = "-:-"
-        } else {
+        if isValidDuration(self) == true {
             let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
             let components = formattedDuration.componentsSeparatedByString(":")
             for component in components {
@@ -23,43 +21,64 @@ extension String {
                 }
                 duration += component
             }
+
+        } else {
+            duration = "-:-"
         }
         return duration
     }
-
+    // MARK:- Validate time of Video
+    func isValidDuration(text: String) -> Bool {
+        let DURATION_REGEX = "^PT+[1-9]+H[1-9]+M[1-9]+[1-9]S"
+        let DURATION_REGEX1 = "^PT+[1-9]+M[1-9]+[1-9]S"
+        let durationTest = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX)
+        let durationTest1 = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX1)
+        let result = durationTest.evaluateWithObject(text)
+        let result1 = durationTest1.evaluateWithObject(text)
+        if result == true || result1 == true {
+            return true
+        } else {
+            return false
+        }
+    }
+    // MARK:- Get time upload of video
     func getTimeUpload(text: String) -> String {
         var time = ""
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let selectedDate = dateFormatter.dateFromString(text)
-        let currentDate = NSDate()
-        let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate!, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
-        if diffDateComponents.year != 0 {
-            time = "\(diffDateComponents.year) years, \(diffDateComponents.month) months"
-        } else {
-            if diffDateComponents.month != 0 {
-                if diffDateComponents.day < 7 {
-                    time = "\(diffDateComponents.month) months, \(diffDateComponents.day) days"
-                } else {
-                    let week = diffDateComponents.day / 7
-                    time = "\(diffDateComponents.month) months, \(week) weeks"
-                }
+        if isValidDateTime(text) == true {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            let selectedDate = dateFormatter.dateFromString(text)
+            let currentDate = NSDate()
+            let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate!, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
+            if diffDateComponents.year != 0 {
+                time = "\(diffDateComponents.year) years"
             } else {
-                if diffDateComponents.day != 0 {
-                    if diffDateComponents.day < 7 {
-                        time = "\(diffDateComponents.day) days, \(diffDateComponents.hour) hours"
-                    } else {
-                        let week = diffDateComponents.day / 7
-                        time = "\(week) weeks, \(diffDateComponents.day % 7 ) days"
-                    }
+                if diffDateComponents.month != 0 {
+                    time = "\(diffDateComponents.month) months"
                 } else {
-                    time = " \(diffDateComponents.hour) hours, \(diffDateComponents.minute) minutes"
+                    if diffDateComponents.day != 0 {
+                        if diffDateComponents.day < 7 {
+                            time = "\(diffDateComponents.day) days"
+                        } else {
+                            let week = diffDateComponents.day / 7
+                            time = "\(week) weeks"
+                        }
+                    } else {
+                        time = " \(diffDateComponents.hour) hours"
+                    }
                 }
             }
         }
         return time
     }
-
+    // MARK:- Validate time upload
+    func isValidDateTime(text: String) -> Bool {
+        let DATETIME_REGEX = "^[0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+:[0-9]+.000Z"
+        let durationTest = NSPredicate(format: "SELF MATCHES %@", DATETIME_REGEX)
+        let result = durationTest.evaluateWithObject(text)
+        return result
+    }
+    // MARK:- Show view count of video
     func getNumberView() -> String {
         var numberView = ""
         let countView = Int(self)
