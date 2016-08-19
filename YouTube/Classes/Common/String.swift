@@ -9,16 +9,20 @@
 extension String {
 
     func getYoutubeFormattedDuration() -> String {
-        let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
-        let components = formattedDuration.componentsSeparatedByString(":")
         var duration = ""
-        for component in components {
-            duration = duration.characters.count > 0 ? duration + ":": duration
-            if component.characters.count < 2 {
-                duration += "0" + component
-                continue
+        if self == "" {
+            duration = "-:-"
+        } else {
+            let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
+            let components = formattedDuration.componentsSeparatedByString(":")
+            for component in components {
+                duration = duration.characters.count > 0 ? duration + ":": duration
+                if component.characters.count < 2 {
+                    duration += "0" + component
+                    continue
+                }
+                duration += component
             }
-            duration += component
         }
         return duration
     }
@@ -54,6 +58,25 @@ extension String {
             }
         }
         return time
+    }
+
+    func getNumberView() -> String {
+        var numberView = ""
+        let countView = Int(self)
+        if self == "" {
+            numberView = "0 view"
+        } else {
+            if countView > 999999 {
+                numberView = String(countView! / 1000000) + "M views"
+            } else {
+                if countView > 999 {
+                    numberView = String(countView! / 1000) + "K views"
+                } else {
+                    numberView = self + "views"
+                }
+            }
+        }
+        return numberView
     }
 
 }
