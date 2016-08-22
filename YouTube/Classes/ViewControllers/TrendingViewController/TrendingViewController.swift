@@ -39,10 +39,8 @@ class TrendingViewController: BaseViewController {
     override func setUpData() {
         loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
-            self.hideLoading()
             trendingVideos = videos
         } else {
-            self.showLoading()
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }

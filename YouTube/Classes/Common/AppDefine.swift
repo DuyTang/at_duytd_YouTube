@@ -11,7 +11,7 @@ import Foundation
 struct AppDefine {
 
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
- 
+
     static let Home = "Home"
     static let Favorite = "Favorite"
     static let History = "History"
@@ -36,6 +36,7 @@ struct AppDefine {
     static let LoadVideoSuccess = "Load Video Success"
     static let LoadVideoFail = "Load Video Fail"
     static let LoadCategoryFail = "Load Category Fail"
+    static let NoData = "No Data"
     // MARK:- Alert
     static let OkButton = "OK"
     static let CancelButton = "Cancel"
@@ -46,4 +47,5 @@ struct AppDefine {
     static let NoListFavorite = "Create new list favorite"
     // MARK:- Notification
     static let AddVideoToHistory = "addVideoToHistory"
+
 }

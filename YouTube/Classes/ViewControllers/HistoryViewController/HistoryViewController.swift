@@ -110,7 +110,7 @@ extension HistoryViewController: UITableViewDataSource {
         if date.count > 0 {
             return date[section]
         } else {
-            return "No data"
+            return AppDefine.NoData
         }
     }
 
