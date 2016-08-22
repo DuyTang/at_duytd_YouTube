@@ -9,12 +9,9 @@
 import Foundation
 
 struct AppDefine {
-    
+
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
-    static let mainColor = UIColor.RGB(255, 37, 21)
-    static let backgroundColor = UIColor.RGB(249, 249, 249)
-    static let borderColor = UIColor.RGB(204, 24, 30)
-    static let subscribeColor = UIColor.RGB(224, 14, 69)
+ 
     static let Home = "Home"
     static let Favorite = "Favorite"
     static let History = "History"
@@ -47,10 +44,6 @@ struct AppDefine {
     static let TextPlaceHolder = "Name List Favorite"
     static let Error = "Error"
     static let NoListFavorite = "Create new list favorite"
-    // MARK:- Table
-    static let heightOfHomeCell: CGFloat = 230
-    static let heightOfNomarlCell: CGFloat = 90
-    static let maxRelatedVideo = 20
     // MARK:- Notification
     static let AddVideoToHistory = "addVideoToHistory"
 }

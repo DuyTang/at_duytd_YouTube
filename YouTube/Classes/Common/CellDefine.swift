@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct CellDefine {
+    // MARK:- Hight Cell
+    static let HeightOfHomeCell: CGFloat = 230
+    static let HeightOfNomarlCell: CGFloat = 90
+    // MARK:- Number Related Video
+    static let MaxRelatedVideo = 20
+}
