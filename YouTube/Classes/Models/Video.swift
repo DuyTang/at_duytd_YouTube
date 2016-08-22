@@ -10,12 +10,12 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-private protocol ValueObject {
+private protocol VideoObject {
     init?(_ object: VideoFavorite)
     init?(history: History)
 }
 
-class Video: Object, Mappable, ValueObject {
+class Video: Object, Mappable, VideoObject {
     dynamic var idVideo = ""
     dynamic var idCategory = ""
     dynamic var title = ""
@@ -78,7 +78,7 @@ class Video: Object, Mappable, ValueObject {
         self.thumbnail = object.thumbnail ?? ""
         self.descript = object.descript ?? ""
     }
-    
+
     convenience required init(history: History) {
         self.init()
         self.idVideo = history.idVideo ?? ""

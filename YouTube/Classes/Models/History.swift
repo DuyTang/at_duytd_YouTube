@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 import SwiftUtils
 
-protocol ValueObject1 {
+protocol HistoryObject {
     init?(_ video: Video)
 }
 
-class History: Object, ValueObject1 {
+class History: Object, HistoryObject {
     dynamic var idVideo = ""
     dynamic var idCategory = ""
     dynamic var title = ""
