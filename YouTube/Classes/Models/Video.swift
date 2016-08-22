@@ -10,8 +10,9 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-protocol ValueObject {
+private protocol ValueObject {
     init?(_ object: VideoFavorite)
+    init?(history: History)
 }
 
 class Video: Object, Mappable, ValueObject {
@@ -76,6 +77,18 @@ class Video: Object, Mappable, ValueObject {
         self.channelTitle = object.channelTitle ?? ""
         self.thumbnail = object.thumbnail ?? ""
         self.descript = object.descript ?? ""
+    }
+    
+    convenience required init(history: History) {
+        self.init()
+        self.idVideo = history.idVideo ?? ""
+        self.idCategory = history.idCategory ?? ""
+        self.title = history.title ?? ""
+        self.viewCount = history.viewCount ?? ""
+        self.duration = history.duration ?? ""
+        self.channelTitle = history.channelTitle ?? ""
+        self.thumbnail = history.thumbnail ?? ""
+        self.descript = history.descript ?? ""
     }
 
     class func cleanData() {

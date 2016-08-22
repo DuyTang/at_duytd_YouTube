@@ -32,12 +32,15 @@ class HistoryViewController: BaseViewController {
         loadData()
     }
     func addNewVideo() {
-        historyTableView.beginUpdates()
-        var indexPaths = [NSIndexPath]()
-        indexPaths.append(NSIndexPath(forRow: getListVideo(date[date.count - 1]).count - 1, inSection: date.count - 1))
-        historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
-        historyTableView.endUpdates()
-
+        if date.count == 0 {
+            historyTableView.reloadData()
+        } else {
+            historyTableView.beginUpdates()
+            var indexPaths = [NSIndexPath]()
+            indexPaths.append(NSIndexPath(forRow: getListVideo(date[date.count - 1]).count - 1, inSection: date.count - 1))
+            historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+            historyTableView.endUpdates()
+        }
     }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
@@ -57,7 +60,6 @@ class HistoryViewController: BaseViewController {
             let realm = try Realm()
             videos = realm.objects(History)
         } catch {
-
         }
         loadDate()
     }
@@ -125,6 +127,13 @@ extension HistoryViewController: UITableViewDataSource {
         let video = getListVideo(date[indexPath.section])[indexPath.row]
         cell.configureHistoryCell(video)
         return cell
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let detailVideoVC = DetailVideoViewController()
+        let video = getListVideo(date[indexPath.section])[indexPath.row]
+        detailVideoVC.video = Video(history: video)
+        self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
 //MARK:- UITableViewDelegate

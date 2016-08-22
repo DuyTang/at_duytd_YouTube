@@ -11,7 +11,7 @@ extension String {
     // MARK:- Get time of video
     func getYoutubeFormattedDuration() -> String {
         var duration = ""
-        if isValidDuration(self) {
+        if checkDurationVideo(self) {
             let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
             let components = formattedDuration.componentsSeparatedByString(":")
             for component in components {
@@ -29,7 +29,7 @@ extension String {
         return duration
     }
     // MARK:- Validate time of Video
-    func isValidDuration(text: String) -> Bool {
+    func checkDurationVideo(text: String) -> Bool {
         let DURATION_REGEX = "^PT+[0-9]+H[0-9]+M[0-9]+[0-9]S"
         let DURATION_REGEX1 = "^PT+[0-9]+M[0-9]+[0-9]S"
         let durationTest = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX)
