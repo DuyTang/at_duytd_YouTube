@@ -11,31 +11,5 @@ import Foundation
 struct AppDefine {
 
     static let YoutubeKey = "AIzaSyCH3W03eJCg52RIGnfvCjgTfs21Tddl6Io"
-
-    static let Home = "Home"
-    static let Favorite = "Favorite"
-    static let History = "History"
-    static let Trending = "Trending"
-    static let NoData = "No Data"
-    static let ImageHome = "ic_home"
-    static let ImageFavorite = "ic_favorite"
-    static let ImageHistory = "ic_history"
-    static let ImageTrending = "ic_trending"
-    static let ImageButton = "bt_star"
-    static let ImageSelectedButton = "bt_starfill"
-    static let Font = "Neutra Text"
-    static let SelectedFont = "Neutra Text TF"
-    static let FontSize: CGFloat = 19
-    static let UrlImage = "https://i.ytimg.com/vi/"
-    static let MaxRelatedVideo = 20
-    // MARK:- Type Image
-    static let DefaulImage = "/default.jpg"
-    static let MediumImage = "/mqdefault.jpg"
-    static let HighImage = "/hqdefault.jpg"
-    static let StandardImage = "/sddefault.jpg"
-    static let MaxresImage = "/maxresdefault.jpg"
-
-    // MARK:- Notification
-    static let AddVideoToHistory = "addVideoToHistory"
-
+    
 }

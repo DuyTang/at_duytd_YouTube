@@ -20,4 +20,5 @@ struct Message {
     static let TextPlaceHolder = "Name List Favorite"
     static let Error = "Error"
     static let NoListFavorite = "Create new list favorite"
+    static let NoData = "No Data"
 }

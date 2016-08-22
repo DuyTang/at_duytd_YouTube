@@ -7,3 +7,7 @@
 //
 
 import Foundation
+struct Notification {
+    // MARK:- Notification
+    static let AddVideoToHistory = "addVideoToHistory"
+}

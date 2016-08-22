@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct UIColors {
+struct Color {
     // MARK:- Defin color
     static let MainColor = UIColor.RGB(255, 37, 21)
     static let BackgroundColor = UIColor.RGB(249, 249, 249)

@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+struct Tabbar {
+    static let Home = "Home"
+    static let Favorite = "Favorite"
+    static let History = "History"
+    static let Trending = "Trending"
+    static let ImageHome = "ic_home"
+    static let ImageFavorite = "ic_favorite"
+    static let ImageHistory = "ic_history"
+    static let ImageTrending = "ic_trending"
+    static let ImageButton = "bt_star"
+    static let ImageSelectedButton = "bt_starfill"
+}
