@@ -227,16 +227,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
                 youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
                 youtubeVideoPlayer?.presentInView(viewPlayer)
                 youtubeVideoPlayer?.moviePlayer.play()
-                do {
-                    let realm = try Realm()
-                    let historyVideo = History()
-                    historyVideo.initFromVideo(video, datetime: NSDate())
-                    try realm.write({
-                        realm.add(historyVideo)
-                        NSNotificationCenter.defaultCenter().postNotificationName(AppDefine.AddVideoToHistory, object: nil)
-                    })
-                } catch {
-                }
+                History.addVideoToHistory(video)
             }
 
         }

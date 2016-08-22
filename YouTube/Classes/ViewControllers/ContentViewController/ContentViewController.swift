@@ -15,7 +15,7 @@ class ContentViewController: BaseViewController {
     var pageIndex = 0
     var pageId = ""
     var pageToken: String?
-    private var dataOfVideo: Results<Video>?
+    private var homeVideos: Results<Video>?
     private var isLoading = false
     private var loadmoreActive = true
 
@@ -35,7 +35,7 @@ class ContentViewController: BaseViewController {
         loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             self.hideLoading()
-            dataOfVideo = videos
+            homeVideos = videos
         } else {
             self.showLoading()
             loadVideos(pageId, pageToken: nil)
@@ -49,7 +49,7 @@ class ContentViewController: BaseViewController {
     func loadData() {
         do {
             let realm = try Realm()
-            dataOfVideo = realm.objects(Video).filter("idCategory = %@", pageId)
+            homeVideos = realm.objects(Video).filter("idCategory = %@", pageId)
             self.contentTableView.reloadData()
         } catch {
 
@@ -90,7 +90,7 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let videos = dataOfVideo {
+        if let videos = homeVideos {
             return videos.count
         } else {
             return 0
@@ -99,25 +99,15 @@ extension ContentViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.contentTableView.dequeue(HomeCell)
-        let video = self.dataOfVideo![indexPath.row]
+        let video = self.homeVideos![indexPath.row]
         cell.configureCell(video)
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.video = dataOfVideo![indexPath.row]
-        do {
-            let realm = try Realm()
-            let historyVideo = History()
-            historyVideo.initFromVideo(dataOfVideo![indexPath.row], datetime: NSDate())
-            try realm.write({
-                realm.add(historyVideo)
-            })
-            NSNotificationCenter.defaultCenter().postNotificationName(AppDefine.AddVideoToHistory, object: nil)
-        } catch {
-
-        }
+        detailVideoVC.video = homeVideos![indexPath.row]
+        History.addVideoToHistory(homeVideos![indexPath.row])
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 

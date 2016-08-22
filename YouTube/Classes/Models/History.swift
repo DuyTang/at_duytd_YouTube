@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import ObjectMapper
+import SwiftUtils
 
 class History: Object {
     dynamic var idVideo = ""
@@ -42,6 +43,20 @@ class History: Object {
             try realm.write({
                 realm.delete(videos)
             })
+        } catch {
+
+        }
+    }
+
+    class func addVideoToHistory(video: Video) {
+        do {
+            let realm = try Realm()
+            let historyVideo = History()
+            historyVideo.initFromVideo(video, datetime: NSDate())
+            try realm.write({
+                realm.add(historyVideo)
+            })
+            NSNotificationCenter.defaultCenter().postNotificationName(AppDefine.AddVideoToHistory, object: nil)
         } catch {
 
         }
