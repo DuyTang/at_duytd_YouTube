@@ -36,7 +36,7 @@ class HomeCell: BaseTableViewCell {
     }
     // MARk:- Set Up UI
     override func setUpUI() {
-        self.thumbnailChannel.setCircle(1.0, borderColor: AppDefine.backgroundColor)
+        self.thumbnailChannel.setCircle(1.0, borderColor: UIColors.BackgroundColor)
     }
 
     override func prepareForReuse() {

@@ -88,7 +88,7 @@ extension DetailFavoriteViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return AppDefine.heightOfHomeCell
+        return CellDefine.HeightOfHomeCell
     }
 }
 

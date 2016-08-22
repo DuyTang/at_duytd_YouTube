@@ -43,7 +43,7 @@ class PlayVideoCell: BaseTableViewCell {
     }
     override func setUpUI() {
         self.subcribeButton.setCircle(1.0, borderColor: UIColor.blackColor())
-        self.thumbnailVideo.setCircle(1.0, borderColor: AppDefine.backgroundColor)
+        self.thumbnailVideo.setCircle(1.0, borderColor: UIColors.BackgroundColor)
     }
 
     @IBAction private func clickExpandDescription(sender: UIButton) {
@@ -51,7 +51,7 @@ class PlayVideoCell: BaseTableViewCell {
     }
     @IBAction func changeSubscribe(sender: AnyObject) {
         if isSubscribe == false {
-            self.subcribeButton.setCircle(1.0, borderColor: AppDefine.subscribeColor)
+            self.subcribeButton.setCircle(1.0, borderColor: UIColors.SubscribeColor)
             self.subcribeButton.setImage(UIImage(named: "bt_sub_color"), forState: .Normal)
             self.isSubscribe = true
         } else {

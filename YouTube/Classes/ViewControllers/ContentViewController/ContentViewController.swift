@@ -133,7 +133,7 @@ extension ContentViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return AppDefine.heightOfHomeCell
+        return CellDefine.HeightOfHomeCell
     }
 
 }

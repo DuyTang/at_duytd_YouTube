@@ -132,7 +132,7 @@ extension HistoryViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension HistoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return AppDefine.heightOfNomarlCell
+        return CellDefine.HeightOfNomarlCell
     }
 }
 

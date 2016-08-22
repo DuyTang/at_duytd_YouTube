@@ -19,10 +19,10 @@ class CategoryCell: BaseCollectionViewCell {
     func changFont(isSelected: Bool) {
         if isSelected {
             self.nameCategoryLabel.font = UIFont(name: AppDefine.SelectedFont, size: AppDefine.FontSize)
-            self.nameCategoryLabel.textColor = AppDefine.borderColor
+            self.nameCategoryLabel.textColor = UIColors.BorderColor
         } else {
             nameCategoryLabel.font = UIFont(name: AppDefine.Font, size: AppDefine.FontSize)
-            self.nameCategoryLabel.textColor = UIColor.init(hex: 0x9A9DA4)
+            self.nameCategoryLabel.textColor = UIColors.CategoryTextColor
         }
     }
     // MARK:- Configure Cell

@@ -66,6 +66,7 @@
 		F3E07AF21D5C86F000DAB7C9 /* ListVideoFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */; };
 		F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */; };
 		F3E07AF71D5C89B200DAB7C9 /* VideoFavoriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E07AF51D5C89B200DAB7C9 /* VideoFavoriteCell.xib */; };
+		F3E58B911D6A97D8004BB244 /* CellDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E58B901D6A97D8004BB244 /* CellDefine.swift */; };
 		F3E825ED1D62A093005C6647 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E825EB1D62A093005C6647 /* TrendingViewController.swift */; };
 		F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E825EC1D62A093005C6647 /* TrendingViewController.xib */; };
 /* End PBXBuildFile section */
@@ -140,6 +141,7 @@
 		F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVideoFavorite.swift; sourceTree = "<group>"; };
 		F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFavoriteCell.swift; sourceTree = "<group>"; };
 		F3E07AF51D5C89B200DAB7C9 /* VideoFavoriteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoFavoriteCell.xib; sourceTree = "<group>"; };
+		F3E58B901D6A97D8004BB244 /* CellDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDefine.swift; sourceTree = "<group>"; };
 		F3E825EB1D62A093005C6647 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		F3E825EC1D62A093005C6647 /* TrendingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -287,6 +289,7 @@
 				F39598941D59B9120030BF82 /* UIView.swift */,
 				F37778171D5AEA9A00AC2075 /* UIImageView.swift */,
 				F3B2F9911D65A8050082FE1B /* String.swift */,
+				F3E58B901D6A97D8004BB244 /* CellDefine.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3E58B911D6A97D8004BB244 /* CellDefine.swift in Sources */,
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
 				F3A1F5501D6474C2006C4C9C /* History.swift in Sources */,

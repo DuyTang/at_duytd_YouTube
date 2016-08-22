@@ -96,7 +96,7 @@ class DetailVideoViewController: BaseViewController {
     private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = AppDefine.maxRelatedVideo
+        parameters["maxResults"] = CellDefine.MaxRelatedVideo
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         self.showLoading()
@@ -212,7 +212,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             if indexPath.row == 1 {
                 return !isExpandDescription ? 0 : UITableViewAutomaticDimension
             } else {
-                return AppDefine.heightOfNomarlCell
+                return CellDefine.HeightOfNomarlCell
             }
         }
     }
