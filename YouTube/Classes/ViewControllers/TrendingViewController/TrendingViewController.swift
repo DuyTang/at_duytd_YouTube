@@ -64,7 +64,7 @@ class TrendingViewController: BaseViewController {
             return
         }
         isLoading = true
-        self.showLoading()
+        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["chart"] = "mostPopular"
@@ -99,7 +99,7 @@ extension TrendingViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.trendingTableView.dequeue(HomeCell.self)
+        let cell = trendingTableView.dequeue(HomeCell.self)
         let video = trendingVideos[indexPath.row]
         cell.configureCell(video)
         return cell

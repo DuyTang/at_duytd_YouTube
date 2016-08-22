@@ -15,7 +15,7 @@ class HistoryViewController: BaseViewController {
     private var videos: Results<History>!
     private var date: [String] = []
     private var listVideo: [[History]] = []
-
+    private let heightOfRow: CGFloat = 90
     override func viewDidLoad() {
         super.viewDidLoad()
         addNotification()
@@ -32,12 +32,11 @@ class HistoryViewController: BaseViewController {
         loadData()
     }
     func addNewVideo() {
-        self.historyTableView.beginUpdates()
+        historyTableView.beginUpdates()
         var indexPaths = [NSIndexPath]()
         indexPaths.append(NSIndexPath(forRow: getListVideo(date[date.count - 1]).count - 1, inSection: date.count - 1))
-        self.historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
-        self.historyTableView.endUpdates()
-        // self.historyTableView.reloadData()
+        historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+        historyTableView.endUpdates()
 
     }
     // MARK:- Configure HistoryViewController
@@ -51,7 +50,6 @@ class HistoryViewController: BaseViewController {
     }
     // MARK:- Set Up Data
     override func setUpData() {
-        loadData()
     }
     // MARK:- Load Data
     func loadData() {
@@ -92,7 +90,7 @@ class HistoryViewController: BaseViewController {
     @IBAction func deleteAllHistory(sender: UIButton) {
         History.cleanData()
         date = []
-        self.historyTableView.reloadData()
+        historyTableView.reloadData()
     }
 }
 //MARK:- UITableViewDataSource
@@ -132,7 +130,7 @@ extension HistoryViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension HistoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CellDefine.HeightOfNomarlCell
+        return heightOfRow
     }
 }
 

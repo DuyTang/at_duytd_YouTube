@@ -16,6 +16,7 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
     var videoFavorites: Results<VideoFavorite>?
+    private let heightOfRow: CGFloat = 90
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -62,12 +63,12 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(HomeCell.self)
-        let video = Video.init(videoFavorites![indexPath.row])
+        let video = Video(videoFavorites![indexPath.row])
         cell.configureCell(video)
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let video = Video.init(videoFavorites![indexPath.row])
+        let video = Video(videoFavorites![indexPath.row])
         let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = video
         detailVideoVC.delegate = self
@@ -78,7 +79,7 @@ extension DetailFavoriteViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CellDefine.HeightOfHomeCell
+        return heightOfRow
     }
 }
 

@@ -34,23 +34,21 @@ class ContentViewController: BaseViewController {
     override func setUpData() {
         loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
-            self.hideLoading()
             homeVideos = videos
         } else {
-            self.showLoading()
             loadVideos(pageId, pageToken: nil)
         }
     }
     // MARK:- Register Cell
     private func configureContentViewCOntroller() {
-        self.contentTableView.registerNib(HomeCell)
+        contentTableView.registerNib(HomeCell)
     }
     // MARK:- Load Data
     func loadData() {
         do {
             let realm = try Realm()
             homeVideos = realm.objects(Video).filter("idCategory = %@", pageId)
-            self.contentTableView.reloadData()
+            contentTableView.reloadData()
         } catch {
 
         }
@@ -61,7 +59,7 @@ class ContentViewController: BaseViewController {
             return
         }
         isLoading = true
-        self.showLoading()
+        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["maxResults"] = "10"
@@ -98,8 +96,8 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.contentTableView.dequeue(HomeCell)
-        let video = self.homeVideos![indexPath.row]
+        let cell = contentTableView.dequeue(HomeCell)
+        let video = homeVideos![indexPath.row]
         cell.configureCell(video)
         return cell
     }
