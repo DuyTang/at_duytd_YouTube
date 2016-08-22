@@ -54,7 +54,7 @@ class Video: Object, Mappable, VideoObject {
         var statistics = [String: AnyObject]()
         statistics <- map["statistics"]
         viewCount = statistics["viewCount"] as? String ?? ""
-        thumbnail = AppDefine.UrlImage + idVideo + AppDefine.StandardImage
+        thumbnail = AppDefine.UrlImage + idVideo + AppDefine.HighImage
     }
 
     class func getVideos(id: String) -> Results<Video>? {
