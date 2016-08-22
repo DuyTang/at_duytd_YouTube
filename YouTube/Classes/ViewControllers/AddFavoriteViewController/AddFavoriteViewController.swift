@@ -78,7 +78,7 @@ class AddFavoriteViewController: BaseViewController {
             self.delegate?.addSuccess(isSaved)
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
-            self.showAlert(AppDefine.Error, message: AppDefine.NoListFavorite, cancelButton: AppDefine.CancelButton)
+            self.showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
         }
     }
 

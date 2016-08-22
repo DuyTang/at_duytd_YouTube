@@ -16,6 +16,7 @@ struct AppDefine {
     static let Favorite = "Favorite"
     static let History = "History"
     static let Trending = "Trending"
+    static let NoData = "No Data"
     static let ImageHome = "ic_home"
     static let ImageFavorite = "ic_favorite"
     static let ImageHistory = "ic_history"
@@ -32,19 +33,7 @@ struct AppDefine {
     static let HighImage = "/hqdefault.jpg"
     static let StandardImage = "/sddefault.jpg"
     static let MaxresImage = "/maxresdefault.jpg"
-    // MARK:- Message
-    static let LoadVideoSuccess = "Load Video Success"
-    static let LoadVideoFail = "Load Video Fail"
-    static let LoadCategoryFail = "Load Category Fail"
-    static let NoData = "No Data"
-    // MARK:- Alert
-    static let OkButton = "OK"
-    static let CancelButton = "Cancel"
-    static let MessageEnterList = "Enter your list"
-    static let TitleAddNewList = "Enter Name"
-    static let TextPlaceHolder = "Name List Favorite"
-    static let Error = "Error"
-    static let NoListFavorite = "Create new list favorite"
+
     // MARK:- Notification
     static let AddVideoToHistory = "addVideoToHistory"
 

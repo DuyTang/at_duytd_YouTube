@@ -67,6 +67,7 @@
 		F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */; };
 		F3E07AF71D5C89B200DAB7C9 /* VideoFavoriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E07AF51D5C89B200DAB7C9 /* VideoFavoriteCell.xib */; };
 		F3E58B911D6A97D8004BB244 /* CellDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E58B901D6A97D8004BB244 /* CellDefine.swift */; };
+		F3E58B931D6AA6C1004BB244 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E58B921D6AA6C1004BB244 /* Message.swift */; };
 		F3E825ED1D62A093005C6647 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E825EB1D62A093005C6647 /* TrendingViewController.swift */; };
 		F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3E825EC1D62A093005C6647 /* TrendingViewController.xib */; };
 /* End PBXBuildFile section */
@@ -142,6 +143,7 @@
 		F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFavoriteCell.swift; sourceTree = "<group>"; };
 		F3E07AF51D5C89B200DAB7C9 /* VideoFavoriteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoFavoriteCell.xib; sourceTree = "<group>"; };
 		F3E58B901D6A97D8004BB244 /* CellDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDefine.swift; sourceTree = "<group>"; };
+		F3E58B921D6AA6C1004BB244 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		F3E825EB1D62A093005C6647 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		F3E825EC1D62A093005C6647 /* TrendingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,6 +292,7 @@
 				F37778171D5AEA9A00AC2075 /* UIImageView.swift */,
 				F3B2F9911D65A8050082FE1B /* String.swift */,
 				F3E58B901D6A97D8004BB244 /* CellDefine.swift */,
+				F3E58B921D6AA6C1004BB244 /* Message.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				F39A2CCD1D5511AE003FC772 /* BaseViewController.swift in Sources */,
 				F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */,
 				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,
+				F3E58B931D6AA6C1004BB244 /* Message.swift in Sources */,
 				F39A2CD11D5512A3003FC772 /* APIDefine.swift in Sources */,
 				F3E07AF01D5C5B3D00DAB7C9 /* Favorite.swift in Sources */,
 				F377781A1D5AF33700AC2075 /* MyCategory.swift in Sources */,
