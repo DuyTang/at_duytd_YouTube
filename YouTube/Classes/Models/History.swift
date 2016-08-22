@@ -32,8 +32,8 @@ class History: Object {
         self.channelTitle = video.channelTitle ?? ""
         self.descript = video.descript ?? ""
         self.thumbnail = video.thumbnail ?? ""
-        self.date = formatLocationDate(datetime)
-        self.time = formatLocationTime(datetime)
+        self.date = datetime.toString(DateFormat.Date, localized: true)
+        self.time = datetime.toString(DateFormat.Time24NoSec, localized: true)
     }
 
     class func cleanData() {
@@ -60,21 +60,5 @@ class History: Object {
         } catch {
 
         }
-    }
-
-    func formatLocationDate(datetime: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en")
-        let stringDate = dateFormatter.stringFromDate(datetime)
-        return stringDate
-    }
-
-    func formatLocationTime(datetime: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en")
-        let stringDate = dateFormatter.stringFromDate(datetime)
-        return stringDate
     }
 }

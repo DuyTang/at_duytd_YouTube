@@ -5,12 +5,13 @@
 //  Created by Duy Tang on 8/18/16.
 //  Copyright © 2016 Duy Tang. All rights reserved.
 //
+import SwiftUtils
 
 extension String {
     // MARK:- Get time of video
     func getYoutubeFormattedDuration() -> String {
         var duration = ""
-        if isValidDuration(self) == true {
+        if isValidDuration(self) {
             let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
             let components = formattedDuration.componentsSeparatedByString(":")
             for component in components {
@@ -42,26 +43,42 @@ extension String {
         }
     }
     // MARK:- Get time upload of video
-    func getTimeUpload(text: String) -> String {
+    func getTimeUpload() -> String {
         var time = ""
-        if isValidDateTime(text) == true {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            let selectedDate = dateFormatter.dateFromString(text)
+        if self != "" {
+            let selectedDate = self.toDate(DateFormat.TZDateTime3, localized: false)
             let currentDate = NSDate()
-            let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate!, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
+            let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
             if diffDateComponents.year != 0 {
-                time = "\(diffDateComponents.year) years"
+                if diffDateComponents.year == 1 {
+                    time = "\(diffDateComponents.year) year "
+                } else {
+                    time = "\(diffDateComponents.year) years"
+                }
             } else {
                 if diffDateComponents.month != 0 {
-                    time = "\(diffDateComponents.month) months"
+                    if diffDateComponents.month == 1 {
+                        time = "\(diffDateComponents.month) month"
+                    } else {
+                        time = "\(diffDateComponents.month) months"
+                    }
                 } else {
                     if diffDateComponents.day != 0 {
                         if diffDateComponents.day < 7 {
-                            time = "\(diffDateComponents.day) days"
+                            if diffDateComponents.day == 1 {
+                                time = "\(diffDateComponents.day) day"
+                            } else {
+                                time = "\(diffDateComponents.day) days"
+                            }
                         } else {
                             let week = diffDateComponents.day / 7
-                            time = "\(week) weeks"
+                            if week == 1 {
+                                time = "\(week) week"
+
+                            } else {
+                                time = "\(week) weeks"
+
+                            }
                         }
                     } else {
                         time = " \(diffDateComponents.hour) hours"
@@ -71,13 +88,7 @@ extension String {
         }
         return time
     }
-    // MARK:- Validate time upload
-    func isValidDateTime(text: String) -> Bool {
-        let DATETIME_REGEX = "^[0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+:[0-9]+.000Z"
-        let durationTest = NSPredicate(format: "SELF MATCHES %@", DATETIME_REGEX)
-        let result = durationTest.evaluateWithObject(text)
-        return result
-    }
+
     // MARK:- Show view count of video
     func getNumberView() -> String {
         var numberView = ""
@@ -85,14 +96,18 @@ extension String {
         if self == "" {
             numberView = "0 view"
         } else {
-            if countView > 999999 {
-                numberView = String(countView! / 1000000) + "M views"
-            } else {
-                if countView > 999 {
-                    numberView = String(countView! / 1000) + "K views"
+            if countView != 1 {
+                if countView > 999999 {
+                    numberView = String(countView! / 1000000) + "M views"
                 } else {
-                    numberView = self + "views"
+                    if countView > 999 {
+                        numberView = String(countView! / 1000) + "K views"
+                    } else {
+                        numberView = self + "views"
+                    }
                 }
+            } else {
+                numberView = "1 view"
             }
         }
         return numberView
