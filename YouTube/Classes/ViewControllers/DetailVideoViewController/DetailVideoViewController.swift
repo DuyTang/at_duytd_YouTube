@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import ObjectMapper
 import XCDYouTubeVideoPlayerViewController
+import SwiftUtils
 protocol DetailVideoDelegete {
     func deleteFromListFavorite(isDeleted: Bool)
 }
@@ -42,11 +43,15 @@ class DetailVideoViewController: BaseViewController {
     }
     // MARK:- Add Video Player View
     func addVideoPlayerView() {
-        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
         viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
+        prepareToPlayVideo()
+        self.playerVideoView.addSubview(viewPlayer)
+    }
+
+    func prepareToPlayVideo() {
+        youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
         self.youtubeVideoPlayer?.presentInView(viewPlayer)
         youtubeVideoPlayer?.moviePlayer.play()
-        self.playerVideoView.addSubview(viewPlayer)
     }
 
     // MARK:- Config DetailVideoViewController
@@ -224,9 +229,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
                 loadData()
                 self.isFavorite = false
                 self.favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
-                youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.idVideo)
-                youtubeVideoPlayer?.presentInView(viewPlayer)
-                youtubeVideoPlayer?.moviePlayer.play()
+                prepareToPlayVideo()
                 History.addVideoToHistory(video)
             }
 

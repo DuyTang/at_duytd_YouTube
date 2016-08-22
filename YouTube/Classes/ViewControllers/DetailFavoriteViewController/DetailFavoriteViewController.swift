@@ -67,11 +67,11 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailVideoVC = DetailVideoViewController()
         let video = Video.init(videoFavorites![indexPath.row])
-        History.addVideoToHistory(video)
+        let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = video
         detailVideoVC.delegate = self
+        History.addVideoToHistory(video)
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }

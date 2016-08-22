@@ -105,20 +105,10 @@ extension TrendingViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailVideoVC = DetailVideoViewController()
         let video = trendingVideos![indexPath.row]
-        do {
-            let realm = try Realm()
-            let historyVideo = History()
-            historyVideo.initFromVideo(video, datetime: NSDate())
-            try realm.write({
-                realm.add(historyVideo)
-            })
-            NSNotificationCenter.defaultCenter().postNotificationName(AppDefine.AddVideoToHistory, object: nil)
-        } catch {
-
-        }
+        let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = video
+        History.addVideoToHistory(video)
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
