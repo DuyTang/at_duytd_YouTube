@@ -27,6 +27,7 @@ struct AppDefine {
     static let SelectedFont = "Neutra Text TF"
     static let FontSize: CGFloat = 19
     static let UrlImage = "https://i.ytimg.com/vi/"
+    static let MaxRelatedVideo = 20
     // MARK:- Type Image
     static let DefaulImage = "/default.jpg"
     static let MediumImage = "/mqdefault.jpg"

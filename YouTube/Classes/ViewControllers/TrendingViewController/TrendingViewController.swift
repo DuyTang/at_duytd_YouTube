@@ -16,6 +16,7 @@ class TrendingViewController: BaseViewController {
     private var nextPage: String?
     private var isLoading = false
     private var loadmoreActive = true
+    private let heightOfRow: CGFloat = 230
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +124,6 @@ extension TrendingViewController: UITableViewDataSource {
 
 extension TrendingViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CellDefine.HeightOfHomeCell
+        return heightOfRow
     }
 }

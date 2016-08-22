@@ -101,7 +101,7 @@ class DetailVideoViewController: BaseViewController {
     private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = CellDefine.MaxRelatedVideo
+        parameters["maxResults"] = AppDefine.MaxRelatedVideo
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         self.showLoading()
