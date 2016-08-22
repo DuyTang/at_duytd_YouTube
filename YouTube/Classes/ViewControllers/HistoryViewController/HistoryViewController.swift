@@ -32,12 +32,13 @@ class HistoryViewController: BaseViewController {
         loadData()
     }
     func addNewVideo() {
-//        self.historyTableView.beginUpdates()
-//        var indexPaths = [NSIndexPath]()
-//        indexPaths.append(NSIndexPath(forRow: self.videos.count - 1, inSection: 0))
-//        self.historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
-//        self.historyTableView.endUpdates()
-        self.historyTableView.reloadData()
+        self.historyTableView.beginUpdates()
+        var indexPaths = [NSIndexPath]()
+        indexPaths.append(NSIndexPath(forRow: getListVideo(date[date.count - 1]).count - 1, inSection: date.count - 1))
+        self.historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+        self.historyTableView.endUpdates()
+        // self.historyTableView.reloadData()
+
     }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
