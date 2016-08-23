@@ -18,7 +18,9 @@ class ContentViewController: BaseViewController {
     private var homeVideos: Results<Video>?
     private var isLoading = false
     private var loadmoreActive = true
-
+    struct Options {
+        static let HeightOfHomeCell: CGFloat = 230
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -121,7 +123,7 @@ extension ContentViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CellDefine.HeightOfHomeCell
+        return Options.HeightOfHomeCell
     }
 
 }

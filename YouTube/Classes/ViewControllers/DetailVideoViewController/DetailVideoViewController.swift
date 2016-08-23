@@ -29,7 +29,10 @@ class DetailVideoViewController: BaseViewController {
     private var viewPlayer: UIView!
     private var isFavorite = false
     var delegate: DetailVideoDelegete?
-    private let heightOfRow: CGFloat = 90
+    struct Options {
+        static let HeightOfRow: CGFloat = 90
+        static let MaxRelatedVideo = 20
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +75,9 @@ class DetailVideoViewController: BaseViewController {
     }
 
     func setImageForFavoriteButton() {
-        if checkFavorite(video.idVideo) == true || isFavorite == true {
-            favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
-            isFavorite = true
-        } else {
-            favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
-            isFavorite = false
-        }
+        isFavorite = checkFavorite(video.idVideo)
+        let nameImage = isFavorite ? "bt_starfill" : "bt_star"
+        favoriteButton.setImage(UIImage(named: nameImage), forState: .Normal)
     }
 
     // MARK:- Set Up UI
@@ -102,7 +101,7 @@ class DetailVideoViewController: BaseViewController {
     private func loadRelatedVideo(id: String) {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
-        parameters["maxResults"] = AppDefine.MaxRelatedVideo
+        parameters["maxResults"] = Options.MaxRelatedVideo
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         showLoading()
@@ -168,7 +167,7 @@ class DetailVideoViewController: BaseViewController {
             }
             favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
             isFavorite = false
-            delegate?.deleteFromListFavorite(self.isFavorite)
+            delegate?.deleteFromListFavorite(isFavorite)
         }
     }
 
@@ -195,11 +194,11 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         } else {
             if indexPath.row == 1 {
-                let cell = self.detailVideoTable.dequeue(DecriptVideoCell.self)
+                let cell = detailVideoTable.dequeue(DecriptVideoCell.self)
                 cell.configureDecriptVideoCell(video)
                 return cell
             } else {
-                let cell = self.detailVideoTable.dequeue(VideoFavoriteCell.self)
+                let cell = detailVideoTable.dequeue(VideoFavoriteCell.self)
                 let video = videos[indexPath.row - 2]
                 cell.configureCell(video)
                 return cell
@@ -218,7 +217,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             if indexPath.row == 1 {
                 return !isExpandDescription ? 0 : UITableViewAutomaticDimension
             } else {
-                return heightOfRow
+                return Options.HeightOfRow
             }
         }
     }
@@ -240,8 +239,8 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension DetailVideoViewController: AddFavoriteDelegate {
     func addSuccess(isSuccess: Bool) {
-        if isSuccess == true {
-            self.favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
+        if isSuccess {
+            favoriteButton.setImage(UIImage(named: "bt_starfill"), forState: .Normal)
         } else {
             isFavorite = isSuccess
         }

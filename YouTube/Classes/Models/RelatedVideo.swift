@@ -32,7 +32,7 @@ class RelatedVideo: Object, Mappable {
         title = snippet["title"] as? String ?? ""
         channelTitle = snippet["channelTitle"] as? String ?? ""
         descript = snippet["description"] as? String ?? ""
-        thumbnail = AppDefine.UrlImage + idVideo + AppDefine.StandardImage
+        thumbnail = Option.UrlImage + idVideo + Option.HighImage
         // var contentDetails = [String: AnyObject]()
         // contentDetails <- map["contentDetails"]
         // duration = contentDetails["duration"] as? String ?? ""

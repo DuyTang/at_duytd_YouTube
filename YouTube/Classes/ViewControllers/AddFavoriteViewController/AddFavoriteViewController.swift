@@ -40,8 +40,8 @@ class AddFavoriteViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: UIColors.BackgroundColor)
-        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: UIColors.BackgroundColor)
+        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
+        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
         self.setAttributeViewController()
     }
     // MARK:- Set Up Data

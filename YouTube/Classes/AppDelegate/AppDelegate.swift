@@ -18,16 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         // init tabbar
         let homeNavi = BaseNavigationController(rootViewController: HomeViewController())
-        homeNavi.setAttributeForNavigation(AppDefine.Home, image: AppDefine.ImageHome)
+        homeNavi.setAttributeForNavigation(Tabbar.Home, image: Tabbar.ImageHome)
 
         let favoriteNavi = BaseNavigationController(rootViewController: FavoriteViewController())
-        favoriteNavi.setAttributeForNavigation(AppDefine.Favorite, image: AppDefine.ImageFavorite)
+        favoriteNavi.setAttributeForNavigation(Tabbar.Favorite, image: Tabbar.ImageFavorite)
 
         let historyNavi = BaseNavigationController(rootViewController: HistoryViewController())
-        historyNavi.setAttributeForNavigation(AppDefine.History, image: AppDefine.ImageHistory)
+        historyNavi.setAttributeForNavigation(Tabbar.History, image: Tabbar.ImageHistory)
 
         let trendingNavi = BaseNavigationController(rootViewController: TrendingViewController())
-        trendingNavi.setAttributeForNavigation(AppDefine.Trending, image: AppDefine.ImageTrending)
+        trendingNavi.setAttributeForNavigation(Tabbar.Trending, image: Tabbar.ImageTrending)
 
         let tabbar = BaseTabbarViewController()
         tabbar.viewControllers = [favoriteNavi, homeNavi, trendingNavi, historyNavi]

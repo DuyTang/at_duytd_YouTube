@@ -27,16 +27,16 @@ class HomeCell: BaseTableViewCell {
     }
     // MARK:- Configure Cell
     func configureCell(video: Video) {
-        self.thumbnailVideo.downloadImage(video.thumbnail)
-        self.thumbnailChannel.downloadImage(video.thumbnail)
-        self.nameVideoLabel.text = video.title
-        self.nameChannelLabel.text = video.channelTitle
-        self.numberViewLabel.text = "\(video.viewCount) views"
+        thumbnailVideo.downloadImage(video.thumbnail)
+        thumbnailChannel.downloadImage(video.thumbnail)
+        nameVideoLabel.text = video.title
+        nameChannelLabel.text = video.channelTitle
+        numberViewLabel.text = "\(video.viewCount) views"
 
     }
     // MARk:- Set Up UI
     override func setUpUI() {
-        self.thumbnailChannel.setCircle(1.0, borderColor: UIColors.BackgroundColor)
+        thumbnailChannel.setCircle(1.0, borderColor: Color.BackgroundColor)
     }
 
     override func prepareForReuse() {

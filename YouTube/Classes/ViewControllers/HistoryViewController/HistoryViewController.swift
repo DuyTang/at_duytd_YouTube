@@ -15,7 +15,11 @@ class HistoryViewController: BaseViewController {
     private var videos: Results<History>!
     private var date: [String] = []
     private var listVideo: [[History]] = []
-    private let heightOfRow: CGFloat = 90
+
+    struct Options {
+        static let HeightOfRow: CGFloat = 90
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addNotification()
@@ -25,10 +29,10 @@ class HistoryViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     func addNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: AppDefine.AddVideoToHistory, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: Notification.AddVideoToHistory, object: nil)
     }
     override func viewWillAppear(animated: Bool) {
-        date = []
+        date.removeAll()
         loadData()
     }
     func addNewVideo() {
@@ -44,12 +48,12 @@ class HistoryViewController: BaseViewController {
     }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
-        self.historyTableView.registerNib(HistoryCell)
+        historyTableView.registerNib(HistoryCell)
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.navigationController?.navigationBarHidden = true
-        self.configureHistoryController()
+        navigationController?.navigationBarHidden = true
+        configureHistoryController()
     }
     // MARK:- Set Up Data
     override func setUpData() {
@@ -75,7 +79,7 @@ class HistoryViewController: BaseViewController {
                 }
             }
         }
-        self.historyTableView.reloadData()
+        historyTableView.reloadData()
     }
     func getListVideo(date: String) -> [History] {
         var list = [History]()
@@ -91,7 +95,7 @@ class HistoryViewController: BaseViewController {
 
     @IBAction func deleteAllHistory(sender: UIButton) {
         History.cleanData()
-        date = []
+        date.removeAll()
         historyTableView.reloadData()
     }
 }
@@ -110,7 +114,7 @@ extension HistoryViewController: UITableViewDataSource {
         if date.count > 0 {
             return date[section]
         } else {
-            return AppDefine.NoData
+            return Message.NoData
         }
     }
 
@@ -123,7 +127,7 @@ extension HistoryViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.historyTableView.dequeue(HistoryCell.self)
+        let cell = historyTableView.dequeue(HistoryCell.self)
         let video = getListVideo(date[indexPath.section])[indexPath.row]
         cell.configureHistoryCell(video)
         return cell
@@ -133,13 +137,13 @@ extension HistoryViewController: UITableViewDataSource {
         let detailVideoVC = DetailVideoViewController()
         let video = getListVideo(date[indexPath.section])[indexPath.row]
         detailVideoVC.video = Video(history: video)
-        self.navigationController?.pushViewController(detailVideoVC, animated: true)
+        navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
 //MARK:- UITableViewDelegate
 extension HistoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return heightOfRow
+        return Options.HeightOfRow
     }
 }
 

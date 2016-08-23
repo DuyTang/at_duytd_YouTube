@@ -60,7 +60,7 @@ class History: Object, HistoryObject {
             try realm.write({
                 realm.add(historyVideo)
             })
-            NSNotificationCenter.defaultCenter().postNotificationName(AppDefine.AddVideoToHistory, object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(Notification.AddVideoToHistory, object: nil)
         } catch {
 
         }

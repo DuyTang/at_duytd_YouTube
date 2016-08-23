@@ -16,7 +16,9 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
     var videoFavorites: Results<VideoFavorite>?
-    private let heightOfRow: CGFloat = 90
+    struct Options {
+        static let HeightOfRow: CGFloat = 230
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,16 +27,16 @@ class DetailFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     private func configureDetailFavoriteViewController() {
-        self.listVideoFavoriteTableView.registerNib(HomeCell)
+        listVideoFavoriteTableView.registerNib(HomeCell)
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.configureDetailFavoriteViewController()
-        self.nameListFavoriteLabel.text = favorite.name
+        configureDetailFavoriteViewController()
+        nameListFavoriteLabel.text = favorite.name
     }
     // MARK:- Set Up Data
     override func setUpData() {
-        self.loadData()
+        loadData()
     }
     private func loadData() {
         do {
@@ -46,7 +48,7 @@ class DetailFavoriteViewController: BaseViewController {
     }
     // MARK:- Action
     @IBAction func clickBack(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
 }
 //MARK:- UITableViewDataSource
@@ -73,20 +75,20 @@ extension DetailFavoriteViewController: UITableViewDataSource {
         detailVideoVC.video = video
         detailVideoVC.delegate = self
         History.addVideoToHistory(video)
-        self.navigationController?.pushViewController(detailVideoVC, animated: true)
+        navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 }
 //MARK:- UITableViewDelegate
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return heightOfRow
+        return Options.HeightOfRow
     }
 }
 
 extension DetailFavoriteViewController: DetailVideoDelegete {
     func deleteFromListFavorite(isDeleted: Bool) {
         if isDeleted == false {
-            self.listVideoFavoriteTableView.reloadData()
+            listVideoFavoriteTableView.reloadData()
         }
     }
 }
