@@ -16,7 +16,7 @@ class TrendingViewController: BaseViewController {
     private var nextPage: String?
     private var isLoading = false
     private var loadmoreActive = true
-    @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
+    private let heightOfRow: CGFloat = 230
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +40,8 @@ class TrendingViewController: BaseViewController {
     override func setUpData() {
         loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
-            self.indicatorView.hidden = true
             trendingVideos = videos
         } else {
-            self.indicatorView.startAnimating()
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
@@ -66,6 +64,7 @@ class TrendingViewController: BaseViewController {
             return
         }
         isLoading = true
+        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["chart"] = "mostPopular"
@@ -74,8 +73,7 @@ class TrendingViewController: BaseViewController {
         parameters["pageToken"] = nextPage
         MyVideo.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
             if success {
-                self.indicatorView.stopAnimating()
-                self.indicatorView.hidden = true
+                self.hideLoading()
                 self.trendingTableView.reloadData()
                 self.nextPage = nextPageToken
                 if nextPageToken == nil {
@@ -101,16 +99,17 @@ extension TrendingViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.trendingTableView.dequeue(HomeCell.self)
+        let cell = trendingTableView.dequeue(HomeCell.self)
         let video = trendingVideos[indexPath.row]
         cell.configureCell(video)
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailVideoVC = DetailVideoViewController()
         let video = trendingVideos![indexPath.row]
+        let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = video
+        History.addVideoToHistory(video)
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
@@ -125,6 +124,6 @@ extension TrendingViewController: UITableViewDataSource {
 
 extension TrendingViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return AppDefine.heightOfHomeCell
+        return heightOfRow
     }
 }

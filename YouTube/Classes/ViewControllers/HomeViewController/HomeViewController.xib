@@ -63,7 +63,7 @@
                                 <constraint firstItem="9UF-y0-q0a" firstAttribute="centerX" secondItem="dDX-lW-qfP" secondAttribute="centerX" id="zEv-Cs-Ji2"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-HH-LSB">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-HH-LSB">
                             <rect key="frame" x="325" y="26" width="34" height="34"/>
                             <state key="normal" backgroundImage="bt_searchWhite"/>
                         </button>

@@ -11,6 +11,10 @@ import UIKit
 class CategoryCell: BaseCollectionViewCell {
 
     @IBOutlet weak private var nameCategoryLabel: UILabel!
+    private struct Options {
+        static let FontSize: CGFloat = 19
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpUI()
@@ -18,16 +22,17 @@ class CategoryCell: BaseCollectionViewCell {
     // MARK:- Action
     func changFont(isSelected: Bool) {
         if isSelected {
-            self.nameCategoryLabel.font = UIFont(name: AppDefine.SelectedFont, size: AppDefine.FontSize)
-            self.nameCategoryLabel.textColor = AppDefine.borderColor
+            nameCategoryLabel.font = UIFont().fontNeutraTF(Options.FontSize)
+            nameCategoryLabel.textColor = Color.BorderColor
         } else {
-            nameCategoryLabel.font = UIFont(name: AppDefine.Font, size: AppDefine.FontSize)
-            self.nameCategoryLabel.textColor = UIColor.init(hex: 0x9A9DA4)
+            nameCategoryLabel.font = UIFont().fontNeutra(Options.FontSize)
+            nameCategoryLabel.textColor = Color.CategoryTextColor
         }
     }
+
     // MARK:- Configure Cell
     func configureCategoryCell(category: Category) {
-        self.nameCategoryLabel.text = category.title
+        nameCategoryLabel.text = category.title
     }
     // MARK:- Set Up UI
     private func setUpUI() {

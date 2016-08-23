@@ -10,11 +10,22 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-protocol ValueObject {
+private protocol VideoObject {
     init?(_ object: VideoFavorite)
+    init?(history: History)
 }
 
-class Video: Object, Mappable, ValueObject {
+struct Option {
+    static let UrlImage = "https://i.ytimg.com/vi/"
+    // MARK:- Type Image
+    static let DefaulImage = "/default.jpg"
+    static let MediumImage = "/mqdefault.jpg"
+    static let HighImage = "/hqdefault.jpg"
+    static let StandardImage = "/sddefault.jpg"
+    static let MaxresImage = "/maxresdefault.jpg"
+}
+
+class Video: Object, Mappable, VideoObject {
     dynamic var idVideo = ""
     dynamic var idCategory = ""
     dynamic var title = ""
@@ -53,7 +64,7 @@ class Video: Object, Mappable, ValueObject {
         var statistics = [String: AnyObject]()
         statistics <- map["statistics"]
         viewCount = statistics["viewCount"] as? String ?? ""
-        thumbnail = AppDefine.UrlImage + idVideo + AppDefine.StandardImage
+        thumbnail = Option.UrlImage + idVideo + Option.HighImage
     }
 
     class func getVideos(id: String) -> Results<Video>? {
@@ -76,6 +87,18 @@ class Video: Object, Mappable, ValueObject {
         self.channelTitle = object.channelTitle ?? ""
         self.thumbnail = object.thumbnail ?? ""
         self.descript = object.descript ?? ""
+    }
+
+    convenience required init(history: History) {
+        self.init()
+        self.idVideo = history.idVideo ?? ""
+        self.idCategory = history.idCategory ?? ""
+        self.title = history.title ?? ""
+        self.viewCount = history.viewCount ?? ""
+        self.duration = history.duration ?? ""
+        self.channelTitle = history.channelTitle ?? ""
+        self.thumbnail = history.thumbnail ?? ""
+        self.descript = history.descript ?? ""
     }
 
     class func cleanData() {

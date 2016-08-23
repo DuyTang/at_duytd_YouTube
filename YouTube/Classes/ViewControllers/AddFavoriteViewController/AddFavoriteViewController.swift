@@ -40,8 +40,8 @@ class AddFavoriteViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
-        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: AppDefine.backgroundColor)
+        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
+        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
         self.setAttributeViewController()
     }
     // MARK:- Set Up Data
@@ -78,7 +78,7 @@ class AddFavoriteViewController: BaseViewController {
             self.delegate?.addSuccess(isSaved)
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
-            self.showAlert(AppDefine.Error, message: AppDefine.NoListFavorite, cancelButton: AppDefine.CancelButton)
+            self.showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
         }
     }
 

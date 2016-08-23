@@ -15,11 +15,12 @@ class ContentViewController: BaseViewController {
     var pageIndex = 0
     var pageId = ""
     var pageToken: String?
-    private var dataOfVideo: Results<Video>?
+    private var homeVideos: Results<Video>?
     private var isLoading = false
     private var loadmoreActive = true
-    @IBOutlet weak private var indicatorView: UIActivityIndicatorView!
-
+    private struct Options {
+        static let HeightOfHomeCell: CGFloat = 230
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -35,23 +36,21 @@ class ContentViewController: BaseViewController {
     override func setUpData() {
         loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
-            self.indicatorView.hidden = true
-            dataOfVideo = videos
+            homeVideos = videos
         } else {
-            self.indicatorView.startAnimating()
             loadVideos(pageId, pageToken: nil)
         }
     }
     // MARK:- Register Cell
     private func configureContentViewCOntroller() {
-        self.contentTableView.registerNib(HomeCell)
+        contentTableView.registerNib(HomeCell)
     }
     // MARK:- Load Data
     func loadData() {
         do {
             let realm = try Realm()
-            dataOfVideo = realm.objects(Video).filter("idCategory = %@", pageId)
-            self.contentTableView.reloadData()
+            homeVideos = realm.objects(Video).filter("idCategory = %@", pageId)
+            contentTableView.reloadData()
         } catch {
 
         }
@@ -62,6 +61,7 @@ class ContentViewController: BaseViewController {
             return
         }
         isLoading = true
+        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["maxResults"] = "10"
@@ -71,8 +71,7 @@ class ContentViewController: BaseViewController {
         parameters["pageToken"] = pageToken
         MyVideo.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
             if success {
-                self.indicatorView.stopAnimating()
-                self.indicatorView.hidden = true
+                self.hideLoading()
                 self.contentTableView.reloadData()
                 self.pageToken = nextPageToken
                 if nextPageToken == nil {
@@ -91,7 +90,7 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let videos = dataOfVideo {
+        if let videos = homeVideos {
             return videos.count
         } else {
             return 0
@@ -99,15 +98,16 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.contentTableView.dequeue(HomeCell)
-        let video = self.dataOfVideo![indexPath.row]
+        let cell = contentTableView.dequeue(HomeCell)
+        let video = homeVideos![indexPath.row]
         cell.configureCell(video)
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.video = dataOfVideo![indexPath.row]
+        detailVideoVC.video = homeVideos![indexPath.row]
+        History.addVideoToHistory(homeVideos![indexPath.row])
         self.navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
@@ -123,7 +123,7 @@ extension ContentViewController: UITableViewDataSource {
 //MARK:- UITableViewDelegate
 extension ContentViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return AppDefine.heightOfHomeCell
+        return Options.HeightOfHomeCell
     }
 
 }

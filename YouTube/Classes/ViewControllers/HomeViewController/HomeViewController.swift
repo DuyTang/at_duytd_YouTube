@@ -44,7 +44,7 @@ class HomeViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.configureHomeViewController()
         self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
-        self.selectedCategoryView.backgroundColor = AppDefine.borderColor
+        self.selectedCategoryView.backgroundColor = Color.BorderColor
         self.categoryCollectionView.addSubview(selectedCategoryView)
         self.pageViewController?.dataSource = self
         self.pageViewController?.delegate = self
