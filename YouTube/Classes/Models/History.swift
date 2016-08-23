@@ -23,8 +23,8 @@ class History: Object, HistoryObject {
     dynamic var channelTitle = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
-    dynamic var date = "2016-08-22"
-    dynamic var time = "00:00"
+    dynamic var date = ""
+    dynamic var time = ""
 
     required convenience init(_ video: Video) {
         self.init()

@@ -30,13 +30,13 @@ extension String {
     }
     // MARK:- Validate time of Video
     func checkDurationVideo(text: String) -> Bool {
-        let DURATION_REGEX = "^PT+[0-9]+H[0-9]+M[0-9]+[0-9]S"
-        let DURATION_REGEX1 = "^PT+[0-9]+M[0-9]+[0-9]S"
+        let DURATION_REGEX_FULL = "^PT+[0-9]+H[0-9]+M[0-9]+[0-9]S"
+        let DURATION_REGEX = "^PT+[0-9]+M[0-9]+[0-9]S"
+        let durationTestFull = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX_FULL)
         let durationTest = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX)
-        let durationTest1 = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX1)
+        let test_REGEX_FULL = durationTestFull.evaluateWithObject(text)
         let test_REGEX = durationTest.evaluateWithObject(text)
-        let test_REGEX1 = durationTest1.evaluateWithObject(text)
-        if test_REGEX || test_REGEX1 {
+        if test_REGEX_FULL || test_REGEX {
             return true
         } else {
             return false

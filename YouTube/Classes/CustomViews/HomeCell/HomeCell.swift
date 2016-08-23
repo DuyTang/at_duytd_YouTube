@@ -31,8 +31,7 @@ class HomeCell: BaseTableViewCell {
         thumbnailChannel.downloadImage(video.thumbnail)
         nameVideoLabel.text = video.title
         nameChannelLabel.text = video.channelTitle
-        numberViewLabel.text = "\(video.viewCount) views"
-
+        numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
     }
     // MARk:- Set Up UI
     override func setUpUI() {

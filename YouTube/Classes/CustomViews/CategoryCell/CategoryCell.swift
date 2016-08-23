@@ -11,9 +11,7 @@ import UIKit
 class CategoryCell: BaseCollectionViewCell {
 
     @IBOutlet weak private var nameCategoryLabel: UILabel!
-    struct Option {
-        static let Font = "Neutra Text"
-        static let SelectedFont = "Neutra Text TF"
+    struct Options {
         static let FontSize: CGFloat = 19
     }
 
@@ -24,13 +22,14 @@ class CategoryCell: BaseCollectionViewCell {
     // MARK:- Action
     func changFont(isSelected: Bool) {
         if isSelected {
-            nameCategoryLabel.font = UIFont(name: Option.SelectedFont, size: Option.FontSize)
+            nameCategoryLabel.font = UIFont().fontNeutraTF(Options.FontSize)
             nameCategoryLabel.textColor = Color.BorderColor
         } else {
-            nameCategoryLabel.font = UIFont(name: Option.Font, size: Option.FontSize)
+            nameCategoryLabel.font = UIFont().fontNeutra(Options.FontSize)
             nameCategoryLabel.textColor = Color.CategoryTextColor
         }
     }
+
     // MARK:- Configure Cell
     func configureCategoryCell(category: Category) {
         nameCategoryLabel.text = category.title
