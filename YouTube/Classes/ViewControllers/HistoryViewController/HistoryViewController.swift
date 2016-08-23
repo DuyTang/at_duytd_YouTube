@@ -22,29 +22,17 @@ class HistoryViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addNotification()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    func addNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: Notification.AddVideoToHistory, object: nil)
     }
     override func viewWillAppear(animated: Bool) {
         date.removeAll()
         loadData()
     }
     func addNewVideo() {
-        if date.count == 0 {
-            historyTableView.reloadData()
-        } else {
-            historyTableView.beginUpdates()
-            var indexPaths = [NSIndexPath]()
-            indexPaths.append(NSIndexPath(forRow: getListVideo(date[date.count - 1]).count - 1, inSection: date.count - 1))
-            historyTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
-            historyTableView.endUpdates()
-        }
+
     }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
@@ -65,6 +53,7 @@ class HistoryViewController: BaseViewController {
             videos = realm.objects(History)
         } catch {
         }
+        date.removeAll()
         loadDate()
     }
 
@@ -120,7 +109,8 @@ extension HistoryViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if date.count > 0 {
-            return getListVideo(date[section]).count
+            let count = getListVideo(date[section]).count
+            return count
         } else {
             return 0
         }
