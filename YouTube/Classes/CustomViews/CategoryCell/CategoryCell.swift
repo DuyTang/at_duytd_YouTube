@@ -11,7 +11,7 @@ import UIKit
 class CategoryCell: BaseCollectionViewCell {
 
     @IBOutlet weak private var nameCategoryLabel: UILabel!
-    struct Options {
+    private struct Options {
         static let FontSize: CGFloat = 19
     }
 

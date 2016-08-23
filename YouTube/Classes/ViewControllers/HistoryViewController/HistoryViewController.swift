@@ -14,7 +14,7 @@ class HistoryViewController: BaseViewController {
     @IBOutlet weak private var historyTableView: UITableView!
     private var videos: Results<History>!
     private var date: [String] = []
-    struct Options {
+    private struct Options {
         static let HeightOfRow: CGFloat = 90
     }
 

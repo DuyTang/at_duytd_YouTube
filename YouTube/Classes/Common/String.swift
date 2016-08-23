@@ -45,7 +45,7 @@ extension String {
     // MARK:- Get time upload of video
     func getTimeUpload() -> String {
         var time = ""
-        if self != "" {
+        if self.isEmpty {
             let selectedDate = self.toDate(DateFormat.TZDateTime3, localized: false)
             let currentDate = NSDate()
             let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
@@ -93,21 +93,21 @@ extension String {
     func getNumberView() -> String {
         var numberView = ""
         let countView = Int(self)
-        if self == "" {
+        if self.isEmpty {
             numberView = "0 view"
         } else {
-            if countView != 1 {
+            if countView > 1 {
                 if countView > 999999 {
                     numberView = String(countView! / 1000000) + "M views"
                 } else {
-                    if countView > 999 {
+                    if 999999 >= countView && countView > 999 {
                         numberView = String(countView! / 1000) + "K views"
                     } else {
                         numberView = self + "views"
                     }
                 }
             } else {
-                numberView = "1 view"
+                numberView = self + " view"
             }
         }
         return numberView

@@ -29,7 +29,7 @@ class DetailVideoViewController: BaseViewController {
     private var viewPlayer: UIView!
     private var isFavorite = false
     var delegate: DetailVideoDelegete?
-    struct Options {
+    private struct Options {
         static let HeightOfRow: CGFloat = 90
         static let MaxRelatedVideo = 20
     }

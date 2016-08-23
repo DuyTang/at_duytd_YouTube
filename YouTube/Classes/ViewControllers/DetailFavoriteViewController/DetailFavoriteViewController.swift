@@ -16,7 +16,7 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
     var videoFavorites: Results<VideoFavorite>?
-    struct Options {
+    private struct Options {
         static let HeightOfRow: CGFloat = 230
     }
     override func viewDidLoad() {

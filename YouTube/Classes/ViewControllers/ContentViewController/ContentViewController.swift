@@ -18,7 +18,7 @@ class ContentViewController: BaseViewController {
     private var homeVideos: Results<Video>?
     private var isLoading = false
     private var loadmoreActive = true
-    struct Options {
+    private struct Options {
         static let HeightOfHomeCell: CGFloat = 230
     }
     override func viewDidLoad() {
