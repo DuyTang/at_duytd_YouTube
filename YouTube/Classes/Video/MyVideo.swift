@@ -62,5 +62,17 @@ class MyVideo {
         }
     }
 
+    class func searchVideoForKey(parameters: [String: AnyObject], completion: APIRequestCompletion) {
+        let api = APIDefine.YouTube().getListVideoRelated()
+        APIRequest.GET(api, parameter: parameters, success: { (response) in
+            if let data = response as? [String: AnyObject] {
+                // parse data
+            }
+            completion(success: true, nextPageToken: nil, error: nil)
+        }) { (error) in
+            completion(success: false, nextPageToken: nil, error: error)
+        }
+    }
+
 }
 

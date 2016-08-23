@@ -106,9 +106,11 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Show SearchBar
     @IBAction private func showSearchBar(sender: AnyObject) {
-        self.searchView.hidden = isShowSearchBar
-        self.titleView.hidden = !isShowSearchBar
-        self.isShowSearchBar = !isShowSearchBar
+//        self.searchView.hidden = isShowSearchBar
+//        self.titleView.hidden = !isShowSearchBar
+//        self.isShowSearchBar = !isShowSearchBar
+        let searchVC = SearchViewController()
+        presentViewController(searchVC, animated: true, completion: nil)
     }
     // MARK:- Move Page
     private func backPage(viewController: UIViewController) {

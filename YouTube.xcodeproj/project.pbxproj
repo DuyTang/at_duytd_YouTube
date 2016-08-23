@@ -23,6 +23,8 @@
 		F37C65791D6BFED9000AA778 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C65781D6BFED9000AA778 /* Font.swift */; };
 		F37C657C1D6BFF28000AA778 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C657A1D6BFF28000AA778 /* HistoryCell.swift */; };
 		F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37C657B1D6BFF28000AA778 /* HistoryCell.xib */; };
+		F37C65811D6C3959000AA778 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C657F1D6C3959000AA778 /* SearchViewController.swift */; };
+		F37C65821D6C3959000AA778 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37C65801D6C3959000AA778 /* SearchViewController.xib */; };
 		F39598951D59B9120030BF82 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39598941D59B9120030BF82 /* UIView.swift */; };
 		F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CAC1D550F51003FC772 /* AppDelegate.swift */; };
 		F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB41D550FC0003FC772 /* Assets.xcassets */; };
@@ -95,6 +97,8 @@
 		F37C65781D6BFED9000AA778 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F37C657A1D6BFF28000AA778 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		F37C657B1D6BFF28000AA778 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
+		F37C657F1D6C3959000AA778 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F37C65801D6C3959000AA778 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		F393C0441D5DBF7C000F6818 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		F393C0451D5DBF7C000F6818 /* ArialBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArialBold.ttf; sourceTree = "<group>"; };
 		F393C0461D5DBF7C000F6818 /* TimesNewRoman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimesNewRoman.ttf; sourceTree = "<group>"; };
@@ -205,6 +209,15 @@
 				F377781C1D5AF3CF00AC2075 /* MyVideo.swift */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		F37C657E1D6C394A000AA778 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F37C657F1D6C3959000AA778 /* SearchViewController.swift */,
+				F37C65801D6C3959000AA778 /* SearchViewController.xib */,
+			);
+			path = SearchViewController;
 			sourceTree = "<group>";
 		};
 		F39A2C831D550E8F003FC772 = {
@@ -367,6 +380,7 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F37C657E1D6C394A000AA778 /* SearchViewController */,
 				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
 				F39A2CD91D5516AA003FC772 /* ContentViewController */,
@@ -591,6 +605,7 @@
 				F35EE5991D5CC774005464CC /* DecriptVideoCell.xib in Resources */,
 				F3B097C21D5561CF000D9E84 /* CategoryCell.xib in Resources */,
 				F37A0C5C1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html in Resources */,
+				F37C65821D6C3959000AA778 /* SearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +694,7 @@
 				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,
 				F3E58B931D6AA6C1004BB244 /* Message.swift in Sources */,
 				F39A2CD11D5512A3003FC772 /* APIDefine.swift in Sources */,
+				F37C65811D6C3959000AA778 /* SearchViewController.swift in Sources */,
 				F3E07AF01D5C5B3D00DAB7C9 /* Favorite.swift in Sources */,
 				F377781A1D5AF33700AC2075 /* MyCategory.swift in Sources */,
 				F39A2CC71D551161003FC772 /* BaseTableView.swift in Sources */,
