@@ -14,8 +14,6 @@ class HistoryViewController: BaseViewController {
     @IBOutlet weak private var historyTableView: UITableView!
     private var videos: Results<History>!
     private var date: [String] = []
-    private var listVideo: [[History]] = []
-
     struct Options {
         static let HeightOfRow: CGFloat = 90
     }
@@ -31,9 +29,7 @@ class HistoryViewController: BaseViewController {
         date.removeAll()
         loadData()
     }
-    func addNewVideo() {
 
-    }
     // MARK:- Configure HistoryViewController
     private func configureHistoryController() {
         historyTableView.registerNib(HistoryCell)
@@ -43,9 +39,6 @@ class HistoryViewController: BaseViewController {
         navigationController?.navigationBarHidden = true
         configureHistoryController()
     }
-    // MARK:- Set Up Data
-    override func setUpData() {
-    }
     // MARK:- Load Data
     func loadData() {
         do {
@@ -53,10 +46,9 @@ class HistoryViewController: BaseViewController {
             videos = realm.objects(History)
         } catch {
         }
-        date.removeAll()
         loadDate()
     }
-
+    // MARK:- Load Date Watched
     func loadDate() {
         if videos.count > 0 {
             var currentDate = videos[0].date
@@ -70,6 +62,7 @@ class HistoryViewController: BaseViewController {
         }
         historyTableView.reloadData()
     }
+    // MARK: - Load List Video By Date
     func getListVideo(date: String) -> [History] {
         var list = [History]()
         if videos.count > 0 {
@@ -81,7 +74,7 @@ class HistoryViewController: BaseViewController {
         }
         return list
     }
-
+    // MARK:- Clear History
     @IBAction func deleteAllHistory(sender: UIButton) {
         History.cleanData()
         date.removeAll()
@@ -109,8 +102,7 @@ extension HistoryViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if date.count > 0 {
-            let count = getListVideo(date[section]).count
-            return count
+            return getListVideo(date[section]).count
         } else {
             return 0
         }
