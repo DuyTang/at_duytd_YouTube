@@ -13,9 +13,11 @@ class SearchViewController: BaseViewController {
     @IBOutlet weak private var searchResultTableView: UITableView!
     @IBOutlet weak private var keySearchBar: UISearchBar!
     private var isSearching = false
+    private var listKey = [String]()
+    private var key: String = ""
 
     private struct Options {
-        static let HeightOfRow: CGFloat = 40
+        static let HeightOfRow: CGFloat = 30
     }
 
     override func viewDidLoad() {
@@ -43,7 +45,7 @@ class SearchViewController: BaseViewController {
     }
     // MARK:- Configuer SearchViewController
     private func config() {
-        searchResultTableView.registerNib(DecriptVideoCell)
+        searchResultTableView.registerNib(ResultSearchCell)
     }
 
     private func setAttributeViewController() {
@@ -58,11 +60,24 @@ class SearchViewController: BaseViewController {
     }
 
     private func loadData() {
-
+        loadListName(key)
     }
 
     private func loadListName(key: String) {
+        var parameters = [String: AnyObject]()
+        parameters["q"] = key
+        MyVideo.searchKey(parameters) { (response) in
+            if let data = response as? String {
+                self.listKey = self.convertStringToArray(data)
+                self.searchResultTableView.reloadData()
+            }
+        }
+    }
 
+    private func convertStringToArray(string: String) -> [String] {
+        var listElement = string.stringByReplacingOccurrencesOfString("[", withString: "").stringByReplacingOccurrencesOfString("]", withString: "").componentsSeparatedByString(",")
+        listElement.removeAtIndex(0)
+        return listElement
     }
 
     @IBAction func backToHomeViewController(sender: AnyObject) {
@@ -77,11 +92,20 @@ extension SearchViewController: UITableViewDataSource {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if listKey.isEmpty {
+            return 0
+        } else {
+            return listKey.count
+        }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = searchResultTableView.dequeue(DecriptVideoCell.self)
+        let cell = searchResultTableView.dequeue(ResultSearchCell.self)
+        let nameVideo = listKey[indexPath.row].stringByRemovingPercentEncoding!
+        cell.configResultSearchCell(nameVideo)
         return cell
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
     }
 }
 
@@ -95,7 +119,12 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        key = searchBar.text!
         isSearching = true
         searchResultTableView.hidden = false
+        loadListName(key)
+        if key.isEmpty {
+            searchResultTableView.hidden = true
+        }
     }
 }

@@ -28,6 +28,10 @@ class APIDefine {
         func getListVideoRelated() -> String {
             return EndPoint + "/search"
         }
+
+        func getResultAutoCompleteSearch() -> String {
+            return "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&client=firefox"
+        }
     }
 
 }
