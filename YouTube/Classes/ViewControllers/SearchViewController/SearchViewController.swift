@@ -80,9 +80,10 @@ class SearchViewController: BaseViewController {
         listElement.removeAtIndex(0)
         let listName = listElement.map { (text) -> String in
             let temp = text.stringByReplacingOccurrencesOfString("\"", withString: "")
-            let data = temp.dataUsingEncoding(NSUTF8StringEncoding)
-            let encodeString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            return String(encodeString!)
+            let transform = "Any-Hex/Java"
+            let convertedString = temp.mutableCopy() as? NSMutableString
+            CFStringTransform(convertedString, nil, transform as NSString, true)
+            return String(convertedString!)
         }
         return listName
     }

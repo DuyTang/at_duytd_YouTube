@@ -16,14 +16,12 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak private var contentView: UIView!
     @IBOutlet weak private var categoryCollectionView: UICollectionView!
     private var selectedCategoryView: UIView!
-    private var isShowSearchBar = false
     private var pageViewController: UIPageViewController?
     private var currentIndex = 0
     private var lastIndex: NSIndexPath?
     private var padding: CGFloat = 10
     private var viewControllers: [ContentViewController] = []
-    private var dataOfCategory: Results<Category>?
-    private var dataOfVideo: Results<Video>?
+    private var listCategory: Results<Category>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,23 +33,23 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Register CollectionCell
     private func configureHomeViewController() {
-        self.categoryCollectionView.registerNib(CategoryCell)
+        categoryCollectionView.registerNib(CategoryCell)
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.configureHomeViewController()
-        self.selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
-        self.selectedCategoryView.backgroundColor = Color.BorderColor
-        self.categoryCollectionView.addSubview(selectedCategoryView)
-        self.pageViewController?.dataSource = self
-        self.pageViewController?.delegate = self
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        configureHomeViewController()
+        selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
+        selectedCategoryView.backgroundColor = Color.BorderColor
+        categoryCollectionView.addSubview(selectedCategoryView)
+        pageViewController?.dataSource = self
+        pageViewController?.delegate = self
     }
     // MARK:- Set Up Data
     override func setUpData() {
         Category.cleanData()
         if let categories = Category.getCategories() where categories.count > 0 {
-            dataOfCategory = categories
+            listCategory = categories
             loadData()
             addContentToPageViewController()
         } else {
@@ -60,37 +58,37 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Add Page Controller
     private func createViewController() {
-        for i in 0...(dataOfCategory?.count)! - 1 {
+        for index in 0...(listCategory?.count)! - 1 {
             let viewController = ContentViewController()
-            viewController.pageIndex = i
-            viewController.pageId = dataOfCategory![i].id
+            viewController.pageIndex = index
+            viewController.pageId = listCategory![index].id
             viewControllers.append(viewController)
         }
     }
     private func addContentToPageViewController() {
         createViewController()
-        self.pageViewController = UIPageViewController(transitionStyle: .Scroll,
+        pageViewController = UIPageViewController(transitionStyle: .Scroll,
             navigationOrientation: .Horizontal, options: nil)
-        self.pageViewController?.dataSource = self
+        pageViewController?.dataSource = self
         let viewController = viewControllers[0]
-        self.pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
-        self.pageViewController?.view.frame = CGRect(x: contentView.bounds.minX,
+        pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
+        pageViewController?.view.frame = CGRect(x: contentView.bounds.minX,
             y: contentView.bounds.minY, width: contentView.bounds.width, height: contentView.bounds.height)
         addChildViewController(pageViewController!)
-        self.contentView.addSubview((pageViewController?.view)!)
-        self.pageViewController?.didMoveToParentViewController(self)
+        contentView.addSubview((pageViewController?.view)!)
+        pageViewController?.didMoveToParentViewController(self)
     }
     // MARK:- Load Data
     private func loadData() {
         do {
             let realm = try Realm()
-            dataOfCategory = realm.objects(Category)
+            listCategory = realm.objects(Category)
             categoryCollectionView.reloadData()
         } catch {
 
         }
     }
-
+    // MARK:- Load list Category
     private func loadCategories() {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
@@ -111,11 +109,11 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Move Page
     private func backPage(viewController: UIViewController) {
-        self.pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
+        pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
     }
 
     private func nextPage(viewController: UIViewController) {
-        self.pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
+        pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
     }
 }
 //MARK:- UICollectionViewDataSource
@@ -125,7 +123,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let categories = dataOfCategory {
+        if let categories = listCategory {
             if categories.count > 10 {
                 return 10
             } else {
@@ -137,8 +135,8 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = self.categoryCollectionView.dequeue(CategoryCell.self, forIndexPath: indexPath)
-        let category = self.dataOfCategory![indexPath.row]
+        let cell = categoryCollectionView.dequeue(CategoryCell.self, forIndexPath: indexPath)
+        let category = listCategory![indexPath.row]
         cell.configureCategoryCell(category)
         let isSelected = currentIndex == indexPath.row ? true : false
         cell.changFont(isSelected)
@@ -152,7 +150,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 UIView.animateWithDuration(0.3) {
                     self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
                 }
-                self.pageViewController?.delegate = self
+                pageViewController?.delegate = self
                 let viewController = viewControllers[indexPath.row]
                 if currentIndex > indexPath.row {
                     nextPage(viewController)
@@ -168,11 +166,11 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let category = dataOfCategory![indexPath.row]
+            let category = listCategory![indexPath.row]
             let textLabel = UILabel()
             textLabel.text = category.title
             let labelTextWidth = textLabel.intrinsicContentSize().width
-            return CGSize(width: labelTextWidth + self.padding * 2, height: collectionView.frame.height)
+            return CGSize(width: labelTextWidth + padding * 2, height: collectionView.frame.height)
     }
 
 }
