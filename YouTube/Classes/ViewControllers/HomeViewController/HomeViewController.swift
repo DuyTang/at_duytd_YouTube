@@ -12,8 +12,6 @@ import RealmSwift
 
 class HomeViewController: BaseViewController {
 
-    @IBOutlet weak private var searchView: UIView!
-    @IBOutlet weak private var searchTextField: UITextField!
     @IBOutlet weak private var titleView: UIView!
     @IBOutlet weak private var contentView: UIView!
     @IBOutlet weak private var categoryCollectionView: UICollectionView!
@@ -106,11 +104,10 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Show SearchBar
     @IBAction private func showSearchBar(sender: AnyObject) {
-//        self.searchView.hidden = isShowSearchBar
-//        self.titleView.hidden = !isShowSearchBar
-//        self.isShowSearchBar = !isShowSearchBar
         let searchVC = SearchViewController()
-        presentViewController(searchVC, animated: true, completion: nil)
+        let searchNavigationController = BaseNavigationController(rootViewController: searchVC)
+        searchNavigationController.modalPresentationStyle = .OverCurrentContext
+        presentViewController(searchNavigationController, animated: false, completion: nil)
     }
     // MARK:- Move Page
     private func backPage(viewController: UIViewController) {

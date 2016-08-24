@@ -16,7 +16,6 @@ class MyVideo {
     static var searchRequest: Alamofire.Request?
     class func loadDataFromAPI(id: String, parameters: [String: AnyObject], completion: APIRequestCompletion) {
         let api = APIDefine.YouTube().getListVideo()
-        // print(api)
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
                 let pageToken = data["nextPageToken"] as? String
@@ -63,15 +62,16 @@ class MyVideo {
         }
     }
 
-    class func searchVideoForKey(parameters: [String: AnyObject], completion: APIRequestCompletion) {
+    class func searchVideoForKey(parameters: [String: AnyObject], completion: APIRequestForResponse) {
         let api = APIDefine.YouTube().getListVideoRelated()
         APIRequest.GET(api, parameter: parameters, success: { (response) in
-            // if let data = response as? [String: AnyObject] {
-            // // parse data
-            // }
-            completion(success: true, nextPageToken: nil, error: nil)
+            if let data = response as? [String: AnyObject] {
+                let pageToken = data["nextPageToken"] as? String
+                let items = data["items"] as? NSArray
+                completion(success: true, response: items, nextPageToken: pageToken, error: nil)
+            }
         }) { (error) in
-            completion(success: false, nextPageToken: nil, error: error)
+            completion(success: false, response: nil, nextPageToken: nil, error: error)
         }
     }
 

@@ -10,6 +10,19 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
 
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        self.view.backgroundColor = UIColor.clearColor()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.tintColor = UIColor.whiteColor()
@@ -17,6 +30,7 @@ class BaseNavigationController: UINavigationController {
         self.navigationBar.translucent = false
         self.navigationBar.hidden = true
         self.navigationBar.shadowImage = UIImage()
+
     }
 
     override func didReceiveMemoryWarning() {

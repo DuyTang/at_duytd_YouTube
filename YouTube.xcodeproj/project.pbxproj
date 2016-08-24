@@ -27,6 +27,8 @@
 		F37C65821D6C3959000AA778 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37C65801D6C3959000AA778 /* SearchViewController.xib */; };
 		F37ED8F01D6D3E6D006205E5 /* ResultSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37ED8EE1D6D3E6D006205E5 /* ResultSearchCell.swift */; };
 		F37ED8F11D6D3E6D006205E5 /* ResultSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */; };
+		F37ED8F51D6D4CF1006205E5 /* VideoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37ED8F31D6D4CF1006205E5 /* VideoSearchViewController.swift */; };
+		F37ED8F61D6D4CF1006205E5 /* VideoSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37ED8F41D6D4CF1006205E5 /* VideoSearchViewController.xib */; };
 		F39598951D59B9120030BF82 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39598941D59B9120030BF82 /* UIView.swift */; };
 		F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CAC1D550F51003FC772 /* AppDelegate.swift */; };
 		F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB41D550FC0003FC772 /* Assets.xcassets */; };
@@ -103,6 +105,8 @@
 		F37C65801D6C3959000AA778 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		F37ED8EE1D6D3E6D006205E5 /* ResultSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultSearchCell.swift; sourceTree = "<group>"; };
 		F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultSearchCell.xib; sourceTree = "<group>"; };
+		F37ED8F31D6D4CF1006205E5 /* VideoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSearchViewController.swift; sourceTree = "<group>"; };
+		F37ED8F41D6D4CF1006205E5 /* VideoSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoSearchViewController.xib; sourceTree = "<group>"; };
 		F393C0441D5DBF7C000F6818 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		F393C0451D5DBF7C000F6818 /* ArialBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArialBold.ttf; sourceTree = "<group>"; };
 		F393C0461D5DBF7C000F6818 /* TimesNewRoman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimesNewRoman.ttf; sourceTree = "<group>"; };
@@ -231,6 +235,15 @@
 				F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */,
 			);
 			path = ResultSearchCell;
+			sourceTree = "<group>";
+		};
+		F37ED8F21D6D4CBB006205E5 /* VideoSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F37ED8F31D6D4CF1006205E5 /* VideoSearchViewController.swift */,
+				F37ED8F41D6D4CF1006205E5 /* VideoSearchViewController.xib */,
+			);
+			path = VideoSearchViewController;
 			sourceTree = "<group>";
 		};
 		F39A2C831D550E8F003FC772 = {
@@ -394,6 +407,7 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F37ED8F21D6D4CBB006205E5 /* VideoSearchViewController */,
 				F37C657E1D6C394A000AA778 /* SearchViewController */,
 				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
@@ -599,6 +613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F37ED8F61D6D4CF1006205E5 /* VideoSearchViewController.xib in Resources */,
 				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
 				F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */,
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
@@ -704,6 +719,7 @@
 				F3E58B9A1D6B1CAB004BB244 /* NotificationDefine.swift in Sources */,
 				F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */,
 				F3B2F9921D65A8050082FE1B /* String.swift in Sources */,
+				F37ED8F51D6D4CF1006205E5 /* VideoSearchViewController.swift in Sources */,
 				F39A2CCD1D5511AE003FC772 /* BaseViewController.swift in Sources */,
 				F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */,
 				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,

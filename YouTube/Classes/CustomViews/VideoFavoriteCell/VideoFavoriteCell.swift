@@ -16,6 +16,7 @@ class VideoFavoriteCell: BaseTableViewCell {
     @IBOutlet weak private var countViewLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .None
         // Initialization code
     }
 
