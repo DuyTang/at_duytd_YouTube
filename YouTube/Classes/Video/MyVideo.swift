@@ -85,5 +85,21 @@ class MyVideo {
         }
     }
 
+    class func getChannelThumbnail(parameters: [String: AnyObject], completion: APIRequestSuccess) {
+        let api = APIDefine.YouTube().getChannel()
+        APIRequest.GET(api, parameter: parameters, success: { (response) in
+            if let data = response as? [String: AnyObject], items = data["items"] as? NSArray,
+                item = items[0] as? [String: AnyObject],
+                snippet = item["snippet"] as? [String: AnyObject],
+                thumbnail = snippet["thumbnails"] as? [String: AnyObject],
+                imageChannel = thumbnail["high"] as? [String: AnyObject] {
+                    if let url = imageChannel["url"] as? String {
+                        completion(response: url)
+                    }
+            }
+        }) { (error) in
+            completion(response: nil)
+        }
+    }
 }
 

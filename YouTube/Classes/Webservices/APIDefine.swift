@@ -32,6 +32,9 @@ class APIDefine {
         func getResultAutoCompleteSearch() -> String {
             return "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&client=firefox"
         }
+        func getChannel() -> String {
+            return "https://www.googleapis.com/youtube/v3/channels?part=snippet"
+        }
     }
 
 }
