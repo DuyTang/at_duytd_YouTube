@@ -100,7 +100,6 @@ class HomeViewController: BaseViewController {
         MyCategory.getVideoCatetogories(parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()
-                print(self.listCategory)
                 self.addContentToPageViewController()
             }
         }

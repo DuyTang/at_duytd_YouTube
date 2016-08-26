@@ -12,7 +12,7 @@ class BaseNavigationController: UINavigationController {
 
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-        self.view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clearColor()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -29,11 +29,11 @@ class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationBar.translucent = false
-        self.navigationBar.hidden = true
-        self.navigationBar.shadowImage = UIImage()
+        navigationBar.tintColor = UIColor.whiteColor()
+        navigationBar.barTintColor = UIColor.whiteColor()
+        navigationBar.translucent = false
+        navigationBar.hidden = true
+        navigationBar.shadowImage = UIImage()
 
     }
 
@@ -43,8 +43,8 @@ class BaseNavigationController: UINavigationController {
     }
     func setAttributeForNavigation(title: String, image: String) {
         self.title = title
-        self.tabBarItem.image = UIImage(named: image)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        self.tabBarItem.selectedImage = UIImage(named: image)!.imageWithRenderingMode(.AlwaysTemplate)
+        tabBarItem.image = UIImage(named: image)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        tabBarItem.selectedImage = UIImage(named: image)!.imageWithRenderingMode(.AlwaysTemplate)
     }
 
 }

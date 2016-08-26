@@ -77,7 +77,7 @@ class SearchViewController: BaseViewController {
         self.listKey.removeAll()
         var parameters = [String: AnyObject]()
         parameters["q"] = key
-        MyVideo.searchKey(parameters) { (response) in
+        VideoService.searchKey(parameters) { (response) in
             if let data = response as? String {
                 self.listKey = self.convertStringToArray(data)
                 if self.listKey == [""] {
@@ -101,7 +101,7 @@ class SearchViewController: BaseViewController {
         parameters["maxResults"] = Options.MaxResult
         parameters["pageToken"] = nextPage
         parameters["q"] = key
-        MyVideo.searchVideoForKey(parameters) { (success, response, nextPageToken, error) in
+        VideoService.searchVideoForKey(parameters) { (success, response, nextPageToken, error) in
             if success {
                 self.nextPage = nextPageToken
                 if nextPageToken == nil {
@@ -113,7 +113,7 @@ class SearchViewController: BaseViewController {
                         var parameter = [String: AnyObject]()
                         parameter["part"] = "contentDetails,statistics"
                         parameter["id"] = video?.idVideo
-                        MyVideo.loadDetailVideoFromIdVideo(parameter, completion: { (response) in
+                        VideoService.loadDetailVideoFromIdVideo(parameter, completion: { (response) in
                             if let detailVideo = response as? NSArray {
                                 for item in detailVideo {
                                     if let detailVideo = item.objectForKey("contentDetails") as? NSDictionary {

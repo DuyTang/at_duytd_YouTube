@@ -69,7 +69,7 @@ class ContentViewController: BaseViewController {
         parameters["videoCategoryId"] = id
         parameters["regionCode"] = "VN"
         parameters["pageToken"] = pageToken
-        MyVideo.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
+        VideoService.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.hideLoading()
                 self.contentTableView.reloadData()

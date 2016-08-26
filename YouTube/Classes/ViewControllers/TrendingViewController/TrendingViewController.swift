@@ -73,7 +73,7 @@ class TrendingViewController: BaseViewController {
         parameters["regionCode"] = "VN"
         parameters["maxResults"] = "10"
         parameters["pageToken"] = nextPage
-        MyVideo.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
+        VideoService.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.hideLoading()
                 self.trendingTableView.reloadData()

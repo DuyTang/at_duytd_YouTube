@@ -11,7 +11,7 @@ import RealmSwift
 import ObjectMapper
 import Alamofire
 
-class MyVideo {
+class VideoService {
     var dataOfVideo: Results<Video>?
     static var searchRequest: Alamofire.Request?
     class func loadDataFromAPI(id: String, parameters: [String: AnyObject], completion: APIRequestCompletion) {
