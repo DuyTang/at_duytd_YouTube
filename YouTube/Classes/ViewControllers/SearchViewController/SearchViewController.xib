@@ -7,8 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
+                <outlet property="deleteKeyButton" destination="f2V-rK-90a" id="9Tt-ls-v6W"/>
                 <outlet property="keySearchBar" destination="saB-zP-ptP" id="FFt-Q4-AIw"/>
                 <outlet property="searchResultTableView" destination="42l-bl-1UP" id="a48-cN-ukp"/>
+                <outlet property="videoSearchTableView" destination="H0I-IN-7qg" id="6V0-jd-kg7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,10 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQ8-lA-wdp">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqm-aP-lHP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
@@ -35,12 +33,20 @@
                                 <action selector="backToHomeViewController:" destination="-1" eventType="touchUpInside" id="hGC-An-Vkl"/>
                             </connections>
                         </button>
-                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="saB-zP-ptP">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2V-rK-90a">
+                            <rect key="frame" x="328" y="23" width="36" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Clear"/>
+                            <connections>
+                                <action selector="deleteKey:" destination="-1" eventType="touchUpInside" id="tpz-7l-ecY"/>
+                            </connections>
+                        </button>
+                        <searchBar contentMode="redraw" searchBarStyle="prominent" translatesAutoresizingMaskIntoConstraints="NO" id="saB-zP-ptP">
                             <rect key="frame" x="47" y="18" width="281" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="dpF-93-DR4"/>
                             </constraints>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="barTintColor" red="1" green="0.1450980392" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -51,19 +57,30 @@
                     <color key="backgroundColor" red="1" green="0.1450980392" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="QCz-ug-27p" firstAttribute="leading" secondItem="Aqm-aP-lHP" secondAttribute="leading" constant="8" id="9Vh-EF-MXh"/>
+                        <constraint firstAttribute="bottom" secondItem="f2V-rK-90a" secondAttribute="bottom" constant="11" id="CzG-uV-v8w"/>
                         <constraint firstItem="saB-zP-ptP" firstAttribute="leading" secondItem="QCz-ug-27p" secondAttribute="trailing" constant="5" id="Qse-Xr-DmQ"/>
                         <constraint firstAttribute="bottom" secondItem="QCz-ug-27p" secondAttribute="bottom" constant="8" id="Vsy-Zz-keY"/>
+                        <constraint firstAttribute="trailing" secondItem="f2V-rK-90a" secondAttribute="trailing" constant="11" id="a5E-Ib-eh6"/>
                         <constraint firstItem="saB-zP-ptP" firstAttribute="top" secondItem="Aqm-aP-lHP" secondAttribute="top" constant="18" id="aXT-lU-HLM"/>
                         <constraint firstAttribute="height" constant="64" id="fAY-4z-r5g"/>
                         <constraint firstItem="saB-zP-ptP" firstAttribute="centerX" secondItem="Aqm-aP-lHP" secondAttribute="centerX" id="pQB-aL-iah"/>
                     </constraints>
                 </view>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42l-bl-1UP">
-                    <rect key="frame" x="47" y="64" width="281" height="250"/>
+                <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H0I-IN-7qg">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="DRs-t7-Uly"/>
+                        <outlet property="delegate" destination="-1" id="if6-5o-ZQk"/>
+                    </connections>
+                </tableView>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42l-bl-1UP">
+                    <rect key="frame" x="0.0" y="64" width="375" height="300"/>
+                    <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="250" id="rG9-fc-1ER"/>
+                        <constraint firstAttribute="height" constant="300" id="rG9-fc-1ER"/>
                     </constraints>
+                    <color key="sectionIndexBackgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="cAv-au-tZG"/>
                         <outlet property="delegate" destination="-1" id="AKJ-nr-F5m"/>
@@ -72,19 +89,19 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="H0I-IN-7qg" secondAttribute="trailing" id="2dn-yp-Fqu"/>
                 <constraint firstAttribute="trailing" secondItem="Aqm-aP-lHP" secondAttribute="trailing" id="7Rf-qs-egO"/>
-                <constraint firstItem="cQ8-lA-wdp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7cD-u7-5Id"/>
                 <constraint firstItem="Aqm-aP-lHP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BQl-lX-uJI"/>
                 <constraint firstItem="42l-bl-1UP" firstAttribute="centerX" secondItem="saB-zP-ptP" secondAttribute="centerX" id="GgJ-VH-GBG"/>
-                <constraint firstAttribute="trailing" secondItem="cQ8-lA-wdp" secondAttribute="trailing" id="Lxa-7E-vqv"/>
-                <constraint firstAttribute="bottom" secondItem="cQ8-lA-wdp" secondAttribute="bottom" id="NGa-Uo-Dic"/>
-                <constraint firstItem="cQ8-lA-wdp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mBt-lQ-oiM"/>
+                <constraint firstAttribute="bottom" secondItem="H0I-IN-7qg" secondAttribute="bottom" id="HVy-26-KrH"/>
+                <constraint firstItem="H0I-IN-7qg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="asl-3V-feC"/>
+                <constraint firstItem="42l-bl-1UP" firstAttribute="width" secondItem="Aqm-aP-lHP" secondAttribute="width" id="g3g-Zp-OK0"/>
+                <constraint firstItem="H0I-IN-7qg" firstAttribute="top" secondItem="Aqm-aP-lHP" secondAttribute="bottom" id="jRi-IL-GQC"/>
                 <constraint firstItem="Aqm-aP-lHP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oDK-bG-pdy"/>
-                <constraint firstItem="42l-bl-1UP" firstAttribute="width" secondItem="saB-zP-ptP" secondAttribute="width" id="oU3-Ah-bJy"/>
                 <constraint firstItem="42l-bl-1UP" firstAttribute="top" secondItem="saB-zP-ptP" secondAttribute="bottom" constant="4" id="p9u-p9-Jmx"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="218.5" y="7.5"/>
+            <point key="canvasLocation" x="134.5" y="-131.5"/>
         </view>
     </objects>
     <resources>

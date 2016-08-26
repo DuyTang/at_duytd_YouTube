@@ -47,7 +47,6 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Set Up Data
     override func setUpData() {
-        Category.cleanData()
         if let categories = Category.getCategories() where categories.count > 0 {
             listCategory = categories
             loadData()
@@ -58,14 +57,18 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Add Page Controller
     private func createViewController() {
-        for index in 0...(listCategory?.count)! - 1 {
-            let viewController = ContentViewController()
-            viewController.pageIndex = index
-            viewController.pageId = listCategory![index].id
-            viewControllers.append(viewController)
+        if let listCategory = listCategory {
+            for index in 0..<listCategory.count {
+                let viewController = ContentViewController()
+                viewController.pageIndex = index
+                viewController.pageId = listCategory[index].id
+                viewControllers.append(viewController)
+            }
         }
+
     }
     private func addContentToPageViewController() {
+
         createViewController()
         pageViewController = UIPageViewController(transitionStyle: .Scroll,
             navigationOrientation: .Horizontal, options: nil)
@@ -77,6 +80,7 @@ class HomeViewController: BaseViewController {
         addChildViewController(pageViewController!)
         contentView.addSubview((pageViewController?.view)!)
         pageViewController?.didMoveToParentViewController(self)
+
     }
     // MARK:- Load Data
     private func loadData() {
@@ -96,6 +100,7 @@ class HomeViewController: BaseViewController {
         MyCategory.getVideoCatetogories(parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()
+                print(self.listCategory)
                 self.addContentToPageViewController()
             }
         }
@@ -103,9 +108,7 @@ class HomeViewController: BaseViewController {
     // MARK:- Show SearchBar
     @IBAction private func showSearchBar(sender: AnyObject) {
         let searchVC = SearchViewController()
-        let searchNavigationController = BaseNavigationController(rootViewController: searchVC)
-        searchNavigationController.modalPresentationStyle = .OverCurrentContext
-        presentViewController(searchNavigationController, animated: false, completion: nil)
+        navigationController?.pushViewController(searchVC, animated: false)
     }
     // MARK:- Move Page
     private func backPage(viewController: UIViewController) {

@@ -25,7 +25,7 @@
                             <rect key="frame" x="127" y="24" width="120" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YouTube" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UF-y0-q0a">
-                                    <rect key="frame" x="12.5" y="2.5" width="96" height="29.5"/>
+                                    <rect key="frame" x="12" y="2" width="96" height="29.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                     <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -40,8 +40,8 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-HH-LSB">
-                            <rect key="frame" x="325" y="26" width="34" height="34"/>
-                            <state key="normal" backgroundImage="bt_searchWhite"/>
+                            <rect key="frame" x="326" y="26" width="33" height="33"/>
+                            <state key="normal" backgroundImage="bt_search"/>
                             <connections>
                                 <action selector="showSearchBar:" destination="-1" eventType="touchUpInside" id="Sfd-U8-zsH"/>
                             </connections>
@@ -96,6 +96,6 @@
         </view>
     </objects>
     <resources>
-        <image name="bt_searchWhite" width="34" height="34"/>
+        <image name="bt_search" width="33" height="33"/>
     </resources>
 </document>

@@ -7,17 +7,26 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class SearchViewController: BaseViewController {
 
     @IBOutlet weak private var searchResultTableView: UITableView!
+    @IBOutlet weak private var videoSearchTableView: UITableView!
     @IBOutlet weak private var keySearchBar: UISearchBar!
     private var isSearching = false
     private var listKey = [String]()
+    private var listVideo = [Video]()
     private var key: String = ""
+    private var nextPage: String?
+    private var isLoading = false
+    private var loadmoreActive = true
+    @IBOutlet weak private var deleteKeyButton: UIButton!
 
     private struct Options {
         static let HeightOfRow: CGFloat = 30
+        static let HeightOfVideoRow: CGFloat = 90
+        static let MaxResult = 10
     }
 
     override func viewDidLoad() {
@@ -44,6 +53,10 @@ class SearchViewController: BaseViewController {
         keySearchBar.backgroundImage = UIImage()
         config()
         keySearchBar.becomeFirstResponder()
+        if let textField = keySearchBar.valueForKey("_searchField") as? UITextField {
+            textField.clearButtonMode = .Never
+        }
+
     }
     // MARK:- Set Up Data
     override func setUpData() {
@@ -52,6 +65,7 @@ class SearchViewController: BaseViewController {
     // MARK:- Configuer SearchViewController
     private func config() {
         searchResultTableView.registerNib(ResultSearchCell)
+        videoSearchTableView.registerNib(VideoFavoriteCell)
     }
 
     // MARK:- loadData
@@ -74,6 +88,56 @@ class SearchViewController: BaseViewController {
             }
         }
     }
+
+    // MARK:- Load List Video
+    private func loadVideoFromKey(key: String, nextPage: String?) {
+        if isLoading || key.isEmpty {
+            return
+        }
+        isLoading = true
+        showLoading()
+        var parameters = [String: AnyObject]()
+        parameters["part"] = "snippet"
+        parameters["maxResults"] = Options.MaxResult
+        parameters["pageToken"] = nextPage
+        parameters["q"] = key
+        MyVideo.searchVideoForKey(parameters) { (success, response, nextPageToken, error) in
+            if success {
+                self.nextPage = nextPageToken
+                if nextPageToken == nil {
+                    self.loadmoreActive = false
+                }
+                if let videos = response as? NSArray {
+                    for item in videos {
+                        let video = Mapper<Video>().map(item)
+                        var parameter = [String: AnyObject]()
+                        parameter["part"] = "contentDetails,statistics"
+                        parameter["id"] = video?.idVideo
+                        MyVideo.loadDetailVideoFromIdVideo(parameter, completion: { (response) in
+                            if let detailVideo = response as? NSArray {
+                                for item in detailVideo {
+                                    if let detailVideo = item.objectForKey("contentDetails") as? NSDictionary {
+                                        video?.duration = detailVideo["duration"] as? String ?? ""
+                                    }
+                                    if let statistics = item.objectForKey("statistics") as? NSDictionary {
+                                        video?.viewCount = statistics["viewCount"] as? String ?? ""
+                                    }
+                                    self.listVideo.append(video!)
+                                    self.videoSearchTableView.reloadData()
+
+                                }
+
+                            }
+                            self.isLoading = false
+                        })
+                    }
+                    self.hideLoading()
+                }
+            } else {
+                self.showAlert(Message.LoadVideoFail, message: Message.NoData, cancelButton: Message.CancelButton)
+            }
+        }
+    }
     // MARK:- Convert Response to String Array
     private func convertStringToArray(string: String) -> [String] {
         var listElement = string.stringByReplacingOccurrencesOfString("[", withString: "").stringByReplacingOccurrencesOfString("]", withString: "").componentsSeparatedByString(",")
@@ -89,60 +153,110 @@ class SearchViewController: BaseViewController {
     }
     // MARK: - Action
     @IBAction func backToHomeViewController(sender: AnyObject) {
-        dismissViewControllerAnimated(false, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
+    }
+    @IBAction func deleteKey(sender: AnyObject) {
+        key = ""
+        deleteKeyButton.hidden = true
+        listKey.removeAll()
+        searchResultTableView.reloadData()
+        listVideo.removeAll()
+        videoSearchTableView.reloadData()
+        searchResultTableView.hidden = true
+        view.endEditing(true)
     }
 }
 
-//MARK:- Extension UITableViewDataSource
+// MARK:- Extension UITableViewDataSource SearchViewController
 extension SearchViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if listKey.isEmpty {
-            return 0
+        if tableView.tag == 0 {
+            if listKey.isEmpty {
+                return 0
+            } else {
+                return listKey.count
+            }
         } else {
-            return listKey.count
+            if listVideo.isEmpty {
+                return 0
+            } else {
+                return listVideo.count
+            }
         }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = searchResultTableView.dequeue(ResultSearchCell.self)
-        let nameVideo = listKey[indexPath.row]
-        cell.configResultSearchCell(nameVideo)
-        return cell
+        if tableView.tag == 0 {
+            let cell = searchResultTableView.dequeue(ResultSearchCell.self)
+            let nameVideo = listKey[indexPath.row]
+            cell.configResultSearchCell(nameVideo)
+            return cell
+        } else {
+            let cell = videoSearchTableView.dequeue(VideoFavoriteCell)
+            cell.configureCell(listVideo[indexPath.row])
+            return cell
+        }
+
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let videoSearchVC = VideoSearchViewController()
-        videoSearchVC.key = listKey[indexPath.row]
-        navigationController?.pushViewController(videoSearchVC, animated: true)
+        if tableView.tag == 0 {
+            if listKey.count > 0 {
+                loadVideoFromKey(listKey[indexPath.row], nextPage: nextPage)
+                searchResultTableView.hidden = true
+                view.endEditing(true)
+            }
+        } else {
+            let detailVideoVC = DetailVideoViewController()
+            detailVideoVC.video = listVideo[indexPath.row]
+            navigationController?.pushViewController(detailVideoVC, animated: true)
+        }
+    }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset.y
+        let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
+        if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            loadVideoFromKey(key, nextPage: nextPage)
+        }
     }
 }
-//MARK:- Extension UITableViewDelegate
+// MARK:- Extension UITableViewDelegate SearchViewController
 extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return Options.HeightOfRow
+        if tableView.tag == 0 {
+            return Options.HeightOfRow
+        } else {
+            return Options.HeightOfVideoRow
+        }
     }
 }
 
-//MARK:- Extension UISearchBar
+// MARK:- Extension UISearchBar
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         key = searchBar.text!
+        deleteKeyButton.hidden = false
         isSearching = true
         loadListName(key)
         searchResultTableView.hidden = false
-
         if key.isEmpty && listKey.isEmpty {
             searchResultTableView.hidden = true
         }
+
     }
+
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        let videoSearchVC = VideoSearchViewController()
-        videoSearchVC.key = searchBar.text!
-        navigationController?.pushViewController(videoSearchVC, animated: true)
+        listVideo.removeAll()
+        loadVideoFromKey(searchBar.text!, nextPage: nextPage)
+        searchResultTableView.hidden = true
+        videoSearchTableView.reloadData()
+        view.endEditing(true)
     }
+
 }

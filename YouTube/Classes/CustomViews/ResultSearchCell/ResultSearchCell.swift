@@ -13,6 +13,7 @@ class ResultSearchCell: BaseTableViewCell {
     @IBOutlet weak private var nameVideoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .None
         // Initialization code
     }
 
