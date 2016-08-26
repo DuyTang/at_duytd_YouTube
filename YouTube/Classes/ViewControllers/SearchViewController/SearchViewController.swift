@@ -157,6 +157,7 @@ class SearchViewController: BaseViewController {
     }
     @IBAction func deleteKey(sender: AnyObject) {
         key = ""
+        keySearchBar.text = ""
         deleteKeyButton.hidden = true
         listKey.removeAll()
         searchResultTableView.reloadData()
@@ -175,17 +176,9 @@ extension SearchViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 {
-            if listKey.isEmpty {
-                return 0
-            } else {
-                return listKey.count
-            }
+            return listKey.count ?? 0
         } else {
-            if listVideo.isEmpty {
-                return 0
-            } else {
-                return listVideo.count
-            }
+            return listVideo.count ?? 0
         }
     }
 
