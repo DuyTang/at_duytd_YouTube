@@ -13,11 +13,14 @@ import SwiftUtils
 class FavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var favoriteTableView: UITableView!
-    private var dataOfFavorite: Results<Favorite>!
     private var listFavorite: Results<Favorite>!
+    private struct Options {
+        static let HeightOfCell: CGFloat = 100
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Notification()
         // Do any additional setup after loading the view.
     }
 
@@ -27,12 +30,12 @@ class FavoriteViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.favoriteTableView.reloadData()
+        favoriteTableView.reloadData()
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.navigationController?.navigationBarHidden = true
-        self.configureFavoriteController()
+        navigationController?.navigationBarHidden = true
+        configureFavoriteController()
     }
     // MARK:- Set Up Data
     override func setUpData() {
@@ -40,16 +43,30 @@ class FavoriteViewController: BaseViewController {
     }
     // MARK:- Configure FavoriteController
     private func configureFavoriteController() {
-        self.favoriteTableView.registerNib(FavoriteCell)
+        favoriteTableView.registerNib(FavoriteCell)
     }
     // MARK:- Load Data
     func loadData() {
         do {
             let realm = try Realm()
-            dataOfFavorite = realm.objects(Favorite)
+            listFavorite = realm.objects(Favorite)
         } catch {
 
         }
+    }
+    // MARK:- Notification
+    func Notification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deleteListFavorite), name: NotificationDefine.DeleteListFavorite, object: nil)
+    }
+    // MARK:- Update UI
+    func deleteListFavorite(notification: NSNotification) {
+        let userInfo = notification.userInfo
+        let indexPath = userInfo!["indexPath"] as! NSIndexPath
+        favoriteTableView.beginUpdates()
+        var indexPaths = [NSIndexPath]()
+        indexPaths.append(indexPath)
+        favoriteTableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Left)
+        favoriteTableView.endUpdates()
     }
 
 }
@@ -58,7 +75,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let favorites = dataOfFavorite {
+        if let favorites = listFavorite {
             return favorites.count
         } else {
             return 0
@@ -66,20 +83,38 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.favoriteTableView.dequeue(FavoriteCell)
-        let favorite = dataOfFavorite[indexPath.row]
+        let cell = favoriteTableView.dequeue(FavoriteCell)
+        let favorite = listFavorite[indexPath.row]
         cell.configureFavoriteCell(favorite)
         return cell
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return Options.HeightOfCell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailFavoriteVC = DetailFavoriteViewController()
-        detailFavoriteVC.favorite = dataOfFavorite[indexPath.row]
-        self.navigationController?.pushViewController(detailFavoriteVC, animated: true)
+        detailFavoriteVC.favorite = listFavorite[indexPath.row]
+        navigationController?.pushViewController(detailFavoriteVC, animated: true)
+    }
+
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .Default, title: Message.Delete) { action, index in
+            let listVideo: Results<VideoFavorite>!
+            do {
+                let realm = try Realm()
+                listVideo = realm.objects(VideoFavorite).filter("idListFavorite = %@", self.listFavorite[indexPath.row].id)
+                try realm.write({
+                    realm.delete(self.listFavorite[indexPath.row])
+                    realm.delete(listVideo)
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteListFavorite, object: nil, userInfo: ["indexPath": indexPath])
+                })
+            } catch {
+
+            }
+        }
+        return [delete]
     }
 }
 

@@ -7,7 +7,10 @@
 //
 
 import Foundation
-struct Notification {
+struct NotificationDefine {
     // MARK:- Notification
     static let AddVideoToHistory = "addVideoToHistory"
+    static let DeleteListFavorite = "deleteListFavorite"
+    static let AddVideoFavorite = "addVideoFavorite"
+    static let DeleteVideo = "deleteVideo"
 }
