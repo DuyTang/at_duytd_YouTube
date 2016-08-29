@@ -95,7 +95,11 @@ class VideoService {
                 imageChannel = thumbnail["high"] as? [String: AnyObject] {
                     if let url = imageChannel["url"] as? String {
                         completion(response: url)
+                    } else {
+                        completion(response: nil)
                     }
+            } else {
+                    completion(response: nil)
             }
         }) { (error) in
             completion(response: nil)

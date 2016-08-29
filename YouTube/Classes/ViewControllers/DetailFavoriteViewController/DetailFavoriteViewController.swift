@@ -15,12 +15,13 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
+    private var cellSnapshot: UIView?
+    private var cellIsAnimating = false
+    private var cellNeedToShow = false
+    private var initialIndexPath: NSIndexPath?
+
     private struct Options {
         static let HeightOfRow: CGFloat = 205
-        static var cellSnapshot: UIView? = nil
-        static var cellIsAnimating: Bool = false
-        static var cellNeedToShow: Bool = false
-        static var initialIndexPath: NSIndexPath? = nil
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,6 @@ class DetailFavoriteViewController: BaseViewController {
         listVideoFavoriteTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
         listVideoFavoriteTableView.addGestureRecognizer(longpress)
-
         notification()
     }
 
@@ -88,35 +88,34 @@ class DetailFavoriteViewController: BaseViewController {
     }
 
     // MARK:- Sort Video in FavoriteLisst
-    func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
-        let longPress = gestureRecognizer as! UILongPressGestureRecognizer
+    func longPressGestureRecognized(longPress: UILongPressGestureRecognizer) {
         let state = longPress.state
         let locationInView = longPress.locationInView(listVideoFavoriteTableView)
         let indexPath = listVideoFavoriteTableView.indexPathForRowAtPoint(locationInView)
         switch state {
         case UIGestureRecognizerState.Began:
             if indexPath != nil {
-                Options.initialIndexPath = indexPath
+                initialIndexPath = indexPath
                 let cell = listVideoFavoriteTableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-                Options.cellSnapshot = snapshotOfCell(cell)
+                cellSnapshot = snapshotOfCell(cell)
 
                 var center = cell.center
-                Options.cellSnapshot!.center = center
-                Options.cellSnapshot!.alpha = 0.0
-                listVideoFavoriteTableView.addSubview(Options.cellSnapshot!)
+                cellSnapshot!.center = center
+                cellSnapshot!.alpha = 0.0
+                listVideoFavoriteTableView.addSubview(cellSnapshot!)
 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
                     center.y = locationInView.y
-                    Options.cellIsAnimating = true
-                    Options.cellSnapshot!.center = center
-                    Options.cellSnapshot!.transform = CGAffineTransformMakeScale(1.05, 1.05)
-                    Options.cellSnapshot!.alpha = 0.98
+                    self.cellIsAnimating = true
+                    self.cellSnapshot!.center = center
+                    self.cellSnapshot!.transform = CGAffineTransformMakeScale(1.05, 1.05)
+                    self.cellSnapshot!.alpha = 0.98
                     cell.alpha = 0.0
                     }, completion: { (finished) -> Void in
                     if finished {
-                        Options.cellIsAnimating = false
-                        if Options.cellNeedToShow {
-                            Options.cellNeedToShow = false
+                        self.cellIsAnimating = false
+                        if self.cellNeedToShow {
+                            self.cellNeedToShow = false
                             UIView.animateWithDuration(0.25, animations: { () -> Void in
                                 cell.alpha = 1
                             })
@@ -128,12 +127,12 @@ class DetailFavoriteViewController: BaseViewController {
             }
 
         case UIGestureRecognizerState.Changed:
-            if Options.cellSnapshot != nil {
-                var center = Options.cellSnapshot!.center
+            if let cellSnapshot = cellSnapshot {
+                var center = cellSnapshot.center
                 center.y = locationInView.y
-                Options.cellSnapshot!.center = center
-                if indexPath != nil && indexPath != Options.initialIndexPath {
-                    if let fromIndex = indexPath?.row, toIndex = Options.initialIndexPath?.row {
+                cellSnapshot.center = center
+                if indexPath != nil && indexPath != initialIndexPath {
+                    if let fromIndex = indexPath?.row, toIndex = initialIndexPath?.row {
                         do {
                             let realm = try Realm()
                             try realm.write({
@@ -143,37 +142,43 @@ class DetailFavoriteViewController: BaseViewController {
 
                         }
                     }
-                    listVideoFavoriteTableView.moveRowAtIndexPath(Options.initialIndexPath!, toIndexPath: indexPath!)
-                    Options.initialIndexPath = indexPath
+                    listVideoFavoriteTableView.moveRowAtIndexPath(initialIndexPath!, toIndexPath: indexPath!)
+                    initialIndexPath = indexPath
+                }
+                let contentY = listVideoFavoriteTableView.contentOffset.y + listVideoFavoriteTableView.frame.height
+                if cellSnapshot.frame.y < listVideoFavoriteTableView.contentOffset.y {
+                    scrollToUp()
+                } else if cellSnapshot.frame.y + cellSnapshot.frame.height > contentY && listVideoFavoriteTableView.contentOffset.y + listVideoFavoriteTableView.frame.height < listVideoFavoriteTableView.contentSize.height {
+                    scrollToDown()
                 }
             }
         default:
-            if Options.initialIndexPath != nil {
-                let cell = listVideoFavoriteTableView.cellForRowAtIndexPath(Options.initialIndexPath!) as UITableViewCell!
-                if Options.cellIsAnimating {
-                    Options.cellNeedToShow = true
+            if let initialIndexPath = initialIndexPath {
+                let cell = listVideoFavoriteTableView.cellForRowAtIndexPath(initialIndexPath) as UITableViewCell!
+                if cellIsAnimating {
+                    cellNeedToShow = true
                 } else {
                     cell.hidden = false
                     cell.alpha = 0.0
                 }
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    Options.cellSnapshot!.center = cell.center
-                    Options.cellSnapshot!.transform = CGAffineTransformIdentity
-                    Options.cellSnapshot!.alpha = 0.0
+                    self.cellSnapshot!.center = cell.center
+                    self.cellSnapshot!.transform = CGAffineTransformIdentity
+                    self.cellSnapshot!.alpha = 0.0
                     cell.alpha = 1.0
 
                     }, completion: { (finished) -> Void in
                     if finished {
-                        Options.initialIndexPath = nil
-                        Options.cellSnapshot!.removeFromSuperview()
-                        Options.cellSnapshot = nil
+                        self.initialIndexPath = nil
+                        self.cellSnapshot!.removeFromSuperview()
+                        self.cellSnapshot = nil
                     }
                 })
             }
         }
     }
 
-    func snapshotOfCell(inputView: UIView) -> UIView {
+    private func snapshotOfCell(inputView: UIView) -> UIView {
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
         inputView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext() as UIImage
@@ -186,6 +191,33 @@ class DetailFavoriteViewController: BaseViewController {
         cellSnapshot.layer.shadowRadius = 5.0
         cellSnapshot.layer.shadowOpacity = 0.4
         return cellSnapshot
+    }
+
+    private func scrollToUp() {
+        if listVideoFavoriteTableView.contentOffset.y != 0 {
+            let y = listVideoFavoriteTableView.contentOffset.y - 5
+            listVideoFavoriteTableView.contentOffset.y = y > 0 ? y : 0
+            if let cellSnapshot = cellSnapshot {
+                if cellSnapshot.frame.y < listVideoFavoriteTableView.contentOffset.y {
+                    scrollToUp()
+                }
+            }
+        }
+    }
+
+    private func scrollToDown() {
+        let y = listVideoFavoriteTableView.contentOffset.y + 5
+        if y + listVideoFavoriteTableView.frame.height < listVideoFavoriteTableView.contentSize.height {
+            listVideoFavoriteTableView.contentOffset.y = y
+            if let cellSnapshot = cellSnapshot {
+                let contentY = listVideoFavoriteTableView.contentOffset.y + listVideoFavoriteTableView.frame.height
+                if cellSnapshot.frame.y < listVideoFavoriteTableView.contentOffset.y {
+                    scrollToUp()
+                } else if cellSnapshot.frame.y + cellSnapshot.frame.height > contentY && listVideoFavoriteTableView.contentOffset.y + listVideoFavoriteTableView.frame.height < listVideoFavoriteTableView.contentSize.height {
+                    scrollToDown()
+                }
+            }
+        }
     }
 
 }
