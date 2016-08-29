@@ -10,13 +10,31 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
 
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        view.backgroundColor = UIColor.clearColor()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationBar.translucent = false
-        self.navigationBar.hidden = true
-        self.navigationBar.shadowImage = UIImage()
+        navigationBar.tintColor = UIColor.whiteColor()
+        navigationBar.barTintColor = UIColor.whiteColor()
+        navigationBar.translucent = false
+        navigationBar.hidden = true
+        navigationBar.shadowImage = UIImage()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,8 +43,8 @@ class BaseNavigationController: UINavigationController {
     }
     func setAttributeForNavigation(title: String, image: String) {
         self.title = title
-        self.tabBarItem.image = UIImage(named: image)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        self.tabBarItem.selectedImage = UIImage(named: image)!.imageWithRenderingMode(.AlwaysTemplate)
+        tabBarItem.image = UIImage(named: image)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        tabBarItem.selectedImage = UIImage(named: image)!.imageWithRenderingMode(.AlwaysTemplate)
     }
 
 }

@@ -105,14 +105,14 @@ class DetailVideoViewController: BaseViewController {
         parameters["relatedToVideoId"] = id
         parameters["type"] = "video"
         showLoading()
-        MyVideo.loadListVideoRelated(parameters) { (response) in
+        VideoService.loadListVideoRelated(parameters) { (response) in
             if let items = response as? NSArray {
                 for item in items {
                     let video = Mapper<Video>().map(item)
                     var parameter = [String: AnyObject]()
                     parameter["part"] = "contentDetails,statistics"
                     parameter["id"] = video?.idVideo
-                    MyVideo.loadDetailVideoFromIdVideo(parameter, completion: { (response) in
+                    VideoService.loadDetailVideoFromIdVideo(parameter, completion: { (response) in
                         if let detailVideo = response as? NSArray {
                             for item in detailVideo {
                                 if let detailVideo = item.objectForKey("contentDetails") as? NSDictionary {

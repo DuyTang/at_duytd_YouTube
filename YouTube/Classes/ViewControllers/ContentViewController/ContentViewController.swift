@@ -19,7 +19,7 @@ class ContentViewController: BaseViewController {
     private var isLoading = false
     private var loadmoreActive = true
     private struct Options {
-        static let HeightOfHomeCell: CGFloat = 230
+        static let HeightOfHomeCell: CGFloat = 205
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class ContentViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.configureContentViewCOntroller()
+        configureContentViewCOntroller()
     }
     // MARK:- Set Up Data
     override func setUpData() {
@@ -69,7 +69,7 @@ class ContentViewController: BaseViewController {
         parameters["videoCategoryId"] = id
         parameters["regionCode"] = "VN"
         parameters["pageToken"] = pageToken
-        MyVideo.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
+        VideoService.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.hideLoading()
                 self.contentTableView.reloadData()
@@ -108,7 +108,7 @@ extension ContentViewController: UITableViewDataSource {
         let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = homeVideos![indexPath.row]
         History.addVideoToHistory(homeVideos![indexPath.row])
-        self.navigationController?.pushViewController(detailVideoVC, animated: true)
+        navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {

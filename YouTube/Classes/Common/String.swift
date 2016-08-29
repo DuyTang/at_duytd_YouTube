@@ -22,7 +22,6 @@ extension String {
                 }
                 duration += component
             }
-
         } else {
             duration = "-:-"
         }
@@ -45,7 +44,7 @@ extension String {
     // MARK:- Get time upload of video
     func getTimeUpload() -> String {
         var time = ""
-        if self.isEmpty {
+        if !self.isEmpty {
             let selectedDate = self.toDate(DateFormat.TZDateTime3, localized: false)
             let currentDate = NSDate()
             let diffDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: selectedDate, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
@@ -74,10 +73,10 @@ extension String {
                             let week = diffDateComponents.day / 7
                             if week == 1 {
                                 time = "\(week) week"
-
+                                
                             } else {
                                 time = "\(week) weeks"
-
+                                
                             }
                         }
                     } else {
@@ -88,7 +87,7 @@ extension String {
         }
         return time
     }
-
+    
     // MARK:- Show view count of video
     func getNumberView() -> String {
         var numberView = ""
@@ -112,5 +111,5 @@ extension String {
         }
         return numberView
     }
-
+    
 }

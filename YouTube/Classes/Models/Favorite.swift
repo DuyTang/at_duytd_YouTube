@@ -12,6 +12,7 @@ import RealmSwift
 class Favorite: Object {
     dynamic var id = 0
     dynamic var name = ""
+    var listVideo = List<VideoFavorite>()
 
     class func getId() -> Int {
         var id = 0

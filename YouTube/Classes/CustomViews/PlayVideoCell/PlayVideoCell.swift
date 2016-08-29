@@ -34,7 +34,7 @@ class PlayVideoCell: BaseTableViewCell {
         nameVideoLabel.text = video.title.isEmpty ? " " : video.title
         thumbnailVideo.downloadImage(video.thumbnail)
         channelLabel.text = video.channelTitle
-        viewCountLabel.text = video.viewCount + " views"
+        viewCountLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

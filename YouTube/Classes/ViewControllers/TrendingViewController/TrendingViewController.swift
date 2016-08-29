@@ -16,7 +16,9 @@ class TrendingViewController: BaseViewController {
     private var nextPage: String?
     private var isLoading = false
     private var loadmoreActive = true
-    private let heightOfRow: CGFloat = 230
+    private struct Options {
+        static let HeightOfRow: CGFloat = 205
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class TrendingViewController: BaseViewController {
 
     // MARK:- Configure TrendingViewControllers
     func configureTrendingViewController() {
-        self.trendingTableView.registerNib(HomeCell)
+        trendingTableView.registerNib(HomeCell)
     }
 
     // MARk:- Set up UI
@@ -52,7 +54,7 @@ class TrendingViewController: BaseViewController {
         do {
             let realm = try Realm()
             trendingVideos = realm.objects(Video).filter("idCategory = %@", idCategory)
-            self.trendingTableView.reloadData()
+            trendingTableView.reloadData()
         } catch {
 
         }
@@ -71,7 +73,7 @@ class TrendingViewController: BaseViewController {
         parameters["regionCode"] = "VN"
         parameters["maxResults"] = "10"
         parameters["pageToken"] = nextPage
-        MyVideo.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
+        VideoService.loadDataFromAPI(idCategory, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.hideLoading()
                 self.trendingTableView.reloadData()
@@ -110,7 +112,7 @@ extension TrendingViewController: UITableViewDataSource {
         let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = video
         History.addVideoToHistory(video)
-        self.navigationController?.pushViewController(detailVideoVC, animated: true)
+        navigationController?.pushViewController(detailVideoVC, animated: true)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -124,6 +126,6 @@ extension TrendingViewController: UITableViewDataSource {
 
 extension TrendingViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return heightOfRow
+        return Options.HeightOfRow
     }
 }

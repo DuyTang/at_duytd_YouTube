@@ -16,6 +16,7 @@ class VideoFavoriteCell: BaseTableViewCell {
     @IBOutlet weak private var countViewLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .None
         // Initialization code
     }
 
@@ -27,9 +28,9 @@ class VideoFavoriteCell: BaseTableViewCell {
     // MARK:- Configure Cell
     func configureCell(video: Video) {
         thumbnailVideo.downloadImage(video.thumbnail)
-        self.nameVideoLabel.text = video.title
-        self.channelLabel.text = video.channelTitle
-        self.countViewLabel.text = "\(video.viewCount) views"
+        nameVideoLabel.text = video.title
+        channelLabel.text = video.channelTitle
+        countViewLabel.text = Int(video.viewCount) > 1 ? video.viewCount.getNumberView() : "\(video.viewCount) view"
 
     }
     // MARk:- Set Up UI

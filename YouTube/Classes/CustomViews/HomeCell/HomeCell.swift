@@ -16,6 +16,7 @@ class HomeCell: BaseTableViewCell {
     @IBOutlet weak private var numberViewLabel: UILabel!
     @IBOutlet weak private var thumbnailChannel: UIImageView!
     @IBOutlet weak private var timeUploadLabel: UILabel!
+    @IBOutlet weak private var durationLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .None
@@ -31,7 +32,9 @@ class HomeCell: BaseTableViewCell {
         thumbnailChannel.downloadImage(video.thumbnail)
         nameVideoLabel.text = video.title
         nameChannelLabel.text = video.channelTitle
-        numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
+        numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount.getNumberView()) -" : "\(video.viewCount) view -"
+        timeUploadLabel.text = video.timeUpload.getTimeUpload()
+        durationLabel.text = video.duration.getYoutubeFormattedDuration()
     }
     // MARk:- Set Up UI
     override func setUpUI() {

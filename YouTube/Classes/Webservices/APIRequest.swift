@@ -38,8 +38,8 @@ struct APIError {
 
 typealias APIRequestSuccess = (response: AnyObject?) -> Void
 typealias APIRequestFailure = (error: APIError?) -> Void
-typealias APIRequestCompletion = (success: Bool,nextPageToken: String?, error: APIError?) -> Void
-
+typealias APIRequestCompletion = (success: Bool, nextPageToken: String?, error: APIError?) -> Void
+typealias APIRequestForResponse = (success: Bool, response: AnyObject?, nextPageToken: String?, error: APIError?) -> Void
 class APIRequest {
 
     static let manager = NetworkReachabilityManager(host: "www.apple.com")

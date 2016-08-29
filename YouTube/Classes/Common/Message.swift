@@ -21,4 +21,5 @@ struct Message {
     static let Error = "Error"
     static let NoListFavorite = "Create new list favorite"
     static let NoData = "No Data"
+    static let Delete = "Delete"
 }

@@ -23,6 +23,10 @@
 		F37C65791D6BFED9000AA778 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C65781D6BFED9000AA778 /* Font.swift */; };
 		F37C657C1D6BFF28000AA778 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C657A1D6BFF28000AA778 /* HistoryCell.swift */; };
 		F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37C657B1D6BFF28000AA778 /* HistoryCell.xib */; };
+		F37C65811D6C3959000AA778 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C657F1D6C3959000AA778 /* SearchViewController.swift */; };
+		F37C65821D6C3959000AA778 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37C65801D6C3959000AA778 /* SearchViewController.xib */; };
+		F37ED8F01D6D3E6D006205E5 /* ResultSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37ED8EE1D6D3E6D006205E5 /* ResultSearchCell.swift */; };
+		F37ED8F11D6D3E6D006205E5 /* ResultSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */; };
 		F39598951D59B9120030BF82 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39598941D59B9120030BF82 /* UIView.swift */; };
 		F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CAC1D550F51003FC772 /* AppDelegate.swift */; };
 		F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB41D550FC0003FC772 /* Assets.xcassets */; };
@@ -95,6 +99,10 @@
 		F37C65781D6BFED9000AA778 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F37C657A1D6BFF28000AA778 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		F37C657B1D6BFF28000AA778 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
+		F37C657F1D6C3959000AA778 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F37C65801D6C3959000AA778 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		F37ED8EE1D6D3E6D006205E5 /* ResultSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultSearchCell.swift; sourceTree = "<group>"; };
+		F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultSearchCell.xib; sourceTree = "<group>"; };
 		F393C0441D5DBF7C000F6818 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		F393C0451D5DBF7C000F6818 /* ArialBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArialBold.ttf; sourceTree = "<group>"; };
 		F393C0461D5DBF7C000F6818 /* TimesNewRoman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimesNewRoman.ttf; sourceTree = "<group>"; };
@@ -207,6 +215,24 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		F37C657E1D6C394A000AA778 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F37C657F1D6C3959000AA778 /* SearchViewController.swift */,
+				F37C65801D6C3959000AA778 /* SearchViewController.xib */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		F37ED8ED1D6D3E3B006205E5 /* ResultSearchCell */ = {
+			isa = PBXGroup;
+			children = (
+				F37ED8EE1D6D3E6D006205E5 /* ResultSearchCell.swift */,
+				F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */,
+			);
+			path = ResultSearchCell;
+			sourceTree = "<group>";
+		};
 		F39A2C831D550E8F003FC772 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +332,7 @@
 		F39A2CA61D550F2C003FC772 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F37ED8ED1D6D3E3B006205E5 /* ResultSearchCell */,
 				F35EE58F1D5CC6B4005464CC /* DecriptVideoCell */,
 				F35EE5911D5CC6B4005464CC /* PlayVideoCell */,
 				F3E07AF31D5C899700DAB7C9 /* VideoFavoriteCell */,
@@ -367,6 +394,7 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F37C657E1D6C394A000AA778 /* SearchViewController */,
 				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
 				F39A2CD91D5516AA003FC772 /* ContentViewController */,
@@ -585,12 +613,14 @@
 				F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */,
 				F3B097CA1D556DCE000D9E84 /* FavoriteCell.xib in Resources */,
 				F3B097BE1D555E90000D9E84 /* ContentViewController.xib in Resources */,
+				F37ED8F11D6D3E6D006205E5 /* ResultSearchCell.xib in Resources */,
 				F39A2CE41D551745003FC772 /* Neutra Text TF Light Demi.ttf in Resources */,
 				F39A2CBF1D5510F8003FC772 /* HomeViewController.xib in Resources */,
 				F3E07AF71D5C89B200DAB7C9 /* VideoFavoriteCell.xib in Resources */,
 				F35EE5991D5CC774005464CC /* DecriptVideoCell.xib in Resources */,
 				F3B097C21D5561CF000D9E84 /* CategoryCell.xib in Resources */,
 				F37A0C5C1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html in Resources */,
+				F37C65821D6C3959000AA778 /* SearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,7 +709,9 @@
 				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,
 				F3E58B931D6AA6C1004BB244 /* Message.swift in Sources */,
 				F39A2CD11D5512A3003FC772 /* APIDefine.swift in Sources */,
+				F37C65811D6C3959000AA778 /* SearchViewController.swift in Sources */,
 				F3E07AF01D5C5B3D00DAB7C9 /* Favorite.swift in Sources */,
+				F37ED8F01D6D3E6D006205E5 /* ResultSearchCell.swift in Sources */,
 				F377781A1D5AF33700AC2075 /* MyCategory.swift in Sources */,
 				F39A2CC71D551161003FC772 /* BaseTableView.swift in Sources */,
 				F3E825ED1D62A093005C6647 /* TrendingViewController.swift in Sources */,
@@ -816,6 +848,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = YouTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

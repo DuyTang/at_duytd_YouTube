@@ -22,7 +22,12 @@ class AddFavoriteViewController: BaseViewController {
     @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
     var idListFavorite = 1
     var video = Video()
+    var myFavorite = Favorite()
     var isSaved = false
+
+    private struct Options {
+        static let HeightOfCell: CGFloat = 40
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -32,26 +37,31 @@ class AddFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     private func setAttributeViewController() {
         providesPresentationContextTransitionStyle = true
         definesPresentationContext = true
         modalPresentationStyle = .OverCurrentContext
         modalTransitionStyle = .CrossDissolve
     }
+
     // MARK:- Set Up UI
     override func setUpUI() {
-        self.addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
-        self.addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
-        self.setAttributeViewController()
+        addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
+        addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
+        setAttributeViewController()
     }
+
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
     }
+
     // MARK:- Set Up
     override func setUp() {
-        self.setAttributeViewController()
+        setAttributeViewController()
     }
+
     // MARK:- Load Data
     private func loadData() {
         do {
@@ -61,6 +71,7 @@ class AddFavoriteViewController: BaseViewController {
 
         }
     }
+
     // MARK:- Action
     @IBAction func addFavoriteButton(sender: AnyObject) {
         if favorites.count > 0 {
@@ -68,59 +79,69 @@ class AddFavoriteViewController: BaseViewController {
                 let realm = try Realm()
                 let videoFavorite = VideoFavorite()
                 videoFavorite.initializate(video, idListFavorite: idListFavorite)
+                myFavorite = realm.objects(Favorite).filter("id = %@", idListFavorite).first!
                 try realm.write({ () -> Void in
-                    realm.add(videoFavorite)
+                    myFavorite.listVideo.append(videoFavorite)
                     self.isSaved = true
                 })
             } catch {
 
             }
-            self.delegate?.addSuccess(isSaved)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            delegate?.addSuccess(isSaved)
+            dismissViewControllerAnimated(true, completion: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.AddVideoFavorite, object: nil, userInfo: ["idFavorite": idListFavorite])
         } else {
-            self.showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
+            showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
         }
     }
 
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
-        self.delegate?.addSuccess(false)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        delegate?.addSuccess(false)
+        dismissViewControllerAnimated(true, completion: nil)
     }
+
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
-        self.showSubView(false)
+        showSubView(false)
     }
+
     @IBAction func addNewFavoriteListButton(sender: AnyObject) {
-        if self.nameNewListFavoriteTextField.text! != "" {
+        if nameNewListFavoriteTextField.text! != "" {
             let favorite = Favorite()
-            favorite.name = self.nameNewListFavoriteTextField.text!
+            favorite.name = nameNewListFavoriteTextField.text!
             favorite.id = Favorite.getId() + 1
             do {
                 let realm = try Realm()
+                let videoFavorite = VideoFavorite()
+                videoFavorite.initializate(video, idListFavorite: favorite.id)
                 try realm.write({
                     realm.add(favorite)
-                    self.listFavoritePicker.reloadAllComponents()
+                    favorite.listVideo.append(videoFavorite)
+                    self.delegate?.addSuccess(true)
                 })
             } catch {
 
             }
-            self.showSubView(true)
-            self.listFavoritePicker.selectRow(favorite.id - 1, inComponent: 0, animated: true)
         }
         idListFavorite = Favorite.getId()
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func backToListFavoriteButton(sender: AnyObject) {
-        self.showSubView(true)
+        showSubView(true)
     }
+
     private func showSubView(isShow: Bool) {
-        self.addFavoriteView.hidden = !isShow
-        self.addNewListFavoriteView.hidden = isShow
+        addFavoriteView.hidden = !isShow
+        addNewListFavoriteView.hidden = isShow
     }
 }
+
+//MARK:- Extension UIPickerView
 extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let favorites = favorites {
             return favorites.count
@@ -128,14 +149,17 @@ extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             return 0
         }
     }
+
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return favorites[row].name
     }
+
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.idListFavorite = favorites[row].id
+        idListFavorite = favorites[row].id
     }
+
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 40
+        return Options.HeightOfCell
     }
 }
 

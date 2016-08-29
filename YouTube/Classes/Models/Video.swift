@@ -34,6 +34,7 @@ class Video: Object, Mappable, VideoObject {
     dynamic var channelTitle = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
+    dynamic var timeUpload = ""
 
     required convenience init?(_ map: Map) {
         self.init()
@@ -56,7 +57,7 @@ class Video: Object, Mappable, VideoObject {
         title = snippet["title"] as? String ?? ""
         channelTitle = snippet["channelTitle"] as? String ?? ""
         descript = snippet["description"] as? String ?? ""
-
+        timeUpload = snippet["publishedAt"] as? String ?? ""
         var contentDetails = [String: AnyObject]()
         contentDetails <- map["contentDetails"]
         duration = contentDetails["duration"] as? String ?? ""

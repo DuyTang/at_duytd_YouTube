@@ -3,15 +3,12 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
                 <outlet property="categoryCollectionView" destination="Jwc-Hx-i1M" id="tbY-AN-s1n"/>
                 <outlet property="contentView" destination="O28-uL-GSl" id="sPH-m9-cXw"/>
-                <outlet property="searchTextField" destination="ZJD-Ff-7NY" id="Pbk-xr-iw9"/>
-                <outlet property="searchView" destination="gzC-Hc-zBp" id="s9p-sa-Jcs"/>
                 <outlet property="titleView" destination="dDX-lW-qfP" id="nrZ-6s-oKi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,32 +21,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4Z-BQ-Y04">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzC-Hc-zBp">
-                            <rect key="frame" x="62" y="24" width="250" height="40"/>
-                            <subviews>
-                                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJD-Ff-7NY">
-                                    <rect key="frame" x="0.0" y="2" width="250" height="35"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="rCt-VQ-ie6"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                            </subviews>
-                            <color key="backgroundColor" red="1" green="0.1450980392" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="B5U-8K-GOa"/>
-                                <constraint firstItem="ZJD-Ff-7NY" firstAttribute="centerX" secondItem="gzC-Hc-zBp" secondAttribute="centerX" id="G7M-Lg-Kuk"/>
-                                <constraint firstItem="ZJD-Ff-7NY" firstAttribute="width" secondItem="gzC-Hc-zBp" secondAttribute="width" id="rqk-Me-f9R"/>
-                                <constraint firstItem="ZJD-Ff-7NY" firstAttribute="centerY" secondItem="gzC-Hc-zBp" secondAttribute="centerY" id="sFS-jj-p7h"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDX-lW-qfP">
                             <rect key="frame" x="127" y="24" width="120" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YouTube" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UF-y0-q0a">
-                                    <rect key="frame" x="12.5" y="2.5" width="96" height="29.5"/>
+                                    <rect key="frame" x="12" y="2" width="96" height="29.5"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                     <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -63,21 +39,21 @@
                                 <constraint firstItem="9UF-y0-q0a" firstAttribute="centerX" secondItem="dDX-lW-qfP" secondAttribute="centerX" id="zEv-Cs-Ji2"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-HH-LSB">
-                            <rect key="frame" x="325" y="26" width="34" height="34"/>
-                            <state key="normal" backgroundImage="bt_searchWhite"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-HH-LSB">
+                            <rect key="frame" x="326" y="26" width="33" height="33"/>
+                            <state key="normal" backgroundImage="bt_search"/>
+                            <connections>
+                                <action selector="showSearchBar:" destination="-1" eventType="touchUpInside" id="Sfd-U8-zsH"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.1450980392" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="gzC-Hc-zBp" firstAttribute="width" secondItem="K4Z-BQ-Y04" secondAttribute="width" multiplier="2/3" id="Dbi-PS-8Gk"/>
                         <constraint firstItem="dDX-lW-qfP" firstAttribute="top" secondItem="K4Z-BQ-Y04" secondAttribute="top" constant="24" id="JxL-Rd-hEh"/>
                         <constraint firstAttribute="trailing" secondItem="SWg-HH-LSB" secondAttribute="trailing" constant="16" id="Mby-RB-w37"/>
                         <constraint firstItem="SWg-HH-LSB" firstAttribute="top" secondItem="K4Z-BQ-Y04" secondAttribute="top" constant="26" id="eFn-6j-1QL"/>
                         <constraint firstAttribute="height" constant="64" id="jeo-HU-3B8"/>
                         <constraint firstItem="dDX-lW-qfP" firstAttribute="centerX" secondItem="K4Z-BQ-Y04" secondAttribute="centerX" id="stg-fi-LpH"/>
-                        <constraint firstItem="gzC-Hc-zBp" firstAttribute="centerX" secondItem="K4Z-BQ-Y04" secondAttribute="centerX" id="zrg-TN-C2P"/>
-                        <constraint firstItem="gzC-Hc-zBp" firstAttribute="top" secondItem="K4Z-BQ-Y04" secondAttribute="top" constant="24" id="zzy-jt-bko"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Jwc-Hx-i1M">
@@ -120,6 +96,6 @@
         </view>
     </objects>
     <resources>
-        <image name="bt_searchWhite" width="34" height="34"/>
+        <image name="bt_search" width="33" height="33"/>
     </resources>
 </document>
