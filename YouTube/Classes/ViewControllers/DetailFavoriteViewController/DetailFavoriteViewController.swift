@@ -32,13 +32,9 @@ class DetailFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
 
-    private func configureDetailFavoriteViewController() {
-        listVideoFavoriteTableView.registerNib(HomeCell)
-    }
-
     // MARK:- Set Up UI
     override func setUpUI() {
-        configureDetailFavoriteViewController()
+        listVideoFavoriteTableView.registerNib(HomeCell)
         nameListFavoriteLabel.text = favorite.name
         listVideoFavoriteTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))

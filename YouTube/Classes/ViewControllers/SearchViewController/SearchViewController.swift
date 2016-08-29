@@ -50,8 +50,9 @@ class SearchViewController: BaseViewController {
     }
     // MARK:- Set Up UI
     override func setUpUI() {
+        searchResultTableView.registerNib(ResultSearchCell)
+        videoSearchTableView.registerNib(VideoFavoriteCell)
         keySearchBar.backgroundImage = UIImage()
-        configSearchViewController()
         keySearchBar.becomeFirstResponder()
         if let textField = keySearchBar.valueForKey("_searchField") as? UITextField {
             textField.clearButtonMode = .Never
@@ -61,11 +62,6 @@ class SearchViewController: BaseViewController {
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
-    }
-    // MARK:- Configuer SearchViewController
-    private func configSearchViewController() {
-        searchResultTableView.registerNib(ResultSearchCell)
-        videoSearchTableView.registerNib(VideoFavoriteCell)
     }
 
     // MARK:- loadData
