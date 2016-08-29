@@ -15,7 +15,6 @@ class DetailFavoriteViewController: BaseViewController {
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
     @IBOutlet weak private var listVideoFavoriteTableView: UITableView!
     var favorite = Favorite()
-    var videoFavorites: Results<VideoFavorite>?
     private struct Options {
         static let HeightOfRow: CGFloat = 205
         static var cellSnapshot: UIView? = nil
@@ -28,49 +27,49 @@ class DetailFavoriteViewController: BaseViewController {
         listVideoFavoriteTableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
         listVideoFavoriteTableView.addGestureRecognizer(longpress)
-        Notification()
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
     private func configureDetailFavoriteViewController() {
         listVideoFavoriteTableView.registerNib(HomeCell)
     }
+
     // MARK:- Set Up UI
     override func setUpUI() {
         configureDetailFavoriteViewController()
         nameListFavoriteLabel.text = favorite.name
+        notification()
     }
+
     // MARK:- Set Up Data
     override func setUpData() {
-        loadData()
-    }
-    private func loadData() {
-        do {
-            let realm = try Realm()
-            videoFavorites = realm.objects(VideoFavorite).filter("idListFavorite = %@", favorite.id)
-        } catch {
 
-        }
     }
+
     // MARK:- Notification
-    func Notification() {
+    func notification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: NotificationDefine.AddVideoFavorite, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deleteVideo), name: NotificationDefine.DeleteVideo, object: nil)
     }
 
+    // MARK:- Add new video to list
     func addNewVideo(notification: NSNotification) {
         let userInfo = notification.userInfo
         let id = userInfo!["idFavorite"] as? Int ?? 0
         if id == favorite.id {
             listVideoFavoriteTableView.beginUpdates()
             var indexPaths = [NSIndexPath]()
-            indexPaths.append(NSIndexPath(forRow: videoFavorites!.count - 1, inSection: 0))
+            indexPaths.append(NSIndexPath(forRow: favorite.listVideo.count - 1, inSection: 0))
             listVideoFavoriteTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
             listVideoFavoriteTableView.endUpdates()
         }
     }
+
+    // MARK:- Delete video from list
     func deleteVideo(notification: NSNotification) {
         let userInfo = notification.userInfo
         if let indexPath = userInfo!["indexPath"] as? NSIndexPath {
@@ -86,6 +85,7 @@ class DetailFavoriteViewController: BaseViewController {
     @IBAction func clickBack(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
+
     // MARK:- Sort Video in FavoriteLisst
     func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
@@ -136,16 +136,14 @@ class DetailFavoriteViewController: BaseViewController {
                         do {
                             let realm = try Realm()
                             try realm.write({
-                                favorite.listVideo.swap(fromIndex, toIndex)
+                                favorite.listVideo.swap(toIndex, fromIndex)
                             })
-
                         } catch {
 
                         }
                     }
                     listVideoFavoriteTableView.moveRowAtIndexPath(Options.initialIndexPath!, toIndexPath: indexPath!)
                     Options.initialIndexPath = indexPath
-
                 }
             }
         default:
@@ -157,7 +155,6 @@ class DetailFavoriteViewController: BaseViewController {
                     cell.hidden = false
                     cell.alpha = 0.0
                 }
-
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
                     Options.cellSnapshot!.center = cell.center
                     Options.cellSnapshot!.transform = CGAffineTransformIdentity
@@ -193,25 +190,20 @@ class DetailFavoriteViewController: BaseViewController {
 }
 // MARK:- UITableViewDataSource
 extension DetailFavoriteViewController: UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let numberListFavorite = videoFavorites?.count {
-            return numberListFavorite
-        } else {
-            return 0
-        }
+        return favorite.listVideo.count
     }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(HomeCell.self)
-        let video = Video(videoFavorites![indexPath.row])
+        let video = Video(favorite.listVideo[indexPath.row])
         cell.configureCell(video)
         return cell
     }
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let video = Video(videoFavorites![indexPath.row])
+        let video = Video(favorite.listVideo[indexPath.row])
         let detailVideoVC = DetailVideoViewController()
         detailVideoVC.video = video
         detailVideoVC.delegate = self
@@ -221,7 +213,7 @@ extension DetailFavoriteViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Default, title: Message.Delete) { action, index in
-            let video = self.videoFavorites![indexPath.row]
+            let video = self.favorite.listVideo[indexPath.row]
             do {
                 let realm = try Realm()
                 try realm.write({
