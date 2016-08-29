@@ -24,9 +24,6 @@ class DetailFavoriteViewController: BaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        listVideoFavoriteTableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-        let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
-        listVideoFavoriteTableView.addGestureRecognizer(longpress)
 
     }
 
@@ -42,6 +39,10 @@ class DetailFavoriteViewController: BaseViewController {
     override func setUpUI() {
         configureDetailFavoriteViewController()
         nameListFavoriteLabel.text = favorite.name
+        listVideoFavoriteTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
+        listVideoFavoriteTableView.addGestureRecognizer(longpress)
+
         notification()
     }
 

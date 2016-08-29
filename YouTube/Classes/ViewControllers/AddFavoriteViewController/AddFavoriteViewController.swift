@@ -37,26 +37,31 @@ class AddFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     private func setAttributeViewController() {
         providesPresentationContextTransitionStyle = true
         definesPresentationContext = true
         modalPresentationStyle = .OverCurrentContext
         modalTransitionStyle = .CrossDissolve
     }
+
     // MARK:- Set Up UI
     override func setUpUI() {
         addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
         addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
         setAttributeViewController()
     }
+
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
     }
+
     // MARK:- Set Up
     override func setUp() {
         setAttributeViewController()
     }
+
     // MARK:- Load Data
     private func loadData() {
         do {
@@ -66,6 +71,7 @@ class AddFavoriteViewController: BaseViewController {
 
         }
     }
+
     // MARK:- Action
     @IBAction func addFavoriteButton(sender: AnyObject) {
         if favorites.count > 0 {
@@ -93,13 +99,15 @@ class AddFavoriteViewController: BaseViewController {
         delegate?.addSuccess(false)
         dismissViewControllerAnimated(true, completion: nil)
     }
+
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
         showSubView(false)
     }
+
     @IBAction func addNewFavoriteListButton(sender: AnyObject) {
         if nameNewListFavoriteTextField.text! != "" {
             let favorite = Favorite()
-            favorite.name = self.nameNewListFavoriteTextField.text!
+            favorite.name = nameNewListFavoriteTextField.text!
             favorite.id = Favorite.getId() + 1
             do {
                 let realm = try Realm()
@@ -121,15 +129,19 @@ class AddFavoriteViewController: BaseViewController {
     @IBAction func backToListFavoriteButton(sender: AnyObject) {
         showSubView(true)
     }
+
     private func showSubView(isShow: Bool) {
         addFavoriteView.hidden = !isShow
         addNewListFavoriteView.hidden = isShow
     }
 }
+
+//MARK:- Extension UIPickerView
 extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
+
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let favorites = favorites {
             return favorites.count
@@ -137,12 +149,15 @@ extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             return 0
         }
     }
+
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return favorites[row].name
     }
+
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         idListFavorite = favorites[row].id
     }
+
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return Options.HeightOfCell
     }

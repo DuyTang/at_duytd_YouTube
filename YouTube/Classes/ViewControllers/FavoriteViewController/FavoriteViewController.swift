@@ -20,7 +20,6 @@ class FavoriteViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Notification()
         // Do any additional setup after loading the view.
     }
 
@@ -28,23 +27,29 @@ class FavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         favoriteTableView.reloadData()
     }
+
     // MARK:- Set Up UI
     override func setUpUI() {
         navigationController?.navigationBarHidden = true
         configureFavoriteController()
+        notification()
     }
+
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
     }
+
     // MARK:- Configure FavoriteController
     private func configureFavoriteController() {
         favoriteTableView.registerNib(FavoriteCell)
     }
+
     // MARK:- Load Data
     func loadData() {
         do {
@@ -54,10 +59,12 @@ class FavoriteViewController: BaseViewController {
 
         }
     }
+
     // MARK:- Notification
-    func Notification() {
+    func notification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deleteListFavorite), name: NotificationDefine.DeleteListFavorite, object: nil)
     }
+
     // MARK:- Update UI
     func deleteListFavorite(notification: NSNotification) {
         let userInfo = notification.userInfo
@@ -70,7 +77,8 @@ class FavoriteViewController: BaseViewController {
     }
 
 }
-extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
+
+extension FavoriteViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -87,10 +95,6 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         let favorite = listFavorite[indexPath.row]
         cell.configureFavoriteCell(favorite)
         return cell
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return Options.HeightOfCell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -115,6 +119,12 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         return [delete]
+    }
+}
+
+extension FavoriteViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return Options.HeightOfCell
     }
 }
 
