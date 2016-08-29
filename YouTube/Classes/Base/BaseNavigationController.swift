@@ -44,7 +44,7 @@ class BaseNavigationController: UINavigationController {
     func setAttributeForNavigation(title: String, image: String) {
         self.title = title
         tabBarItem.image = UIImage(named: image)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        tabBarItem.selectedImage = UIImage(named: image)!.imageWithRenderingMode(.AlwaysTemplate)
+        //tabBarItem.selectedImage = UIImage(named: image)!.imageWithRenderingMode(.AlwaysTemplate)
     }
 
 }

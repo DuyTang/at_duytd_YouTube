@@ -15,9 +15,9 @@ class BaseTabbarViewController: UITabBarController {
         self.tabBar.barTintColor = Color.BackgroundColor
         self.tabBar.tintColor = Color.MainColor
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
 }

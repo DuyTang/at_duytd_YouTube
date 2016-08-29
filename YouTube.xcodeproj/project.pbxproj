@@ -13,6 +13,11 @@
 		F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */; };
 		F35EE5981D5CC774005464CC /* DecriptVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */; };
 		F35EE5991D5CC774005464CC /* DecriptVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F35EE5971D5CC774005464CC /* DecriptVideoCell.xib */; };
+		F36FDB661D74711F00504A19 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB651D74711F00504A19 /* UIView+Extension.swift */; };
+		F36FDB681D74714100504A19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB671D74714100504A19 /* UIColor+Extension.swift */; };
+		F36FDB6A1D74717B00504A19 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB691D74717B00504A19 /* CustomTabBarController.swift */; };
+		F36FDB6C1D74758400504A19 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB6B1D74758400504A19 /* TabBarView.swift */; };
+		F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36FDB6D1D7475A200504A19 /* TabBarView.xib */; };
 		F37778141D5AE6A000AC2075 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778131D5AE6A000AC2075 /* Category.swift */; };
 		F37778161D5AE6E700AC2075 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778151D5AE6E700AC2075 /* Video.swift */; };
 		F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778171D5AEA9A00AC2075 /* UIImageView.swift */; };
@@ -87,6 +92,11 @@
 		F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayVideoCell.xib; sourceTree = "<group>"; };
 		F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecriptVideoCell.swift; sourceTree = "<group>"; };
 		F35EE5971D5CC774005464CC /* DecriptVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DecriptVideoCell.xib; sourceTree = "<group>"; };
+		F36FDB651D74711F00504A19 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		F36FDB671D74714100504A19 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F36FDB691D74717B00504A19 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		F36FDB6B1D74758400504A19 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		F36FDB6D1D7475A200504A19 /* TabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarView.xib; sourceTree = "<group>"; };
 		F37778131D5AE6A000AC2075 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F37778151D5AE6E700AC2075 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		F37778171D5AEA9A00AC2075 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
@@ -207,6 +217,23 @@
 			path = PlayVideoCell;
 			sourceTree = "<group>";
 		};
+		F36FDB5F1D746B4200504A19 /* TabbarView */ = {
+			isa = PBXGroup;
+			children = (
+				F36FDB6B1D74758400504A19 /* TabBarView.swift */,
+				F36FDB6D1D7475A200504A19 /* TabBarView.xib */,
+			);
+			path = TabbarView;
+			sourceTree = "<group>";
+		};
+		F36FDB601D746B4F00504A19 /* CustomTabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F36FDB691D74717B00504A19 /* CustomTabBarController.swift */,
+			);
+			path = CustomTabBarViewController;
+			sourceTree = "<group>";
+		};
 		F377781B1D5AF3C400AC2075 /* Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +343,8 @@
 		F39A2CA51D550F2C003FC772 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F36FDB671D74714100504A19 /* UIColor+Extension.swift */,
+				F36FDB651D74711F00504A19 /* UIView+Extension.swift */,
 				F39A2CD41D5512F1003FC772 /* UIColor.swift */,
 				F39A2CD61D551309003FC772 /* AppDefine.swift */,
 				F39598941D59B9120030BF82 /* UIView.swift */,
@@ -332,6 +361,7 @@
 		F39A2CA61D550F2C003FC772 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F36FDB5F1D746B4200504A19 /* TabbarView */,
 				F37ED8ED1D6D3E3B006205E5 /* ResultSearchCell */,
 				F35EE58F1D5CC6B4005464CC /* DecriptVideoCell */,
 				F35EE5911D5CC6B4005464CC /* PlayVideoCell */,
@@ -394,6 +424,7 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F36FDB601D746B4F00504A19 /* CustomTabBarViewController */,
 				F37C657E1D6C394A000AA778 /* SearchViewController */,
 				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
@@ -599,6 +630,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */,
 				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
 				F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */,
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
@@ -679,6 +711,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F36FDB681D74714100504A19 /* UIColor+Extension.swift in Sources */,
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
 				F3A1F5501D6474C2006C4C9C /* History.swift in Sources */,
@@ -690,13 +723,16 @@
 				F35EE5981D5CC774005464CC /* DecriptVideoCell.swift in Sources */,
 				F3E58B9C1D6B1CE6004BB244 /* TabbarDefine.swift in Sources */,
 				F3B097E21D5572A2000D9E84 /* DetailFavoriteViewController.swift in Sources */,
+				F36FDB6A1D74717B00504A19 /* CustomTabBarController.swift in Sources */,
 				F37C65791D6BFED9000AA778 /* Font.swift in Sources */,
 				F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */,
 				F39A2CBE1D5510F8003FC772 /* HomeViewController.swift in Sources */,
 				F3B097C11D5561CF000D9E84 /* CategoryCell.swift in Sources */,
 				F39A2CCF1D5511D6003FC772 /* BaseTabbarViewController.swift in Sources */,
+				F36FDB6C1D74758400504A19 /* TabBarView.swift in Sources */,
 				F37778141D5AE6A000AC2075 /* Category.swift in Sources */,
 				F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */,
+				F36FDB661D74711F00504A19 /* UIView+Extension.swift in Sources */,
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
 				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
 				F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */,
