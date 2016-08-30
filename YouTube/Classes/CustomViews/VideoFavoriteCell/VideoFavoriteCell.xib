@@ -16,30 +16,37 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovx-IO-h4S">
-                        <rect key="frame" x="122" y="56.5" width="37" height="17.5"/>
+                        <rect key="frame" x="112" y="57" width="37" height="17.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1T-N2-ILw">
-                        <rect key="frame" x="122" y="15" width="183" height="17.5"/>
+                        <rect key="frame" x="112" y="15" width="193" height="18"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zo-mQ-yVY">
-                        <rect key="frame" x="122" y="35.5" width="183" height="17.5"/>
+                        <rect key="frame" x="112" y="36" width="193" height="17.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
-                        <rect key="frame" x="14" y="8" width="100" height="73"/>
+                        <rect key="frame" x="14" y="8" width="90" height="73"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="ZpX-lc-9Ag"/>
+                            <constraint firstAttribute="width" constant="90" id="ZpX-lc-9Ag"/>
                             <constraint firstAttribute="height" constant="73" id="u06-FG-Nnu"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEX-mM-ORC">
+                        <rect key="frame" x="69" y="64" width="34.5" height="16.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="7zo-mQ-yVY" firstAttribute="top" secondItem="E1T-N2-ILw" secondAttribute="bottom" constant="3" id="07M-Zw-aot"/>
@@ -51,16 +58,19 @@
                     <constraint firstItem="6kI-Qt-qrF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Wor-Pl-deP"/>
                     <constraint firstAttribute="trailingMargin" secondItem="E1T-N2-ILw" secondAttribute="trailing" constant="7" id="k0t-A6-K4Z"/>
                     <constraint firstItem="Ovx-IO-h4S" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="lRE-12-eqQ"/>
+                    <constraint firstItem="Ovx-IO-h4S" firstAttribute="leading" secondItem="GEX-mM-ORC" secondAttribute="trailing" constant="8.5" id="oen-Rq-cfz"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="GEX-mM-ORC" secondAttribute="bottom" constant="0.5" id="qMx-pX-47U"/>
                     <constraint firstItem="7zo-mQ-yVY" firstAttribute="leading" secondItem="6kI-Qt-qrF" secondAttribute="trailing" constant="8" id="vNC-CH-unX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="channelLabel" destination="7zo-mQ-yVY" id="MXw-Od-Wez"/>
                 <outlet property="countViewLabel" destination="Ovx-IO-h4S" id="8Us-mm-hY8"/>
+                <outlet property="durationLabel" destination="GEX-mM-ORC" id="Kv2-yu-MkA"/>
                 <outlet property="nameVideoLabel" destination="E1T-N2-ILw" id="jFY-BN-YOo"/>
                 <outlet property="thumbnailVideo" destination="6kI-Qt-qrF" id="OFY-fa-F0v"/>
             </connections>
-            <point key="canvasLocation" x="540" y="191"/>
+            <point key="canvasLocation" x="178" y="201"/>
         </tableViewCell>
     </objects>
 </document>

@@ -40,12 +40,21 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOL-J7-nOU">
+                        <rect key="frame" x="68" y="63.5" width="34.5" height="16.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="oDy-x7-S4m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="5YE-qA-vBk"/>
                     <constraint firstItem="3b7-8Q-Gh0" firstAttribute="top" secondItem="49u-0U-CGv" secondAttribute="bottom" constant="5" id="L3W-mt-dxi"/>
                     <constraint firstItem="3b7-8Q-Gh0" firstAttribute="leading" secondItem="oDy-x7-S4m" secondAttribute="trailing" constant="8" id="LHG-AD-vMw"/>
                     <constraint firstItem="eMU-fu-1x5" firstAttribute="top" secondItem="3b7-8Q-Gh0" secondAttribute="bottom" constant="5" id="VCB-pd-72i"/>
+                    <constraint firstItem="eMU-fu-1x5" firstAttribute="leading" secondItem="XOL-J7-nOU" secondAttribute="trailing" constant="9.5" id="WvY-Rx-kvX"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="XOL-J7-nOU" secondAttribute="bottom" constant="1.5" id="eRH-hr-Hss"/>
                     <constraint firstAttribute="trailingMargin" secondItem="3b7-8Q-Gh0" secondAttribute="trailing" id="hbc-2b-GEh"/>
                     <constraint firstAttribute="topMargin" secondItem="49u-0U-CGv" secondAttribute="top" id="lLz-0U-2xa"/>
                     <constraint firstItem="49u-0U-CGv" firstAttribute="leading" secondItem="oDy-x7-S4m" secondAttribute="trailing" constant="8" id="qln-9b-RUH"/>
@@ -56,6 +65,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="channelLabel" destination="3b7-8Q-Gh0" id="jCj-At-paE"/>
+                <outlet property="durationLabel" destination="XOL-J7-nOU" id="EUV-kA-XVs"/>
                 <outlet property="thumbnailVideoImage" destination="oDy-x7-S4m" id="B1F-bO-X6a"/>
                 <outlet property="timeViewLabel" destination="eMU-fu-1x5" id="vgA-sn-Eqa"/>
                 <outlet property="titleLabel" destination="49u-0U-CGv" id="QUK-Rb-a10"/>
