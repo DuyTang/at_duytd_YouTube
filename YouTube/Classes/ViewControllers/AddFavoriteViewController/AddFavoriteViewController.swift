@@ -33,6 +33,11 @@ class AddFavoriteViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        modalPresentationStyle = .OverCurrentContext
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,6 +45,8 @@ class AddFavoriteViewController: BaseViewController {
     
     private func setAttributeViewController() {
         modalPresentationStyle = .OverCurrentContext
+        parentViewController?.modalPresentationStyle = .OverCurrentContext
+        
     }
     
     // MARK:- Set Up UI
@@ -91,7 +98,7 @@ class AddFavoriteViewController: BaseViewController {
     
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
         delegate?.addSuccess(false)
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {

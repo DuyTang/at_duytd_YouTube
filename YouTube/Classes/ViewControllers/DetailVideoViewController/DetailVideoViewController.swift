@@ -153,7 +153,8 @@ class DetailVideoViewController: BaseViewController {
             let addFavoriteVC = AddFavoriteViewController()
             addFavoriteVC.video = video
             addFavoriteVC.delegate = self
-            presentViewController(addFavoriteVC, animated: false, completion: nil)
+            tabBarController?.presentViewController(addFavoriteVC, animated: false, completion: nil)
+            
             isFavorite = true
         } else {
             do {
