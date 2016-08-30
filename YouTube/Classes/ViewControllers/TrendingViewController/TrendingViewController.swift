@@ -19,25 +19,20 @@ class TrendingViewController: BaseViewController {
     private struct Options {
         static let HeightOfRow: CGFloat = 205
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    // MARK:- Configure TrendingViewControllers
-    func configureTrendingViewController() {
-        trendingTableView.registerNib(HomeCell)
-    }
-
+    
     // MARk:- Set up UI
     override func setUpUI() {
-        configureTrendingViewController()
+        trendingTableView.registerNib(HomeCell)
     }
-
+    
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
@@ -47,21 +42,20 @@ class TrendingViewController: BaseViewController {
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
-
+    
     // MARK:- Load Data
-
     func loadData() {
         do {
             let realm = try Realm()
             trendingVideos = realm.objects(Video).filter("idCategory = %@", idCategory)
             trendingTableView.reloadData()
         } catch {
-
+            
         }
     }
-
+    
     func loadTrendingVideo(id: String, pageToken: String?) {
-
+        
         if isLoading {
             return
         }
@@ -81,6 +75,8 @@ class TrendingViewController: BaseViewController {
                 if nextPageToken == nil {
                     self.loadmoreActive = false
                 }
+            }else {
+                self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
             }
             self.isLoading = false
         }
@@ -91,7 +87,7 @@ extension TrendingViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let videos = trendingVideos {
             return videos.count
@@ -99,14 +95,14 @@ extension TrendingViewController: UITableViewDataSource {
             return 0
         }
     }
-
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = trendingTableView.dequeue(HomeCell.self)
         let video = trendingVideos[indexPath.row]
         cell.configureCell(video)
         return cell
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let video = trendingVideos![indexPath.row]
         let detailVideoVC = DetailVideoViewController()
@@ -114,7 +110,7 @@ extension TrendingViewController: UITableViewDataSource {
         History.addVideoToHistory(video)
         navigationController?.pushViewController(detailVideoVC, animated: true)
     }
-
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height

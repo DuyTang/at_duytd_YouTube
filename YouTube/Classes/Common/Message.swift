@@ -22,4 +22,7 @@ struct Message {
     static let NoListFavorite = "Create new list favorite"
     static let NoData = "No Data"
     static let Delete = "Delete"
+    static let Title = "Message"
+    static let LoadDataFail = "Load Data Fail"
+    
 }

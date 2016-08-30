@@ -11,40 +11,38 @@ import SwiftUtils
 import RealmSwift
 
 class HomeViewController: BaseViewController {
-
+    
     @IBOutlet weak private var titleView: UIView!
     @IBOutlet weak private var contentView: UIView!
     @IBOutlet weak private var categoryCollectionView: UICollectionView!
     private var selectedCategoryView: UIView!
     private var pageViewController: UIPageViewController?
-    private var currentIndex = 0
+    private var currentIndex = -1
     private var lastIndex: NSIndexPath?
     private var padding: CGFloat = 10
     private var viewControllers: [ContentViewController] = []
     private var listCategory: Results<Category>?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    // MARK:- Register CollectionCell
-    private func configureHomeViewController() {
-        categoryCollectionView.registerNib(CategoryCell)
-    }
+    
     // MARK:- Set Up UI
     override func setUpUI() {
         navigationController?.setNavigationBarHidden(true, animated: true)
-        configureHomeViewController()
+        categoryCollectionView.registerNib(CategoryCell)
         selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
         selectedCategoryView.backgroundColor = Color.BorderColor
         categoryCollectionView.addSubview(selectedCategoryView)
         pageViewController?.dataSource = self
         pageViewController?.delegate = self
     }
+    
     // MARK:- Set Up Data
     override func setUpData() {
         if let categories = Category.getCategories() where categories.count > 0 {
@@ -55,6 +53,7 @@ class HomeViewController: BaseViewController {
             loadCategories()
         }
     }
+    
     // MARK:- Add Page Controller
     private func createViewController() {
         if let listCategory = listCategory {
@@ -65,22 +64,24 @@ class HomeViewController: BaseViewController {
                 viewControllers.append(viewController)
             }
         }
-
+        
     }
+    
     private func addContentToPageViewController() {
-
+        
         createViewController()
         pageViewController = UIPageViewController(transitionStyle: .Scroll,
-            navigationOrientation: .Horizontal, options: nil)
+                                                  navigationOrientation: .Horizontal, options: nil)
         pageViewController?.dataSource = self
         let viewController = viewControllers[0]
         pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
         pageViewController?.view.frame = CGRect(x: contentView.bounds.minX,
-            y: contentView.bounds.minY, width: contentView.bounds.width, height: contentView.bounds.height)
+                                                y: contentView.bounds.minY, width: contentView.bounds.width,
+                                                height: contentView.bounds.height)
         addChildViewController(pageViewController!)
         contentView.addSubview((pageViewController?.view)!)
         pageViewController?.didMoveToParentViewController(self)
-
+        
     }
     // MARK:- Load Data
     private func loadData() {
@@ -89,7 +90,7 @@ class HomeViewController: BaseViewController {
             listCategory = realm.objects(Category)
             categoryCollectionView.reloadData()
         } catch {
-
+            
         }
     }
     // MARK:- Load list Category
@@ -101,6 +102,8 @@ class HomeViewController: BaseViewController {
             if success {
                 self.loadData()
                 self.addContentToPageViewController()
+            }else {
+                self.showAlert(Message.Title, message: Message.LoadCategoryFail, cancelButton: Message.OkButton)
             }
         }
     }
@@ -113,7 +116,7 @@ class HomeViewController: BaseViewController {
     private func backPage(viewController: UIViewController) {
         pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
     }
-
+    
     private func nextPage(viewController: UIViewController) {
         pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
     }
@@ -123,7 +126,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let categories = listCategory {
             if categories.count > 10 {
@@ -135,7 +138,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return 0
         }
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeue(CategoryCell.self, forIndexPath: indexPath)
         let category = listCategory![indexPath.row]
@@ -144,7 +147,7 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.changFont(isSelected)
         return cell
     }
-
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row != currentIndex {
             if let selectedCell = categoryCollectionView.cellForItemAtIndexPath(indexPath) as? CategoryCell {
@@ -167,58 +170,74 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let category = listCategory![indexPath.row]
-            let textLabel = UILabel()
-            textLabel.text = category.title
-            let labelTextWidth = textLabel.intrinsicContentSize().width
-            return CGSize(width: labelTextWidth + padding * 2, height: collectionView.frame.height)
+                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let category = listCategory![indexPath.row]
+        let textLabel = UILabel()
+        textLabel.text = category.title
+        let labelTextWidth = textLabel.intrinsicContentSize().width
+        return CGSize(width: labelTextWidth + padding * 2, height: collectionView.frame.height)
     }
-
+    
 }
 //MARK:- UIPageViewControllerDataSource
 extension HomeViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController,
-        viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-            var index = (viewController as? ContentViewController)!.pageIndex
-            if (index == 0) || (index == NSNotFound) {
-                return nil
-            }
-            index = index - 1
-            return viewControllers[index]
+                            viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        var index = (viewController as? ContentViewController)!.pageIndex
+        if (index == 0) || (index == NSNotFound) {
+            return nil
+        }
+        index = index - 1
+        return viewControllers[index]
     }
-
+    
     func pageViewController(pageViewController: UIPageViewController,
-        viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-            var index = (viewController as? ContentViewController)!.pageIndex
-            if index == NSNotFound {
-                return nil
-            }
-            index = index + 1
-            if index == 10 {
-                return nil
-            }
-            return viewControllers[index]
+                            viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        var index = (viewController as? ContentViewController)!.pageIndex
+        if index == NSNotFound {
+            return nil
+        }
+        index = index + 1
+        if index == 10 {
+            return nil
+        }
+        return viewControllers[index]
     }
 }
 //MARK:- UIPageViewControllerDelegate
 extension HomeViewController: UIPageViewControllerDelegate {
     func pageViewController(pageViewController: UIPageViewController,
-        didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            if let viewControl = pageViewController.viewControllers![0] as? ContentViewController {
-                currentIndex = viewControl.pageIndex
-                let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
-                categoryCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: true)
-                let isSelected = currentIndex == indexPath.row ? true : false
-                let selectedCell = collectionView(categoryCollectionView, cellForItemAtIndexPath: indexPath) as! CategoryCell
-                selectedCell.changFont(isSelected)
-                let frame = selectedCell.frame
-                UIView.animateWithDuration(0.05) {
-                    self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
-                }
-                currentIndex = indexPath.row
-                categoryCollectionView.reloadSections(NSIndexSet(index: 0))
+                            didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if let viewControl = pageViewController.viewControllers![0] as? ContentViewController {
+            currentIndex = viewControl.pageIndex
+            let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
+            categoryCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: true)
+            let isSelected = currentIndex == indexPath.row ? true : false
+            let selectedCell = collectionView(categoryCollectionView, cellForItemAtIndexPath: indexPath) as! CategoryCell
+            selectedCell.changFont(isSelected)
+            let frame = selectedCell.frame
+            UIView.animateWithDuration(0.05) {
+                self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
             }
+            currentIndex = indexPath.row
+            categoryCollectionView.reloadSections(NSIndexSet(index: 0))
+        }
+    }
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+        if let viewControl = pageViewController.viewControllers![0] as? ContentViewController {
+            currentIndex = viewControl.pageIndex
+            let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
+            categoryCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: true)
+            let isSelected = currentIndex == indexPath.row ? true : false
+            let selectedCell = collectionView(categoryCollectionView, cellForItemAtIndexPath: indexPath) as! CategoryCell
+            selectedCell.changFont(isSelected)
+            let frame = selectedCell.frame
+            UIView.animateWithDuration(0.05) {
+                self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
+            }
+            currentIndex = indexPath.row
+            categoryCollectionView.reloadSections(NSIndexSet(index: 0))
+        }
     }
 }
 

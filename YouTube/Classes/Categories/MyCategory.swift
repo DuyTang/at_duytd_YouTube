@@ -22,22 +22,26 @@ class MyCategory {
                     Video.cleanData()
                     for item in items {
                         let category = Mapper<Category>().map(item)
-                        do {
-                            let realm = try Realm()
-                            try realm.write({ () -> Void in
-                                realm.add(category!)
-                            })
-                        } catch {
+                        if category!.id == "18" || category!.id == "21" {
+                            continue
+                        } else {
+                            do {
+                                let realm = try Realm()
+                                try realm.write({ () -> Void in
+                                    realm.add(category!)
+                                })
+                            } catch {
+                            }
                         }
                     }
                 }
             }
             completion(success: true, nextPageToken: nil, error: nil)
-
+            
         }) { (error) in
             completion(success: false, nextPageToken: nil, error: error)
         }
-
+        
     }
 }
 
