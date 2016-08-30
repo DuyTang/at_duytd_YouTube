@@ -8,17 +8,17 @@
 import UIKit
 
 extension UIView {
-    static var identifier: String {
+    static var className: String {
         let str = NSStringFromClass(self)
         let last = str.componentsSeparatedByString(".").last
         return last!
     }
     
     static func instanceFromNib() -> UIView {
-        return (UINib(nibName: self.identifier, bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? UIView)!
+        return (UINib(nibName: self.className, bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? UIView)!
     }
     static func loadBundle() -> UIView {
-        return (NSBundle.mainBundle().loadNibNamed(self.identifier, owner: self, options: nil).first as? UIView)!
+        return (NSBundle.mainBundle().loadNibNamed(self.className, owner: self, options: nil).first as? UIView)!
     }
     
     func setBorder(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) {
