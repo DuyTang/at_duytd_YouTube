@@ -12,7 +12,6 @@ import SnapKit
 class CustomTabBarController: BaseTabbarViewController {
     
     private let tabbarView = (TabBarView.loadBundle() as? TabBarView)!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.hidden = true

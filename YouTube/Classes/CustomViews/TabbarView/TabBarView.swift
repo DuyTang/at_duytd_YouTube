@@ -30,13 +30,13 @@ enum ButtonItemType: Int {
     var selectImage: String {
         switch self {
         case Favorite:
-            return "ic_favorite"
+            return "ic_selectfavorite"
         case .Home:
-            return "ic_home"
+            return "ic_selecthome"
         case .Trending:
-            return "ic_trending"
+            return "ic_selecttrending"
         case .History:
-            return "ic_history"
+            return "ic_selecthistory"
         }
     }
 }
@@ -45,9 +45,8 @@ protocol TabBarViewDelegate {
     func tabBarView(tabBar: TabBarView, didSelectIndex index: Int)
 }
 
-
 class TabBarView: UIView {
-    @IBOutlet var itemView: [UIView]!
+    @IBOutlet private var itemView: [UIView]!
     var delegate: TabBarViewDelegate!
     var index: Int = 0 {
         willSet {
@@ -55,10 +54,10 @@ class TabBarView: UIView {
             oldview.backgroundColor = UIColor.clearColor()
             if let imageView = oldview.findImageView(), label = oldview.findLabel() {
                 imageView.image = UIImage(named: ButtonItemType(rawValue: index)!.nonSelectImage)
-                label.textColor = UIColor.textColor()
+                label.textColor = Color.CategoryTextColor
             }
             let newView = itemView[newValue]
-            newView.backgroundColor = UIColor.navBarColor()
+            newView.backgroundColor = Color.NavBarColor
             
             if let imageView = newView.findImageView(), label = newView.findLabel() {
                 imageView.image = UIImage(named: ButtonItemType(rawValue: newValue)!.selectImage)
@@ -67,7 +66,7 @@ class TabBarView: UIView {
         }
     }
     
-    @IBAction func selectTabBarItem(sender: AnyObject) {
+    @IBAction private func selectTabBarItem(sender: AnyObject) {
         let tag = sender.tag
         if tag != index {
             index = tag
