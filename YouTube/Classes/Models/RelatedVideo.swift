@@ -18,11 +18,11 @@ class RelatedVideo: Object, Mappable {
     dynamic var channelTitle = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
-
+    
     required convenience init(_ map: Map) {
         self.init()
     }
-
+    
     func mapping(map: Map) {
         var id = [String: AnyObject]()
         id <- map["id"]
@@ -33,14 +33,6 @@ class RelatedVideo: Object, Mappable {
         channelTitle = snippet["channelTitle"] as? String ?? ""
         descript = snippet["description"] as? String ?? ""
         thumbnail = Option.UrlImage + idVideo + Option.HighImage
-        // var contentDetails = [String: AnyObject]()
-        // contentDetails <- map["contentDetails"]
-        // duration = contentDetails["duration"] as? String ?? ""
-        //
-        // var statistics = [String: AnyObject]()
-        // statistics <- map["statistics"]
-        // viewCount = statistics["viewCount"] as? String ?? ""
-
     }
     class func getRelatedVideo() -> Results<RelatedVideo>? {
         do {
@@ -59,7 +51,7 @@ class RelatedVideo: Object, Mappable {
                 realm.delete(videos)
             })
         } catch {
-
+            
         }
     }
 }

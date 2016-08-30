@@ -19,7 +19,6 @@ class PlayVideoCell: BaseTableViewCell {
     @IBOutlet weak private var thumbnailVideo: UIImageView!
     @IBOutlet weak private var channelLabel: UILabel!
     @IBOutlet weak private var viewCountLabel: UILabel!
-    @IBOutlet weak private var subcribeButton: UIButton!
     @IBOutlet weak var showDecriptionButton: UIButton!
     private var isRun = false
     private var isSubscribe = false
@@ -42,23 +41,11 @@ class PlayVideoCell: BaseTableViewCell {
 
     }
     override func setUpUI() {
-        subcribeButton.setCircle(1.0, borderColor: UIColor.blackColor())
         thumbnailVideo.setCircle(1.0, borderColor: Color.BackgroundColor)
     }
 
     @IBAction private func clickExpandDescription(sender: UIButton) {
         delegate?.clickExpandDescription(self)
-    }
-    @IBAction func changeSubscribe(sender: AnyObject) {
-        if isSubscribe == false {
-            subcribeButton.setCircle(1.0, borderColor: Color.SubscribeColor)
-            subcribeButton.setImage(UIImage(named: "bt_sub_color"), forState: .Normal)
-            isSubscribe = true
-        } else {
-            subcribeButton.setCircle(1.0, borderColor: UIColor.blackColor())
-            subcribeButton.setImage(UIImage(named: "bt_sub"), forState: .Normal)
-            isSubscribe = false
-        }
     }
 
     @IBAction func showDecriptionVideo(sender: AnyObject) {
