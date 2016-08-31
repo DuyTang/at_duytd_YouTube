@@ -34,6 +34,8 @@ class DetailVideoViewController: BaseViewController {
     var delegate: DetailVideoDelegete?
     private struct Options {
         static let HeightOfRow: CGFloat = 90
+        static let HeightOfPlayVideoCell: CGFloat = 108
+        static let HeightOfButtonCell: CGFloat = 38
         static let MaxRelatedVideo = 20
     }
     @IBOutlet weak var backgroundView: UIView!
@@ -90,6 +92,7 @@ class DetailVideoViewController: BaseViewController {
         view.addSubview(nextButton)
         detailVideoTable.registerNib(PlayVideoCell)
         detailVideoTable.registerNib(DecriptVideoCell)
+        detailVideoTable.registerNib(ButtonCell)
         detailVideoTable.registerNib(VideoFavoriteCell)
     }
 
@@ -302,13 +305,12 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return videos.count + 2
+        return videos.count + 3
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = detailVideoTable.dequeue(PlayVideoCell.self)
-            cell.delegate = self
             cell.configPlayVideoCell(video)
             return cell
         } else {
@@ -317,10 +319,16 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.configureDecriptVideoCell(video)
                 return cell
             } else {
-                let cell = detailVideoTable.dequeue(VideoFavoriteCell.self)
-                let video = videos[indexPath.row - 2]
-                cell.configureCell(video)
-                return cell
+                if indexPath.row == 2 {
+                    let cell = detailVideoTable.dequeue(ButtonCell.self)
+                    cell.delegate = self
+                    return cell
+                } else {
+                    let cell = detailVideoTable.dequeue(VideoFavoriteCell.self)
+                    let video = videos[indexPath.row - 3]
+                    cell.configureCell(video)
+                    return cell
+                }
             }
         }
     }
@@ -331,12 +339,16 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return UITableViewAutomaticDimension
+            return Options.HeightOfPlayVideoCell
         } else {
             if indexPath.row == 1 {
-                return !isExpandDescription ? 10 : UITableViewAutomaticDimension
+                return !isExpandDescription ? 20 : UITableViewAutomaticDimension
             } else {
-                return Options.HeightOfRow
+                if indexPath.row == 2 {
+                    return Options.HeightOfButtonCell
+                } else {
+                    return Options.HeightOfRow
+                }
             }
         }
     }
@@ -344,7 +356,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row > 1 {
             if videos.count > 0 {
-                video = videos[indexPath.row - 2]
+                video = videos[indexPath.row - 3]
                 loadData()
                 isFavorite = false
                 favoriteButton.setImage(UIImage(named: "bt_star"), forState: .Normal)
@@ -368,8 +380,8 @@ extension DetailVideoViewController: AddFavoriteDelegate {
     }
 }
 
-extension DetailVideoViewController: PlayVideoCellDelegate {
-    func clickExpandDescription(cell: PlayVideoCell) {
+extension DetailVideoViewController: ButtonCellDelegate {
+    func clickExpandDescription(cell: ButtonCell) {
         isExpandDescription = !isExpandDescription
         detailVideoTable.beginUpdates()
         detailVideoTable.endUpdates()

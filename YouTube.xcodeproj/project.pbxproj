@@ -16,6 +16,8 @@
 		F36FDB6A1D74717B00504A19 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB691D74717B00504A19 /* CustomTabBarController.swift */; };
 		F36FDB6C1D74758400504A19 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB6B1D74758400504A19 /* TabBarView.swift */; };
 		F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36FDB6D1D7475A200504A19 /* TabBarView.xib */; };
+		F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F374C2341D76C3E7005EC196 /* ButtonCell.swift */; };
+		F374C2371D76C3E7005EC196 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F374C2351D76C3E7005EC196 /* ButtonCell.xib */; };
 		F37778141D5AE6A000AC2075 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778131D5AE6A000AC2075 /* Category.swift */; };
 		F37778161D5AE6E700AC2075 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778151D5AE6E700AC2075 /* Video.swift */; };
 		F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778171D5AEA9A00AC2075 /* UIImageView.swift */; };
@@ -94,6 +96,8 @@
 		F36FDB691D74717B00504A19 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		F36FDB6B1D74758400504A19 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		F36FDB6D1D7475A200504A19 /* TabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarView.xib; sourceTree = "<group>"; };
+		F374C2341D76C3E7005EC196 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		F374C2351D76C3E7005EC196 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		F37778131D5AE6A000AC2075 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F37778151D5AE6E700AC2075 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		F37778171D5AEA9A00AC2075 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
@@ -232,6 +236,15 @@
 			path = CustomTabBarViewController;
 			sourceTree = "<group>";
 		};
+		F374C2331D76C3D0005EC196 /* ButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				F374C2341D76C3E7005EC196 /* ButtonCell.swift */,
+				F374C2351D76C3E7005EC196 /* ButtonCell.xib */,
+			);
+			path = ButtonCell;
+			sourceTree = "<group>";
+		};
 		F377781B1D5AF3C400AC2075 /* Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +370,7 @@
 		F39A2CA61D550F2C003FC772 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F374C2331D76C3D0005EC196 /* ButtonCell */,
 				F36FDB5F1D746B4200504A19 /* TabbarView */,
 				F37ED8ED1D6D3E3B006205E5 /* ResultSearchCell */,
 				F35EE58F1D5CC6B4005464CC /* DecriptVideoCell */,
@@ -638,6 +652,7 @@
 				F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */,
 				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
 				F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */,
+				F374C2371D76C3E7005EC196 /* ButtonCell.xib in Resources */,
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
 				F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */,
 				F3B097E31D5572A2000D9E84 /* DetailFavoriteViewController.xib in Resources */,
@@ -739,6 +754,7 @@
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
 				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
 				F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */,
+				F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */,
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,
 				F3E58B9A1D6B1CAB004BB244 /* NotificationDefine.swift in Sources */,
 				F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */,

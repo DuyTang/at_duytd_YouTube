@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class DecriptVideoCell: BaseTableViewCell {
     @IBOutlet private weak var detailDecriptVideoLabel: UILabel!
     override func awakeFromNib() {
@@ -24,5 +23,4 @@ class DecriptVideoCell: BaseTableViewCell {
     func configureDecriptVideoCell(video: Video) {
         self.detailDecriptVideoLabel.text = video.descript
     }
-
 }

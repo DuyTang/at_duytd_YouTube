@@ -26,14 +26,14 @@
                 <constraints>
                     <constraint firstAttribute="leadingMargin" secondItem="ojX-FP-DTq" secondAttribute="leading" id="3Zk-bx-34u"/>
                     <constraint firstAttribute="topMargin" secondItem="ojX-FP-DTq" secondAttribute="top" id="6cC-Ll-Abh"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ojX-FP-DTq" secondAttribute="bottom" constant="-0.5" id="ckF-tb-QVP"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ojX-FP-DTq" secondAttribute="bottom" constant="-0.5" id="OCo-b0-KcP"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ojX-FP-DTq" secondAttribute="trailing" id="ydQ-gI-O5e"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detailDecriptVideoLabel" destination="ojX-FP-DTq" id="gOu-Ts-kCj"/>
             </connections>
-            <point key="canvasLocation" x="379" y="71"/>
+            <point key="canvasLocation" x="494" y="84"/>
         </tableViewCell>
     </objects>
 </document>

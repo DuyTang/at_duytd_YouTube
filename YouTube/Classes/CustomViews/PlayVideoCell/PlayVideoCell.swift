@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol PlayVideoCellDelegate {
-    func clickExpandDescription(cell: PlayVideoCell)
-}
-
 class PlayVideoCell: BaseTableViewCell {
 
     @IBOutlet weak private var playVideoView: YTPlayerView!
@@ -23,7 +19,6 @@ class PlayVideoCell: BaseTableViewCell {
     private var isRun = false
     private var isSubscribe = false
     private var isShow = false
-    var delegate: PlayVideoCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,20 +37,5 @@ class PlayVideoCell: BaseTableViewCell {
     }
     override func setUpUI() {
         thumbnailVideo.setCircle(1.0, borderColor: Color.BackgroundColor)
-    }
-
-    @IBAction private func clickExpandDescription(sender: UIButton) {
-        delegate?.clickExpandDescription(self)
-    }
-
-    @IBAction func showDecriptionVideo(sender: AnyObject) {
-        if isShow {
-            showDecriptionButton.setImage(UIImage(named: "bt_expand"), forState: .Normal)
-            isShow = false
-        } else {
-            showDecriptionButton.setImage(UIImage(named: "bt_collapse"), forState: .Normal)
-            isShow = true
-        }
-
     }
 }
