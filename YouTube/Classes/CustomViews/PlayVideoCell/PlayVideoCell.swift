@@ -10,12 +10,11 @@ import UIKit
 
 class PlayVideoCell: BaseTableViewCell {
 
-    @IBOutlet weak private var playVideoView: YTPlayerView!
     @IBOutlet weak private var nameVideoLabel: UILabel!
     @IBOutlet weak private var thumbnailVideo: UIImageView!
     @IBOutlet weak private var channelLabel: UILabel!
     @IBOutlet weak private var viewCountLabel: UILabel!
-    @IBOutlet weak var showDecriptionButton: UIButton!
+    @IBOutlet weak private var timeUploadLabel: UILabel!
     private var isRun = false
     private var isSubscribe = false
     private var isShow = false
@@ -29,6 +28,7 @@ class PlayVideoCell: BaseTableViewCell {
         thumbnailVideo.downloadImage(video.thumbnail)
         channelLabel.text = video.channelTitle
         viewCountLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
+        timeUploadLabel.text = video.timeUpload.getTimeUpload()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
