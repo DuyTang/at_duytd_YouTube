@@ -53,6 +53,15 @@ class DetailVideoViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
 
+    override func setUp() {
+        modalPresentationStyle = .OverCurrentContext
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+
     // MARK:- Add Video Player View
     func addVideoPlayerView() {
         viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.3 / 4))
@@ -61,6 +70,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     func prepareToPlayVideo(id: String) {
+        youtubeVideoPlayer?.view.removeFromSuperview()
         youtubeVideoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: id)
         youtubeVideoPlayer?.presentInView(viewPlayer)
         youtubeVideoPlayer?.moviePlayer.play()
@@ -142,7 +152,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     // MARK:- Load related video
-    private func loadData() {
+    func loadData() {
         videos.removeAll()
         loadRelatedVideo(video.idVideo)
     }

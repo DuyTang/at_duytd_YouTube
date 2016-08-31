@@ -170,10 +170,14 @@ class TrendingViewController: BaseViewController {
         videoPlayerViewController.nextButton.alpha = alpha
     }
 
+    override func setUp() {
+        modalPresentationStyle = .OverCurrentContext
+    }
     // MARk:- Set up UI
     override func setUpUI() {
         trendingTableView.registerNib(HomeCell)
         draggbleProgress(thumbnailVideoContainerView)
+
     }
 
     // MARK:- Set Up Data
@@ -285,8 +289,9 @@ extension TrendingViewController: UITableViewDataSource {
             videoPlayerViewController.removeFromParentViewController()
         }
         videoPlayerViewController.video = trendingVideos![indexPath.row]
+        videoPlayerViewController.loadData()
+        videoPlayerViewController.prepareToPlayVideo(trendingVideos![indexPath.row].idVideo)
         History.addVideoToHistory(trendingVideos![indexPath.row])
-        view.removeFromSuperview()
         self.tabBarController?.presentViewController(videoPlayerViewController, animated: true, completion: nil)
     }
 
