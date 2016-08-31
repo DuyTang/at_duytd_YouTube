@@ -9,6 +9,15 @@
 import UIKit
 import RealmSwift
 
+enum UIPanGestureRecognizerDirection {
+    case UIPanGestureRecognizerDirectionUndefined
+    case UIPanGestureRecognizerDirectionUp
+    case UIPanGestureRecognizerDirectionDown
+    case UIPanGestureRecognizerDirectionLeft
+    case UIPanGestureRecognizerDirectionRight
+
+}
+
 class TrendingViewController: BaseViewController {
     @IBOutlet weak var trendingTableView: UITableView!
     @IBOutlet weak var thumbnailVideoContainerView: UIView!
@@ -21,6 +30,7 @@ class TrendingViewController: BaseViewController {
     private struct Options {
         static let HeightOfRow: CGFloat = 205
     }
+    var director: UIPanGestureRecognizerDirection?
     let customTransitioningDelegate: InteractiveTransitioningDelegate = InteractiveTransitioningDelegate()
     lazy var videoPlayerViewController: DetailVideoViewController = {
         let vc = DetailVideoViewController()
@@ -96,6 +106,7 @@ class TrendingViewController: BaseViewController {
                 finalRect.origin.y = CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame)
                 videoPlayerViewController.view.frame = finalRect
                 self!.showButtonInPlayVideoView(0.0)
+
                 videoPlayerViewController
                 }, completion: { (finished) in
                 completion()
@@ -192,13 +203,8 @@ class TrendingViewController: BaseViewController {
 
     // MARK:- Load Data
     func loadData() {
-        do {
-            let realm = try Realm()
-            trendingVideos = realm.objects(Video).filter("idCategory = %@", idCategory)
-            trendingTableView.reloadData()
-        } catch {
-
-        }
+        RealmManager.getListVideo(idCategory)
+        trendingTableView.reloadData()
     }
 
     func loadTrendingVideo(id: String, pageToken: String?) {
@@ -251,10 +257,10 @@ class TrendingViewController: BaseViewController {
             lastVideoPlayerOriginY = videoPlayerViewControllerInitialFrame!.origin.y
 
         } else if (panGestureRecozgnizer.state == .Changed) {
-
             let ratio = max(min(((lastVideoPlayerOriginY + translatedPoint.y) / CGRectGetMinY(thumbnailVideoContainerView.frame)), 1), 0)
             lastPanRatio = 1 - ratio
             customTransitioningDelegate.updateInteractiveTransition(lastPanRatio)
+
         } else if (panGestureRecozgnizer.state == .Ended) {
             let completed = lastPanRatio > panRatioThreshold || lastPanRatio < -panRatioThreshold
             customTransitioningDelegate.finalizeInteractiveTransition(isTransitionCompleted: completed)
@@ -291,6 +297,8 @@ extension TrendingViewController: UITableViewDataSource {
         videoPlayerViewController.video = trendingVideos![indexPath.row]
         videoPlayerViewController.loadData()
         videoPlayerViewController.prepareToPlayVideo(trendingVideos![indexPath.row].idVideo)
+        videoPlayerViewController.checkFavorite(trendingVideos![indexPath.row].idVideo)
+        videoPlayerViewController.setImageForFavoriteButton()
         History.addVideoToHistory(trendingVideos![indexPath.row])
         self.tabBarController?.presentViewController(videoPlayerViewController, animated: true, completion: nil)
     }

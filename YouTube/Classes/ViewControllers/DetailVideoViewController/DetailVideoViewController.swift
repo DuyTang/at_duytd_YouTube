@@ -28,7 +28,7 @@ class DetailVideoViewController: BaseViewController {
     @IBOutlet weak var dismissButton: UIButton!
     var favoriteButton: UIButton!
     private var viewPlayer: UIView!
-    private var isFavorite = false
+    var isFavorite = false
     var playButton: UIButton!
     var nextButton: UIButton!
     var delegate: DetailVideoDelegete?
@@ -261,7 +261,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     // MARK:- Check Favorite
-    private func checkFavorite(idVideo: String) -> Bool {
+    func checkFavorite(idVideo: String) -> Bool {
         var isFavorite = false
         do {
             let realm = try Realm()
@@ -352,7 +352,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             return Options.HeightOfPlayVideoCell
         } else {
             if indexPath.row == 1 {
-                return !isExpandDescription ? 20 : UITableViewAutomaticDimension
+                return !isExpandDescription ? 0 : UITableViewAutomaticDimension
             } else {
                 if indexPath.row == 2 {
                     return Options.HeightOfButtonCell

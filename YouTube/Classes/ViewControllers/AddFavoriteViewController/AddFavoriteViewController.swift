@@ -89,7 +89,8 @@ class AddFavoriteViewController: BaseViewController {
 
             }
             delegate?.addSuccess(isSaved)
-            dismissViewControllerAnimated(true, completion: nil)
+            self.view.removeFromSuperview()
+            self.removeFromParentViewController()
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.AddVideoFavorite, object: nil, userInfo: ["idFavorite": idListFavorite])
         } else {
             showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
@@ -125,7 +126,6 @@ class AddFavoriteViewController: BaseViewController {
             }
         }
         idListFavorite = Favorite.getId()
-//        dismissViewControllerAnimated(true, completion: nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
     }
