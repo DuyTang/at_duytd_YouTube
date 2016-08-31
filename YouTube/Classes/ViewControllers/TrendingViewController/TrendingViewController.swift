@@ -41,21 +41,21 @@ class TrendingViewController: BaseViewController {
         }
         return vc
     }()
-
+    
     let panRatioThreshold: CGFloat = 0.3
     var lastPanRatio: CGFloat = 0.0
     var lastVideoPlayerOriginY: CGFloat = 0.0
     var videoPlayerViewControllerInitialFrame: CGRect?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     func draggbleProgress(thumbnailVideoContainerView: UIView) {
         customTransitioningDelegate.transitionPresent = { [weak self](fromViewController: UIViewController,
             toViewController: UIViewController, containerView: UIView, transitionType: TransitionType, completion: () -> Void) in
@@ -76,14 +76,10 @@ class TrendingViewController: BaseViewController {
             UIView.animateWithDuration(defaultTransitionAnimationDuration, animations: {
                 videoPlayerViewController.view.transform = CGAffineTransformIdentity
                 videoPlayerViewController.view.frame = containerView.bounds
-                videoPlayerViewController.backgroundView.alpha = 1.0
-                videoPlayerViewController.dismissButton.alpha = 1.0
-                videoPlayerViewController.backButton.alpha = 1.0
+                self!.showButtonInPlayVideoView(1.0)
                 }, completion: { (finished) in
-                completion()
-                // In order to disable user interaction with pan gesture recognizer
-                // It is important to do this after completion block, since user interaction is enabled after view controller transition completes
-                videoPlayerViewController.view.userInteractionEnabled = true
+                    completion()
+                    videoPlayerViewController.view.userInteractionEnabled = true
             })
         }
         customTransitioningDelegate.transitionDismiss = { [weak self](fromViewController: UIViewController, toViewController: UIViewController, containerView: UIView, transitionType: TransitionType, completion: () -> Void) in
@@ -98,33 +94,30 @@ class TrendingViewController: BaseViewController {
                 finalRect.origin.x = CGRectGetMinX(weakSelf.thumbnailVideoContainerView.frame)
                 finalRect.origin.y = CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame)
                 videoPlayerViewController.view.frame = finalRect
-                videoPlayerViewController.backgroundView.alpha = 1.0
-                videoPlayerViewController.dismissButton.alpha = 0.0
-                videoPlayerViewController.backButton.alpha = 0.0
+                self!.showButtonInPlayVideoView(0.0)
+                videoPlayerViewController
                 }, completion: { (finished) in
-                completion()
-                videoPlayerViewController.view.userInteractionEnabled = false
-                weakSelf.addChildViewController(videoPlayerViewController)
-                var thumbnailRect = videoPlayerViewController.view.frame
-                thumbnailRect.origin = CGPointZero
-                videoPlayerViewController.view.frame = thumbnailRect
-
-                weakSelf.thumbnailVideoContainerView.addSubview(fromViewController.view)
-                fromViewController.didMoveToParentViewController(weakSelf)
+                    completion()
+                    videoPlayerViewController.view.userInteractionEnabled = false
+                    weakSelf.addChildViewController(videoPlayerViewController)
+                    var thumbnailRect = videoPlayerViewController.view.frame
+                    thumbnailRect.origin = CGPointZero
+                    videoPlayerViewController.view.frame = thumbnailRect
+                    
+                    weakSelf.thumbnailVideoContainerView.addSubview(fromViewController.view)
+                    fromViewController.didMoveToParentViewController(weakSelf)
             })
         }
-
+        
         customTransitioningDelegate.transitionPercentPresent = { [weak self](fromViewController: UIViewController, toViewController: UIViewController, percentage: CGFloat, containerView: UIView) in
             guard let weakSelf = self else {
                 return
             }
-
             let videoPlayerViewController = toViewController as! DetailVideoViewController
             if (weakSelf.videoPlayerViewControllerInitialFrame != nil) {
                 weakSelf.videoPlayerViewController.view.frame = weakSelf.videoPlayerViewControllerInitialFrame!
                 weakSelf.videoPlayerViewControllerInitialFrame = nil
             }
-
             let startXScale = CGRectGetWidth(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetWidth(containerView.bounds)
             let startYScale = CGRectGetHeight(weakSelf.thumbnailVideoContainerView.bounds) * 3 / CGRectGetHeight(containerView.bounds)
             let xScale = startXScale + ((1 - startXScale) * percentage)
@@ -141,13 +134,12 @@ class TrendingViewController: BaseViewController {
             videoPlayerViewController.backgroundView.alpha = percentage
             videoPlayerViewController.dismissButton.alpha = percentage
         }
-
+        
         customTransitioningDelegate.transitionPercentDismiss = { [weak self](fromViewController: UIViewController, toViewController: UIViewController, percentage: CGFloat, containerView: UIView) in
-
+            
             guard let weakSelf = self else {
                 return
             }
-
             let videoPlayerViewController = fromViewController as! DetailVideoViewController
             let finalXScale = CGRectGetWidth(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetWidth(videoPlayerViewController.view.bounds)
             let finalYScale = CGRectGetHeight(weakSelf.thumbnailVideoContainerView.bounds) * 3 / CGRectGetHeight(videoPlayerViewController.view.bounds)
@@ -166,13 +158,23 @@ class TrendingViewController: BaseViewController {
             videoPlayerViewController.dismissButton.alpha = 1 - percentage
         }
     }
-
+    
+    // MARK:- Show Hide Button In PlayVideoView
+    func showButtonInPlayVideoView(alpha: CGFloat) {
+        videoPlayerViewController.backgroundView.alpha = 1.0
+        videoPlayerViewController.dismissButton.alpha = alpha
+        videoPlayerViewController.backButton.alpha = alpha
+        videoPlayerViewController.favoriteButton.alpha = alpha
+        videoPlayerViewController.playButton.alpha = alpha
+        videoPlayerViewController.nextButton.alpha = alpha
+    }
+    
     // MARk:- Set up UI
     override func setUpUI() {
         trendingTableView.registerNib(HomeCell)
         draggbleProgress(thumbnailVideoContainerView)
     }
-
+    
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
@@ -182,7 +184,7 @@ class TrendingViewController: BaseViewController {
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
-
+    
     // MARK:- Load Data
     func loadData() {
         do {
@@ -190,12 +192,12 @@ class TrendingViewController: BaseViewController {
             trendingVideos = realm.objects(Video).filter("idCategory = %@", idCategory)
             trendingTableView.reloadData()
         } catch {
-
+            
         }
     }
-
+    
     func loadTrendingVideo(id: String, pageToken: String?) {
-
+        
         if isLoading {
             return
         }
@@ -221,58 +223,46 @@ class TrendingViewController: BaseViewController {
             self.isLoading = false
         }
     }
-
+    // MARK:- Draggable Video Progress
     @IBAction func presentFromThumbnailAction(sender: UITapGestureRecognizer) {
         guard self.videoPlayerViewController.parentViewController != nil else {
             return
         }
-
-        self.videoPlayerViewControllerInitialFrame = self.thumbnailVideoContainerView.convertRect(self.videoPlayerViewController.view.frame, toView: self.view)
-        self.videoPlayerViewController.removeFromParentViewController()
-        self.presentViewController(self.videoPlayerViewController, animated: true, completion: nil)
+        videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(videoPlayerViewController.view.frame, toView: view)
+        videoPlayerViewController.removeFromParentViewController()
+        presentViewController(videoPlayerViewController, animated: true, completion: nil)
     }
-
+    
     @IBAction func handlePresentPan(panGestureRecozgnizer: UIPanGestureRecognizer) {
-        guard self.videoPlayerViewController.parentViewController != nil || self.customTransitioningDelegate.isPresenting else {
+        guard videoPlayerViewController.parentViewController != nil || customTransitioningDelegate.isPresenting else {
             return
         }
-
         let translatedPoint = panGestureRecozgnizer.translationInView(self.view)
-
         if (panGestureRecozgnizer.state == .Began) {
-
-            self.videoPlayerViewControllerInitialFrame = self.thumbnailVideoContainerView.convertRect(self.videoPlayerViewController.view.frame, toView: self.view)
-            self.videoPlayerViewController.removeFromParentViewController()
-
-            self.customTransitioningDelegate.beginPresenting(viewController: self.videoPlayerViewController, fromViewController: self)
-
-            self.videoPlayerViewControllerInitialFrame = self.thumbnailVideoContainerView.convertRect(self.videoPlayerViewController.view.frame, toView: self.view)
-
-            self.lastVideoPlayerOriginY = self.videoPlayerViewControllerInitialFrame!.origin.y
-
+            videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(videoPlayerViewController.view.frame, toView: view)
+            videoPlayerViewController.removeFromParentViewController()
+            customTransitioningDelegate.beginPresenting(viewController: videoPlayerViewController, fromViewController: self)
+            videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(videoPlayerViewController.view.frame, toView: view)
+            lastVideoPlayerOriginY = videoPlayerViewControllerInitialFrame!.origin.y
+            
         } else if (panGestureRecozgnizer.state == .Changed) {
-
-            let ratio = max(min(((self.lastVideoPlayerOriginY + translatedPoint.y) / CGRectGetMinY(self.thumbnailVideoContainerView.frame)), 1), 0)
-
-            // Store lastPanRatio for next callback
-            self.lastPanRatio = 1 - ratio
-
-            // Update percentage of interactive transition
-            self.customTransitioningDelegate.updateInteractiveTransition(self.lastPanRatio)
+            
+            let ratio = max(min(((lastVideoPlayerOriginY + translatedPoint.y) / CGRectGetMinY(thumbnailVideoContainerView.frame)), 1), 0)
+            lastPanRatio = 1 - ratio
+            customTransitioningDelegate.updateInteractiveTransition(lastPanRatio)
         } else if (panGestureRecozgnizer.state == .Ended) {
-            // If pan ratio exceeds the threshold then transition is completed, otherwise cancel dismissal and present the view controller again
-            let completed = (self.lastPanRatio > self.panRatioThreshold) || (self.lastPanRatio < -self.panRatioThreshold)
-            self.customTransitioningDelegate.finalizeInteractiveTransition(isTransitionCompleted: completed)
+            let completed = lastPanRatio > panRatioThreshold || lastPanRatio < -panRatioThreshold
+            customTransitioningDelegate.finalizeInteractiveTransition(isTransitionCompleted: completed)
         }
     }
-
+    
 }
 
 extension TrendingViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let videos = trendingVideos {
             return videos.count
@@ -280,24 +270,25 @@ extension TrendingViewController: UITableViewDataSource {
             return 0
         }
     }
-
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = trendingTableView.dequeue(HomeCell.self)
         let video = trendingVideos[indexPath.row]
         cell.configureCell(video)
         return cell
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (self.videoPlayerViewController.parentViewController != nil) {
             self.videoPlayerViewControllerInitialFrame = self.thumbnailVideoContainerView.convertRect(self.videoPlayerViewController.view.frame, toView: self.view)
             self.videoPlayerViewController.removeFromParentViewController()
         }
         videoPlayerViewController.video = trendingVideos![indexPath.row]
+        History.addVideoToHistory(trendingVideos![indexPath.row])
         self.tabBarController?.presentViewController(videoPlayerViewController, animated: true, completion: nil)
-
+        
     }
-
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height

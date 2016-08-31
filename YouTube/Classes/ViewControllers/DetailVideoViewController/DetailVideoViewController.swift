@@ -26,11 +26,11 @@ class DetailVideoViewController: BaseViewController {
     private var videos = [Video]()
     var backButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
-    private var favoriteButton: UIButton!
+    var favoriteButton: UIButton!
     private var viewPlayer: UIView!
     private var isFavorite = false
-    private var playButton: UIButton!
-    private var nextButton: UIButton!
+    var playButton: UIButton!
+    var nextButton: UIButton!
     var delegate: DetailVideoDelegete?
     private struct Options {
         static let HeightOfRow: CGFloat = 90
