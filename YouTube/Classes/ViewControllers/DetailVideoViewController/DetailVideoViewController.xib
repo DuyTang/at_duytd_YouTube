@@ -8,7 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVideoViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundView" destination="8MU-Wb-sOH" id="0Nf-GR-fdV"/>
                 <outlet property="detailVideoTable" destination="00B-Xv-9Mo" id="hJD-Sv-zRd"/>
+                <outlet property="dismissButton" destination="2N3-YK-RYx" id="onT-68-X9d"/>
                 <outlet property="playerVideoView" destination="FDk-1W-wh4" id="GL1-AZ-YkD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,40 +20,72 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="00B-Xv-9Mo">
-                    <rect key="frame" x="0.0" y="215" width="375" height="446.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="3WA-vU-p0D"/>
-                        <outlet property="delegate" destination="-1" id="DmE-0Q-YZe"/>
-                    </connections>
-                </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDk-1W-wh4" customClass="YTPlayerView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="215.5"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MU-Wb-sOH">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDk-1W-wh4" customClass="YTPlayerView">
+                            <rect key="frame" x="0.0" y="0.0" width="395" height="227.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="180" id="UNU-NQ-ESB"/>
+                                <constraint firstAttribute="width" secondItem="FDk-1W-wh4" secondAttribute="height" multiplier="4:2.3" id="gew-30-jdg"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="UNU-NQ-ESB"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="00B-Xv-9Mo">
+                            <rect key="frame" x="0.0" y="227" width="375" height="439.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="3WA-vU-p0D"/>
+                                <outlet property="delegate" destination="-1" id="DmE-0Q-YZe"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="180" id="UNU-NQ-ESB"/>
-                        <constraint firstAttribute="width" secondItem="FDk-1W-wh4" secondAttribute="height" multiplier="4:2.3" id="gew-30-jdg"/>
+                        <constraint firstItem="FDk-1W-wh4" firstAttribute="leading" secondItem="8MU-Wb-sOH" secondAttribute="leading" id="NhU-LK-Ogi"/>
+                        <constraint firstAttribute="trailing" secondItem="FDk-1W-wh4" secondAttribute="trailing" constant="-20" id="Qbw-dG-711"/>
+                        <constraint firstItem="00B-Xv-9Mo" firstAttribute="top" secondItem="FDk-1W-wh4" secondAttribute="bottom" id="TVR-Tm-kbH"/>
+                        <constraint firstAttribute="trailing" secondItem="00B-Xv-9Mo" secondAttribute="trailing" id="a2m-wm-W6z"/>
+                        <constraint firstItem="00B-Xv-9Mo" firstAttribute="leading" secondItem="8MU-Wb-sOH" secondAttribute="leading" id="abW-BI-2WG"/>
+                        <constraint firstAttribute="bottom" secondItem="00B-Xv-9Mo" secondAttribute="bottom" id="fnA-iO-eHF"/>
+                        <constraint firstItem="FDk-1W-wh4" firstAttribute="top" secondItem="8MU-Wb-sOH" secondAttribute="top" id="rln-J9-QT1"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="UNU-NQ-ESB"/>
-                        </mask>
-                    </variation>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2N3-YK-RYx">
+                    <rect key="frame" x="10" y="10" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="OuI-Cn-2Gi"/>
+                        <constraint firstAttribute="height" constant="30" id="S60-1a-cSR"/>
+                    </constraints>
+                    <connections>
+                        <action selector="hideView:" destination="-1" eventType="touchUpInside" id="7r9-SY-1kL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="00B-Xv-9Mo" firstAttribute="top" secondItem="FDk-1W-wh4" secondAttribute="bottom" id="Akl-dX-6wc"/>
-                <constraint firstAttribute="trailing" secondItem="00B-Xv-9Mo" secondAttribute="trailing" id="SaR-QJ-eZl"/>
-                <constraint firstItem="00B-Xv-9Mo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Skv-tN-lxs"/>
-                <constraint firstItem="FDk-1W-wh4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fvE-vB-b09"/>
-                <constraint firstAttribute="bottom" secondItem="00B-Xv-9Mo" secondAttribute="bottom" constant="5" id="j2F-Dl-zlZ"/>
-                <constraint firstAttribute="trailing" secondItem="FDk-1W-wh4" secondAttribute="trailing" id="keR-5P-2FM"/>
-                <constraint firstItem="FDk-1W-wh4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rcA-15-5Hm"/>
+                <constraint firstItem="2N3-YK-RYx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Cbt-Kv-hm9"/>
+                <constraint firstItem="8MU-Wb-sOH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KJK-UK-yZm"/>
+                <constraint firstAttribute="bottom" secondItem="8MU-Wb-sOH" secondAttribute="bottom" id="TQz-Rf-jkC"/>
+                <constraint firstItem="2N3-YK-RYx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="e3h-7w-JhK"/>
+                <constraint firstItem="8MU-Wb-sOH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="flh-gC-uAd"/>
+                <constraint firstAttribute="trailing" secondItem="8MU-Wb-sOH" secondAttribute="trailing" id="fxC-ze-uln"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="ElL-EL-RgT" appends="YES" id="4eA-34-ByP"/>
+            </connections>
             <point key="canvasLocation" x="253.5" y="35.5"/>
         </view>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="ElL-EL-RgT">
+            <connections>
+                <action selector="handlePan:" destination="-1" id="7xu-zl-xPR"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
 </document>

@@ -13,7 +13,7 @@ protocol AddFavoriteDelegate: NSObjectProtocol {
 }
 
 class AddFavoriteViewController: BaseViewController {
-    
+
     @IBOutlet weak private var addFavoriteView: UIView!
     @IBOutlet weak private var listFavoritePicker: UIPickerView!
     private var favorites: Results<Favorite>!
@@ -24,7 +24,7 @@ class AddFavoriteViewController: BaseViewController {
     var video = Video()
     var myFavorite = Favorite()
     var isSaved = false
-    
+
     private struct Options {
         static let HeightOfCell: CGFloat = 40
     }
@@ -32,47 +32,47 @@ class AddFavoriteViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         modalPresentationStyle = .OverCurrentContext
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     private func setAttributeViewController() {
         modalPresentationStyle = .OverCurrentContext
         parentViewController?.modalPresentationStyle = .OverCurrentContext
-        
+
     }
-    
+
     // MARK:- Set Up UI
     override func setUpUI() {
     }
-    
+
     // MARK:- Set Up Data
     override func setUpData() {
         loadData()
     }
-    
+
     // MARK:- Set Up
     override func setUp() {
         setAttributeViewController()
     }
-    
+
     // MARK:- Load Data
     private func loadData() {
         do {
             let realm = try Realm()
             favorites = realm.objects(Favorite)
         } catch {
-            
+
         }
     }
-    
+
     // MARK:- Action
     @IBAction func addFavoriteButton(sender: AnyObject) {
         if favorites.count > 0 {
@@ -86,7 +86,7 @@ class AddFavoriteViewController: BaseViewController {
                     self.isSaved = true
                 })
             } catch {
-                
+
             }
             delegate?.addSuccess(isSaved)
             dismissViewControllerAnimated(true, completion: nil)
@@ -95,16 +95,17 @@ class AddFavoriteViewController: BaseViewController {
             showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
         }
     }
-    
+
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
         delegate?.addSuccess(false)
-        dismissViewControllerAnimated(false, completion: nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
     }
-    
+
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
         showSubView(false)
     }
-    
+
     @IBAction func addNewFavoriteListButton(sender: AnyObject) {
         if nameNewListFavoriteTextField.text! != "" {
             let favorite = Favorite()
@@ -120,17 +121,19 @@ class AddFavoriteViewController: BaseViewController {
                     self.delegate?.addSuccess(true)
                 })
             } catch {
-                
+
             }
         }
         idListFavorite = Favorite.getId()
-        dismissViewControllerAnimated(true, completion: nil)
+//        dismissViewControllerAnimated(true, completion: nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
     }
-    
+
     @IBAction func backToListFavoriteButton(sender: AnyObject) {
         showSubView(true)
     }
-    
+
     private func showSubView(isShow: Bool) {
         addFavoriteView.hidden = !isShow
         addNewListFavoriteView.hidden = isShow
@@ -142,7 +145,7 @@ extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let favorites = favorites {
             return favorites.count
@@ -150,15 +153,15 @@ extension AddFavoriteViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             return 0
         }
     }
-    
+
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return favorites[row].name
     }
-    
+
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         idListFavorite = favorites[row].id
     }
-    
+
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return Options.HeightOfCell
     }
