@@ -34,8 +34,8 @@ class DetailVideoViewController: BaseViewController {
     var delegate: DetailVideoDelegete?
     private struct Options {
         static let HeightOfRow: CGFloat = 90
-        static let HeightOfPlayVideoCell: CGFloat = 108
-        static let HeightOfButtonCell: CGFloat = 38
+        static let HeightOfPlayVideoCell: CGFloat = 104
+        static let HeightOfButtonCell: CGFloat = 30
         static let MaxRelatedVideo = 20
     }
     @IBOutlet weak var backgroundView: UIView!
@@ -352,7 +352,7 @@ extension DetailVideoViewController: UITableViewDataSource, UITableViewDelegate 
             return Options.HeightOfPlayVideoCell
         } else {
             if indexPath.row == 1 {
-                return !isExpandDescription ? 0 : UITableViewAutomaticDimension
+                return !isExpandDescription ? 40 : UITableViewAutomaticDimension
             } else {
                 if indexPath.row == 2 {
                     return Options.HeightOfButtonCell
