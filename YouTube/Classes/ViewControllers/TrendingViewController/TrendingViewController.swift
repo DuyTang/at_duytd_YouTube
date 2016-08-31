@@ -67,6 +67,13 @@ class TrendingViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        videoPlayerViewController.view.removeFromSuperview()
+        videoPlayerViewController.removeFromParentViewController()
+        videoPlayerViewController.youtubeVideoPlayer!.moviePlayer.pause()
+    }
+
     func draggbleProgress(thumbnailVideoContainerView: UIView) {
         customTransitioningDelegate.transitionPresent = { [weak self](fromViewController: UIViewController,
             toViewController: UIViewController, containerView: UIView, transitionType: TransitionType, completion: () -> Void) in
