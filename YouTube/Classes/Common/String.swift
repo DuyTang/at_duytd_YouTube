@@ -17,7 +17,7 @@ extension String {
             for component in components {
                 duration = duration.characters.count > 0 ? duration + ":": duration
                 if component.characters.count < 2 {
-                    duration += "0" + component
+                    duration = component
                     continue
                 }
                 duration += component
@@ -73,10 +73,10 @@ extension String {
                             let week = diffDateComponents.day / 7
                             if week == 1 {
                                 time = "\(week) week"
-                                
+
                             } else {
                                 time = "\(week) weeks"
-                                
+
                             }
                         }
                     } else {
@@ -87,7 +87,7 @@ extension String {
         }
         return time
     }
-    
+
     // MARK:- Show view count of video
     func getNumberView() -> String {
         var numberView = ""
@@ -111,5 +111,5 @@ extension String {
         }
         return numberView
     }
-    
+
 }
