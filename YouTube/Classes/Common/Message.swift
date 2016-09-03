@@ -24,5 +24,6 @@ struct Message {
     static let Delete = "Delete"
     static let Title = "Message"
     static let LoadDataFail = "Load Data Fail"
-    
+    static let RelatedVideo = "Related Video"
+
 }

@@ -15,4 +15,8 @@ extension UIFont {
     func fontNeutraTF(size: CGFloat) -> UIFont! {
         return UIFont(name: "Neutra Text TF", size: size)
     }
+
+    func fontHelveticaNeue() -> String {
+        return "Helvetica Neue"
+    }
 }

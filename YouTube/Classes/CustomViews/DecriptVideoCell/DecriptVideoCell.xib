@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojX-FP-DTq">
-                        <rect key="frame" x="16" y="8" width="293" height="18"/>
+                        <rect key="frame" x="16" y="0.0" width="293" height="33.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -24,10 +24,10 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ojX-FP-DTq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="947-Zo-494"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ojX-FP-DTq" secondAttribute="bottom" id="Xwm-6m-n4m"/>
-                    <constraint firstItem="ojX-FP-DTq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="aFJ-uk-Njy"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ojX-FP-DTq" secondAttribute="trailing" constant="3" id="jV5-vO-f6X"/>
+                    <constraint firstItem="ojX-FP-DTq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="NCo-cD-4W9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ojX-FP-DTq" secondAttribute="trailing" constant="3" id="mj5-Yy-Y35"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ojX-FP-DTq" secondAttribute="bottom" constant="-8" id="nCI-O9-M67"/>
+                    <constraint firstItem="ojX-FP-DTq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="w7b-N6-3v2"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
