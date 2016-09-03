@@ -11,7 +11,6 @@ target 'YouTube' do
     pod 'HanekeSwift','0.10.1'
     pod 'ObjectMapper', '1.1.5'
     pod 'SwiftUtils', '1.2.2'
-    pod 'youtube-ios-player-helper'
     pod 'XCDYouTubeVideoPlayerViewController', '~> 1.1'
-    pod 'XCDYouTubeKit', '~> 2.0.2'
+    pod 'XCDYouTubeKit', '~> 2.5'
 end

@@ -15,14 +15,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ClP-bz-Kid">
                     <rect key="frame" x="0.0" y="0.0" width="94" height="60"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_favorite" translatesAutoresizingMaskIntoConstraints="NO" id="EpR-ee-FLa">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_home" translatesAutoresizingMaskIntoConstraints="NO" id="EpR-ee-FLa">
                             <rect key="frame" x="36" y="13" width="22" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="CIR-Iy-onI"/>
                                 <constraint firstAttribute="width" constant="22" id="O4W-Qt-hRM"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGe-st-uL9">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGe-st-uL9">
                             <rect key="frame" x="0.0" y="40" width="94" height="14.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" red="0.60392156862745094" green="0.61568627450980395" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,14 +52,14 @@
                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BV3-NU-7K2">
                     <rect key="frame" x="94" y="0.0" width="94" height="60"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_home" translatesAutoresizingMaskIntoConstraints="NO" id="zKU-oC-Fk3">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trending" translatesAutoresizingMaskIntoConstraints="NO" id="zKU-oC-Fk3">
                             <rect key="frame" x="36" y="13" width="22" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="PSP-an-mSd"/>
                                 <constraint firstAttribute="height" constant="22" id="Vae-Fk-O2E"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBf-oc-RBA">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBf-oc-RBA">
                             <rect key="frame" x="0.0" y="40" width="94" height="14.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" red="0.60392156860000001" green="0.61568627450000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,14 +90,14 @@
                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2L0-BW-dM4">
                     <rect key="frame" x="188" y="0.0" width="94" height="60"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trending" translatesAutoresizingMaskIntoConstraints="NO" id="JBx-8d-8Tk">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_favorite" translatesAutoresizingMaskIntoConstraints="NO" id="JBx-8d-8Tk">
                             <rect key="frame" x="36" y="13" width="22" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="7Aj-fR-4YI"/>
                                 <constraint firstAttribute="height" constant="22" id="thr-Aq-qZv"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-Cj-rsn">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-Cj-rsn">
                             <rect key="frame" x="0.0" y="40" width="94" height="14.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" red="0.60392156860000001" green="0.61568627450000002" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>

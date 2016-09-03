@@ -36,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         trendingNavi.setAttributeForNavigation(Tabbar.Trending, image: Tabbar.ImageTrending)
 
         tabBarController = CustomTabBarController()
-        tabBarController?.viewControllers = [favoriteNavi, homeNavi, trendingNavi, historyNavi]
-        tabBarController?.selectedIndex = 1
+        tabBarController?.viewControllers = [homeNavi, trendingNavi, favoriteNavi, historyNavi]
+        tabBarController?.selectedIndex = 0
 
         self.window?.rootViewController = tabBarController
         thumbnailView?.clipsToBounds = true
