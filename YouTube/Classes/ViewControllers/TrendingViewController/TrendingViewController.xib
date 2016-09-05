@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrendingViewController" customModule="YouTube" customModuleProvider="target">
             <connections>
-                <outlet property="thumbnailVideoContainerView" destination="a8I-tO-CHG" id="cqq-07-g4l"/>
                 <outlet property="trendingTableView" destination="Nxn-my-AKV" id="DWK-EL-06A"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -42,19 +41,6 @@
                         <outlet property="delegate" destination="-1" id="sJB-f9-hNC"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8I-tO-CHG">
-                    <rect key="frame" x="235" y="527" width="140" height="80"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <gestureRecognizers/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="Ql5-Hp-LdP"/>
-                        <constraint firstAttribute="width" constant="140" id="iat-cB-Khg"/>
-                    </constraints>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="NQ5-Va-RIs" appends="YES" id="nVf-9h-Oav"/>
-                        <outletCollection property="gestureRecognizers" destination="xP8-cN-edc" appends="YES" id="v30-Wa-CPL"/>
-                    </connections>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
@@ -63,11 +49,9 @@
                 <constraint firstAttribute="trailing" secondItem="Nxn-my-AKV" secondAttribute="trailing" id="DNR-np-225"/>
                 <constraint firstItem="Nxn-my-AKV" firstAttribute="top" secondItem="j5p-PC-eYR" secondAttribute="bottom" id="G26-Hl-ReB"/>
                 <constraint firstItem="j5p-PC-eYR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QCj-Uk-Gv4"/>
-                <constraint firstAttribute="trailing" secondItem="a8I-tO-CHG" secondAttribute="trailing" id="cmI-dm-Jw7"/>
                 <constraint firstItem="Nxn-my-AKV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="l8P-XS-nLf"/>
                 <constraint firstAttribute="bottom" secondItem="Nxn-my-AKV" secondAttribute="bottom" constant="60" id="ovp-t3-R7e"/>
                 <constraint firstAttribute="trailing" secondItem="j5p-PC-eYR" secondAttribute="trailing" id="pOB-Pa-Zt7"/>
-                <constraint firstAttribute="bottom" secondItem="a8I-tO-CHG" secondAttribute="bottom" constant="60" id="pv3-px-WsT"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="318.5" y="255.5"/>
