@@ -9,6 +9,12 @@
 import UIKit
 import ObjectMapper
 
+private struct Options {
+    static let HeightOfRow: CGFloat = 30
+    static let HeightOfVideoRow: CGFloat = 83
+    static let MaxResult = 10
+}
+
 class SearchViewController: BaseViewController {
 
     @IBOutlet weak private var searchResultTableView: UITableView!
@@ -22,12 +28,7 @@ class SearchViewController: BaseViewController {
     private var isLoading = false
     private var loadmoreActive = true
     @IBOutlet weak private var deleteKeyButton: UIButton!
-
-    private struct Options {
-        static let HeightOfRow: CGFloat = 30
-        static let HeightOfVideoRow: CGFloat = 90
-        static let MaxResult = 10
-    }
+    private var dragVideo: DraggalbeVideo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +40,17 @@ class SearchViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK:- Lefe Cycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         keySearchBar.text = ""
         searchResultTableView.hidden = true
     }
-    // MARK:- Set Up
+
     override func setUp() {
         modalPresentationStyle = .OverCurrentContext
     }
-    // MARK:- Set Up UI
+
     override func setUpUI() {
         searchResultTableView.registerNib(ResultSearchCell)
         videoSearchTableView.registerNib(VideoFavoriteCell)
@@ -57,18 +59,51 @@ class SearchViewController: BaseViewController {
         if let textField = keySearchBar.valueForKey("_searchField") as? UITextField {
             textField.clearButtonMode = .Never
         }
-
+        dragVideo.draggbleProgress()
+        dragVideo.addActionToView()
     }
-    // MARK:- Set Up Data
+
     override func setUpData() {
+        dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
         loadData()
     }
 
-    // MARK:- loadData
     private func loadData() {
         loadListName(key)
     }
-    // MARK:- Load List Key Search
+
+    // MARK:- Private Function
+    private func convertStringToArray(string: String) -> [String] {
+        var listElement = string.stringByReplacingOccurrencesOfString("[", withString: "").stringByReplacingOccurrencesOfString("]", withString: "").componentsSeparatedByString(",")
+        listElement.removeAtIndex(0)
+        let listName = listElement.map { (text) -> String in
+            let temp = text.stringByReplacingOccurrencesOfString("\"", withString: "")
+            let transform = "Any-Hex/Java"
+            let convertedString = temp.mutableCopy() as? NSMutableString
+            CFStringTransform(convertedString, nil, transform as NSString, true)
+            return String(convertedString!)
+        }
+        return listName
+    }
+
+    // MARK:- Action
+    @IBAction private func backToHomeViewController(sender: AnyObject) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+
+    @IBAction private func deleteKey(sender: AnyObject) {
+        key = ""
+        keySearchBar.text = ""
+        deleteKeyButton.hidden = true
+        listKey.removeAll()
+        searchResultTableView.reloadData()
+        listVideo.removeAll()
+        videoSearchTableView.reloadData()
+        searchResultTableView.hidden = true
+        view.endEditing(true)
+    }
+
+    // MARK:- Webservice
     private func loadListName(key: String) {
         self.listKey.removeAll()
         var parameters = [String: AnyObject]()
@@ -85,7 +120,6 @@ class SearchViewController: BaseViewController {
         }
     }
 
-    // MARK:- Load List Video
     private func loadVideoFromKey(key: String, nextPage: String?) {
         if isLoading || key.isEmpty {
             return
@@ -120,9 +154,7 @@ class SearchViewController: BaseViewController {
                                     }
                                     self.listVideo.append(video!)
                                     self.videoSearchTableView.reloadData()
-
                                 }
-
                             }
                             self.isLoading = false
                         })
@@ -134,37 +166,10 @@ class SearchViewController: BaseViewController {
             }
         }
     }
-    // MARK:- Convert Response to String Array
-    private func convertStringToArray(string: String) -> [String] {
-        var listElement = string.stringByReplacingOccurrencesOfString("[", withString: "").stringByReplacingOccurrencesOfString("]", withString: "").componentsSeparatedByString(",")
-        listElement.removeAtIndex(0)
-        let listName = listElement.map { (text) -> String in
-            let temp = text.stringByReplacingOccurrencesOfString("\"", withString: "")
-            let transform = "Any-Hex/Java"
-            let convertedString = temp.mutableCopy() as? NSMutableString
-            CFStringTransform(convertedString, nil, transform as NSString, true)
-            return String(convertedString!)
-        }
-        return listName
-    }
-    // MARK: - Action
-    @IBAction func backToHomeViewController(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
-    }
-    @IBAction func deleteKey(sender: AnyObject) {
-        key = ""
-        keySearchBar.text = ""
-        deleteKeyButton.hidden = true
-        listKey.removeAll()
-        searchResultTableView.reloadData()
-        listVideo.removeAll()
-        videoSearchTableView.reloadData()
-        searchResultTableView.hidden = true
-        view.endEditing(true)
-    }
+
 }
 
-// MARK:- Extension UITableViewDataSource SearchViewController
+// MARK:- Extension
 extension SearchViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -200,9 +205,7 @@ extension SearchViewController: UITableViewDataSource {
                 view.endEditing(true)
             }
         } else {
-            let detailVideoVC = DetailVideoViewController()
-            detailVideoVC.video = listVideo[indexPath.row]
-            navigationController?.pushViewController(detailVideoVC, animated: true)
+            dragVideo.prensetDetailVideoController(listVideo[indexPath.row])
         }
     }
 
@@ -214,7 +217,7 @@ extension SearchViewController: UITableViewDataSource {
         }
     }
 }
-// MARK:- Extension UITableViewDelegate SearchViewController
+
 extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView.tag == 0 {
@@ -224,8 +227,6 @@ extension SearchViewController: UITableViewDelegate {
         }
     }
 }
-
-// MARK:- Extension UISearchBar
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
