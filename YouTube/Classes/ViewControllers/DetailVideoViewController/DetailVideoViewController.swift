@@ -94,7 +94,6 @@ class DetailVideoViewController: BaseViewController {
     }
 
     func showButton(alpha: CGFloat) {
-        backgroundView.alpha = 1.0
         dismissButton.alpha = alpha
         favoriteButton.alpha = alpha
         playButton.alpha = alpha
@@ -202,7 +201,7 @@ class DetailVideoViewController: BaseViewController {
         dismissButton.hidden = status
         favoriteButton.hidden = status
         if !status {
-            dp_after(3, block: {
+            dp_after(4, block: {
                 self.changStatusButton(true)
             })
         }

@@ -55,7 +55,6 @@ class DraggalbeVideo {
                 } else {
                     videoPlayerViewController.view.frame = CGRectOffset(containerView.bounds, 0,
                         CGRectGetHeight(videoPlayerViewController.view.frame))
-                    videoPlayerViewController.backgroundView.alpha = 0.0
                 }
             }
             UIView.animateWithDuration(defaultTransitionAnimationDuration, animations: {
@@ -152,7 +151,7 @@ class DraggalbeVideo {
 
     }
 
-    @objc func presentFromThumbnailAction(sender: UITapGestureRecognizer? = nil) {
+    @objc private func presentFromThumbnailAction(sender: UITapGestureRecognizer? = nil) {
         guard self.videoPlayerViewController.parentViewController != nil else {
             return
         }
@@ -161,7 +160,7 @@ class DraggalbeVideo {
         parentVC.presentViewController(videoPlayerViewController, animated: true, completion: nil)
     }
 
-    @objc func handlePresentPan(panGestureRecozgnizer: UIPanGestureRecognizer) {
+    @objc private func handlePresentPan(panGestureRecozgnizer: UIPanGestureRecognizer) {
         guard videoPlayerViewController.parentViewController != nil || customTransitioningDelegate.isPresenting else {
             return
         }
@@ -184,7 +183,7 @@ class DraggalbeVideo {
         }
     }
 
-    @objc func exitPLayerVideo(swipeGesture: UISwipeGestureRecognizer) {
+    @objc private func exitPLayerVideo(swipeGesture: UISwipeGestureRecognizer) {
         let alert = UIAlertController(title: Message.Title, message: "Would you like to exit play video", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
             self.videoPlayerViewController.youtubeVideoPlayer?.moviePlayer.pause()
