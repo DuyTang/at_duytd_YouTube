@@ -54,18 +54,18 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mY-H2-GrR">
-                        <rect key="frame" x="270" y="63" width="37" height="17.5"/>
+                        <rect key="frame" x="270" y="64" width="37" height="17.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7mY-H2-GrR" firstAttribute="top" secondItem="1m3-yt-WOX" secondAttribute="bottom" constant="26" id="1DR-wh-QgD"/>
                     <constraint firstItem="h25-nk-PKQ" firstAttribute="top" secondItem="Q3l-lO-m6G" secondAttribute="bottom" constant="3" id="1Xc-04-ZGc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7mY-H2-GrR" secondAttribute="trailing" constant="5" id="24B-vv-h6d"/>
                     <constraint firstItem="f54-zS-jKt" firstAttribute="top" secondItem="1m3-yt-WOX" secondAttribute="bottom" constant="8" id="4xm-ve-zyD"/>
                     <constraint firstItem="f54-zS-jKt" firstAttribute="leading" secondItem="Q3l-lO-m6G" secondAttribute="trailing" constant="9" id="9sY-ou-jos"/>
+                    <constraint firstItem="7mY-H2-GrR" firstAttribute="top" secondItem="f54-zS-jKt" secondAttribute="bottom" constant="1" id="Cgt-LC-FFH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="h25-nk-PKQ" secondAttribute="trailing" constant="3" id="Fbv-Ov-Q4x"/>
                     <constraint firstItem="Q3l-lO-m6G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="3" id="HFb-aI-UHP"/>
                     <constraint firstItem="W1c-WN-HrT" firstAttribute="top" secondItem="f54-zS-jKt" secondAttribute="bottom" id="KE6-5E-9nz"/>
