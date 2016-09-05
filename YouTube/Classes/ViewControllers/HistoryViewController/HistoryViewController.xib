@@ -46,8 +46,8 @@
                         <constraint firstAttribute="bottom" secondItem="gvK-6P-6LE" secondAttribute="bottom" constant="8" id="j5C-Dp-gH3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
-                    <rect key="frame" x="0.0" y="64" width="375" height="563"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
+                    <rect key="frame" x="0.0" y="64" width="375" height="543"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="PWA-zi-ZEI"/>
@@ -62,7 +62,7 @@
                 <constraint firstItem="Y4l-XT-yIv" firstAttribute="top" secondItem="cHd-lJ-otw" secondAttribute="bottom" id="8kx-Z7-ITf"/>
                 <constraint firstAttribute="trailing" secondItem="Y4l-XT-yIv" secondAttribute="trailing" id="K8A-Zo-xAa"/>
                 <constraint firstItem="cHd-lJ-otw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ePO-t0-AbW"/>
-                <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" constant="40" id="fvI-WH-RJx"/>
+                <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" constant="60" id="fvI-WH-RJx"/>
                 <constraint firstAttribute="trailing" secondItem="cHd-lJ-otw" secondAttribute="trailing" id="trY-IO-HCn"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

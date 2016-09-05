@@ -18,6 +18,13 @@ class RealmManager {
     class func getAllCategory() -> Results<Category>? {
         return realm?.objects(Category)
     }
+    class func getAllHistory() -> Results<History>?{
+        return realm?.objects(History)
+    }
+    
+    class func getAllObject(ob: Object) -> Results<Object>?{
+        return realm?.objects(Object)
+    }
 
     class func getListVideo(id: String) -> Results<Video>? {
         return realm?.objects(Video).filter("idCategory = %@", id)

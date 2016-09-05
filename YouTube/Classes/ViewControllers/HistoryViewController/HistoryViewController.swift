@@ -46,11 +46,7 @@ class HistoryViewController: BaseViewController {
     }
 
     private func loadData() {
-        do {
-            let realm = try Realm()
-            videos = realm.objects(History)
-        } catch {
-        }
+        videos = RealmManager.getAllHistory()
         loadDate()
     }
 
