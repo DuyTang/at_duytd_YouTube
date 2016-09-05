@@ -28,7 +28,7 @@ class PlayVideoCell: BaseTableViewCell {
         thumbnailVideo.downloadImage(video.thumbnail)
         channelLabel.text = video.channelTitle
         viewCountLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
-        timeUploadLabel.text = video.timeUpload.getTimeUpload()
+        timeUploadLabel.text = video.timeUpload.convertTimeUpload()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

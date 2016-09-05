@@ -41,7 +41,6 @@ class DraggalbeVideo {
         self.parentVC = rootViewController
     }
 
-    // MARK:- Draggable Video Progress
     func draggbleProgress() {
         customTransitioningDelegate.transitionPresent = { [weak self](fromViewController: UIViewController,
             toViewController: UIViewController, containerView: UIView, transitionType: TransitionType, completion: () -> Void) in
@@ -62,7 +61,7 @@ class DraggalbeVideo {
             UIView.animateWithDuration(defaultTransitionAnimationDuration, animations: {
                 videoPlayerViewController.view.transform = CGAffineTransformIdentity
                 videoPlayerViewController.view.frame = containerView.bounds
-                self!.showControl(1.0)
+                videoPlayerViewController.showButton(1.0)
                 }, completion: { (finished) in
                 completion()
                 videoPlayerViewController.view.userInteractionEnabled = true
@@ -80,7 +79,7 @@ class DraggalbeVideo {
                 finalRect.origin.x = CGRectGetMinX(weakSelf.thumbnailVideoContainerView.frame)
                 finalRect.origin.y = CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame)
                 videoPlayerViewController.view.frame = CGRect(origin: finalRect.origin, size: CGSizeMake(weakSelf.thumbnailVideoContainerView.bounds.width, weakSelf.thumbnailVideoContainerView.bounds.height))
-                self!.showControl(0.0)
+                videoPlayerViewController.showButton(0.0)
 
                 }, completion: { (finished) in
                 completion()
@@ -143,15 +142,6 @@ class DraggalbeVideo {
         }
     }
 
-    private func showControl(alpha: CGFloat) {
-        videoPlayerViewController.backgroundView.alpha = 1.0
-        videoPlayerViewController.dismissButton.alpha = alpha
-        videoPlayerViewController.favoriteButton.alpha = alpha
-        videoPlayerViewController.playButton.alpha = alpha
-        videoPlayerViewController.nextButton.alpha = alpha
-        videoPlayerViewController.previousButton.alpha = alpha
-    }
-
     func addActionToView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(presentFromThumbnailAction))
         thumbnailVideoContainerView.addGestureRecognizer(tap)
@@ -159,7 +149,6 @@ class DraggalbeVideo {
         thumbnailVideoContainerView.addGestureRecognizer(pan)
     }
 
-    // MARK:- Draggable Video Progress
     @objc func presentFromThumbnailAction(sender: UITapGestureRecognizer? = nil) {
         guard self.videoPlayerViewController.parentViewController != nil else {
             return

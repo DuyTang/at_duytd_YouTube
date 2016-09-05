@@ -20,9 +20,9 @@ class DecriptVideoCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureDecriptVideoCell(text: String, nameFont: String, size: CGFloat, color: UIColor) {
+    func configureDecriptVideoCell(text: String, font: UIFont, color: UIColor) {
         detailDecriptVideoLabel.text = text
-        detailDecriptVideoLabel.font = UIFont(name: nameFont, size: size)
+        detailDecriptVideoLabel.font = font
         detailDecriptVideoLabel.textColor = color
     }
 }

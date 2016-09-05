@@ -11,30 +11,25 @@ import RealmSwift
 protocol AddFavoriteDelegate: NSObjectProtocol {
     func addSuccess(isSuccess: Bool)
 }
+private struct Options {
+    static let HeightOfCell: CGFloat = 40
+}
 
 class AddFavoriteViewController: BaseViewController {
-
-    @IBOutlet weak private var addFavoriteView: UIView!
-    @IBOutlet weak private var listFavoritePicker: UIPickerView!
     private var favorites: Results<Favorite>!
     weak var delegate: AddFavoriteDelegate?
+    @IBOutlet weak private var addFavoriteView: UIView!
+    @IBOutlet weak private var listFavoritePicker: UIPickerView!
     @IBOutlet weak private var addNewListFavoriteView: UIView!
     @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
-    var idListFavorite = 1
+    private var idListFavorite = 1
     var video = Video()
-    var myFavorite = Favorite()
-    var isSaved = false
+    private var myFavorite = Favorite()
+    private var isSaved = false
 
-    private struct Options {
-        static let HeightOfCell: CGFloat = 40
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,29 +37,24 @@ class AddFavoriteViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK:- Set Up UI
-    override func setUpUI() {
-    }
-
-    // MARK:- Set Up Data
-    override func setUpData() {
-        loadData()
-    }
-
-    // MARK:- Set Up
+    // MARK:- Life Cycle
     override func setUp() {
         modalPresentationStyle = .OverCurrentContext
         parentViewController?.modalPresentationStyle = .OverCurrentContext
     }
 
-    // MARK:- Load Data
-    private func loadData() {
-        do {
-            let realm = try Realm()
-            favorites = realm.objects(Favorite)
-        } catch {
+    override func setUpData() {
+        loadData()
+    }
 
-        }
+    private func loadData() {
+        favorites = RealmManager.getAllFavorite()
+    }
+
+    // MARK:- Private Function
+    private func showSubView(isShow: Bool) {
+        addFavoriteView.hidden = !isShow
+        addNewListFavoriteView.hidden = isShow
     }
 
     // MARK:- Action
@@ -83,8 +73,8 @@ class AddFavoriteViewController: BaseViewController {
 
             }
             delegate?.addSuccess(isSaved)
-            self.view.removeFromSuperview()
-            self.removeFromParentViewController()
+            view.removeFromSuperview()
+            removeFromParentViewController()
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.AddVideoFavorite, object: nil, userInfo: ["idFavorite": idListFavorite])
         } else {
             showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
@@ -128,10 +118,6 @@ class AddFavoriteViewController: BaseViewController {
         showSubView(true)
     }
 
-    private func showSubView(isShow: Bool) {
-        addFavoriteView.hidden = !isShow
-        addNewListFavoriteView.hidden = isShow
-    }
 }
 
 //MARK:- Extension UIPickerView

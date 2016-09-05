@@ -8,8 +8,11 @@
 
 import UIKit
 import RealmSwift
+private struct Options {
+    static let HeightOfRow: CGFloat = 205
+}
 
-class TrendingViewController: BaseViewController, UIGestureRecognizerDelegate {
+class TrendingViewController: BaseViewController {
     @IBOutlet weak var trendingTableView: UITableView!
     private var trendingVideos: Results<Video>!
     private var idCategory = "0"
@@ -17,9 +20,6 @@ class TrendingViewController: BaseViewController, UIGestureRecognizerDelegate {
     private var isLoading = false
     private var loadmoreActive = true
     private var isPlaying = false
-    private struct Options {
-        static let HeightOfRow: CGFloat = 205
-    }
     private var dragVideo: DraggalbeVideo!
 
     override func viewDidLoad() {

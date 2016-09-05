@@ -26,17 +26,17 @@ class HomeCell: BaseTableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
-    // MARK:- Configure Cell
+
     func configureCell(video: Video) {
         thumbnailVideo.downloadImage(video.thumbnail)
         thumbnailChannel.downloadImage(video.thumbnail)
         nameVideoLabel.text = video.title
         nameChannelLabel.text = video.channelTitle
         numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount.getNumberView()) -" : "\(video.viewCount) view -"
-        timeUploadLabel.text = video.timeUpload.getTimeUpload()
+        timeUploadLabel.text = video.timeUpload.convertTimeUpload()
         durationLabel.text = video.duration.convertDuration()
     }
-    // MARk:- Set Up UI
+
     override func setUpUI() {
         thumbnailChannel.setCircle(1.0, borderColor: Color.BackgroundColor)
     }

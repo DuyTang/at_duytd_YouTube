@@ -457,16 +457,16 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F36FDB601D746B4F00504A19 /* CustomTabBarViewController */,
-				F37C657E1D6C394A000AA778 /* SearchViewController */,
-				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
 				F39A2CD91D5516AA003FC772 /* ContentViewController */,
+				F36FDB601D746B4F00504A19 /* CustomTabBarViewController */,
 				F3B097D91D557235000D9E84 /* DetailFavoriteViewController */,
 				F3B097DA1D557235000D9E84 /* DetailVideoViewController */,
 				F39A2CDC1D5516AA003FC772 /* FavoriteViewController */,
 				F3B097DB1D557235000D9E84 /* HistoryViewController */,
 				F39A2CBB1D5510E5003FC772 /* HomeViewController */,
+				F37C657E1D6C394A000AA778 /* SearchViewController */,
+				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -496,8 +496,8 @@
 		F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */ = {
 			isa = PBXGroup;
 			children = (
-				F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */,
 				F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */,
+				F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */,
 			);
 			path = AddFavoriteViewController;
 			sourceTree = "<group>";

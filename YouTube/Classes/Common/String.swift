@@ -8,6 +8,7 @@
 import SwiftUtils
 
 extension String {
+
     // MARK:- Get time of video
     func convertDuration() -> String {
         var duration = ""
@@ -27,6 +28,7 @@ extension String {
         }
         return duration
     }
+
     // MARK:- Validate time of Video
     func checkDurationVideo(text: String) -> Bool {
         let DURATION_REGEX_FULL = "^PT+[0-9]+H[0-9]+M[0-9]+[0-9]S"
@@ -41,8 +43,9 @@ extension String {
             return false
         }
     }
+
     // MARK:- Get time upload of video
-    func getTimeUpload() -> String {
+    func convertTimeUpload() -> String {
         var time = ""
         if !self.isEmpty {
             let selectedDate = self.toDate(DateFormat.TZDateTime3, localized: false)
@@ -73,10 +76,8 @@ extension String {
                             let week = diffDateComponents.day / 7
                             if week == 1 {
                                 time = "\(week) week"
-
                             } else {
                                 time = "\(week) weeks"
-
                             }
                         }
                     } else {
