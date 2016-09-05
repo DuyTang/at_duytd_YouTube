@@ -256,6 +256,10 @@ class DetailVideoViewController: BaseViewController {
         }
     }
 
+    @objc private func hideView(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
     @objc private func moviePlayerPlayBackDidFinish(notification: NSNotification) {
         handleNext()
     }
@@ -325,10 +329,6 @@ class DetailVideoViewController: BaseViewController {
 
     @IBAction private func handlePan(sender: UIPanGestureRecognizer) {
         self.handlePan?(panGestureRecognizer: sender)
-    }
-
-    @objc private func hideView(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
     }
 
     // MARK:- Webservice
