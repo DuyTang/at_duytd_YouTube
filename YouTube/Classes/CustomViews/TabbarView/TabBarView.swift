@@ -9,11 +9,11 @@
 import UIKit
 
 enum ButtonItemType: Int {
-    case Favorite = 0
-    case Home
+    case Home = 0
     case Trending
+    case Favorite
     case History
-    
+
     var nonSelectImage: String {
         switch self {
         case Favorite:
@@ -26,7 +26,7 @@ enum ButtonItemType: Int {
             return "ic_history"
         }
     }
-    
+
     var selectImage: String {
         switch self {
         case Favorite:
@@ -58,21 +58,21 @@ class TabBarView: UIView {
             }
             let newView = itemView[newValue]
             newView.backgroundColor = Color.NavBarColor
-            
+
             if let imageView = newView.findImageView(), label = newView.findLabel() {
                 imageView.image = UIImage(named: ButtonItemType(rawValue: newValue)!.selectImage)
                 label.textColor = UIColor.whiteColor()
             }
         }
     }
-    
+
     @IBAction private func selectTabBarItem(sender: AnyObject) {
         let tag = sender.tag
         if tag != index {
             index = tag
             delegate.tabBarView(self, didSelectIndex: tag)
         }
-        
+
     }
-    
+
 }
