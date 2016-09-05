@@ -8,6 +8,9 @@
 
 import UIKit
 import RealmSwift
+private struct Options {
+    static let HeightOfHomeCell: CGFloat = 205
+}
 
 class ContentViewController: BaseViewController {
 
@@ -18,9 +21,8 @@ class ContentViewController: BaseViewController {
     private var homeVideos: Results<Video>?
     private var isLoading = false
     private var loadmoreActive = true
-    private struct Options {
-        static let HeightOfHomeCell: CGFloat = 205
-    }
+    private var dragVideo: DraggalbeVideo!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -28,12 +30,16 @@ class ContentViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    // MARK:- Set Up UI
+
+    // MARK:- Life Cycle
     override func setUpUI() {
-        configureContentViewCOntroller()
+        contentTableView.registerNib(HomeCell)
+        dragVideo.draggbleProgress()
+        dragVideo.addActionToView()
     }
-    // MARK:- Set Up Data
+
     override func setUpData() {
+        dragVideo = DraggalbeVideo(rootViewController: self.parentViewController!)
         loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             homeVideos = videos
@@ -41,21 +47,13 @@ class ContentViewController: BaseViewController {
             loadVideos(pageId, pageToken: nil)
         }
     }
-    // MARK:- Register Cell
-    private func configureContentViewCOntroller() {
-        contentTableView.registerNib(HomeCell)
-    }
-    // MARK:- Load Data
-    func loadData() {
-        do {
-            let realm = try Realm()
-            homeVideos = realm.objects(Video).filter("idCategory = %@", pageId)
-            contentTableView.reloadData()
-        } catch {
 
-        }
+    private func loadData() {
+        homeVideos = RealmManager.getListVideo(pageId)
+        contentTableView.reloadData()
     }
 
+    // MARK:- Webservice
     private func loadVideos(id: String, pageToken: String?) {
         if isLoading {
             return
@@ -83,6 +81,7 @@ class ContentViewController: BaseViewController {
     }
 
 }
+
 //MARK:- UITableViewDataSource
 extension ContentViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -105,10 +104,7 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.video = homeVideos![indexPath.row]
-        History.addVideoToHistory(homeVideos![indexPath.row])
-        navigationController?.pushViewController(detailVideoVC, animated: true)
+        dragVideo.prensetDetailVideoController(homeVideos![indexPath.row])
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
