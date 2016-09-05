@@ -26,7 +26,7 @@ class DetailVideoViewController: BaseViewController {
     @IBOutlet weak var detailVideoTable: UITableView!
     @IBOutlet weak private var playerVideoView: UIView!
     private var dataOfRelatedVideo: Results<RelatedVideo>!
-    private var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
+    var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
     private var isExpandDescription = false
     private var isFavorite = false
     private var isPlaying = false
@@ -132,11 +132,11 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Private Function
     private func configureVideoPlayer() {
-        dismissButton = UIButton(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
+        dismissButton = UIButton(frame: CGRect(x: 10, y: 0, width: 20, height: 20))
         dismissButton.setImage(UIImage(named: "bt_close"), forState: .Normal)
         dismissButton.addTarget(self, action: #selector(hideView), forControlEvents: .TouchUpInside)
 
-        favoriteButton = UIButton(frame: CGRect(x: width - 40, y: 0, width: 40, height: 40))
+        favoriteButton = UIButton(frame: CGRect(x: width - 30, y: 0, width: 30, height: 30))
         setImageForFavoriteButton()
         favoriteButton.addTarget(self, action: #selector(addVideoToFavoriteList), forControlEvents: .TouchUpInside)
 
@@ -144,21 +144,19 @@ class DetailVideoViewController: BaseViewController {
         playButton.setImage(UIImage(named: "bt_play"), forState: .Normal)
         playButton.tintColor = .whiteColor()
         playButton.addTarget(self, action: #selector(handlePause), forControlEvents: .TouchUpInside)
-        playButton.hidden = true
 
         nextButton = UIButton(frame: CGRect(x: viewPlayer.frame.midX + 25, y: viewPlayer.frame.midY - 25, width: 50, height: 50))
         nextButton.setImage(UIImage(named: "bt_next"), forState: .Normal)
         nextButton.tintColor = .whiteColor()
         nextButton.addTarget(self, action: #selector(handleNext), forControlEvents: .TouchUpInside)
-        nextButton.hidden = true
 
         previousButton = UIButton(frame: CGRect(x: viewPlayer.frame.midX - 75, y: viewPlayer.frame.midY - 25, width: 50, height: 50))
         previousButton.setImage(UIImage(named: "bt_previou"), forState: .Normal)
         previousButton.tintColor = .whiteColor()
         previousButton.addTarget(self, action: #selector(handlePrevious), forControlEvents: .TouchUpInside)
-        previousButton.hidden = true
 
         indicator = UIActivityIndicatorView(frame: CGRect(x: viewPlayer.frame.midX - 25, y: viewPlayer.frame.midY - 25, width: 50, height: 50))
+        changStatusButton(true)
 
         view.addSubview(indicator)
         view.addSubview(dismissButton)
@@ -201,8 +199,10 @@ class DetailVideoViewController: BaseViewController {
         nextButton.hidden = status
         playButton.hidden = status
         previousButton.hidden = status
+        dismissButton.hidden = status
+        favoriteButton.hidden = status
         if !status {
-            dp_after(2, block: {
+            dp_after(3, block: {
                 self.changStatusButton(true)
             })
         }

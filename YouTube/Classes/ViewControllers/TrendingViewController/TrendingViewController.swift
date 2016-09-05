@@ -31,21 +31,13 @@ class TrendingViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    override func setUp() {
-        modalPresentationStyle = .OverCurrentContext
-    }
-    // MARk:- Set up UI
+    // MARK:- Life Cycle
     override func setUpUI() {
         trendingTableView.registerNib(HomeCell)
         dragVideo.draggbleProgress()
         dragVideo.addActionToView()
     }
 
-    // MARK:- Set Up Data
     override func setUpData() {
         dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
         loadData()
@@ -56,12 +48,12 @@ class TrendingViewController: BaseViewController {
         }
     }
 
-    // MARK:- Load Data
     private func loadData() {
         trendingVideos = RealmManager.getListVideo(idCategory)
         trendingTableView.reloadData()
     }
 
+    // MARK:- Webservice
     private func loadTrendingVideo(id: String, pageToken: String?) {
         if isLoading {
             return
@@ -89,6 +81,7 @@ class TrendingViewController: BaseViewController {
         }
     }
 }
+
 //MARK:- Extension UITableView
 extension TrendingViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

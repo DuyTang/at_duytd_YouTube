@@ -147,6 +147,9 @@ class DraggalbeVideo {
         thumbnailVideoContainerView.addGestureRecognizer(tap)
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePresentPan))
         thumbnailVideoContainerView.addGestureRecognizer(pan)
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(exitPLayerVideo))
+        thumbnailVideoContainerView.addGestureRecognizer(longPress)
+
     }
 
     @objc func presentFromThumbnailAction(sender: UITapGestureRecognizer? = nil) {
@@ -179,6 +182,20 @@ class DraggalbeVideo {
             let completed = lastPanRatio > panRatioThreshold || lastPanRatio < -panRatioThreshold
             customTransitioningDelegate.finalizeInteractiveTransition(isTransitionCompleted: completed)
         }
+    }
+
+    @objc func exitPLayerVideo(swipeGesture: UISwipeGestureRecognizer) {
+        let alert = UIAlertController(title: Message.Title, message: "Would you like to exit play video", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
+            self.videoPlayerViewController.youtubeVideoPlayer?.moviePlayer.pause()
+            self.videoPlayerViewController.view.removeFromSuperview()
+            self.videoPlayerViewController.removeFromParentViewController()
+            self.parentVC.removeFromParentViewController()
+            }))
+        alert.addAction(UIAlertAction(title: Message.CancelButton, style: UIAlertActionStyle.Cancel, handler: { action in
+
+            }))
+        parentVC.presentViewController(alert, animated: true, completion: nil)
     }
 
     func prensetDetailVideoController(video: Video) {
