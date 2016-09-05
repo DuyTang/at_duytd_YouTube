@@ -34,7 +34,7 @@ class HomeCell: BaseTableViewCell {
         nameChannelLabel.text = video.channelTitle
         numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount.getNumberView()) -" : "\(video.viewCount) view -"
         timeUploadLabel.text = video.timeUpload.getTimeUpload()
-        durationLabel.text = video.duration.getYoutubeFormattedDuration()
+        durationLabel.text = video.duration.convertDuration()
     }
     // MARk:- Set Up UI
     override func setUpUI() {

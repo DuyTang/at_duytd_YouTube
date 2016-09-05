@@ -32,7 +32,7 @@ class VideoFavoriteCell: BaseTableViewCell {
         nameVideoLabel.text = video.title
         channelLabel.text = video.channelTitle
         countViewLabel.text = Int(video.viewCount) > 1 ? video.viewCount.getNumberView() : "\(video.viewCount) view"
-        durationLabel.text = video.duration.getYoutubeFormattedDuration()
+        durationLabel.text = video.duration.convertDuration()
     }
     // MARk:- Set Up UI
     override func setUpUI() {

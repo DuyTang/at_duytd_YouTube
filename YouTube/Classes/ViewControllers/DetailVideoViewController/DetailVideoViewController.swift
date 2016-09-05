@@ -85,14 +85,14 @@ class DetailVideoViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotatedDevice), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
-    func changeVideo(notification: NSNotification) {
+    @objc private func changeVideo(notification: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
             self.youtubeVideoPlayer!.moviePlayer.prepareToPlay()
         }
     }
 
     // MARK:- Add Video Player View
-    func addVideoPlayerView() {
+    private func addVideoPlayerView() {
         viewPlayer = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width * 2.4 / 4))
         prepareToPlayVideo(video.idVideo)
         playerVideoView.addSubview(viewPlayer)
@@ -105,7 +105,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     // MARK:- Config DetailVideoViewController
-    private func configureDetailVideoViewController() {
+    private func configureVideoPlayer() {
         dismissButton = UIButton(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
         dismissButton.setImage(UIImage(named: "bt_close"), forState: .Normal)
         dismissButton.addTarget(self, action: #selector(hideView), forControlEvents: .TouchUpInside)
@@ -140,11 +140,6 @@ class DetailVideoViewController: BaseViewController {
         view.addSubview(playButton)
         view.addSubview(nextButton)
         view.addSubview(previousButton)
-
-        detailVideoTable.registerNib(PlayVideoCell)
-        detailVideoTable.registerNib(DecriptVideoCell)
-        detailVideoTable.registerNib(ButtonCell)
-        detailVideoTable.registerNib(VideoFavoriteCell)
     }
 
     private func setTimeAppear() {
@@ -152,7 +147,7 @@ class DetailVideoViewController: BaseViewController {
 
     }
 
-    func tapVideoPlayer() {
+    @objc private func tapVideoPlayer() {
         hideButton(true)
     }
 
@@ -181,7 +176,7 @@ class DetailVideoViewController: BaseViewController {
         favoriteButton.setImage(UIImage(named: nameImage), forState: .Normal)
     }
 
-    func handlePause() {
+    @objc private func handlePause() {
         if isPlaying {
             youtubeVideoPlayer?.moviePlayer.pause()
             playButton.setImage(UIImage(named: "bt_play"), forState: .Normal)
@@ -192,18 +187,18 @@ class DetailVideoViewController: BaseViewController {
         isPlaying = !isPlaying
     }
 
-    func handleNext() {
+    @objc private func handleNext() {
         oldVideo = video
         video = videos[0]
         handleChangState()
     }
 
-    func handlePrevious() {
+    @objc private func handlePrevious() {
         video = oldVideo
         handleChangState()
     }
 
-    private func handleChangState() {
+    @objc private func handleChangState() {
         hideButton(true)
         indicator.startAnimating()
         isFavorite = checkFavorite(video.idVideo)
@@ -217,7 +212,11 @@ class DetailVideoViewController: BaseViewController {
     // MARK:- Set Up UI
     override func setUpUI() {
         addVideoPlayerView()
-        configureDetailVideoViewController()
+        configureVideoPlayer()
+        detailVideoTable.registerNib(PlayVideoCell)
+        detailVideoTable.registerNib(DecriptVideoCell)
+        detailVideoTable.registerNib(ButtonCell)
+        detailVideoTable.registerNib(VideoFavoriteCell)
         setTimeAppear()
     }
 
@@ -296,7 +295,7 @@ class DetailVideoViewController: BaseViewController {
         }
     }
     // MARK:- Progress Rotate Device
-    func rotatedDevice() {
+    @objc private func rotatedDevice() {
         let orientation = UIDevice.currentDevice().orientation
         if orientation == UIDeviceOrientation.LandscapeLeft || orientation == UIDeviceOrientation.LandscapeRight || orientation == UIDeviceOrientation.PortraitUpsideDown {
             youtubeVideoPlayer?.moviePlayer.setFullscreen(true, animated: true)
@@ -312,24 +311,24 @@ class DetailVideoViewController: BaseViewController {
 
     }
 
-    @IBAction func handlePan(sender: UIPanGestureRecognizer) {
+    @IBAction private func handlePan(sender: UIPanGestureRecognizer) {
         self.handlePan?(panGestureRecognizer: sender)
     }
 
-    func hideView(sender: AnyObject) {
+    @objc private func hideView(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
-    func moviePlayerPlayBackDidFinish(notification: NSNotification) {
+    @objc private func moviePlayerPlayBackDidFinish(notification: NSNotification) {
         print("moviePlayerPlayBackDidFinish")
         handleNext()
     }
 
-    func moviePlayerNowPlayingMovieDidChange(notification: NSNotification) {
+    @objc private func moviePlayerNowPlayingMovieDidChange(notification: NSNotification) {
         print("moviePlayerNowPlayingMovieDidChange")
     }
 
-    func moviePlayerLoadStateDidChange(notification: NSNotification) {
+    @objc private func moviePlayerLoadStateDidChange(notification: NSNotification) {
         let state = (youtubeVideoPlayer?.moviePlayer.playbackState)!
         switch state {
         case .Stopped:
@@ -347,7 +346,7 @@ class DetailVideoViewController: BaseViewController {
         }
     }
 
-    func moviePlayerPlaybackDidChange(notification: NSNotification) {
+    @objc private func moviePlayerPlaybackDidChange(notification: NSNotification) {
         let state = (youtubeVideoPlayer?.moviePlayer.playbackState)!
         switch state {
         case .Stopped:

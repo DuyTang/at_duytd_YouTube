@@ -35,18 +35,11 @@ class AddFavoriteViewController: BaseViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        modalPresentationStyle = .OverCurrentContext
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    private func setAttributeViewController() {
-        modalPresentationStyle = .OverCurrentContext
-        parentViewController?.modalPresentationStyle = .OverCurrentContext
-
     }
 
     // MARK:- Set Up UI
@@ -60,7 +53,8 @@ class AddFavoriteViewController: BaseViewController {
 
     // MARK:- Set Up
     override func setUp() {
-        setAttributeViewController()
+        modalPresentationStyle = .OverCurrentContext
+        parentViewController?.modalPresentationStyle = .OverCurrentContext
     }
 
     // MARK:- Load Data
@@ -99,8 +93,8 @@ class AddFavoriteViewController: BaseViewController {
 
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
         delegate?.addSuccess(false)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
+        view.removeFromSuperview()
+        removeFromParentViewController()
     }
 
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
@@ -126,8 +120,8 @@ class AddFavoriteViewController: BaseViewController {
             }
         }
         idListFavorite = Favorite.getId()
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
+        view.removeFromSuperview()
+        removeFromParentViewController()
     }
 
     @IBAction func backToListFavoriteButton(sender: AnyObject) {

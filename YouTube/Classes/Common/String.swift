@@ -9,7 +9,7 @@ import SwiftUtils
 
 extension String {
     // MARK:- Get time of video
-    func getYoutubeFormattedDuration() -> String {
+    func convertDuration() -> String {
         var duration = ""
         if checkDurationVideo(self) {
             let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")

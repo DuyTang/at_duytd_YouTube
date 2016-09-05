@@ -85,13 +85,7 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Load Data
     private func loadData() {
-        do {
-            let realm = try Realm()
-            listCategory = realm.objects(Category)
-            categoryCollectionView.reloadData()
-        } catch {
-
-        }
+        listCategory = RealmManager.getAllCategory()
     }
     // MARK:- Load list Category
     private func loadCategories() {
