@@ -15,5 +15,6 @@ struct Color {
     static let BorderColor = UIColor.RGB(204, 24, 30)
     static let SubscribeColor = UIColor.RGB(224, 14, 69)
     static let CategoryTextColor = UIColor.RGB(154, 157, 164)
-    static let NavBarColor = UIColor.RGB(241, 93,  81)
+    static let NavBarColor = UIColor.RGB(241, 93, 81)
+    static let TitleColor = UIColor.RGB(0, 122, 255)
 }

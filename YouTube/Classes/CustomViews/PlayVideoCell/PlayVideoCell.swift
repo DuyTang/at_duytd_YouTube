@@ -8,23 +8,16 @@
 
 import UIKit
 
-protocol PlayVideoCellDelegate {
-    func clickExpandDescription(cell: PlayVideoCell)
-}
-
 class PlayVideoCell: BaseTableViewCell {
 
-    @IBOutlet weak private var playVideoView: YTPlayerView!
     @IBOutlet weak private var nameVideoLabel: UILabel!
     @IBOutlet weak private var thumbnailVideo: UIImageView!
     @IBOutlet weak private var channelLabel: UILabel!
     @IBOutlet weak private var viewCountLabel: UILabel!
-    @IBOutlet weak private var subcribeButton: UIButton!
-    @IBOutlet weak var showDecriptionButton: UIButton!
+    @IBOutlet weak private var timeUploadLabel: UILabel!
     private var isRun = false
     private var isSubscribe = false
     private var isShow = false
-    var delegate: PlayVideoCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,6 +28,7 @@ class PlayVideoCell: BaseTableViewCell {
         thumbnailVideo.downloadImage(video.thumbnail)
         channelLabel.text = video.channelTitle
         viewCountLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
+        timeUploadLabel.text = video.timeUpload.convertTimeUpload()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -42,33 +36,6 @@ class PlayVideoCell: BaseTableViewCell {
 
     }
     override func setUpUI() {
-        subcribeButton.setCircle(1.0, borderColor: UIColor.blackColor())
         thumbnailVideo.setCircle(1.0, borderColor: Color.BackgroundColor)
-    }
-
-    @IBAction private func clickExpandDescription(sender: UIButton) {
-        delegate?.clickExpandDescription(self)
-    }
-    @IBAction func changeSubscribe(sender: AnyObject) {
-        if isSubscribe == false {
-            subcribeButton.setCircle(1.0, borderColor: Color.SubscribeColor)
-            subcribeButton.setImage(UIImage(named: "bt_sub_color"), forState: .Normal)
-            isSubscribe = true
-        } else {
-            subcribeButton.setCircle(1.0, borderColor: UIColor.blackColor())
-            subcribeButton.setImage(UIImage(named: "bt_sub"), forState: .Normal)
-            isSubscribe = false
-        }
-    }
-
-    @IBAction func showDecriptionVideo(sender: AnyObject) {
-        if isShow {
-            showDecriptionButton.setImage(UIImage(named: "bt_expand"), forState: .Normal)
-            isShow = false
-        } else {
-            showDecriptionButton.setImage(UIImage(named: "bt_collapse"), forState: .Normal)
-            isShow = true
-        }
-
     }
 }

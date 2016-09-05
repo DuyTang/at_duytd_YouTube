@@ -8,6 +8,9 @@
 
 import UIKit
 import RealmSwift
+private struct Options {
+    static let HeightOfRow: CGFloat = 205
+}
 
 class TrendingViewController: BaseViewController {
     @IBOutlet weak var trendingTableView: UITableView!
@@ -16,30 +19,27 @@ class TrendingViewController: BaseViewController {
     private var nextPage: String?
     private var isLoading = false
     private var loadmoreActive = true
-    private struct Options {
-        static let HeightOfRow: CGFloat = 205
-    }
+    private var isPlaying = false
+    private var dragVideo: DraggalbeVideo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    // MARK:- Configure TrendingViewControllers
-    func configureTrendingViewController() {
-        trendingTableView.registerNib(HomeCell)
-    }
-
-    // MARk:- Set up UI
+    // MARK:- Life Cycle
     override func setUpUI() {
-        configureTrendingViewController()
+        trendingTableView.registerNib(HomeCell)
+        dragVideo.draggbleProgress()
+        dragVideo.addActionToView()
     }
 
-    // MARK:- Set Up Data
     override func setUpData() {
+        dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
         loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
             trendingVideos = videos
@@ -48,20 +48,13 @@ class TrendingViewController: BaseViewController {
         }
     }
 
-    // MARK:- Load Data
-
-    func loadData() {
-        do {
-            let realm = try Realm()
-            trendingVideos = realm.objects(Video).filter("idCategory = %@", idCategory)
-            trendingTableView.reloadData()
-        } catch {
-
-        }
+    private func loadData() {
+        trendingVideos = RealmManager.getListVideo(idCategory)
+        trendingTableView.reloadData()
     }
 
-    func loadTrendingVideo(id: String, pageToken: String?) {
-
+    // MARK:- Webservice
+    private func loadTrendingVideo(id: String, pageToken: String?) {
         if isLoading {
             return
         }
@@ -81,12 +74,15 @@ class TrendingViewController: BaseViewController {
                 if nextPageToken == nil {
                     self.loadmoreActive = false
                 }
+            } else {
+                self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
             }
             self.isLoading = false
         }
     }
 }
 
+//MARK:- Extension UITableView
 extension TrendingViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -108,11 +104,7 @@ extension TrendingViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let video = trendingVideos![indexPath.row]
-        let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.video = video
-        History.addVideoToHistory(video)
-        navigationController?.pushViewController(detailVideoVC, animated: true)
+        dragVideo.prensetDetailVideoController(trendingVideos[indexPath.row])
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {

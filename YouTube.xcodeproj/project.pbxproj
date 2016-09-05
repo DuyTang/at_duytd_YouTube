@@ -16,6 +16,9 @@
 		F36FDB6A1D74717B00504A19 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB691D74717B00504A19 /* CustomTabBarController.swift */; };
 		F36FDB6C1D74758400504A19 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FDB6B1D74758400504A19 /* TabBarView.swift */; };
 		F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36FDB6D1D7475A200504A19 /* TabBarView.xib */; };
+		F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F374C2341D76C3E7005EC196 /* ButtonCell.swift */; };
+		F374C2371D76C3E7005EC196 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F374C2351D76C3E7005EC196 /* ButtonCell.xib */; };
+		F374C23A1D76DC5F005EC196 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F374C2391D76DC5F005EC196 /* RealmManager.swift */; };
 		F37778141D5AE6A000AC2075 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778131D5AE6A000AC2075 /* Category.swift */; };
 		F37778161D5AE6E700AC2075 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778151D5AE6E700AC2075 /* Video.swift */; };
 		F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37778171D5AEA9A00AC2075 /* UIImageView.swift */; };
@@ -31,6 +34,8 @@
 		F37ED8F01D6D3E6D006205E5 /* ResultSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37ED8EE1D6D3E6D006205E5 /* ResultSearchCell.swift */; };
 		F37ED8F11D6D3E6D006205E5 /* ResultSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */; };
 		F39598951D59B9120030BF82 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39598941D59B9120030BF82 /* UIView.swift */; };
+		F3985F8F1D7D23E400B85E1F /* AICustomViewControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3985F8E1D7D23E400B85E1F /* AICustomViewControllerTransition.swift */; };
+		F3985F911D7D24EF00B85E1F /* DraggableVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3985F901D7D24EF00B85E1F /* DraggableVideo.swift */; };
 		F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A2CAC1D550F51003FC772 /* AppDelegate.swift */; };
 		F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB41D550FC0003FC772 /* Assets.xcassets */; };
 		F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39A2CB61D550FC7003FC772 /* LaunchScreen.storyboard */; };
@@ -93,6 +98,9 @@
 		F36FDB691D74717B00504A19 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		F36FDB6B1D74758400504A19 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		F36FDB6D1D7475A200504A19 /* TabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarView.xib; sourceTree = "<group>"; };
+		F374C2341D76C3E7005EC196 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		F374C2351D76C3E7005EC196 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		F374C2391D76DC5F005EC196 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		F37778131D5AE6A000AC2075 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F37778151D5AE6E700AC2075 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		F37778171D5AEA9A00AC2075 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
@@ -114,6 +122,8 @@
 		F393C0461D5DBF7C000F6818 /* TimesNewRoman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TimesNewRoman.ttf; sourceTree = "<group>"; };
 		F393C04A1D5DC122000F6818 /* PhoneKeyCaps.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhoneKeyCaps.ttf; sourceTree = "<group>"; };
 		F39598941D59B9120030BF82 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		F3985F8E1D7D23E400B85E1F /* AICustomViewControllerTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AICustomViewControllerTransition.swift; sourceTree = "<group>"; };
+		F3985F901D7D24EF00B85E1F /* DraggableVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableVideo.swift; sourceTree = "<group>"; };
 		F39A2C8C1D550E8F003FC772 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39A2C9B1D550E8F003FC772 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		F39A2CAC1D550F51003FC772 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +240,23 @@
 			path = CustomTabBarViewController;
 			sourceTree = "<group>";
 		};
+		F374C2331D76C3D0005EC196 /* ButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				F374C2341D76C3E7005EC196 /* ButtonCell.swift */,
+				F374C2351D76C3E7005EC196 /* ButtonCell.xib */,
+			);
+			path = ButtonCell;
+			sourceTree = "<group>";
+		};
+		F374C2381D76DC4F005EC196 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				F374C2391D76DC5F005EC196 /* RealmManager.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		F377781B1D5AF3C400AC2075 /* Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +281,15 @@
 				F37ED8EF1D6D3E6D006205E5 /* ResultSearchCell.xib */,
 			);
 			path = ResultSearchCell;
+			sourceTree = "<group>";
+		};
+		F3985F8D1D7D23CC00B85E1F /* DraggableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F3985F8E1D7D23E400B85E1F /* AICustomViewControllerTransition.swift */,
+				F3985F901D7D24EF00B85E1F /* DraggableVideo.swift */,
+			);
+			path = DraggableViewController;
 			sourceTree = "<group>";
 		};
 		F39A2C831D550E8F003FC772 = {
@@ -292,6 +328,7 @@
 		F39A2CA11D550F2C003FC772 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F374C2381D76DC4F005EC196 /* Realm */,
 				F39A2CA71D550F2C003FC772 /* Models */,
 				F377781B1D5AF3C400AC2075 /* Video */,
 				F39A2CA21D550F2C003FC772 /* AppDelegate */,
@@ -355,6 +392,7 @@
 		F39A2CA61D550F2C003FC772 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F374C2331D76C3D0005EC196 /* ButtonCell */,
 				F36FDB5F1D746B4200504A19 /* TabbarView */,
 				F37ED8ED1D6D3E3B006205E5 /* ResultSearchCell */,
 				F35EE58F1D5CC6B4005464CC /* DecriptVideoCell */,
@@ -393,6 +431,7 @@
 		F39A2CA91D550F2C003FC772 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F3985F8D1D7D23CC00B85E1F /* DraggableViewController */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -418,16 +457,16 @@
 		F39A2CB91D55104F003FC772 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F36FDB601D746B4F00504A19 /* CustomTabBarViewController */,
-				F37C657E1D6C394A000AA778 /* SearchViewController */,
-				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 				F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */,
 				F39A2CD91D5516AA003FC772 /* ContentViewController */,
+				F36FDB601D746B4F00504A19 /* CustomTabBarViewController */,
 				F3B097D91D557235000D9E84 /* DetailFavoriteViewController */,
 				F3B097DA1D557235000D9E84 /* DetailVideoViewController */,
 				F39A2CDC1D5516AA003FC772 /* FavoriteViewController */,
 				F3B097DB1D557235000D9E84 /* HistoryViewController */,
 				F39A2CBB1D5510E5003FC772 /* HomeViewController */,
+				F37C657E1D6C394A000AA778 /* SearchViewController */,
+				F3E825EA1D62A082005C6647 /* TrendingViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -457,8 +496,8 @@
 		F39A2CD81D5516AA003FC772 /* AddFavoriteViewController */ = {
 			isa = PBXGroup;
 			children = (
-				F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */,
 				F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */,
+				F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */,
 			);
 			path = AddFavoriteViewController;
 			sourceTree = "<group>";
@@ -627,6 +666,7 @@
 				F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */,
 				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
 				F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */,
+				F374C2371D76C3E7005EC196 /* ButtonCell.xib in Resources */,
 				F39A2CB51D550FC0003FC772 /* Assets.xcassets in Resources */,
 				F39A2CB81D550FC7003FC772 /* LaunchScreen.storyboard in Resources */,
 				F3B097E31D5572A2000D9E84 /* DetailFavoriteViewController.xib in Resources */,
@@ -705,6 +745,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3985F8F1D7D23E400B85E1F /* AICustomViewControllerTransition.swift in Sources */,
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
 				F3A1F5501D6474C2006C4C9C /* History.swift in Sources */,
@@ -721,6 +762,7 @@
 				F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */,
 				F39A2CBE1D5510F8003FC772 /* HomeViewController.swift in Sources */,
 				F3B097C11D5561CF000D9E84 /* CategoryCell.swift in Sources */,
+				F3985F911D7D24EF00B85E1F /* DraggableVideo.swift in Sources */,
 				F39A2CCF1D5511D6003FC772 /* BaseTabbarViewController.swift in Sources */,
 				F36FDB6C1D74758400504A19 /* TabBarView.swift in Sources */,
 				F37778141D5AE6A000AC2075 /* Category.swift in Sources */,
@@ -728,6 +770,8 @@
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
 				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
 				F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */,
+				F374C23A1D76DC5F005EC196 /* RealmManager.swift in Sources */,
+				F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */,
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,
 				F3E58B9A1D6B1CAB004BB244 /* NotificationDefine.swift in Sources */,
 				F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */,

@@ -7,12 +7,11 @@
 //
 
 import UIKit
-
 class DecriptVideoCell: BaseTableViewCell {
     @IBOutlet private weak var detailDecriptVideoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        selectionStyle = .None
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -21,8 +20,9 @@ class DecriptVideoCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureDecriptVideoCell(video: Video) {
-        self.detailDecriptVideoLabel.text = video.descript
+    func configureDecriptVideoCell(text: String, font: UIFont, color: UIColor) {
+        detailDecriptVideoLabel.text = text
+        detailDecriptVideoLabel.font = font
+        detailDecriptVideoLabel.textColor = color
     }
-
 }

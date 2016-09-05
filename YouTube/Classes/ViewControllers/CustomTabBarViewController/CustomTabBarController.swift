@@ -10,7 +10,7 @@ import Foundation
 import SnapKit
 
 class CustomTabBarController: BaseTabbarViewController {
-    
+
     private let tabbarView = (TabBarView.loadBundle() as? TabBarView)!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +23,14 @@ class CustomTabBarController: BaseTabbarViewController {
             make.trailing.equalTo(view)
             make.height.equalTo(60)
         }
-        tabbarView.index = 1
+        tabbarView.index = 0
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 }
 
 extension CustomTabBarController: TabBarViewDelegate {

@@ -31,20 +31,18 @@ class HomeViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    // MARK:- Register CollectionCell
-    private func configureHomeViewController() {
-        categoryCollectionView.registerNib(CategoryCell)
-    }
+
     // MARK:- Set Up UI
     override func setUpUI() {
         navigationController?.setNavigationBarHidden(true, animated: true)
-        configureHomeViewController()
+        categoryCollectionView.registerNib(CategoryCell)
         selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
         selectedCategoryView.backgroundColor = Color.BorderColor
         categoryCollectionView.addSubview(selectedCategoryView)
         pageViewController?.dataSource = self
         pageViewController?.delegate = self
     }
+
     // MARK:- Set Up Data
     override func setUpData() {
         if let categories = Category.getCategories() where categories.count > 0 {
@@ -55,6 +53,7 @@ class HomeViewController: BaseViewController {
             loadCategories()
         }
     }
+
     // MARK:- Add Page Controller
     private func createViewController() {
         if let listCategory = listCategory {
@@ -67,6 +66,7 @@ class HomeViewController: BaseViewController {
         }
 
     }
+
     private func addContentToPageViewController() {
 
         createViewController()
@@ -76,7 +76,8 @@ class HomeViewController: BaseViewController {
         let viewController = viewControllers[0]
         pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
         pageViewController?.view.frame = CGRect(x: contentView.bounds.minX,
-            y: contentView.bounds.minY, width: contentView.bounds.width, height: contentView.bounds.height)
+            y: contentView.bounds.minY, width: contentView.bounds.width,
+            height: contentView.bounds.height)
         addChildViewController(pageViewController!)
         contentView.addSubview((pageViewController?.view)!)
         pageViewController?.didMoveToParentViewController(self)
@@ -84,13 +85,7 @@ class HomeViewController: BaseViewController {
     }
     // MARK:- Load Data
     private func loadData() {
-        do {
-            let realm = try Realm()
-            listCategory = realm.objects(Category)
-            categoryCollectionView.reloadData()
-        } catch {
-
-        }
+        listCategory = RealmManager.getAllCategory()
     }
     // MARK:- Load list Category
     private func loadCategories() {
@@ -101,6 +96,8 @@ class HomeViewController: BaseViewController {
             if success {
                 self.loadData()
                 self.addContentToPageViewController()
+            } else {
+                self.showAlert(Message.Title, message: Message.LoadCategoryFail, cancelButton: Message.OkButton)
             }
         }
     }
@@ -219,6 +216,22 @@ extension HomeViewController: UIPageViewControllerDelegate {
                 currentIndex = indexPath.row
                 categoryCollectionView.reloadSections(NSIndexSet(index: 0))
             }
+    }
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+        if let viewControl = pageViewController.viewControllers![0] as? ContentViewController {
+            currentIndex = viewControl.pageIndex
+            let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
+            categoryCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: true)
+            let isSelected = currentIndex == indexPath.row ? true : false
+            let selectedCell = collectionView(categoryCollectionView, cellForItemAtIndexPath: indexPath) as! CategoryCell
+            selectedCell.changFont(isSelected)
+            let frame = selectedCell.frame
+            UIView.animateWithDuration(0.05) {
+                self.selectedCategoryView.frame = CGRect(x: frame.origin.x, y: 38, width: frame.size.width, height: 2)
+            }
+            currentIndex = indexPath.row
+            categoryCollectionView.reloadSections(NSIndexSet(index: 0))
+        }
     }
 }
 

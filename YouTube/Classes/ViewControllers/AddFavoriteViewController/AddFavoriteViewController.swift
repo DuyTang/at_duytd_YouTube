@@ -11,23 +11,22 @@ import RealmSwift
 protocol AddFavoriteDelegate: NSObjectProtocol {
     func addSuccess(isSuccess: Bool)
 }
+private struct Options {
+    static let HeightOfCell: CGFloat = 40
+}
 
 class AddFavoriteViewController: BaseViewController {
-
-    @IBOutlet weak private var addFavoriteView: UIView!
-    @IBOutlet weak private var listFavoritePicker: UIPickerView!
     private var favorites: Results<Favorite>!
     weak var delegate: AddFavoriteDelegate?
+    @IBOutlet weak private var addFavoriteView: UIView!
+    @IBOutlet weak private var listFavoritePicker: UIPickerView!
     @IBOutlet weak private var addNewListFavoriteView: UIView!
     @IBOutlet weak private var nameNewListFavoriteTextField: UITextField!
-    var idListFavorite = 1
+    private var idListFavorite = 1
     var video = Video()
-    var myFavorite = Favorite()
-    var isSaved = false
+    private var myFavorite = Favorite()
+    private var isSaved = false
 
-    private struct Options {
-        static let HeightOfCell: CGFloat = 40
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -38,38 +37,24 @@ class AddFavoriteViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    private func setAttributeViewController() {
-        providesPresentationContextTransitionStyle = true
-        definesPresentationContext = true
+    // MARK:- Life Cycle
+    override func setUp() {
         modalPresentationStyle = .OverCurrentContext
-        modalTransitionStyle = .CrossDissolve
+        parentViewController?.modalPresentationStyle = .OverCurrentContext
     }
 
-    // MARK:- Set Up UI
-    override func setUpUI() {
-        addFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
-        addNewListFavoriteView.setBorder(5.0, borderWidth: 1.0, borderColor: Color.BackgroundColor)
-        setAttributeViewController()
-    }
-
-    // MARK:- Set Up Data
     override func setUpData() {
         loadData()
     }
 
-    // MARK:- Set Up
-    override func setUp() {
-        setAttributeViewController()
+    private func loadData() {
+        favorites = RealmManager.getAllFavorite()
     }
 
-    // MARK:- Load Data
-    private func loadData() {
-        do {
-            let realm = try Realm()
-            favorites = realm.objects(Favorite)
-        } catch {
-
-        }
+    // MARK:- Private Function
+    private func showSubView(isShow: Bool) {
+        addFavoriteView.hidden = !isShow
+        addNewListFavoriteView.hidden = isShow
     }
 
     // MARK:- Action
@@ -88,7 +73,8 @@ class AddFavoriteViewController: BaseViewController {
 
             }
             delegate?.addSuccess(isSaved)
-            dismissViewControllerAnimated(true, completion: nil)
+            view.removeFromSuperview()
+            removeFromParentViewController()
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.AddVideoFavorite, object: nil, userInfo: ["idFavorite": idListFavorite])
         } else {
             showAlert(Message.Error, message: Message.NoListFavorite, cancelButton: Message.CancelButton)
@@ -97,7 +83,8 @@ class AddFavoriteViewController: BaseViewController {
 
     @IBAction func backToDetailVideoControllerButton(sender: AnyObject) {
         delegate?.addSuccess(false)
-        dismissViewControllerAnimated(true, completion: nil)
+        view.removeFromSuperview()
+        removeFromParentViewController()
     }
 
     @IBAction func showAddNameFavoriteListViewButton(sender: AnyObject) {
@@ -123,17 +110,14 @@ class AddFavoriteViewController: BaseViewController {
             }
         }
         idListFavorite = Favorite.getId()
-        dismissViewControllerAnimated(true, completion: nil)
+        view.removeFromSuperview()
+        removeFromParentViewController()
     }
 
     @IBAction func backToListFavoriteButton(sender: AnyObject) {
         showSubView(true)
     }
 
-    private func showSubView(isShow: Bool) {
-        addFavoriteView.hidden = !isShow
-        addNewListFavoriteView.hidden = isShow
-    }
 }
 
 //MARK:- Extension UIPickerView

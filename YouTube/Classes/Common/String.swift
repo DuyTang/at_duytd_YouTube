@@ -8,8 +8,9 @@
 import SwiftUtils
 
 extension String {
+
     // MARK:- Get time of video
-    func getYoutubeFormattedDuration() -> String {
+    func convertDuration() -> String {
         var duration = ""
         if checkDurationVideo(self) {
             let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
@@ -17,7 +18,7 @@ extension String {
             for component in components {
                 duration = duration.characters.count > 0 ? duration + ":": duration
                 if component.characters.count < 2 {
-                    duration += "0" + component
+                    duration = component
                     continue
                 }
                 duration += component
@@ -27,6 +28,7 @@ extension String {
         }
         return duration
     }
+
     // MARK:- Validate time of Video
     func checkDurationVideo(text: String) -> Bool {
         let DURATION_REGEX_FULL = "^PT+[0-9]+H[0-9]+M[0-9]+[0-9]S"
@@ -41,8 +43,9 @@ extension String {
             return false
         }
     }
+
     // MARK:- Get time upload of video
-    func getTimeUpload() -> String {
+    func convertTimeUpload() -> String {
         var time = ""
         if !self.isEmpty {
             let selectedDate = self.toDate(DateFormat.TZDateTime3, localized: false)
@@ -73,10 +76,8 @@ extension String {
                             let week = diffDateComponents.day / 7
                             if week == 1 {
                                 time = "\(week) week"
-                                
                             } else {
                                 time = "\(week) weeks"
-                                
                             }
                         }
                     } else {
@@ -87,7 +88,7 @@ extension String {
         }
         return time
     }
-    
+
     // MARK:- Show view count of video
     func getNumberView() -> String {
         var numberView = ""
@@ -111,5 +112,5 @@ extension String {
         }
         return numberView
     }
-    
+
 }

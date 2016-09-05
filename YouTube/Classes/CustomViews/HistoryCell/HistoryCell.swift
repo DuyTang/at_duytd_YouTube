@@ -14,6 +14,7 @@ class HistoryCell: BaseTableViewCell {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var channelLabel: UILabel!
     @IBOutlet weak private var timeViewLabel: UILabel!
+    @IBOutlet weak private var durationLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,6 +31,7 @@ class HistoryCell: BaseTableViewCell {
         self.titleLabel.text = video.title
         self.channelLabel.text = video.channelTitle
         self.timeViewLabel.text = video.time
+        durationLabel.text = video.duration.convertDuration()
     }
 
 }
