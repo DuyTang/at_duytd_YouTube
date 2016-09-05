@@ -79,9 +79,14 @@ class HistoryViewController: BaseViewController {
 
     // MARK:- Action
     @IBAction private func deleteAllHistory(sender: UIButton) {
-        History.cleanData()
-        date.removeAll()
-        historyTableView.reloadData()
+        let alert = UIAlertController(title: Message.Title, message: Message.DeleteMessage, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
+            History.cleanData()
+            self.date.removeAll()
+            self.historyTableView.reloadData()
+            }))
+        alert.addAction(UIAlertAction(title: Message.CancelButton, style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
 }
 //MARK:- Extension
@@ -101,6 +106,10 @@ extension HistoryViewController: UITableViewDataSource {
         } else {
             return Message.NoData
         }
+    }
+
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = Color.TitleColor
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
