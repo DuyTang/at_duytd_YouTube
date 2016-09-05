@@ -15,9 +15,18 @@ class RealmManager {
     class func getAllFavorite() -> Results<Favorite>? {
         return realm?.objects(Favorite)
     }
+    
     class func getListVideo(id: String) -> Results<Video>? {
         return realm?.objects(Video).filter("idCategory = %@", id)
     }
+    class func getListVideoFavorite(key: String)-> Results<VideoFavorite>? {
+        return realm?.objects(VideoFavorite).filter("idVideo = %@", key)
+    }
+    
+    class func getVideoFavorite(key: String)-> VideoFavorite {
+        return (realm?.objects(VideoFavorite).filter("idVideo = %@", key).first)!
+    }
+    
     class func addRealm(object: Object) {
         do {
             try realm?.write({

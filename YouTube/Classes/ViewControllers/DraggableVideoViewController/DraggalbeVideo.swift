@@ -8,15 +8,16 @@
 
 import Foundation
 
-class DraggalbeVideo: UIViewController, UIGestureRecognizerDelegate {
+class DraggalbeVideo {
     var thumbnailVideoContainerView: UIView = (UIApplication.sharedApplication().delegate as? AppDelegate)!.thumbnailView!
     let customTransitioningDelegate = InteractiveTransitioningDelegate()
+    private var parentVC: UIViewController!
     lazy var videoPlayerViewController: DetailVideoViewController = {
         let vc = AppDefine.kAppDelegate!.videoDetailVC
         vc.modalPresentationStyle = .Custom
         vc.transitioningDelegate = self.customTransitioningDelegate
         vc.handlePan = { (panGestureRecozgnizer) in
-            let translatedPoint = panGestureRecozgnizer.translationInView(self.view)
+            let translatedPoint = panGestureRecozgnizer.translationInView(self.parentVC.view)
             if panGestureRecozgnizer.state == .Began {
                 self.customTransitioningDelegate.beginDismissing(viewController: vc)
                 self.lastVideoPlayerOriginY = vc.view.frame.origin.y
@@ -37,8 +38,12 @@ class DraggalbeVideo: UIViewController, UIGestureRecognizerDelegate {
     var lastVideoPlayerOriginY: CGFloat = 0.0
     var videoPlayerViewControllerInitialFrame: CGRect?
 
+    init(rootViewController: UIViewController) {
+        self.parentVC = rootViewController
+    }
+
     // MARK:- Draggable Video Progress
-    func draggbleProgress(thumbnailVideoContainerView: UIView) {
+    func draggbleProgress() {
         customTransitioningDelegate.transitionPresent = { [weak self](fromViewController: UIViewController,
             toViewController: UIViewController, containerView: UIView, transitionType: TransitionType, completion: () -> Void) in
             guard let weakSelf = self else {
@@ -50,20 +55,15 @@ class DraggalbeVideo: UIViewController, UIGestureRecognizerDelegate {
                     videoPlayerViewController.view.frame = weakSelf.videoPlayerViewControllerInitialFrame!
                     weakSelf.videoPlayerViewControllerInitialFrame = nil
                 } else {
-                    videoPlayerViewController.view.frame = CGRectOffset(containerView.bounds, 0, CGRectGetHeight(videoPlayerViewController.view.frame))
+                    videoPlayerViewController.view.frame = CGRectOffset(containerView.bounds, 0,
+                        CGRectGetHeight(videoPlayerViewController.view.frame))
                     videoPlayerViewController.backgroundView.alpha = 0.0
-                    videoPlayerViewController.dismissButton.alpha = 0.0
                 }
             }
             UIView.animateWithDuration(defaultTransitionAnimationDuration, animations: {
                 videoPlayerViewController.view.transform = CGAffineTransformIdentity
                 videoPlayerViewController.view.frame = containerView.bounds
-                videoPlayerViewController.backgroundView.alpha = 1.0
-                videoPlayerViewController.dismissButton.alpha = 1.0
-                videoPlayerViewController.backButton.alpha = 1.0
-                videoPlayerViewController.favoriteButton.alpha = 1.0
-                videoPlayerViewController.playButton.alpha = 1.0
-                videoPlayerViewController.nextButton.alpha = 1.0
+                self!.showControl(1.0)
                 }, completion: { (finished) in
                 completion()
                 videoPlayerViewController.view.userInteractionEnabled = true
@@ -80,25 +80,19 @@ class DraggalbeVideo: UIViewController, UIGestureRecognizerDelegate {
                 var finalRect = videoPlayerViewController.view.frame
                 finalRect.origin.x = CGRectGetMinX(weakSelf.thumbnailVideoContainerView.frame)
                 finalRect.origin.y = CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame)
-                videoPlayerViewController.view.frame = finalRect
-                videoPlayerViewController.backgroundView.alpha = 1.0
-                videoPlayerViewController.dismissButton.alpha = 0.0
-                videoPlayerViewController.backButton.alpha = 0.0
-                videoPlayerViewController.favoriteButton.alpha = 0.0
-                videoPlayerViewController.playButton.alpha = 0.0
-                videoPlayerViewController.nextButton.alpha = 0.0
+                videoPlayerViewController.view.frame = CGRect(origin: finalRect.origin, size: CGSizeMake(weakSelf.thumbnailVideoContainerView.bounds.width, weakSelf.thumbnailVideoContainerView.bounds.height))
+                self!.showControl(0.0)
 
-                videoPlayerViewController
                 }, completion: { (finished) in
                 completion()
                 videoPlayerViewController.view.userInteractionEnabled = false
-                weakSelf.parentViewController?.addChildViewController(videoPlayerViewController)
+                weakSelf.parentVC?.addChildViewController(videoPlayerViewController)
                 var thumbnailRect = videoPlayerViewController.view.frame
                 thumbnailRect.origin = CGPointZero
                 videoPlayerViewController.view.frame = thumbnailRect
 
                 weakSelf.thumbnailVideoContainerView.addSubview(fromViewController.view)
-                fromViewController.didMoveToParentViewController(weakSelf.parentViewController)
+                fromViewController.didMoveToParentViewController(weakSelf.parentVC)
             })
         }
 
@@ -125,7 +119,6 @@ class DraggalbeVideo: UIViewController, UIGestureRecognizerDelegate {
             finalRect.origin.y = verticalMove
             toViewController.view.frame = finalRect
             videoPlayerViewController.backgroundView.alpha = percentage
-            videoPlayerViewController.dismissButton.alpha = percentage
         }
 
         customTransitioningDelegate.transitionPercentDismiss = { [weak self](fromViewController: UIViewController, toViewController: UIViewController, percentage: CGFloat, containerView: UIView) in
@@ -148,8 +141,71 @@ class DraggalbeVideo: UIViewController, UIGestureRecognizerDelegate {
             finalRect.origin.y = verticalMove
             videoPlayerViewController.view.frame = finalRect
             videoPlayerViewController.backgroundView.alpha = 1 - percentage
-            videoPlayerViewController.dismissButton.alpha = 1 - percentage
         }
+    }
+
+    func showControl(alpha: CGFloat) {
+        videoPlayerViewController.backgroundView.alpha = 1.0
+        videoPlayerViewController.dismissButton.alpha = alpha
+        videoPlayerViewController.favoriteButton.alpha = alpha
+        videoPlayerViewController.playButton.alpha = alpha
+        videoPlayerViewController.nextButton.alpha = alpha
+        videoPlayerViewController.previousButton.alpha = alpha
+    }
+
+    func addActionToView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(presentFromThumbnailAction))
+        thumbnailVideoContainerView.addGestureRecognizer(tap)
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePresentPan))
+        thumbnailVideoContainerView.addGestureRecognizer(pan)
+    }
+
+    // MARK:- Draggable Video Progress
+    @objc func presentFromThumbnailAction(sender: UITapGestureRecognizer? = nil) {
+        guard self.videoPlayerViewController.parentViewController != nil else {
+            return
+        }
+        videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(videoPlayerViewController.view.frame, toView: parentVC!.view)
+        videoPlayerViewController.removeFromParentViewController()
+        parentVC.presentViewController(videoPlayerViewController, animated: true, completion: nil)
+    }
+
+    @objc func handlePresentPan(panGestureRecozgnizer: UIPanGestureRecognizer) {
+        guard videoPlayerViewController.parentViewController != nil || customTransitioningDelegate.isPresenting else {
+            return
+        }
+        let translatedPoint = panGestureRecozgnizer.translationInView(parentVC.view)
+        if (panGestureRecozgnizer.state == .Began) {
+            videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(videoPlayerViewController.view.frame, toView: parentVC.view)
+            videoPlayerViewController.removeFromParentViewController()
+            customTransitioningDelegate.beginPresenting(viewController: videoPlayerViewController, fromViewController: parentVC)
+            videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(videoPlayerViewController.view.frame, toView: parentVC.view)
+            lastVideoPlayerOriginY = videoPlayerViewControllerInitialFrame!.origin.y
+
+        } else if (panGestureRecozgnizer.state == .Changed) {
+            let ratio = max(min(((lastVideoPlayerOriginY + translatedPoint.y) / CGRectGetMinY(thumbnailVideoContainerView.frame)), 1), 0)
+            lastPanRatio = 1 - ratio
+            customTransitioningDelegate.updateInteractiveTransition(lastPanRatio)
+
+        } else if (panGestureRecozgnizer.state == .Ended) {
+            let completed = lastPanRatio > panRatioThreshold || lastPanRatio < -panRatioThreshold
+            customTransitioningDelegate.finalizeInteractiveTransition(isTransitionCompleted: completed)
+        }
+    }
+
+    func prensetDetailVideoController(video: Video) {
+        if videoPlayerViewController.parentViewController != nil {
+            videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(self.videoPlayerViewController.view.frame, toView: parentVC.view)
+            self.videoPlayerViewController.removeFromParentViewController()
+        }
+        videoPlayerViewController.video = video
+        videoPlayerViewController.oldVideo = video
+        videoPlayerViewController.loadData()
+        videoPlayerViewController.prepareToPlayVideo(video.idVideo)
+        videoPlayerViewController.checkFavorite(video.idVideo)
+        videoPlayerViewController.setImageForFavoriteButton()
+        History.addVideoToHistory(video)
+        parentVC.presentViewController(videoPlayerViewController, animated: true, completion: nil)
     }
 
 }
