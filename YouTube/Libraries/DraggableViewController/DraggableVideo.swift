@@ -55,6 +55,7 @@ class DraggalbeVideo {
                 } else {
                     videoPlayerViewController.view.frame = CGRectOffset(containerView.bounds, 0,
                         CGRectGetHeight(videoPlayerViewController.view.frame))
+                    videoPlayerViewController.backgroundView.alpha = 0.0
                 }
             }
             UIView.animateWithDuration(defaultTransitionAnimationDuration, animations: {
@@ -189,7 +190,6 @@ class DraggalbeVideo {
             self.videoPlayerViewController.youtubeVideoPlayer?.moviePlayer.pause()
             self.videoPlayerViewController.view.removeFromSuperview()
             self.videoPlayerViewController.removeFromParentViewController()
-            self.parentVC.removeFromParentViewController()
             }))
         alert.addAction(UIAlertAction(title: Message.CancelButton, style: UIAlertActionStyle.Cancel, handler: { action in
 
