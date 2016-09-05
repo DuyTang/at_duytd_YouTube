@@ -20,7 +20,7 @@ class TrendingViewController: BaseViewController, UIGestureRecognizerDelegate {
     private struct Options {
         static let HeightOfRow: CGFloat = 205
     }
-    var dragVideo: DraggalbeVideo!
+    private var dragVideo: DraggalbeVideo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,6 @@ class TrendingViewController: BaseViewController, UIGestureRecognizerDelegate {
 
     override func setUp() {
         modalPresentationStyle = .OverCurrentContext
-
     }
     // MARk:- Set up UI
     override func setUpUI() {
@@ -58,12 +57,12 @@ class TrendingViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
 
     // MARK:- Load Data
-    func loadData() {
+    private func loadData() {
         trendingVideos = RealmManager.getListVideo(idCategory)
         trendingTableView.reloadData()
     }
 
-    func loadTrendingVideo(id: String, pageToken: String?) {
+    private func loadTrendingVideo(id: String, pageToken: String?) {
         if isLoading {
             return
         }

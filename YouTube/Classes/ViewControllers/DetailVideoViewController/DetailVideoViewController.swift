@@ -170,6 +170,16 @@ class DetailVideoViewController: BaseViewController {
         hideButton(false)
     }
 
+    // MARK:- Check Favorite
+    func checkFavorite(idVideo: String) -> Bool {
+        var isFavorite = false
+        let listVideo = RealmManager.getListVideoFavorite(video.idVideo)
+        if listVideo?.count > 0 {
+            isFavorite = true
+        }
+        return isFavorite
+    }
+
     func setImageForFavoriteButton() {
         isFavorite = checkFavorite(video.idVideo)
         let nameImage = isFavorite ? "bt_starfill" : "bt_star"
@@ -264,16 +274,6 @@ class DetailVideoViewController: BaseViewController {
                 self.hideLoading()
             }
         }
-    }
-
-    // MARK:- Check Favorite
-    func checkFavorite(idVideo: String) -> Bool {
-        var isFavorite = false
-        let listVideo = RealmManager.getListVideoFavorite(video.idVideo)
-        if listVideo?.count > 0 {
-            isFavorite = true
-        }
-        return isFavorite
     }
 
     // MARK:- Action

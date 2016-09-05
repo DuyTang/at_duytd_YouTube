@@ -1,16 +1,15 @@
 //
-//  DraggalbeVideo.swift
+//  DraggableVideo.swift
 //  YouTube
 //
-//  Created by Duy Tang on 9/2/16.
+//  Created by Duy Tang on 9/5/16.
 //  Copyright © 2016 Duy Tang. All rights reserved.
 //
 
 import Foundation
-
 class DraggalbeVideo {
-    var thumbnailVideoContainerView: UIView = (UIApplication.sharedApplication().delegate as? AppDelegate)!.thumbnailView!
-    let customTransitioningDelegate = InteractiveTransitioningDelegate()
+    private var thumbnailVideoContainerView: UIView = (UIApplication.sharedApplication().delegate as? AppDelegate)!.thumbnailView!
+    private let customTransitioningDelegate = InteractiveTransitioningDelegate()
     private var parentVC: UIViewController!
     lazy var videoPlayerViewController: DetailVideoViewController = {
         let vc = AppDefine.kAppDelegate!.videoDetailVC
@@ -33,10 +32,10 @@ class DraggalbeVideo {
         return vc
     }()
 
-    let panRatioThreshold: CGFloat = 0.3
-    var lastPanRatio: CGFloat = 0.0
-    var lastVideoPlayerOriginY: CGFloat = 0.0
-    var videoPlayerViewControllerInitialFrame: CGRect?
+    private let panRatioThreshold: CGFloat = 0.3
+    private var lastPanRatio: CGFloat = 0.0
+    private var lastVideoPlayerOriginY: CGFloat = 0.0
+    private var videoPlayerViewControllerInitialFrame: CGRect?
 
     init(rootViewController: UIViewController) {
         self.parentVC = rootViewController
@@ -144,7 +143,7 @@ class DraggalbeVideo {
         }
     }
 
-    func showControl(alpha: CGFloat) {
+    private func showControl(alpha: CGFloat) {
         videoPlayerViewController.backgroundView.alpha = 1.0
         videoPlayerViewController.dismissButton.alpha = alpha
         videoPlayerViewController.favoriteButton.alpha = alpha
