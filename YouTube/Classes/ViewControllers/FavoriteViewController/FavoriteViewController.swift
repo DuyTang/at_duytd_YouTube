@@ -10,13 +10,13 @@ import UIKit
 import RealmSwift
 import SwiftUtils
 
-class FavoriteViewController: BaseViewController {
+private struct Options {
+    static let HeightOfCell: CGFloat = 100
+}
 
+class FavoriteViewController: BaseViewController {
     @IBOutlet weak private var favoriteTableView: UITableView!
     private var listFavorite: Results<Favorite>!
-    private struct Options {
-        static let HeightOfCell: CGFloat = 100
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,45 +28,32 @@ class FavoriteViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK:- Life Cycle
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         favoriteTableView.reloadData()
     }
 
-    // MARK:- Set Up UI
     override func setUpUI() {
         navigationController?.navigationBarHidden = true
-        configureFavoriteController()
+        favoriteTableView.registerNib(FavoriteCell)
         notification()
     }
 
-    // MARK:- Set Up Data
     override func setUpData() {
         loadData()
     }
 
-    // MARK:- Configure FavoriteController
-    private func configureFavoriteController() {
-        favoriteTableView.registerNib(FavoriteCell)
-    }
-
-    // MARK:- Load Data
     func loadData() {
-        do {
-            let realm = try Realm()
-            listFavorite = realm.objects(Favorite)
-        } catch {
-
-        }
+        listFavorite = RealmManager.getAllFavorite()
     }
 
-    // MARK:- Notification
-    func notification() {
+    // MARK:- Private Function
+    private func notification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deleteListFavorite), name: NotificationDefine.DeleteListFavorite, object: nil)
     }
 
-    // MARK:- Update UI
-    func deleteListFavorite(notification: NSNotification) {
+    @objc private func deleteListFavorite(notification: NSNotification) {
         let userInfo = notification.userInfo
         let indexPath = userInfo!["indexPath"] as! NSIndexPath
         favoriteTableView.beginUpdates()
@@ -78,6 +65,7 @@ class FavoriteViewController: BaseViewController {
 
 }
 
+//MARK:- Extension
 extension FavoriteViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
