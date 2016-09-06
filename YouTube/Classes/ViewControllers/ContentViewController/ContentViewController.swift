@@ -39,7 +39,7 @@ class ContentViewController: BaseViewController {
     }
 
     override func setUpData() {
-        dragVideo = DraggalbeVideo(rootViewController: self.parentViewController!)
+        dragVideo = DraggalbeVideo(rootViewController: parentViewController!)
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             homeVideos = videos
         } else {

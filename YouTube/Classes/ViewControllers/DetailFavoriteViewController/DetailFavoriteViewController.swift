@@ -47,7 +47,7 @@ class DetailFavoriteViewController: BaseViewController {
     }
 
     override func setUpData() {
-        dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
+        dragVideo = DraggalbeVideo(rootViewController: tabBarController!)
     }
 
     // MARK:- Private Function
@@ -58,13 +58,14 @@ class DetailFavoriteViewController: BaseViewController {
 
     @objc private func addNewVideo(notification: NSNotification) {
         let userInfo = notification.userInfo
-        let id = userInfo!["idFavorite"] as? Int ?? 0
-        if id == favorite.id {
+        if let id = userInfo!["idFavorite"] as? Int where id == favorite.id {
+
             listVideoFavoriteTableView.beginUpdates()
             var indexPaths = [NSIndexPath]()
             indexPaths.append(NSIndexPath(forRow: favorite.listVideo.count - 1, inSection: 0))
             listVideoFavoriteTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
             listVideoFavoriteTableView.endUpdates()
+
         }
     }
 

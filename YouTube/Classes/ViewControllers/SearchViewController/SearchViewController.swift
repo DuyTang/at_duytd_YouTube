@@ -64,7 +64,7 @@ class SearchViewController: BaseViewController {
     }
 
     override func setUpData() {
-        dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
+        dragVideo = DraggalbeVideo(rootViewController: tabBarController!)
         loadData()
     }
 
