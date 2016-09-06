@@ -40,7 +40,6 @@ class ContentViewController: BaseViewController {
 
     override func setUpData() {
         dragVideo = DraggalbeVideo(rootViewController: self.parentViewController!)
-        loadData()
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             homeVideos = videos
         } else {
@@ -70,6 +69,7 @@ class ContentViewController: BaseViewController {
         VideoService.loadDataFromAPI(pageId, parameters: parameters) { (success, nextPageToken, error) in
             if success {
                 self.hideLoading()
+                self.loadData()
                 self.contentTableView.reloadData()
                 self.pageToken = nextPageToken
                 if nextPageToken == nil {
@@ -82,7 +82,7 @@ class ContentViewController: BaseViewController {
 
 }
 
-//MARK:- UITableViewDataSource
+//MARK:- Extension
 extension ContentViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -116,7 +116,7 @@ extension ContentViewController: UITableViewDataSource {
     }
 
 }
-//MARK:- UITableViewDelegate
+
 extension ContentViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return Options.HeightOfHomeCell
