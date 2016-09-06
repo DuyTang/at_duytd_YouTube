@@ -9,14 +9,16 @@
 import UIKit
 import RealmSwift
 
+private struct Options {
+    static let HeightOfRow: CGFloat = 90
+}
+
 class HistoryViewController: BaseViewController {
 
     @IBOutlet weak private var historyTableView: UITableView!
     private var videos: Results<History>!
     private var date: [String] = []
-    private struct Options {
-        static let HeightOfRow: CGFloat = 90
-    }
+    private var dragVideo: DraggalbeVideo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,31 +27,31 @@ class HistoryViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+    // MARK:- Life Cycle
     override func viewWillAppear(animated: Bool) {
         date.removeAll()
         loadData()
     }
 
-    // MARK:- Configure HistoryViewController
-    private func configureHistoryController() {
-        historyTableView.registerNib(HistoryCell)
-    }
-    // MARK:- Set Up UI
     override func setUpUI() {
         navigationController?.navigationBarHidden = true
-        configureHistoryController()
+        historyTableView.registerNib(HistoryCell)
+        dragVideo.draggbleProgress()
+        dragVideo.addActionToView()
     }
-    // MARK:- Load Data
-    func loadData() {
-        do {
-            let realm = try Realm()
-            videos = realm.objects(History)
-        } catch {
-        }
+
+    override func setUpData() {
+        dragVideo = DraggalbeVideo(rootViewController: tabBarController!)
+    }
+
+    private func loadData() {
+        videos = RealmManager.getAllHistory()
         loadDate()
     }
-    // MARK:- Load Date Watched
-    func loadDate() {
+
+    // MARK:- Private Function
+    private func loadDate() {
         if videos.count > 0 {
             var currentDate = videos[0].date
             date.append(currentDate)
@@ -62,8 +64,8 @@ class HistoryViewController: BaseViewController {
         }
         historyTableView.reloadData()
     }
-    // MARK: - Load List Video By Date
-    func getListVideo(date: String) -> [History] {
+
+    private func getListVideo(date: String) -> [History] {
         var list = [History]()
         if videos.count > 0 {
             for video in videos {
@@ -74,14 +76,20 @@ class HistoryViewController: BaseViewController {
         }
         return list
     }
-    // MARK:- Clear History
-    @IBAction func deleteAllHistory(sender: UIButton) {
-        History.cleanData()
-        date.removeAll()
-        historyTableView.reloadData()
+
+    // MARK:- Action
+    @IBAction private func deleteAllHistory(sender: UIButton) {
+        let alert = UIAlertController(title: Message.Title, message: Message.DeleteMessage, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
+            History.cleanData()
+            self.date.removeAll()
+            self.historyTableView.reloadData()
+            }))
+        alert.addAction(UIAlertAction(title: Message.CancelButton, style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
 }
-//MARK:- UITableViewDataSource
+//MARK:- Extension
 extension HistoryViewController: UITableViewDataSource {
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -100,6 +108,10 @@ extension HistoryViewController: UITableViewDataSource {
         }
     }
 
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = Color.TitleColor
+    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if date.count > 0 {
             return getListVideo(date[section]).count
@@ -116,13 +128,11 @@ extension HistoryViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailVideoVC = DetailVideoViewController()
-        let video = getListVideo(date[indexPath.section])[indexPath.row]
-        detailVideoVC.video = Video(history: video)
-        navigationController?.pushViewController(detailVideoVC, animated: true)
+        let video = Video(history: getListVideo(date[indexPath.section])[indexPath.row])
+        dragVideo.prensetDetailVideoController(video)
     }
 }
-//MARK:- UITableViewDelegate
+
 extension HistoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return Options.HeightOfRow

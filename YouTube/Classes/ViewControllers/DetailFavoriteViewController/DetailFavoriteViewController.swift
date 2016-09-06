@@ -10,6 +10,10 @@ import UIKit
 import SwiftUtils
 import RealmSwift
 
+private struct Options {
+    static let HeightOfRow: CGFloat = 205
+}
+
 class DetailFavoriteViewController: BaseViewController {
 
     @IBOutlet weak private var nameListFavoriteLabel: UILabel!
@@ -19,10 +23,8 @@ class DetailFavoriteViewController: BaseViewController {
     private var cellIsAnimating = false
     private var cellNeedToShow = false
     private var initialIndexPath: NSIndexPath?
+    private var dragVideo: DraggalbeVideo!
 
-    private struct Options {
-        static let HeightOfRow: CGFloat = 205
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +34,7 @@ class DetailFavoriteViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
 
-    // MARK:- Set Up UI
+    // MARK:- Life Cycle
     override func setUpUI() {
         listVideoFavoriteTableView.registerNib(HomeCell)
         nameListFavoriteLabel.text = favorite.name
@@ -40,34 +42,34 @@ class DetailFavoriteViewController: BaseViewController {
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
         listVideoFavoriteTableView.addGestureRecognizer(longpress)
         notification()
+        dragVideo.draggbleProgress()
+        dragVideo.addActionToView()
     }
 
-    // MARK:- Set Up Data
     override func setUpData() {
-
+        dragVideo = DraggalbeVideo(rootViewController: tabBarController!)
     }
 
-    // MARK:- Notification
-    func notification() {
+    // MARK:- Private Function
+    private func notification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addNewVideo), name: NotificationDefine.AddVideoFavorite, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(deleteVideo), name: NotificationDefine.DeleteVideo, object: nil)
     }
 
-    // MARK:- Add new video to list
-    func addNewVideo(notification: NSNotification) {
+    @objc private func addNewVideo(notification: NSNotification) {
         let userInfo = notification.userInfo
-        let id = userInfo!["idFavorite"] as? Int ?? 0
-        if id == favorite.id {
+        if let id = userInfo!["idFavorite"] as? Int where id == favorite.id {
+
             listVideoFavoriteTableView.beginUpdates()
             var indexPaths = [NSIndexPath]()
             indexPaths.append(NSIndexPath(forRow: favorite.listVideo.count - 1, inSection: 0))
             listVideoFavoriteTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
             listVideoFavoriteTableView.endUpdates()
+
         }
     }
 
-    // MARK:- Delete video from list
-    func deleteVideo(notification: NSNotification) {
+    @objc private func deleteVideo(notification: NSNotification) {
         let userInfo = notification.userInfo
         if let indexPath = userInfo!["indexPath"] as? NSIndexPath {
             listVideoFavoriteTableView.beginUpdates()
@@ -78,13 +80,7 @@ class DetailFavoriteViewController: BaseViewController {
         }
     }
 
-    // MARK:- Action
-    @IBAction func clickBack(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
-    }
-
-    // MARK:- Sort Video in FavoriteLisst
-    func longPressGestureRecognized(longPress: UILongPressGestureRecognizer) {
+    @objc private func longPressGestureRecognized(longPress: UILongPressGestureRecognizer) {
         let state = longPress.state
         let locationInView = longPress.locationInView(listVideoFavoriteTableView)
         let indexPath = listVideoFavoriteTableView.indexPathForRowAtPoint(locationInView)
@@ -216,8 +212,14 @@ class DetailFavoriteViewController: BaseViewController {
         }
     }
 
+    // MARK:- Action
+    @IBAction private func clickBack(sender: AnyObject) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+
 }
-// MARK:- UITableViewDataSource
+
+// MARK:- Extension
 extension DetailFavoriteViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favorite.listVideo.count
@@ -233,30 +235,20 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
         let video = Video(favorite.listVideo[indexPath.row])
-        let detailVideoVC = DetailVideoViewController()
-        detailVideoVC.video = video
-        detailVideoVC.delegate = self
-        History.addVideoToHistory(video)
-        navigationController?.pushViewController(detailVideoVC, animated: true)
+        dragVideo.videoPlayerViewController.delegate = self
+        dragVideo.prensetDetailVideoController(video)
     }
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Default, title: Message.Delete) { action, index in
             let video = self.favorite.listVideo[indexPath.row]
-            do {
-                let realm = try Realm()
-                try realm.write({
-                    realm.delete(video)
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteVideo, object: nil, userInfo: ["indexPath": indexPath])
-                })
-            } catch {
-
-            }
+            RealmManager.deleteRealm(video)
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteVideo, object: nil, userInfo: ["indexPath": indexPath])
         }
         return [delete]
     }
 }
-// MARK:- UITableViewDelegate
+
 extension DetailFavoriteViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return Options.HeightOfRow

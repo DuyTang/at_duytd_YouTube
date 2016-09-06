@@ -94,6 +94,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     func showButton(alpha: CGFloat) {
+        backgroundView.alpha = 1.0
         dismissButton.alpha = alpha
         favoriteButton.alpha = alpha
         playButton.alpha = alpha

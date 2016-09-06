@@ -25,10 +25,12 @@
                             <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7x-Jq-8vT">
-                            <rect key="frame" x="306" y="26" width="61" height="30"/>
-                            <state key="normal" title="DeleteAll">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7x-Jq-8vT">
+                            <rect key="frame" x="334" y="23" width="33" height="33"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" backgroundImage="bt_delete">
                                 <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="deleteAllHistory:" destination="-1" eventType="touchUpInside" id="rzc-xk-Oyb"/>
@@ -44,8 +46,8 @@
                         <constraint firstAttribute="bottom" secondItem="gvK-6P-6LE" secondAttribute="bottom" constant="8" id="j5C-Dp-gH3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
-                    <rect key="frame" x="0.0" y="64" width="375" height="563"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4l-XT-yIv">
+                    <rect key="frame" x="0.0" y="64" width="375" height="543"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="PWA-zi-ZEI"/>
@@ -60,11 +62,14 @@
                 <constraint firstItem="Y4l-XT-yIv" firstAttribute="top" secondItem="cHd-lJ-otw" secondAttribute="bottom" id="8kx-Z7-ITf"/>
                 <constraint firstAttribute="trailing" secondItem="Y4l-XT-yIv" secondAttribute="trailing" id="K8A-Zo-xAa"/>
                 <constraint firstItem="cHd-lJ-otw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ePO-t0-AbW"/>
-                <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" constant="40" id="fvI-WH-RJx"/>
+                <constraint firstAttribute="bottom" secondItem="Y4l-XT-yIv" secondAttribute="bottom" constant="60" id="fvI-WH-RJx"/>
                 <constraint firstAttribute="trailing" secondItem="cHd-lJ-otw" secondAttribute="trailing" id="trY-IO-HCn"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="109.5" y="194.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="bt_delete" width="33" height="33"/>
+    </resources>
 </document>

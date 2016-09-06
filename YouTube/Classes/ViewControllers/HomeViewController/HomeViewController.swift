@@ -32,7 +32,7 @@ class HomeViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
 
-    // MARK:- Set Up UI
+    // MARK:- Life Cycle
     override func setUpUI() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         categoryCollectionView.registerNib(CategoryCell)
@@ -43,7 +43,6 @@ class HomeViewController: BaseViewController {
         pageViewController?.delegate = self
     }
 
-    // MARK:- Set Up Data
     override func setUpData() {
         if let categories = Category.getCategories() where categories.count > 0 {
             listCategory = categories
@@ -54,7 +53,12 @@ class HomeViewController: BaseViewController {
         }
     }
 
-    // MARK:- Add Page Controller
+    private func loadData() {
+        listCategory = RealmManager.getAllCategory()
+        categoryCollectionView.reloadData()
+    }
+
+    // MARK:- Private Function
     private func createViewController() {
         if let listCategory = listCategory {
             for index in 0..<listCategory.count {
@@ -68,7 +72,6 @@ class HomeViewController: BaseViewController {
     }
 
     private func addContentToPageViewController() {
-
         createViewController()
         pageViewController = UIPageViewController(transitionStyle: .Scroll,
             navigationOrientation: .Horizontal, options: nil)
@@ -83,11 +86,7 @@ class HomeViewController: BaseViewController {
         pageViewController?.didMoveToParentViewController(self)
 
     }
-    // MARK:- Load Data
-    private func loadData() {
-        listCategory = RealmManager.getAllCategory()
-    }
-    // MARK:- Load list Category
+
     private func loadCategories() {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
@@ -101,12 +100,7 @@ class HomeViewController: BaseViewController {
             }
         }
     }
-    // MARK:- Show SearchBar
-    @IBAction private func showSearchBar(sender: AnyObject) {
-        let searchVC = SearchViewController()
-        navigationController?.pushViewController(searchVC, animated: false)
-    }
-    // MARK:- Move Page
+
     private func backPage(viewController: UIViewController) {
         pageViewController?.setViewControllers([viewController], direction: .Forward, animated: true, completion: nil)
     }
@@ -114,8 +108,15 @@ class HomeViewController: BaseViewController {
     private func nextPage(viewController: UIViewController) {
         pageViewController?.setViewControllers([viewController], direction: .Reverse, animated: true, completion: nil)
     }
+
+    // MARK:- Action
+    @IBAction private func showSearchBar(sender: AnyObject) {
+        let searchVC = SearchViewController()
+        navigationController?.pushViewController(searchVC, animated: false)
+    }
+
 }
-//MARK:- UICollectionViewDataSource
+//MARK:- Extension
 extension HomeViewController: UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -173,7 +174,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 
 }
-//MARK:- UIPageViewControllerDataSource
+
 extension HomeViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController,
         viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -198,7 +199,7 @@ extension HomeViewController: UIPageViewControllerDataSource {
             return viewControllers[index]
     }
 }
-//MARK:- UIPageViewControllerDelegate
+
 extension HomeViewController: UIPageViewControllerDelegate {
     func pageViewController(pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
