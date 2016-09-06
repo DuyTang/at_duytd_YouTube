@@ -33,7 +33,7 @@
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_video" translatesAutoresizingMaskIntoConstraints="NO" id="6kI-Qt-qrF">
                         <rect key="frame" x="14" y="8" width="90" height="73"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="ZpX-lc-9Ag"/>
@@ -73,4 +73,7 @@
             <point key="canvasLocation" x="178" y="202.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="bg_video" width="242" height="158"/>
+    </resources>
 </document>

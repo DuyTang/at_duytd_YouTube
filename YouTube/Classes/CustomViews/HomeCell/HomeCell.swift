@@ -42,8 +42,8 @@ class HomeCell: BaseTableViewCell {
     }
 
     override func prepareForReuse() {
-        thumbnailVideo.image = nil
-        thumbnailChannel.image = nil
+        thumbnailVideo.image = UIImage(named: "bg_video")
+        thumbnailChannel.image = UIImage(named: "bg_video")
     }
 
 }
