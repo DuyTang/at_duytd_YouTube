@@ -255,7 +255,7 @@ extension DetailFavoriteViewController: UITableViewDelegate {
     }
 }
 
-extension DetailFavoriteViewController: DetailVideoDelegete {
+extension DetailFavoriteViewController: DetailVideoDelegate {
     func deleteFromListFavorite(isDeleted: Bool) {
         if isDeleted == false {
             listVideoFavoriteTableView.reloadData()

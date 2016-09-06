@@ -89,6 +89,7 @@ class BaseViewController: UIViewController {
         let alertController = UIAlertController(title: title, message: mes, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: cancel, style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
             }))
+        presentViewController(alertController, animated: true, completion: nil)
 
     }
 
