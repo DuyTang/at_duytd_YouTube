@@ -70,7 +70,6 @@ class ContentViewController: BaseViewController {
             if success {
                 self.hideLoading()
                 self.loadData()
-                self.contentTableView.reloadData()
                 self.pageToken = nextPageToken
                 if nextPageToken == nil {
                     self.loadmoreActive = false
