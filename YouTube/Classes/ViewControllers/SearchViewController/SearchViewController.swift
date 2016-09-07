@@ -154,8 +154,18 @@ class SearchViewController: BaseViewController {
                                     if let statistics = item.objectForKey("statistics") as? NSDictionary {
                                         video?.viewCount = statistics["viewCount"] as? String ?? ""
                                     }
-                                    self.listVideo.append(video!)
-                                    self.videoSearchTableView.reloadData()
+                                    if !(video?.channelId.isEmpty)! {
+                                        var parametersThumbnail = [String: AnyObject]()
+                                        parametersThumbnail["part"] = "snippet"
+                                        parametersThumbnail["id"] = video?.channelId
+                                        VideoService.getChannelThumbnail(parametersThumbnail, completion: { (response) in
+                                            video?.channelThumnail = response as? String ?? ""
+                                            self.listVideo.append(video!)
+                                            self.videoSearchTableView.reloadData()
+                                        })
+                                    } else {
+                                        continue
+                                    }
                                 }
                             }
                             self.isLoading = false

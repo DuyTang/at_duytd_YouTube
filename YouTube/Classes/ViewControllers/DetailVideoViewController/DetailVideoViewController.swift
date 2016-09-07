@@ -25,7 +25,6 @@ private struct Options {
 class DetailVideoViewController: BaseViewController {
     @IBOutlet weak var detailVideoTable: UITableView!
     @IBOutlet weak private var playerVideoView: UIView!
-    private var dataOfRelatedVideo: Results<RelatedVideo>!
     var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
     private var isExpandDescription = false
     private var isFavorite = false
@@ -366,8 +365,18 @@ class DetailVideoViewController: BaseViewController {
                                 if let statistics = item.objectForKey("statistics") as? NSDictionary {
                                     video?.viewCount = statistics["viewCount"] as? String ?? ""
                                 }
-                                self.videos.append(video!)
-                                self.detailVideoTable.reloadData()
+                                if !(video?.channelId.isEmpty)! {
+                                    var parametersThumbnail = [String: AnyObject]()
+                                    parametersThumbnail["part"] = "snippet"
+                                    parametersThumbnail["id"] = video?.channelId
+                                    VideoService.getChannelThumbnail(parametersThumbnail, completion: { (response) in
+                                        video?.channelThumnail = response as? String ?? ""
+                                        self.videos.append(video!)
+                                        self.detailVideoTable.reloadData()
+                                    })
+                                } else {
+                                    continue
+                                }
                             }
                         }
                     })

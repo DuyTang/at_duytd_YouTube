@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		24E01A7442F83911BDB4C608 /* Pods_YouTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */; };
-		F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30746571D606AB2001C4649 /* RelatedVideo.swift */; };
 		F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5921D5CC6CE005464CC /* PlayVideoCell.swift */; };
 		F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */; };
 		F35EE5981D5CC774005464CC /* DecriptVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */; };
@@ -90,7 +89,6 @@
 		435F9E24889FD396A037DDA8 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
 		70E2451E2A40AB9366DF073C /* Pods-YouTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F30746571D606AB2001C4649 /* RelatedVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedVideo.swift; sourceTree = "<group>"; };
 		F35EE5921D5CC6CE005464CC /* PlayVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoCell.swift; sourceTree = "<group>"; };
 		F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayVideoCell.xib; sourceTree = "<group>"; };
 		F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecriptVideoCell.swift; sourceTree = "<group>"; };
@@ -413,7 +411,6 @@
 				F37778151D5AE6E700AC2075 /* Video.swift */,
 				F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */,
 				F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */,
-				F30746571D606AB2001C4649 /* RelatedVideo.swift */,
 				F3A1F54F1D6474C2006C4C9C /* History.swift */,
 			);
 			path = Models;
@@ -769,7 +766,6 @@
 				F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */,
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
 				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
-				F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */,
 				F374C23A1D76DC5F005EC196 /* RealmManager.swift in Sources */,
 				F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */,
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,
