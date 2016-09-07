@@ -273,7 +273,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     @objc private func moviePlayerPlayBackDidFinish(notification: NSNotification) {
-
+        handleNext()
     }
 
     @objc private func moviePlayerNowPlayingMovieDidChange(notification: NSNotification) {
@@ -302,7 +302,6 @@ class DetailVideoViewController: BaseViewController {
         let state = (youtubeVideoPlayer?.moviePlayer.playbackState)!
         switch state {
         case .Stopped:
-            handleNext()
             break
         case .Interrupted:
             break
@@ -322,7 +321,6 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
-        self.youtubeVideoPlayer?.moviePlayer.pause()
         if isFavorite == false {
             let addFavoriteVC = AddFavoriteViewController()
             addFavoriteVC.video = video

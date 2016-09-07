@@ -26,7 +26,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7x-Jq-8vT">
-                            <rect key="frame" x="334" y="23" width="33" height="33"/>
+                            <rect key="frame" x="339" y="26" width="28" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="WOP-i3-Fvs"/>
+                                <constraint firstAttribute="width" constant="28" id="npG-J6-GZU"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" backgroundImage="bt_delete">
                                 <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,7 +43,7 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.1450980392" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="G7x-Jq-8vT" secondAttribute="bottom" constant="8" id="7r8-dn-NNL"/>
+                        <constraint firstAttribute="bottom" secondItem="G7x-Jq-8vT" secondAttribute="bottom" constant="10" id="7r8-dn-NNL"/>
                         <constraint firstAttribute="height" constant="64" id="8fZ-Sr-yXi"/>
                         <constraint firstAttribute="trailing" secondItem="G7x-Jq-8vT" secondAttribute="trailing" constant="8" id="Wbx-Aa-cVT"/>
                         <constraint firstItem="gvK-6P-6LE" firstAttribute="centerX" secondItem="cHd-lJ-otw" secondAttribute="centerX" id="gVO-iA-36G"/>

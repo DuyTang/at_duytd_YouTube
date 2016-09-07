@@ -45,6 +45,8 @@ class SearchViewController: BaseViewController {
         super.viewWillAppear(true)
         keySearchBar.text = ""
         searchResultTableView.hidden = true
+        listVideo.removeAll()
+        videoSearchTableView.reloadData()
     }
 
     override func setUp() {
