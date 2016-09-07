@@ -31,15 +31,17 @@ class Video: Object, Mappable, VideoObject {
     dynamic var title = ""
     dynamic var viewCount = ""
     dynamic var duration = ""
+    dynamic var channelId = ""
     dynamic var channelTitle = ""
+    dynamic var channelThumnail = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
     dynamic var timeUpload = ""
-    
+
     required convenience init?(_ map: Map) {
         self.init()
     }
-    
+
     func mapping(map: Map) {
         var id = ""
         id <- map["id"]
@@ -50,34 +52,35 @@ class Video: Object, Mappable, VideoObject {
         } else {
             idVideo = id
         }
-        
+
         idVideo <- map["id"]
         var snippet = [String: AnyObject]()
         snippet <- map["snippet"]
         title = snippet["title"] as? String ?? ""
+        channelId = snippet["channelId"] as? String ?? ""
         channelTitle = snippet["channelTitle"] as? String ?? ""
         descript = snippet["description"] as? String ?? ""
         timeUpload = snippet["publishedAt"] as? String ?? ""
         var contentDetails = [String: AnyObject]()
         contentDetails <- map["contentDetails"]
         duration = contentDetails["duration"] as? String ?? ""
-        
+
         var statistics = [String: AnyObject]()
         statistics <- map["statistics"]
         viewCount = statistics["viewCount"] as? String ?? ""
         thumbnail = Option.UrlImage + idVideo + Option.HighImage
     }
-    
+
     class func getVideos(id: String) -> Results<Video>? {
         do {
             let realm = try Realm()
-            let videos = realm.objects(self).filter("idCategory = '\(id)'")
+            let videos = realm.objects(self).filter("idCategory = %@", id)
             return videos
         } catch {
             return nil
         }
     }
-    
+
     convenience required init(_ object: VideoFavorite) {
         self.init()
         idVideo = object.idVideo ?? ""
@@ -85,12 +88,14 @@ class Video: Object, Mappable, VideoObject {
         title = object.title ?? ""
         viewCount = object.viewCount ?? ""
         duration = object.duration ?? ""
+        channelId = object.channelId ?? ""
         channelTitle = object.channelTitle ?? ""
+        channelThumnail = object.channelThumbnail ?? ""
         thumbnail = object.thumbnail ?? ""
         descript = object.descript ?? ""
         timeUpload = object.timeUpload
     }
-    
+
     convenience required init(history: History) {
         self.init()
         idVideo = history.idVideo ?? ""
@@ -98,11 +103,13 @@ class Video: Object, Mappable, VideoObject {
         title = history.title ?? ""
         viewCount = history.viewCount ?? ""
         duration = history.duration ?? ""
+        channelId = history.channelId ?? ""
         channelTitle = history.channelTitle ?? ""
+        channelThumnail = history.channelThumbnail ?? ""
         thumbnail = history.thumbnail ?? ""
         descript = history.descript ?? ""
     }
-    
+
     class func cleanData() {
         do {
             let realm = try Realm()
@@ -111,7 +118,7 @@ class Video: Object, Mappable, VideoObject {
                 realm.delete(videos)
             })
         } catch {
-            
+
         }
     }
 }
