@@ -93,18 +93,23 @@ extension FavoriteViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Default, title: Message.Delete) { action, index in
-            let listVideo: Results<VideoFavorite>!
-            do {
-                let realm = try Realm()
-                listVideo = realm.objects(VideoFavorite).filter("idListFavorite = %@", self.listFavorite[indexPath.row].id)
-                try realm.write({
-                    realm.delete(self.listFavorite[indexPath.row])
-                    realm.delete(listVideo)
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteListFavorite, object: nil, userInfo: ["indexPath": indexPath])
-                })
-            } catch {
+            var listVideo: Results<VideoFavorite>!
+            let alert = UIAlertController(title: Message.Title, message: Message.DeleteMessage, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
+                do {
+                    let realm = try Realm()
+                    listVideo = realm.objects(VideoFavorite).filter("idListFavorite = %@", self.listFavorite[indexPath.row].id)
+                    try realm.write({
+                        realm.delete(self.listFavorite[indexPath.row])
+                        realm.delete(listVideo)
+                        NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteListFavorite, object: nil, userInfo: ["indexPath": indexPath])
+                    })
+                } catch {
 
-            }
+                }
+                }))
+            alert.addAction(UIAlertAction(title: Message.CancelButton, style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
         return [delete]
     }

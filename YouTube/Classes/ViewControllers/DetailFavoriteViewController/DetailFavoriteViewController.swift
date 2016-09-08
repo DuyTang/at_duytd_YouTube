@@ -242,8 +242,13 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Default, title: Message.Delete) { action, index in
             let video = self.favorite.listVideo[indexPath.row]
-            RealmManager.deleteRealm(video)
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteVideo, object: nil, userInfo: ["indexPath": indexPath])
+            let alert = UIAlertController(title: Message.Title, message: Message.DeleteMessage, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
+                RealmManager.deleteRealm(video)
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteVideo, object: nil, userInfo: ["indexPath": indexPath])
+                }))
+            alert.addAction(UIAlertAction(title: Message.CancelButton, style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
         return [delete]
     }
