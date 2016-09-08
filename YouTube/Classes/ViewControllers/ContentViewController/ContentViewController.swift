@@ -43,6 +43,7 @@ class ContentViewController: BaseViewController {
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             homeVideos = videos
         } else {
+            showLoading()
             loadVideos(pageId, pageToken: nil)
         }
     }
@@ -58,7 +59,6 @@ class ContentViewController: BaseViewController {
             return
         }
         isLoading = true
-        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["maxResults"] = "10"
@@ -76,6 +76,7 @@ class ContentViewController: BaseViewController {
                 }
             }
             self.isLoading = false
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
     }
 
@@ -110,6 +111,7 @@ extension ContentViewController: UITableViewDataSource {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
         if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loadVideos(pageId, pageToken: pageToken)
         }
     }

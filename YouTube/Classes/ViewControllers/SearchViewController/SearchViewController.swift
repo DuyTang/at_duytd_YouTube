@@ -124,7 +124,6 @@ class SearchViewController: BaseViewController {
             return
         }
         isLoading = true
-        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
         parameters["maxResults"] = Options.MaxResult
@@ -169,6 +168,7 @@ class SearchViewController: BaseViewController {
                         })
                     }
                     self.hideLoading()
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 }
             } else {
                 self.showAlert(Message.LoadVideoFail, message: Message.NoData, cancelButton: Message.CancelButton)
@@ -209,6 +209,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 0 {
             if listKey.count > 0 {
+                showLoading()
                 loadVideoFromKey(listKey[indexPath.row], nextPage: nextPage)
                 searchResultTableView.hidden = true
                 view.endEditing(true)
@@ -222,6 +223,7 @@ extension SearchViewController: UITableViewDataSource {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
         if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loadVideoFromKey(key, nextPage: nextPage)
         }
     }

@@ -44,6 +44,7 @@ class TrendingViewController: BaseViewController {
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
             trendingVideos = videos
         } else {
+            showLoading()
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
@@ -58,8 +59,10 @@ class TrendingViewController: BaseViewController {
         if isLoading {
             return
         }
+        if pageToken != nil {
+            isLoading = false
+        }
         isLoading = true
-        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["chart"] = "mostPopular"
@@ -78,6 +81,7 @@ class TrendingViewController: BaseViewController {
                 self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
             }
             self.isLoading = false
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
     }
 }
@@ -111,6 +115,7 @@ extension TrendingViewController: UITableViewDataSource {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
         if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loadTrendingVideo(idCategory, pageToken: nextPage)
         }
     }
