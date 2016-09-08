@@ -42,11 +42,8 @@ class SearchViewController: BaseViewController {
 
     // MARK:- Lefe Cycle
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        keySearchBar.text = ""
+        super.viewWillAppear(animated)
         searchResultTableView.hidden = true
-        listVideo.removeAll()
-        videoSearchTableView.reloadData()
     }
 
     override func setUp() {

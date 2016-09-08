@@ -39,7 +39,7 @@ class TrendingViewController: BaseViewController {
     }
 
     override func setUpData() {
-        dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
+        dragVideo = DraggalbeVideo(rootViewController: tabBarController!)
         loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
             trendingVideos = videos
