@@ -13,5 +13,4 @@ target 'YouTube' do
     pod 'SwiftUtils', '1.2.2'
     pod 'XCDYouTubeVideoPlayerViewController', '~> 1.1'
     pod 'XCDYouTubeKit', '~> 2.5'
-    pod 'SVPullToRefresh', '~> 0.4'
 end
