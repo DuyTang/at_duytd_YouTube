@@ -249,6 +249,8 @@ extension SearchViewController: UISearchBarDelegate {
         searchResultTableView.hidden = false
         if key.isEmpty && listKey.isEmpty {
             searchResultTableView.hidden = true
+            listVideo.removeAll()
+            videoSearchTableView.reloadData()
         }
 
     }

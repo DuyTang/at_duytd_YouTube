@@ -44,6 +44,8 @@ class HomeViewController: BaseViewController {
     }
 
     override func setUpData() {
+        Category.cleanData()
+        Video.cleanData()
         if let categories = Category.getCategories() where categories.count > 0 {
             listCategory = categories
             loadData()
@@ -91,7 +93,7 @@ class HomeViewController: BaseViewController {
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
         parameters["regionCode"] = "VN"
-        MyCategory.getVideoCatetogories(parameters) { (success, nextPageToken, error) in
+        CategoryService.getVideoCatetogories(parameters) { (success, nextPageToken, error) in
             if success {
                 self.loadData()
                 self.addContentToPageViewController()
