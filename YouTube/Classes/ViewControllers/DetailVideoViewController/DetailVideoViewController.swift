@@ -19,7 +19,7 @@ private struct Options {
     static let HeightOfRow: CGFloat = 83
     static let HeightOfPlayVideoCell: CGFloat = 104
     static let HeightOfButtonCell: CGFloat = 30
-    static let MaxRelatedVideo = 20
+    static let MaxRelatedVideo = 10
 }
 
 class DetailVideoViewController: BaseViewController {
