@@ -36,6 +36,7 @@ class TrendingViewController: BaseViewController {
         trendingTableView.registerNib(HomeCell)
         dragVideo.draggbleProgress()
         dragVideo.addActionToView()
+        refreshTable()
     }
 
     override func setUpData() {
@@ -52,6 +53,14 @@ class TrendingViewController: BaseViewController {
     private func loadData() {
         trendingVideos = RealmManager.getListVideo(idCategory)
         trendingTableView.reloadData()
+    }
+
+    // MARK:- Private function
+    private func refreshTable() {
+        trendingTableView.showsPullToRefresh = true
+        trendingTableView.addPullToRefreshWithActionHandler {
+            self.loadData()
+        }
     }
 
     // MARK:- Webservice
@@ -78,9 +87,11 @@ class TrendingViewController: BaseViewController {
                     self.loadmoreActive = false
                 }
             } else {
+                self.hideLoading()
                 self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
             }
             self.isLoading = false
+            self.trendingTableView.showsPullToRefresh = false
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
     }

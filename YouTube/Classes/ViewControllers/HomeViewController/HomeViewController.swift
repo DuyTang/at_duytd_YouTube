@@ -44,7 +44,7 @@ class HomeViewController: BaseViewController {
     }
 
     override func setUpData() {
-        Category.cleanData()
+        // Category.cleanData()
         Video.cleanData()
         if let categories = Category.getCategories() where categories.count > 0 {
             listCategory = categories

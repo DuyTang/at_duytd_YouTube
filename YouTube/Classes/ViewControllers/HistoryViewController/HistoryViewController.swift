@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ReachabilitySwift
 
 private struct Options {
     static let HeightOfRow: CGFloat = 90
@@ -77,6 +78,17 @@ class HistoryViewController: BaseViewController {
         return list
     }
 
+    private func hasConnectivity() -> Bool {
+        do {
+            let reachability: Reachability = try Reachability.reachabilityForInternetConnection()
+            let networkStatus: Int = reachability.currentReachabilityStatus.hashValue
+            return (networkStatus != 0)
+        }
+        catch {
+            return false
+        }
+    }
+
     // MARK:- Action
     @IBAction private func deleteAllHistory(sender: UIButton) {
         let alert = UIAlertController(title: Message.Title, message: Message.DeleteMessage, preferredStyle: .Alert)
@@ -128,8 +140,12 @@ extension HistoryViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let video = Video(history: getListVideo(date[indexPath.section])[indexPath.row])
-        dragVideo.prensetDetailVideoController(video)
+        if hasConnectivity() {
+            let video = Video(history: getListVideo(date[indexPath.section])[indexPath.row])
+            dragVideo.prensetDetailVideoController(video)
+        } else {
+            showAlert(Message.Title, message: "No Connect", cancelButton: Message.OkButton)
+        }
     }
 }
 

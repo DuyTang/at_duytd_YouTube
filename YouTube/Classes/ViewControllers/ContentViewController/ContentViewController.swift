@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SVPullToRefresh
 private struct Options {
     static let HeightOfHomeCell: CGFloat = 205
 }
@@ -46,11 +47,18 @@ class ContentViewController: BaseViewController {
             showLoading()
             loadVideos(pageId, pageToken: nil)
         }
+        refreshTable()
     }
 
     private func loadData() {
         homeVideos = RealmManager.getListVideo(pageId)
         contentTableView.reloadData()
+    }
+
+    private func refreshTable() {
+        contentTableView.addPullToRefreshWithActionHandler {
+            self.loadData()
+        }
     }
 
     // MARK:- Webservice
@@ -74,8 +82,12 @@ class ContentViewController: BaseViewController {
                 if nextPageToken == nil {
                     self.loadmoreActive = false
                 }
+            } else {
+                self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
+                self.hideLoading()
             }
             self.isLoading = false
+            self.contentTableView.showsPullToRefresh = false
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
     }
