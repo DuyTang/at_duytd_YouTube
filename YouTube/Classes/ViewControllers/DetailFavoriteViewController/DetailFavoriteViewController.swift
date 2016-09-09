@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUtils
 import RealmSwift
+import ReachabilitySwift
 
 private struct Options {
     static let HeightOfRow: CGFloat = 205
@@ -212,6 +213,17 @@ class DetailFavoriteViewController: BaseViewController {
         }
     }
 
+    private func hasConnectivity() -> Bool {
+        do {
+            let reachability: Reachability = try Reachability.reachabilityForInternetConnection()
+            let networkStatus: Int = reachability.currentReachabilityStatus.hashValue
+            return (networkStatus != 0)
+        }
+        catch {
+            return false
+        }
+    }
+
     // MARK:- Action
     @IBAction private func clickBack(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
@@ -233,10 +245,14 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let video = Video(favorite.listVideo[indexPath.row])
-        dragVideo.videoPlayerViewController.delegate = self
-        dragVideo.prensetDetailVideoController(video)
+        if hasConnectivity() {
+            listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
+            let video = Video(favorite.listVideo[indexPath.row])
+            dragVideo.videoPlayerViewController.delegate = self
+            dragVideo.prensetDetailVideoController(video)
+        } else {
+            showAlert(Message.Title, message: "No Connect", cancelButton: Message.OkButton)
+        }
     }
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
