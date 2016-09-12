@@ -76,6 +76,8 @@
 		F3B097FD1D557FC2000D9E84 /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */; };
 		F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */; };
 		F3B2F9921D65A8050082FE1B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2F9911D65A8050082FE1B /* String.swift */; };
+		F3DC49D91D86AF3F007C1184 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49D81D86AF3F007C1184 /* Comment.swift */; };
+		F3DC49DD1D86B58B007C1184 /* TopComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49DC1D86B58B007C1184 /* TopComment.swift */; };
 		F3E07AF01D5C5B3D00DAB7C9 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */; };
 		F3E07AF21D5C86F000DAB7C9 /* ListVideoFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */; };
 		F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */; };
@@ -167,6 +169,8 @@
 		F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
 		F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFavoriteViewController.xib; sourceTree = "<group>"; };
 		F3B2F9911D65A8050082FE1B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		F3DC49D81D86AF3F007C1184 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		F3DC49DC1D86B58B007C1184 /* TopComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopComment.swift; sourceTree = "<group>"; };
 		F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVideoFavorite.swift; sourceTree = "<group>"; };
 		F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFavoriteCell.swift; sourceTree = "<group>"; };
@@ -414,6 +418,8 @@
 				F3A1F54F1D6474C2006C4C9C /* History.swift */,
 				F353D4C21D86548C0051C52A /* Channel.swift */,
 				F353D4C61D8662300051C52A /* SnippetChannel.swift */,
+				F3DC49D81D86AF3F007C1184 /* Comment.swift */,
+				F3DC49DC1D86B58B007C1184 /* TopComment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -752,6 +758,7 @@
 				F39A2CAD1D550F51003FC772 /* AppDelegate.swift in Sources */,
 				F39A2CC31D551134003FC772 /* BaseCollectionViewCell.swift in Sources */,
 				F353D4CB1D866A620051C52A /* CategoryService.swift in Sources */,
+				F3DC49DD1D86B58B007C1184 /* TopComment.swift in Sources */,
 				F3A1F5501D6474C2006C4C9C /* History.swift in Sources */,
 				F3B097C51D5562EB000D9E84 /* HomeCell.swift in Sources */,
 				F3B097DE1D557264000D9E84 /* HistoryViewController.swift in Sources */,
@@ -773,6 +780,7 @@
 				F37778141D5AE6A000AC2075 /* Category.swift in Sources */,
 				F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */,
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
+				F3DC49D91D86AF3F007C1184 /* Comment.swift in Sources */,
 				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
 				F374C23A1D76DC5F005EC196 /* RealmManager.swift in Sources */,
 				F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */,
