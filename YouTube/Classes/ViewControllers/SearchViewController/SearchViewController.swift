@@ -42,8 +42,7 @@ class SearchViewController: BaseViewController {
 
     // MARK:- Lefe Cycle
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        keySearchBar.text = ""
+        super.viewWillAppear(animated)
         searchResultTableView.hidden = true
     }
 
@@ -125,7 +124,6 @@ class SearchViewController: BaseViewController {
             return
         }
         isLoading = true
-        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet"
         parameters["maxResults"] = Options.MaxResult
@@ -152,14 +150,25 @@ class SearchViewController: BaseViewController {
                                     if let statistics = item.objectForKey("statistics") as? NSDictionary {
                                         video?.viewCount = statistics["viewCount"] as? String ?? ""
                                     }
-                                    self.listVideo.append(video!)
-                                    self.videoSearchTableView.reloadData()
+                                    if !(video?.channelId.isEmpty)! {
+                                        var parametersThumbnail = [String: AnyObject]()
+                                        parametersThumbnail["part"] = "snippet"
+                                        parametersThumbnail["id"] = video?.channelId
+                                        VideoService.getChannelThumbnail(parametersThumbnail, completion: { (response) in
+                                            video?.channelThumnail = response as? String ?? ""
+                                            self.listVideo.append(video!)
+                                            self.videoSearchTableView.reloadData()
+                                        })
+                                    } else {
+                                        continue
+                                    }
                                 }
                             }
                             self.isLoading = false
                         })
                     }
                     self.hideLoading()
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 }
             } else {
                 self.showAlert(Message.LoadVideoFail, message: Message.NoData, cancelButton: Message.CancelButton)
@@ -200,6 +209,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 0 {
             if listKey.count > 0 {
+                showLoading()
                 loadVideoFromKey(listKey[indexPath.row], nextPage: nextPage)
                 searchResultTableView.hidden = true
                 view.endEditing(true)
@@ -213,6 +223,7 @@ extension SearchViewController: UITableViewDataSource {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
         if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loadVideoFromKey(key, nextPage: nextPage)
         }
     }
@@ -237,6 +248,8 @@ extension SearchViewController: UISearchBarDelegate {
         searchResultTableView.hidden = false
         if key.isEmpty && listKey.isEmpty {
             searchResultTableView.hidden = true
+            listVideo.removeAll()
+            videoSearchTableView.reloadData()
         }
 
     }

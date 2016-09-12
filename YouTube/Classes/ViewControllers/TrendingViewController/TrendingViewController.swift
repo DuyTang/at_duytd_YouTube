@@ -36,14 +36,16 @@ class TrendingViewController: BaseViewController {
         trendingTableView.registerNib(HomeCell)
         dragVideo.draggbleProgress()
         dragVideo.addActionToView()
+        refreshTable()
     }
 
     override func setUpData() {
-        dragVideo = DraggalbeVideo(rootViewController: self.tabBarController!)
+        dragVideo = DraggalbeVideo(rootViewController: tabBarController!)
         loadData()
         if let videos = Video.getVideos(idCategory) where videos.count > 0 {
             trendingVideos = videos
         } else {
+            showLoading()
             loadTrendingVideo(idCategory, pageToken: nil)
         }
     }
@@ -53,13 +55,23 @@ class TrendingViewController: BaseViewController {
         trendingTableView.reloadData()
     }
 
+    // MARK:- Private function
+    private func refreshTable() {
+        trendingTableView.showsPullToRefresh = true
+        trendingTableView.addPullToRefreshWithActionHandler {
+            self.loadData()
+        }
+    }
+
     // MARK:- Webservice
     private func loadTrendingVideo(id: String, pageToken: String?) {
         if isLoading {
             return
         }
+        if pageToken != nil {
+            isLoading = false
+        }
         isLoading = true
-        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["chart"] = "mostPopular"
@@ -75,9 +87,12 @@ class TrendingViewController: BaseViewController {
                     self.loadmoreActive = false
                 }
             } else {
+                self.hideLoading()
                 self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
             }
             self.isLoading = false
+            self.trendingTableView.showsPullToRefresh = false
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
     }
 }
@@ -111,6 +126,7 @@ extension TrendingViewController: UITableViewDataSource {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
         if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loadTrendingVideo(idCategory, pageToken: nextPage)
         }
     }

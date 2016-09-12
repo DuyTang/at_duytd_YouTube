@@ -18,7 +18,7 @@ extension String {
             for component in components {
                 duration = duration.characters.count > 0 ? duration + ":": duration
                 if component.characters.count < 2 {
-                    duration = component
+                    duration += "0" + component
                     continue
                 }
                 duration += component
@@ -31,8 +31,8 @@ extension String {
 
     // MARK:- Validate time of Video
     func checkDurationVideo(text: String) -> Bool {
-        let DURATION_REGEX_FULL = "^PT+[0-9]+H[0-9]+M[0-9]+[0-9]S"
-        let DURATION_REGEX = "^PT+[0-9]+M[0-9]+[0-9]S"
+        let DURATION_REGEX_FULL = "^PT+[0-9]+H[0-9]+M[0-9]+S"
+        let DURATION_REGEX = "^PT+[0-9]+M[0-9]+S"
         let durationTestFull = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX_FULL)
         let durationTest = NSPredicate(format: "SELF MATCHES %@", DURATION_REGEX)
         let test_REGEX_FULL = durationTestFull.evaluateWithObject(text)

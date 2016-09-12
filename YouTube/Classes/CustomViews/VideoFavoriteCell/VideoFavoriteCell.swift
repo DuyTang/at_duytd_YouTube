@@ -9,7 +9,7 @@
 import UIKit
 
 class VideoFavoriteCell: BaseTableViewCell {
-    
+
     @IBOutlet weak private var thumbnailVideo: UIImageView!
     @IBOutlet weak private var nameVideoLabel: UILabel!
     @IBOutlet weak private var channelLabel: UILabel!
@@ -20,10 +20,10 @@ class VideoFavoriteCell: BaseTableViewCell {
         selectionStyle = .None
         // Initialization code
     }
-    
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         // Configure the view for the selected state
     }
     // MARK:- Configure Cell
@@ -36,10 +36,10 @@ class VideoFavoriteCell: BaseTableViewCell {
     }
     // MARk:- Set Up UI
     override func setUpUI() {
-        
+
     }
     override func prepareForReuse() {
-        thumbnailVideo.image = nil
+        thumbnailVideo.image = UIImage(named: "bg_video")
     }
-    
+
 }

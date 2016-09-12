@@ -25,7 +25,7 @@ class PlayVideoCell: BaseTableViewCell {
 
     func configPlayVideoCell(video: Video) {
         nameVideoLabel.text = video.title.isEmpty ? " " : video.title
-        thumbnailVideo.downloadImage(video.thumbnail)
+        thumbnailVideo.downloadImage(video.channelThumnail)
         channelLabel.text = video.channelTitle
         viewCountLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount) views" : "\(video.viewCount) view"
         timeUploadLabel.text = video.timeUpload.convertTimeUpload()

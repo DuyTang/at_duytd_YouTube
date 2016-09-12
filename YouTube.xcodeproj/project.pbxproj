@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		24E01A7442F83911BDB4C608 /* Pods_YouTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */; };
-		F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30746571D606AB2001C4649 /* RelatedVideo.swift */; };
 		F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5921D5CC6CE005464CC /* PlayVideoCell.swift */; };
 		F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */; };
 		F35EE5981D5CC774005464CC /* DecriptVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */; };
@@ -90,7 +89,6 @@
 		435F9E24889FD396A037DDA8 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
 		70E2451E2A40AB9366DF073C /* Pods-YouTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F30746571D606AB2001C4649 /* RelatedVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelatedVideo.swift; sourceTree = "<group>"; };
 		F35EE5921D5CC6CE005464CC /* PlayVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoCell.swift; sourceTree = "<group>"; };
 		F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayVideoCell.xib; sourceTree = "<group>"; };
 		F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecriptVideoCell.swift; sourceTree = "<group>"; };
@@ -106,10 +104,10 @@
 		F37778171D5AEA9A00AC2075 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		F37778191D5AF33700AC2075 /* MyCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCategory.swift; sourceTree = "<group>"; };
 		F377781C1D5AF3CF00AC2075 /* MyVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVideo.swift; sourceTree = "<group>"; };
-		F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YouTube-Bridging-Header.h"; sourceTree = "<group>"; };
-		F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
-		F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
-		F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
+		F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YouTube-Bridging-Header.h"; path = "../YouTube-Bridging-Header.h"; sourceTree = "<group>"; };
+		F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTPlayerView.h; path = ../YTPlayerView.h; sourceTree = "<group>"; };
+		F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTPlayerView.m; path = ../YTPlayerView.m; sourceTree = "<group>"; };
+		F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "YTPlayerView-iframe-player.html"; path = "../YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		F37C65781D6BFED9000AA778 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F37C657A1D6BFF28000AA778 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		F37C657B1D6BFF28000AA778 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
@@ -317,10 +315,6 @@
 				F39A2CA91D550F2C003FC772 /* Libraries */,
 				F39A2CB31D550F81003FC772 /* Resources */,
 				F39A2CAB1D550F2C003FC772 /* Target */,
-				F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */,
-				F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */,
-				F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */,
-				F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */,
 			);
 			path = YouTube;
 			sourceTree = "<group>";
@@ -413,7 +407,6 @@
 				F37778151D5AE6E700AC2075 /* Video.swift */,
 				F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */,
 				F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */,
-				F30746571D606AB2001C4649 /* RelatedVideo.swift */,
 				F3A1F54F1D6474C2006C4C9C /* History.swift */,
 			);
 			path = Models;
@@ -439,7 +432,11 @@
 		F39A2CAB1D550F2C003FC772 /* Target */ = {
 			isa = PBXGroup;
 			children = (
+				F37A0C571D558FE000CD7CC9 /* YouTube-Bridging-Header.h */,
+				F37A0C5B1D558FF700CD7CC9 /* YTPlayerView-iframe-player.html */,
 				F39A2C9B1D550E8F003FC772 /* Info.plist */,
+				F37A0C581D558FE100CD7CC9 /* YTPlayerView.h */,
+				F37A0C591D558FE100CD7CC9 /* YTPlayerView.m */,
 			);
 			path = Target;
 			sourceTree = "<group>";
@@ -769,7 +766,6 @@
 				F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */,
 				F39A2CC51D55114C003FC772 /* BaseNavigationController.swift in Sources */,
 				F39A2CEC1D551AB7003FC772 /* FavoriteViewController.swift in Sources */,
-				F30746581D606AB2001C4649 /* RelatedVideo.swift in Sources */,
 				F374C23A1D76DC5F005EC196 /* RealmManager.swift in Sources */,
 				F374C2361D76C3E7005EC196 /* ButtonCell.swift in Sources */,
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,

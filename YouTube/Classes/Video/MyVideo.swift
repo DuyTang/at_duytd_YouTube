@@ -22,13 +22,19 @@ class VideoService {
                 if let items = data["items"] as? NSArray {
                     for item in items {
                         let video = Mapper<Video>().map(item)
-                        video?.idCategory = id
-                        do {
-                            let realm = try Realm()
-                            try realm.write({
-                                realm.add(video!)
+
+                        if video?.channelId != "" {
+                            var parameter = [String: AnyObject]()
+                            parameter["part"] = "snippet"
+                            parameter["id"] = video?.channelId
+                            getChannelThumbnail(parameter, completion: { (response) in
+                                video?.idCategory = id
+                                video?.channelThumnail = response as? String ?? ""
+                                RealmManager.addRealm(video!)
+                                completion(success: true, nextPageToken: pageToken, error: nil)
                             })
-                        } catch {
+                        } else {
+                            continue
                         }
                     }
                 }
@@ -92,7 +98,7 @@ class VideoService {
                 item = items[0] as? [String: AnyObject],
                 snippet = item["snippet"] as? [String: AnyObject],
                 thumbnail = snippet["thumbnails"] as? [String: AnyObject],
-                imageChannel = thumbnail["high"] as? [String: AnyObject] {
+                imageChannel = thumbnail["medium"] as? [String: AnyObject] {
                     if let url = imageChannel["url"] as? String {
                         completion(response: url)
                     } else {

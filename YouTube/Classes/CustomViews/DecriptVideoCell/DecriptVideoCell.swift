@@ -21,7 +21,7 @@ class DecriptVideoCell: BaseTableViewCell {
     }
 
     func configureDecriptVideoCell(text: String, font: UIFont, color: UIColor) {
-        detailDecriptVideoLabel.text = text
+        detailDecriptVideoLabel.text = text == "" ? "No decription" : text
         detailDecriptVideoLabel.font = font
         detailDecriptVideoLabel.textColor = color
     }

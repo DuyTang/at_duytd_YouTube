@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SVPullToRefresh
 private struct Options {
     static let HeightOfHomeCell: CGFloat = 205
 }
@@ -43,13 +44,21 @@ class ContentViewController: BaseViewController {
         if let videos = Video.getVideos(pageId) where videos.count > 0 {
             homeVideos = videos
         } else {
+            showLoading()
             loadVideos(pageId, pageToken: nil)
         }
+        refreshTable()
     }
 
     private func loadData() {
         homeVideos = RealmManager.getListVideo(pageId)
         contentTableView.reloadData()
+    }
+
+    private func refreshTable() {
+        contentTableView.addPullToRefreshWithActionHandler {
+            self.loadData()
+        }
     }
 
     // MARK:- Webservice
@@ -58,7 +67,6 @@ class ContentViewController: BaseViewController {
             return
         }
         isLoading = true
-        showLoading()
         var parameters = [String: AnyObject]()
         parameters["part"] = "snippet,contentDetails,statistics"
         parameters["maxResults"] = "10"
@@ -70,13 +78,17 @@ class ContentViewController: BaseViewController {
             if success {
                 self.hideLoading()
                 self.loadData()
-                self.contentTableView.reloadData()
                 self.pageToken = nextPageToken
                 if nextPageToken == nil {
                     self.loadmoreActive = false
                 }
+            } else {
+                self.showAlert(Message.Title, message: Message.LoadDataFail, cancelButton: Message.OkButton)
+                self.hideLoading()
             }
             self.isLoading = false
+            self.contentTableView.showsPullToRefresh = false
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
     }
 
@@ -111,6 +123,7 @@ extension ContentViewController: UITableViewDataSource {
         let contentOffset = scrollView.contentOffset.y
         let scrollMaxSize = scrollView.contentSize.height - scrollView.frame.height
         if scrollMaxSize - contentOffset < 50 && loadmoreActive {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loadVideos(pageId, pageToken: pageToken)
         }
     }

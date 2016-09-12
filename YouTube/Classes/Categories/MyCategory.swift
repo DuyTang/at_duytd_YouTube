@@ -11,18 +11,16 @@ import RealmSwift
 import Alamofire
 import ObjectMapper
 
-class MyCategory {
-    var dataOfCategory: Results<Category>!
+class CategoryService {
     class func getVideoCatetogories(parameters: [String: AnyObject], completion: APIRequestCompletion) {
         let api = APIDefine.YouTube().getListCategory()
         APIRequest.GET(api, parameter: parameters, success: { (response) in
             if let data = response as? [String: AnyObject] {
                 if let items = data["items"] as? NSArray {
-                    Category.cleanData()
-                    Video.cleanData()
                     for item in items {
                         let category = Mapper<Category>().map(item)
                         if category!.id == "18" || category!.id == "21" {
+                            // category no data
                             continue
                         } else {
                             do {
@@ -37,11 +35,11 @@ class MyCategory {
                 }
             }
             completion(success: true, nextPageToken: nil, error: nil)
-            
+
         }) { (error) in
             completion(success: false, nextPageToken: nil, error: error)
         }
-        
+
     }
 }
 

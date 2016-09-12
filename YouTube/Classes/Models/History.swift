@@ -20,7 +20,9 @@ class History: Object, HistoryObject {
     dynamic var title = ""
     dynamic var viewCount = ""
     dynamic var duration = ""
+    dynamic var channelId = ""
     dynamic var channelTitle = ""
+    dynamic var channelThumbnail = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
     dynamic var date = ""
@@ -29,16 +31,18 @@ class History: Object, HistoryObject {
     required convenience init(_ video: Video) {
         self.init()
         let datetime = NSDate()
-        self.idVideo = video.idVideo ?? ""
-        self.idCategory = video.idCategory ?? ""
-        self.title = video.title ?? ""
-        self.viewCount = video.viewCount ?? ""
-        self.duration = video.duration ?? ""
-        self.channelTitle = video.channelTitle ?? ""
-        self.descript = video.descript ?? ""
-        self.thumbnail = video.thumbnail ?? ""
-        self.date = datetime.toString(DateFormat.Date, localized: true)
-        self.time = datetime.toString(DateFormat.Time24NoSec, localized: true)
+        idVideo = video.idVideo ?? ""
+        idCategory = video.idCategory ?? ""
+        title = video.title ?? ""
+        viewCount = video.viewCount ?? ""
+        duration = video.duration ?? ""
+        channelId = video.channelId ?? ""
+        channelTitle = video.channelTitle ?? ""
+        channelThumbnail = video.channelThumnail ?? ""
+        descript = video.descript ?? ""
+        thumbnail = video.thumbnail ?? ""
+        date = datetime.toString(DateFormat.Date, localized: true)
+        time = datetime.toString(DateFormat.Time24NoSec, localized: true)
     }
 
     class func cleanData() {
@@ -54,14 +58,7 @@ class History: Object, HistoryObject {
     }
 
     class func addVideoToHistory(video: Video) {
-        do {
-            let realm = try Realm()
-            let historyVideo = History(video)
-            try realm.write({
-                realm.add(historyVideo)
-            })
-        } catch {
-
-        }
+        let historyVideo = History(video)
+        RealmManager.addRealm(historyVideo)
     }
 }

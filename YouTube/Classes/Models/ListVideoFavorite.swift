@@ -16,12 +16,14 @@ class VideoFavorite: Object {
     dynamic var title = ""
     dynamic var viewCount = ""
     dynamic var duration = ""
+    dynamic var channelId = ""
     dynamic var channelTitle = ""
+    dynamic var channelThumbnail = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
     dynamic var timeUpload = ""
     dynamic var idListFavorite = 0
-    
+
     class func getVideos(id: String) -> Results<VideoFavorite>? {
         do {
             let realm = try Realm()
@@ -31,20 +33,22 @@ class VideoFavorite: Object {
             return nil
         }
     }
-    
+
     func initializate(video: Video, idListFavorite: Int) {
         idVideo = video.idVideo ?? ""
         idCategory = video.idCategory ?? ""
         title = video.title ?? ""
         viewCount = video.viewCount ?? ""
         duration = video.duration ?? ""
+        channelId = video.channelId ?? ""
         channelTitle = video.channelTitle ?? ""
+        channelThumbnail = video.channelThumnail ?? ""
         descript = video.descript ?? ""
         thumbnail = video.thumbnail ?? ""
         timeUpload = video.timeUpload
         self.idListFavorite = idListFavorite
     }
-    
+
     class func cleanData() {
         do {
             let realm = try Realm()
@@ -53,7 +57,7 @@ class VideoFavorite: Object {
                 realm.delete(videos)
             })
         } catch {
-            
+
         }
     }
 }

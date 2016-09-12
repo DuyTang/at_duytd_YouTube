@@ -39,7 +39,7 @@
                         <color key="textColor" red="0.0277107802" green="0.041972525169999997" blue="0.0" alpha="0.85501077589999996" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video" translatesAutoresizingMaskIntoConstraints="NO" id="Q3l-lO-m6G">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_video" translatesAutoresizingMaskIntoConstraints="NO" id="Q3l-lO-m6G">
                         <rect key="frame" x="11" y="37" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="gID-WG-SgP"/>
@@ -97,6 +97,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_video" width="170" height="170"/>
+        <image name="bg_video" width="242" height="158"/>
     </resources>
 </document>

@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUtils
 import RealmSwift
+import ReachabilitySwift
 
 private struct Options {
     static let HeightOfRow: CGFloat = 205
@@ -212,6 +213,17 @@ class DetailFavoriteViewController: BaseViewController {
         }
     }
 
+    private func hasConnectivity() -> Bool {
+        do {
+            let reachability: Reachability = try Reachability.reachabilityForInternetConnection()
+            let networkStatus: Int = reachability.currentReachabilityStatus.hashValue
+            return (networkStatus != 0)
+        }
+        catch {
+            return false
+        }
+    }
+
     // MARK:- Action
     @IBAction private func clickBack(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
@@ -233,17 +245,26 @@ extension DetailFavoriteViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let video = Video(favorite.listVideo[indexPath.row])
-        dragVideo.videoPlayerViewController.delegate = self
-        dragVideo.prensetDetailVideoController(video)
+        if hasConnectivity() {
+            listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
+            let video = Video(favorite.listVideo[indexPath.row])
+            dragVideo.videoPlayerViewController.delegate = self
+            dragVideo.prensetDetailVideoController(video)
+        } else {
+            showAlert(Message.Title, message: "No Connect", cancelButton: Message.OkButton)
+        }
     }
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Default, title: Message.Delete) { action, index in
             let video = self.favorite.listVideo[indexPath.row]
-            RealmManager.deleteRealm(video)
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteVideo, object: nil, userInfo: ["indexPath": indexPath])
+            let alert = UIAlertController(title: Message.Title, message: Message.DeleteMessage, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: Message.OkButton, style: .Default, handler: { action in
+                RealmManager.deleteRealm(video)
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationDefine.DeleteVideo, object: nil, userInfo: ["indexPath": indexPath])
+                }))
+            alert.addAction(UIAlertAction(title: Message.CancelButton, style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
         return [delete]
     }
@@ -255,7 +276,7 @@ extension DetailFavoriteViewController: UITableViewDelegate {
     }
 }
 
-extension DetailFavoriteViewController: DetailVideoDelegete {
+extension DetailFavoriteViewController: DetailVideoDelegate {
     func deleteFromListFavorite(isDeleted: Bool) {
         if isDeleted == false {
             listVideoFavoriteTableView.reloadData()

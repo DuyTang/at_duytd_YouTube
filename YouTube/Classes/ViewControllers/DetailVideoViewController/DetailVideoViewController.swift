@@ -11,7 +11,7 @@ import RealmSwift
 import ObjectMapper
 import XCDYouTubeKit
 import SwiftUtils
-protocol DetailVideoDelegete {
+protocol DetailVideoDelegate {
     func deleteFromListFavorite(isDeleted: Bool)
 }
 
@@ -19,13 +19,12 @@ private struct Options {
     static let HeightOfRow: CGFloat = 83
     static let HeightOfPlayVideoCell: CGFloat = 104
     static let HeightOfButtonCell: CGFloat = 30
-    static let MaxRelatedVideo = 20
+    static let MaxRelatedVideo = 10
 }
 
 class DetailVideoViewController: BaseViewController {
     @IBOutlet weak var detailVideoTable: UITableView!
     @IBOutlet weak private var playerVideoView: UIView!
-    private var dataOfRelatedVideo: Results<RelatedVideo>!
     var youtubeVideoPlayer: XCDYouTubeVideoPlayerViewController?
     private var isExpandDescription = false
     private var isFavorite = false
@@ -43,7 +42,8 @@ class DetailVideoViewController: BaseViewController {
     private var indicator: UIActivityIndicatorView!
     private var count: Int = 0
     private var timer: NSTimer?
-    var delegate: DetailVideoDelegete?
+    var delegate: DetailVideoDelegate?
+    var isListFavorite = false
 
     @IBOutlet weak var backgroundView: UIView!
     var handlePan: ((panGestureRecognizer: UIPanGestureRecognizer) -> Void)?
@@ -51,7 +51,6 @@ class DetailVideoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         indicator.startAnimating()
-
     }
 
     override func prefersStatusBarHidden() -> Bool {
@@ -63,9 +62,14 @@ class DetailVideoViewController: BaseViewController {
     }
 
     // MARK:- Life Cycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setImageForFavoriteButton()
+    }
+
     override func setUp() {
         modalPresentationStyle = .OverCurrentContext
-        addNotifiation()
+        addNotification()
     }
 
     override func setUpUI() {
@@ -118,15 +122,6 @@ class DetailVideoViewController: BaseViewController {
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if isPlaying {
-            youtubeVideoPlayer?.moviePlayer.pause()
-            playButton.setImage(UIImage(named: "bt_play"), forState: .Normal)
-            isPlaying = false
-        } else {
-            youtubeVideoPlayer?.moviePlayer.play()
-            playButton.setImage(UIImage(named: "bt_pause"), forState: .Normal)
-            isPlaying = true
-        }
         changStatusButton(false)
     }
 
@@ -172,7 +167,7 @@ class DetailVideoViewController: BaseViewController {
         playerVideoView.addSubview(viewPlayer)
     }
 
-    private func addNotifiation() {
+    private func addNotification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(moviePlayerNowPlayingMovieDidChange),
             name: MPMoviePlayerNowPlayingMovieDidChangeNotification, object: youtubeVideoPlayer?.moviePlayer)
 
@@ -185,6 +180,10 @@ class DetailVideoViewController: BaseViewController {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(moviePlayerPlayBackDidFinish),
             name: MPMoviePlayerPlaybackDidFinishNotification, object: youtubeVideoPlayer?.moviePlayer)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(movieEnterScreen),
+            name: MPMoviePlayerDidEnterFullscreenNotification, object: youtubeVideoPlayer?.moviePlayer)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(movieExitFullScreen),
+            name: MPMoviePlayerDidExitFullscreenNotification, object: youtubeVideoPlayer?.moviePlayer)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeVideo(_:)), name: XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotatedDevice), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
@@ -241,6 +240,18 @@ class DetailVideoViewController: BaseViewController {
         History.addVideoToHistory(video)
     }
 
+    @objc private func movieEnterScreen() {
+        youtubeVideoPlayer?.moviePlayer.setFullscreen(true, animated: true)
+        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    }
+
+    @objc private func movieExitFullScreen() {
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        youtubeVideoPlayer?.moviePlayer.fullscreen = false
+    }
+
     @objc private func rotatedDevice() {
         let orientation = UIDevice.currentDevice().orientation
         if orientation == UIDeviceOrientation.LandscapeLeft || orientation == UIDeviceOrientation.LandscapeRight || orientation == UIDeviceOrientation.PortraitUpsideDown {
@@ -290,7 +301,6 @@ class DetailVideoViewController: BaseViewController {
         let state = (youtubeVideoPlayer?.moviePlayer.playbackState)!
         switch state {
         case .Stopped:
-            handleNext()
             break
         case .Interrupted:
             break
@@ -310,14 +320,13 @@ class DetailVideoViewController: BaseViewController {
 
     // MARK:- Action
     @IBAction func addVideoToFavoriteList(sender: AnyObject) {
-        self.youtubeVideoPlayer?.moviePlayer.pause()
         if isFavorite == false {
             let addFavoriteVC = AddFavoriteViewController()
             addFavoriteVC.video = video
             addFavoriteVC.delegate = self
             addFavoriteVC.view.frame = view.bounds
             view.addSubview(addFavoriteVC.view)
-            self.addChildViewController(addFavoriteVC)
+            addChildViewController(addFavoriteVC)
         } else {
             let video = RealmManager.getVideoFavorite(self.video.idVideo)
             RealmManager.deleteRealm(video)
@@ -329,6 +338,7 @@ class DetailVideoViewController: BaseViewController {
 
     @IBAction private func handlePan(sender: UIPanGestureRecognizer) {
         self.handlePan?(panGestureRecognizer: sender)
+
     }
 
     // MARK:- Webservice
@@ -355,8 +365,18 @@ class DetailVideoViewController: BaseViewController {
                                 if let statistics = item.objectForKey("statistics") as? NSDictionary {
                                     video?.viewCount = statistics["viewCount"] as? String ?? ""
                                 }
-                                self.videos.append(video!)
-                                self.detailVideoTable.reloadData()
+                                if !(video?.channelId.isEmpty)! {
+                                    var parametersThumbnail = [String: AnyObject]()
+                                    parametersThumbnail["part"] = "snippet"
+                                    parametersThumbnail["id"] = video?.channelId
+                                    VideoService.getChannelThumbnail(parametersThumbnail, completion: { (response) in
+                                        video?.channelThumnail = response as? String ?? ""
+                                        self.videos.append(video!)
+                                        self.detailVideoTable.reloadData()
+                                    })
+                                } else {
+                                    continue
+                                }
                             }
                         }
                     })
@@ -460,3 +480,4 @@ extension DetailVideoViewController: ButtonCellDelegate {
         detailVideoTable.endUpdates()
     }
 }
+

@@ -29,7 +29,7 @@ class HomeCell: BaseTableViewCell {
 
     func configureCell(video: Video) {
         thumbnailVideo.downloadImage(video.thumbnail)
-        thumbnailChannel.downloadImage(video.thumbnail)
+        thumbnailChannel.downloadImage(video.channelThumnail)
         nameVideoLabel.text = video.title
         nameChannelLabel.text = video.channelTitle
         numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount.getNumberView()) -" : "\(video.viewCount) view -"
@@ -42,8 +42,8 @@ class HomeCell: BaseTableViewCell {
     }
 
     override func prepareForReuse() {
-        thumbnailVideo.image = nil
-        thumbnailChannel.image = nil
+        thumbnailVideo.image = UIImage(named: "bg_video")
+        thumbnailChannel.image = UIImage(named: "bg_video")
     }
 
 }

@@ -72,7 +72,8 @@ class DraggalbeVideo {
                 return
             }
             let videoPlayerViewController = fromViewController as! DetailVideoViewController
-            let finalTransform = CGAffineTransformMakeScale(CGRectGetWidth(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetWidth(videoPlayerViewController.view.bounds), CGRectGetHeight(weakSelf.thumbnailVideoContainerView.bounds) * 3 / CGRectGetHeight(videoPlayerViewController.view.bounds))
+            let videoPlayerBounds = videoPlayerViewController.view.bounds
+            let finalTransform = CGAffineTransformMakeScale(CGRectGetWidth(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetWidth(videoPlayerBounds), CGRectGetHeight(weakSelf.thumbnailVideoContainerView.bounds) * 3 / CGRectGetHeight(videoPlayerBounds))
             UIView.animateWithDuration(defaultTransitionAnimationDuration, animations: {
                 videoPlayerViewController.view.transform = finalTransform
                 var finalRect = videoPlayerViewController.view.frame
@@ -125,18 +126,17 @@ class DraggalbeVideo {
                 return
             }
             let videoPlayerViewController = fromViewController as! DetailVideoViewController
-            let finalXScale = CGRectGetWidth(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetWidth(videoPlayerViewController.view.bounds)
-            let finalYScale = CGRectGetHeight(weakSelf.thumbnailVideoContainerView.bounds) * 3 / CGRectGetHeight(videoPlayerViewController.view.bounds)
+            let videoPlayerBounds = videoPlayerViewController.view.bounds
+            let finalXScale = CGRectGetWidth(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetWidth(videoPlayerBounds)
+            let finalYScale = CGRectGetHeight(weakSelf.thumbnailVideoContainerView.bounds) / CGRectGetHeight(videoPlayerBounds)
             let xScale = 1 - (percentage * (1 - finalXScale))
             let yScale = 1 - (percentage * (1 - finalYScale))
             videoPlayerViewController.view.transform = CGAffineTransformMakeScale(xScale, yScale)
             let finalXPos = CGRectGetMinX(weakSelf.thumbnailVideoContainerView.frame)
             let finalYPos = CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame)
-            let horizontalMove = min(CGRectGetMinX(weakSelf.thumbnailVideoContainerView.frame) * percentage, finalXPos)
-            let verticalMove = min(CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame) * percentage, finalYPos)
             var finalRect = videoPlayerViewController.view.frame
-            finalRect.origin.x = horizontalMove
-            finalRect.origin.y = verticalMove
+            finalRect.origin.x = min(CGRectGetMinX(weakSelf.thumbnailVideoContainerView.frame) * percentage, finalXPos)
+            finalRect.origin.y = min(CGRectGetMinY(weakSelf.thumbnailVideoContainerView.frame) * percentage, finalYPos)
             videoPlayerViewController.view.frame = finalRect
             videoPlayerViewController.backgroundView.alpha = 1 - percentage
         }
@@ -145,8 +145,8 @@ class DraggalbeVideo {
     func addActionToView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(presentFromThumbnailAction))
         thumbnailVideoContainerView.addGestureRecognizer(tap)
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePresentPan))
-        thumbnailVideoContainerView.addGestureRecognizer(pan)
+//        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePresentPan))
+//        thumbnailVideoContainerView.addGestureRecognizer(pan)
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(exitPLayerVideo))
         thumbnailVideoContainerView.addGestureRecognizer(longPress)
 
