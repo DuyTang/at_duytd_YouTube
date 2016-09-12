@@ -20,9 +20,7 @@ class Category: Object, Mappable {
 
     func mapping(map: Map) {
         id <- map["id"]
-        var snippet = [String: AnyObject]()
-        snippet <- map["snippet"]
-        title = (snippet["title"] as? String)! ?? ""
+        title <- map["snippet.title"]
     }
 
     class func getCategories() -> Results<Category>? {
