@@ -50,10 +50,6 @@ class Video: Object, Mappable, VideoObject {
         } else {
             idVideo = id
         }
-
-        idVideo <- map["id"]
-        var snippet = [String: AnyObject]()
-        snippet <- map["snippet"]
         title <- map["snippet.title"]
         channelId <- map["snippet.channelId"]
         channelTitle <- map["snippet.channelTitle"]

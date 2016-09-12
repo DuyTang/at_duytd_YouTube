@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24E01A7442F83911BDB4C608 /* Pods_YouTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */; };
+		F353D4C31D86548C0051C52A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353D4C21D86548C0051C52A /* Channel.swift */; };
+		F353D4C71D8662300051C52A /* SnippetChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353D4C61D8662300051C52A /* SnippetChannel.swift */; };
 		F35EE5941D5CC6CE005464CC /* PlayVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5921D5CC6CE005464CC /* PlayVideoCell.swift */; };
 		F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */; };
 		F35EE5981D5CC774005464CC /* DecriptVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */; };
@@ -89,6 +91,8 @@
 		435F9E24889FD396A037DDA8 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
 		70E2451E2A40AB9366DF073C /* Pods-YouTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.debug.xcconfig"; sourceTree = "<group>"; };
 		C2CCF25AB6B234644EB89295 /* Pods_YouTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F353D4C21D86548C0051C52A /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		F353D4C61D8662300051C52A /* SnippetChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnippetChannel.swift; sourceTree = "<group>"; };
 		F35EE5921D5CC6CE005464CC /* PlayVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoCell.swift; sourceTree = "<group>"; };
 		F35EE5931D5CC6CE005464CC /* PlayVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayVideoCell.xib; sourceTree = "<group>"; };
 		F35EE5961D5CC774005464CC /* DecriptVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecriptVideoCell.swift; sourceTree = "<group>"; };
@@ -408,6 +412,8 @@
 				F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */,
 				F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */,
 				F3A1F54F1D6474C2006C4C9C /* History.swift */,
+				F353D4C21D86548C0051C52A /* Channel.swift */,
+				F353D4C61D8662300051C52A /* SnippetChannel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -771,7 +777,9 @@
 				F39A2CC91D55117B003FC772 /* BaseTableViewCell.swift in Sources */,
 				F3E58B9A1D6B1CAB004BB244 /* NotificationDefine.swift in Sources */,
 				F39A2CD71D551309003FC772 /* AppDefine.swift in Sources */,
+				F353D4C31D86548C0051C52A /* Channel.swift in Sources */,
 				F3B2F9921D65A8050082FE1B /* String.swift in Sources */,
+				F353D4C71D8662300051C52A /* SnippetChannel.swift in Sources */,
 				F39A2CCD1D5511AE003FC772 /* BaseViewController.swift in Sources */,
 				F37778181D5AEA9A00AC2075 /* UIImageView.swift in Sources */,
 				F37A0C5A1D558FE100CD7CC9 /* YTPlayerView.m in Sources */,
