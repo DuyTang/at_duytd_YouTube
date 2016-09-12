@@ -46,9 +46,7 @@ class Video: Object, Mappable, VideoObject {
         var id = ""
         id <- map["id"]
         if id == "" {
-            var items = [String: AnyObject]()
-            items <- map["id"]
-            idVideo = items["videoId"] as? String ?? ""
+            idVideo <- map["id.videoId"]
         } else {
             idVideo = id
         }
@@ -56,19 +54,14 @@ class Video: Object, Mappable, VideoObject {
         idVideo <- map["id"]
         var snippet = [String: AnyObject]()
         snippet <- map["snippet"]
-        title = snippet["title"] as? String ?? ""
-        channelId = snippet["channelId"] as? String ?? ""
-        channelTitle = snippet["channelTitle"] as? String ?? ""
-        descript = snippet["description"] as? String ?? ""
-        timeUpload = snippet["publishedAt"] as? String ?? ""
-        var contentDetails = [String: AnyObject]()
-        contentDetails <- map["contentDetails"]
-        duration = contentDetails["duration"] as? String ?? ""
-
-        var statistics = [String: AnyObject]()
-        statistics <- map["statistics"]
-        viewCount = statistics["viewCount"] as? String ?? ""
-        thumbnail = Option.UrlImage + idVideo + Option.MediumImage
+        title <- map["snippet.title"]
+        channelId <- map["snippet.channelId"]
+        channelTitle <- map["snippet.channelTitle"]
+        descript <- map["snippet.description"]
+        timeUpload <- map["snippet.publishedAt"]
+        thumbnail <- map["snippet.thumbnails.medium.url"]
+        duration <- map["contentDetails.duration"]
+        viewCount <- map["statistics.viewCount"]
     }
 
     class func getVideos(id: String) -> Results<Video>? {
