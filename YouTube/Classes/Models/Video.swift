@@ -15,16 +15,6 @@ private protocol VideoObject {
     init?(history: History)
 }
 
-struct Option {
-    static let UrlImage = "https://i.ytimg.com/vi/"
-    // MARK:- Type Image
-    static let DefaulImage = "/default.jpg"
-    static let MediumImage = "/mqdefault.jpg"
-    static let HighImage = "/hqdefault.jpg"
-    static let StandardImage = "/sddefault.jpg"
-    static let MaxresImage = "/maxresdefault.jpg"
-}
-
 class Video: Object, Mappable, VideoObject {
     dynamic var idVideo = ""
     dynamic var idCategory = ""

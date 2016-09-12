@@ -1,8 +1,8 @@
 //
-//  MyVideo.swift
+//  VideoService.swift
 //  YouTube
 //
-//  Created by Duy Tang on 8/10/16.
+//  Created by Duy Tang on 9/12/16.
 //  Copyright © 2016 Duy Tang. All rights reserved.
 //
 
