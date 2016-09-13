@@ -78,6 +78,8 @@
 		F3B2F9921D65A8050082FE1B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2F9911D65A8050082FE1B /* String.swift */; };
 		F3DC49D91D86AF3F007C1184 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49D81D86AF3F007C1184 /* Comment.swift */; };
 		F3DC49DD1D86B58B007C1184 /* TopComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49DC1D86B58B007C1184 /* TopComment.swift */; };
+		F3DC49E11D86B8C4007C1184 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49DF1D86B8C4007C1184 /* CommentCell.swift */; };
+		F3DC49E21D86B8C4007C1184 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3DC49E01D86B8C4007C1184 /* CommentCell.xib */; };
 		F3E07AF01D5C5B3D00DAB7C9 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */; };
 		F3E07AF21D5C86F000DAB7C9 /* ListVideoFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */; };
 		F3E07AF61D5C89B200DAB7C9 /* VideoFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */; };
@@ -171,6 +173,8 @@
 		F3B2F9911D65A8050082FE1B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		F3DC49D81D86AF3F007C1184 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F3DC49DC1D86B58B007C1184 /* TopComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopComment.swift; sourceTree = "<group>"; };
+		F3DC49DF1D86B8C4007C1184 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		F3DC49E01D86B8C4007C1184 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		F3E07AEF1D5C5B3D00DAB7C9 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		F3E07AF11D5C86F000DAB7C9 /* ListVideoFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVideoFavorite.swift; sourceTree = "<group>"; };
 		F3E07AF41D5C89B200DAB7C9 /* VideoFavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFavoriteCell.swift; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 		F39A2CA61D550F2C003FC772 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F3DC49DE1D86B8AE007C1184 /* CommentCell */,
 				F374C2331D76C3D0005EC196 /* ButtonCell */,
 				F36FDB5F1D746B4200504A19 /* TabbarView */,
 				F37ED8ED1D6D3E3B006205E5 /* ResultSearchCell */,
@@ -592,6 +597,15 @@
 			path = HistoryViewController;
 			sourceTree = "<group>";
 		};
+		F3DC49DE1D86B8AE007C1184 /* CommentCell */ = {
+			isa = PBXGroup;
+			children = (
+				F3DC49DF1D86B8C4007C1184 /* CommentCell.swift */,
+				F3DC49E01D86B8C4007C1184 /* CommentCell.xib */,
+			);
+			path = CommentCell;
+			sourceTree = "<group>";
+		};
 		F3E07AF31D5C899700DAB7C9 /* VideoFavoriteCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +686,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3DC49E21D86B8C4007C1184 /* CommentCell.xib in Resources */,
 				F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */,
 				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
 				F37C657D1D6BFF28000AA778 /* HistoryCell.xib in Resources */,
@@ -809,6 +824,7 @@
 				F39A2CD31D5512BB003FC772 /* APIRequest.swift in Sources */,
 				F39A2CCB1D551191003FC772 /* BaseView.swift in Sources */,
 				F3B097E61D5575A5000D9E84 /* DetailVideoViewController.swift in Sources */,
+				F3DC49E11D86B8C4007C1184 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

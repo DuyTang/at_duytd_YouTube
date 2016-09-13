@@ -35,6 +35,10 @@ class APIDefine {
         func getChannel() -> String {
             return "https://www.googleapis.com/youtube/v3/channels?part=snippet"
         }
+
+        func getComment() -> String {
+            return "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet"
+        }
     }
 
 }

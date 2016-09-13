@@ -14,7 +14,7 @@ class TopComment: Object, Mappable {
     dynamic var authorDisplayName = ""
     dynamic var authorProfileImageUrl = ""
     dynamic var textDisplay = ""
-    dynamic var likeCount = ""
+    dynamic var likeCount = 0
     dynamic var publishedAt = ""
 
     required convenience init?(_ map: Map) {
@@ -22,10 +22,10 @@ class TopComment: Object, Mappable {
     }
 
     func mapping(map: Map) {
-        authorDisplayName <- map["topLevelComment.snippet.authorDisplayName"]
-        authorProfileImageUrl <- map["topLevelComment.snippet.authorProfileImageUrl"]
-        textDisplay <- map["topLevelComment.textDisplay"]
-        likeCount <- map["topLevelComment.likeCount"]
-        publishedAt <- map["topLevelComment.publishedAt"]
+        authorDisplayName <- map["snippet.authorDisplayName"]
+        authorProfileImageUrl <- map["snippet.authorProfileImageUrl"]
+        textDisplay <- map["snippet.textDisplay"]
+        likeCount <- map["snippet.likeCount"]
+        publishedAt <- map["snippet.publishedAt"]
     }
 }
