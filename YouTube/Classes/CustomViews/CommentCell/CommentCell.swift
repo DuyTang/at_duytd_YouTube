@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentCell: UITableViewCell {
+class CommentCell: BaseTableViewCell {
 
     @IBOutlet weak private var userThumbnail: UIImageView!
     @IBOutlet weak private var userNameLabel: UILabel!
@@ -31,5 +31,9 @@ class CommentCell: UITableViewCell {
         userNameLabel.text = comment.topComment.authorDisplayName
         timeCommentLabel.text = comment.topComment.publishedAt.convertTimeUpload()
         commentLabel.text = comment.topComment.textDisplay
+    }
+
+    override func setUpUI() {
+        userThumbnail.setCircle(1.0, borderColor: Color.TitleColor)
     }
 }
