@@ -145,8 +145,8 @@ class DraggalbeVideo {
     func addActionToView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(presentFromThumbnailAction))
         thumbnailVideoContainerView.addGestureRecognizer(tap)
-//        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePresentPan))
-//        thumbnailVideoContainerView.addGestureRecognizer(pan)
+        // let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePresentPan))
+        // thumbnailVideoContainerView.addGestureRecognizer(pan)
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(exitPLayerVideo))
         thumbnailVideoContainerView.addGestureRecognizer(longPress)
 
@@ -197,11 +197,12 @@ class DraggalbeVideo {
         parentVC.presentViewController(alert, animated: true, completion: nil)
     }
 
-    func prensetDetailVideoController(video: Video) {
+    func prensetDetailVideoController(video: Video, isFavorite: Bool) {
         if videoPlayerViewController.parentViewController != nil {
             videoPlayerViewControllerInitialFrame = thumbnailVideoContainerView.convertRect(self.videoPlayerViewController.view.frame, toView: parentVC.view)
             self.videoPlayerViewController.removeFromParentViewController()
         }
+        videoPlayerViewController.isListFavorite = isFavorite
         videoPlayerViewController.video = video
         videoPlayerViewController.oldVideo = video
         videoPlayerViewController.loadData()

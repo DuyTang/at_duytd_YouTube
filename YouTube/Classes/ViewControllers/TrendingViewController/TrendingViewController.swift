@@ -119,7 +119,7 @@ extension TrendingViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        dragVideo.prensetDetailVideoController(trendingVideos[indexPath.row])
+        dragVideo.prensetDetailVideoController(trendingVideos[indexPath.row], isFavorite: false)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {

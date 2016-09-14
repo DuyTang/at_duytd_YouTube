@@ -249,7 +249,7 @@ extension DetailFavoriteViewController: UITableViewDataSource {
             listVideoFavoriteTableView.deselectRowAtIndexPath(indexPath, animated: false)
             let video = Video(favorite.listVideo[indexPath.row])
             dragVideo.videoPlayerViewController.delegate = self
-            dragVideo.prensetDetailVideoController(video)
+            dragVideo.prensetDetailVideoController(video, isFavorite: true)
         } else {
             showAlert(Message.Title, message: "No Connect", cancelButton: Message.OkButton)
         }

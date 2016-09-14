@@ -215,7 +215,7 @@ extension SearchViewController: UITableViewDataSource {
                 view.endEditing(true)
             }
         } else {
-            dragVideo.prensetDetailVideoController(listVideo[indexPath.row])
+            dragVideo.prensetDetailVideoController(listVideo[indexPath.row], isFavorite: false)
         }
     }
 

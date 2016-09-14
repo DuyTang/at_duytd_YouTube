@@ -116,7 +116,7 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        dragVideo.prensetDetailVideoController(homeVideos![indexPath.row])
+        dragVideo.prensetDetailVideoController(homeVideos![indexPath.row], isFavorite: false)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {

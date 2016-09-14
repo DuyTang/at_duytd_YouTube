@@ -82,7 +82,7 @@ class DetailVideoViewController: BaseViewController {
     }
 
     override func setUpData() {
-        loadData()
+
     }
 
     func loadData() {
