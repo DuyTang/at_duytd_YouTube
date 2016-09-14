@@ -76,6 +76,10 @@
 		F3B097FD1D557FC2000D9E84 /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */; };
 		F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */; };
 		F3B2F9921D65A8050082FE1B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2F9911D65A8050082FE1B /* String.swift */; };
+		F3D3BE201D895833005DB3DB /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D3BE1E1D895833005DB3DB /* CommentViewController.swift */; };
+		F3D3BE211D895833005DB3DB /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D3BE1F1D895833005DB3DB /* CommentViewController.xib */; };
+		F3D3BE251D89583E005DB3DB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D3BE231D89583E005DB3DB /* DetailViewController.swift */; };
+		F3D3BE261D89583E005DB3DB /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D3BE241D89583E005DB3DB /* DetailViewController.xib */; };
 		F3DC49D91D86AF3F007C1184 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49D81D86AF3F007C1184 /* Comment.swift */; };
 		F3DC49DD1D86B58B007C1184 /* TopComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49DC1D86B58B007C1184 /* TopComment.swift */; };
 		F3DC49E11D86B8C4007C1184 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC49DF1D86B8C4007C1184 /* CommentCell.swift */; };
@@ -171,6 +175,10 @@
 		F3B097FB1D557FC2000D9E84 /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
 		F3B097FC1D557FC2000D9E84 /* AddFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFavoriteViewController.xib; sourceTree = "<group>"; };
 		F3B2F9911D65A8050082FE1B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		F3D3BE1E1D895833005DB3DB /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		F3D3BE1F1D895833005DB3DB /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
+		F3D3BE231D89583E005DB3DB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F3D3BE241D89583E005DB3DB /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		F3DC49D81D86AF3F007C1184 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F3DC49DC1D86B58B007C1184 /* TopComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopComment.swift; sourceTree = "<group>"; };
 		F3DC49DF1D86B8C4007C1184 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -582,6 +590,8 @@
 		F3B097DA1D557235000D9E84 /* DetailVideoViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F3D3BE221D89583E005DB3DB /* DetailController */,
+				F3D3BE1D1D895833005DB3DB /* CommentController */,
 				F3B097E41D5575A5000D9E84 /* DetailVideoViewController.swift */,
 				F3B097E51D5575A5000D9E84 /* DetailVideoViewController.xib */,
 			);
@@ -595,6 +605,24 @@
 				F3B097DD1D557264000D9E84 /* HistoryViewController.xib */,
 			);
 			path = HistoryViewController;
+			sourceTree = "<group>";
+		};
+		F3D3BE1D1D895833005DB3DB /* CommentController */ = {
+			isa = PBXGroup;
+			children = (
+				F3D3BE1E1D895833005DB3DB /* CommentViewController.swift */,
+				F3D3BE1F1D895833005DB3DB /* CommentViewController.xib */,
+			);
+			path = CommentController;
+			sourceTree = "<group>";
+		};
+		F3D3BE221D89583E005DB3DB /* DetailController */ = {
+			isa = PBXGroup;
+			children = (
+				F3D3BE231D89583E005DB3DB /* DetailViewController.swift */,
+				F3D3BE241D89583E005DB3DB /* DetailViewController.xib */,
+			);
+			path = DetailController;
 			sourceTree = "<group>";
 		};
 		F3DC49DE1D86B8AE007C1184 /* CommentCell */ = {
@@ -686,6 +714,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3D3BE211D895833005DB3DB /* CommentViewController.xib in Resources */,
 				F3DC49E21D86B8C4007C1184 /* CommentCell.xib in Resources */,
 				F36FDB6E1D7475A200504A19 /* TabBarView.xib in Resources */,
 				F3B097E71D5575A5000D9E84 /* DetailVideoViewController.xib in Resources */,
@@ -698,6 +727,7 @@
 				F39A2CED1D551AB7003FC772 /* FavoriteViewController.xib in Resources */,
 				F3B097C61D5562EB000D9E84 /* HomeCell.xib in Resources */,
 				F3B097FE1D557FC2000D9E84 /* AddFavoriteViewController.xib in Resources */,
+				F3D3BE261D89583E005DB3DB /* DetailViewController.xib in Resources */,
 				F35EE5951D5CC6CE005464CC /* PlayVideoCell.xib in Resources */,
 				F3B097DF1D557264000D9E84 /* HistoryViewController.xib in Resources */,
 				F3E825EE1D62A093005C6647 /* TrendingViewController.xib in Resources */,
@@ -778,6 +808,7 @@
 				F3B097C51D5562EB000D9E84 /* HomeCell.swift in Sources */,
 				F3B097DE1D557264000D9E84 /* HistoryViewController.swift in Sources */,
 				F37778161D5AE6E700AC2075 /* Video.swift in Sources */,
+				F3D3BE251D89583E005DB3DB /* DetailViewController.swift in Sources */,
 				F3E07AF21D5C86F000DAB7C9 /* ListVideoFavorite.swift in Sources */,
 				F3B097BD1D555E90000D9E84 /* ContentViewController.swift in Sources */,
 				F35EE5981D5CC774005464CC /* DecriptVideoCell.swift in Sources */,
@@ -825,6 +856,7 @@
 				F39A2CCB1D551191003FC772 /* BaseView.swift in Sources */,
 				F3B097E61D5575A5000D9E84 /* DetailVideoViewController.swift in Sources */,
 				F3DC49E11D86B8C4007C1184 /* CommentCell.swift in Sources */,
+				F3D3BE201D895833005DB3DB /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
