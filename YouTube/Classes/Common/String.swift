@@ -15,13 +15,16 @@ extension String {
         if checkDurationVideo(self) {
             let formattedDuration = self.stringByReplacingOccurrencesOfString("PT", withString: "").stringByReplacingOccurrencesOfString("H", withString: ":").stringByReplacingOccurrencesOfString("M", withString: ":").stringByReplacingOccurrencesOfString("S", withString: "")
             let components = formattedDuration.componentsSeparatedByString(":")
-            for component in components {
+            for index in 0...components.count - 1 {
                 duration = duration.characters.count > 0 ? duration + ":": duration
-                if component.characters.count < 2 {
-                    duration += "0" + component
-                    continue
+                if index > 0 {
+                    if components[index].characters.count < 2 {
+                        duration += "0" + components[index]
+                        continue
+                    }
                 }
-                duration += component
+                duration += components[index]
+
             }
         } else {
             duration = "-:-"
