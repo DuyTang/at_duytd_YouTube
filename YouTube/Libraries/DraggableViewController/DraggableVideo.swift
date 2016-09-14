@@ -150,6 +150,9 @@ class DraggalbeVideo {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(exitPLayerVideo))
         thumbnailVideoContainerView.addGestureRecognizer(longPress)
 
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(exitPLayerVideo1))
+        thumbnailVideoContainerView.addGestureRecognizer(pan)
+
     }
 
     @objc private func presentFromThumbnailAction(sender: UITapGestureRecognizer? = nil) {
@@ -195,6 +198,56 @@ class DraggalbeVideo {
 
             }))
         parentVC.presentViewController(alert, animated: true, completion: nil)
+
+    }
+
+    @objc private func exitPLayerVideo1(panGesture: UIPanGestureRecognizer) {
+
+        let screenSize = UIScreen.mainScreen().bounds.size
+        let width = 180 * screenSize.width
+        let height = 100 * screenSize.width * 2.4 / 4
+        videoPlayerViewControllerInitialFrame = CGRect(x: screenSize.width - (width + 5), y: screenSize.height - (height + 5), width: width, height: height)
+
+        switch panGesture.state {
+        case .Began:
+            break
+        case .Changed:
+            let translation = panGesture.translationInView(thumbnailVideoContainerView)
+            thumbnailVideoContainerView.center = CGPoint(x: thumbnailVideoContainerView.center.x + translation.x,
+                y: thumbnailVideoContainerView.center.y)
+            let percentAlpha = thumbnailVideoContainerView.center.x / UIScreen.mainScreen().bounds.size.width
+            thumbnailVideoContainerView.alpha = percentAlpha
+            panGesture.setTranslation(CGPoint.zero, inView: thumbnailVideoContainerView)
+        case .Ended:
+            let velocity = panGesture.velocityInView(thumbnailVideoContainerView)
+            print("velocity \(thumbnailVideoContainerView.center)")
+            let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
+            let slideMultiplier = magnitude / 200
+            let slideFactor = 0.1 * slideMultiplier
+
+            if thumbnailVideoContainerView.center.x > UIScreen.mainScreen().bounds.width / 3 {
+                UIView.animateWithDuration(Double(slideFactor * 2),
+                    delay: 0,
+                    options: UIViewAnimationOptions.CurveEaseOut,
+                    animations: { self.thumbnailVideoContainerView.frame = self.videoPlayerViewControllerInitialFrame!
+                        self.thumbnailVideoContainerView.alpha = 1.0
+                    },
+                    completion: nil)
+            } else {
+                parentVC.view.userInteractionEnabled = false
+                UIView.animateWithDuration(Double(slideFactor * 2),
+                    delay: 0,
+                    options: UIViewAnimationOptions.CurveEaseOut,
+                    animations: { self.thumbnailVideoContainerView.frame = CGRect(
+                        origin: CGPoint(x: -self.thumbnailVideoContainerView.bounds.width, y: self.thumbnailVideoContainerView.frame.origin.y),
+                        size: self.thumbnailVideoContainerView.bounds.size) },
+                    completion: { (finish) in
+                        self.parentVC.view.userInteractionEnabled = true
+                })
+            }
+        default:
+            break
+        }
     }
 
     func prensetDetailVideoController(video: Video, isFavorite: Bool) {

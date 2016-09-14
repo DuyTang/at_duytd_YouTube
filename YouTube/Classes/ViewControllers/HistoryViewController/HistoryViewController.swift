@@ -142,7 +142,7 @@ extension HistoryViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if hasConnectivity() {
             let video = Video(history: getListVideo(date[indexPath.section])[indexPath.row])
-            dragVideo.prensetDetailVideoController(video)
+            dragVideo.prensetDetailVideoController(video, isFavorite: false)
         } else {
             showAlert(Message.Title, message: "No Connect", cancelButton: Message.OkButton)
         }
