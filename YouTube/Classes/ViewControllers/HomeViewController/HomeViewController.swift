@@ -33,16 +33,6 @@ class HomeViewController: BaseViewController {
     }
 
     // MARK:- Life Cycle
-    override func setUpUI() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        categoryCollectionView.registerNib(CategoryCell)
-        selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
-        selectedCategoryView.backgroundColor = Color.BorderColor
-        categoryCollectionView.addSubview(selectedCategoryView)
-        pageViewController?.dataSource = self
-        pageViewController?.delegate = self
-    }
-
     override func setUpData() {
         // Category.cleanData()
         Video.cleanData()
@@ -53,6 +43,16 @@ class HomeViewController: BaseViewController {
         } else {
             loadCategories()
         }
+    }
+    
+    override func setUpUI() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        categoryCollectionView.registerNib(CategoryCell)
+        selectedCategoryView = UIView(frame: CGRect(x: 0, y: 38, width: 148.5, height: 2))
+        selectedCategoryView.backgroundColor = Color.BorderColor
+        categoryCollectionView.addSubview(selectedCategoryView)
+        pageViewController?.dataSource = self
+        pageViewController?.delegate = self
     }
 
     private func loadData() {
