@@ -13,10 +13,12 @@ struct Tabbar {
     static let Favorite = "Favorite"
     static let History = "History"
     static let Trending = "Trending"
+    static let PlayList = "PlayList"
     static let ImageHome = "ic_home"
     static let ImageFavorite = "ic_favorite"
     static let ImageHistory = "ic_history"
     static let ImageTrending = "ic_trending"
+    static let ImagePlayList = "ic_chanel"
     static let ImageButton = "bt_star"
     static let ImageSelectedButton = "bt_starfill"
 }
