@@ -26,12 +26,12 @@ class HistoryCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureHistoryCell(video: History) {
-        self.thumbnailVideoImage.downloadImage(video.thumbnail)
-        self.titleLabel.text = video.title
-        self.channelLabel.text = video.channelTitle
-        self.timeViewLabel.text = video.time
-        durationLabel.text = video.duration.convertDuration()
+    func configureHistoryCell(object: History) {
+        self.thumbnailVideoImage.downloadImage(object.video.thumbnail)
+        self.titleLabel.text = object.video.title
+        self.channelLabel.text = object.video.channelTitle
+        self.timeViewLabel.text = object.time
+        durationLabel.text = object.video.duration.convertDuration()
     }
 
 }

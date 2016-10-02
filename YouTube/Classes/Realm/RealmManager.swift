@@ -18,11 +18,11 @@ class RealmManager {
     class func getAllCategory() -> Results<Category>? {
         return realm?.objects(Category)
     }
-    class func getAllHistory() -> Results<History>?{
+    class func getAllHistory() -> Results<History>? {
         return realm?.objects(History)
     }
-    
-    class func getAllObject(ob: Object) -> Results<Object>?{
+
+    class func getAllObject(ob: Object) -> Results<Object>? {
         return realm?.objects(Object)
     }
 
@@ -30,7 +30,7 @@ class RealmManager {
         return realm?.objects(Video).filter("idCategory = %@", id)
     }
     class func getListVideoFavorite(key: String) -> Results<VideoFavorite>? {
-        return realm?.objects(VideoFavorite).filter("idVideo = %@", key)
+        return realm?.objects(VideoFavorite).filter("video.idVideo = %@", key)
     }
 
     class func getVideoFavorite(key: String) -> VideoFavorite {

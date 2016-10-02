@@ -23,7 +23,7 @@ class Video: Object, Mappable, VideoObject {
     dynamic var duration = ""
     dynamic var channelId = ""
     dynamic var channelTitle = ""
-    dynamic var channelThumnail = ""
+    dynamic var channelThumbnail = ""
     dynamic var descript = ""
     dynamic var thumbnail = ""
     dynamic var timeUpload = ""
@@ -62,31 +62,31 @@ class Video: Object, Mappable, VideoObject {
 
     convenience required init(_ object: VideoFavorite) {
         self.init()
-        idVideo = object.idVideo ?? ""
-        idCategory = object.idCategory ?? ""
-        title = object.title ?? ""
-        viewCount = object.viewCount ?? ""
-        duration = object.duration ?? ""
-        channelId = object.channelId ?? ""
-        channelTitle = object.channelTitle ?? ""
-        channelThumnail = object.channelThumbnail ?? ""
-        thumbnail = object.thumbnail ?? ""
-        descript = object.descript ?? ""
-        timeUpload = object.timeUpload
+        idVideo = object.video.idVideo ?? ""
+        idCategory = object.video.idCategory ?? ""
+        title = object.video.title ?? ""
+        viewCount = object.video.viewCount ?? ""
+        duration = object.video.duration ?? ""
+        channelId = object.video.channelId ?? ""
+        channelTitle = object.video.channelTitle ?? ""
+        channelThumbnail = object.video.channelThumbnail ?? ""
+        thumbnail = object.video.thumbnail ?? ""
+        descript = object.video.descript ?? ""
+        timeUpload = object.video.timeUpload
     }
 
     convenience required init(history: History) {
         self.init()
-        idVideo = history.idVideo ?? ""
-        idCategory = history.idCategory ?? ""
-        title = history.title ?? ""
-        viewCount = history.viewCount ?? ""
-        duration = history.duration ?? ""
-        channelId = history.channelId ?? ""
-        channelTitle = history.channelTitle ?? ""
-        channelThumnail = history.channelThumbnail ?? ""
-        thumbnail = history.thumbnail ?? ""
-        descript = history.descript ?? ""
+        idVideo = history.video.idVideo ?? ""
+        idCategory = history.video.idCategory ?? ""
+        title = history.video.title ?? ""
+        viewCount = history.video.viewCount ?? ""
+        duration = history.video.duration ?? ""
+        channelId = history.video.channelId ?? ""
+        channelTitle = history.video.channelTitle ?? ""
+        channelThumbnail = history.video.channelThumbnail ?? ""
+        thumbnail = history.video.thumbnail ?? ""
+        descript = history.video.descript ?? ""
     }
 
     class func cleanData() {

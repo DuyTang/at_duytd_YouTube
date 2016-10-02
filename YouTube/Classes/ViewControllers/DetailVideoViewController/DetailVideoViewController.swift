@@ -370,7 +370,7 @@ class DetailVideoViewController: BaseViewController {
                                     parametersThumbnail["part"] = "snippet"
                                     parametersThumbnail["id"] = video?.channelId
                                     VideoService.getChannelThumbnail(parametersThumbnail, completion: { (response) in
-                                        video?.channelThumnail = response as? String ?? ""
+                                        video?.channelThumbnail = response as? String ?? ""
                                         self.videos.append(video!)
                                         self.detailVideoTable.reloadData()
                                     })

@@ -29,7 +29,7 @@ class VideoService {
                             parameter["id"] = video?.channelId
                             getChannelThumbnail(parameter, completion: { (response) in
                                 video?.idCategory = id
-                                video?.channelThumnail = response as? String ?? ""
+                                video?.channelThumbnail = response as? String ?? ""
                                 RealmManager.addRealm(video!)
                                 completion(success: true, nextPageToken: pageToken, error: nil)
                             })

@@ -15,32 +15,14 @@ protocol HistoryObject {
 }
 
 class History: Object, HistoryObject {
-    dynamic var idVideo = ""
-    dynamic var idCategory = ""
-    dynamic var title = ""
-    dynamic var viewCount = ""
-    dynamic var duration = ""
-    dynamic var channelId = ""
-    dynamic var channelTitle = ""
-    dynamic var channelThumbnail = ""
-    dynamic var descript = ""
-    dynamic var thumbnail = ""
+    dynamic var video: Video!
     dynamic var date = ""
     dynamic var time = ""
 
     required convenience init(_ video: Video) {
         self.init()
         let datetime = NSDate()
-        idVideo = video.idVideo ?? ""
-        idCategory = video.idCategory ?? ""
-        title = video.title ?? ""
-        viewCount = video.viewCount ?? ""
-        duration = video.duration ?? ""
-        channelId = video.channelId ?? ""
-        channelTitle = video.channelTitle ?? ""
-        channelThumbnail = video.channelThumnail ?? ""
-        descript = video.descript ?? ""
-        thumbnail = video.thumbnail ?? ""
+        self.video = video
         date = datetime.toString(DateFormat.Date, localized: true)
         time = datetime.toString(DateFormat.Time24NoSec, localized: true)
     }

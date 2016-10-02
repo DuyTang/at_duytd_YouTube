@@ -63,7 +63,7 @@ class FavoriteCell: BaseTableViewCell {
             let realm = try Realm()
             let videos = realm.objects(VideoFavorite).filter("idListFavorite = %@", idFavorite)
             if videos.count > 0 {
-                thumbnailFavorite = videos[0].thumbnail
+                thumbnailFavorite = videos[0].video.thumbnail
             } else {
                 thumbnailFavorite = ""
             }

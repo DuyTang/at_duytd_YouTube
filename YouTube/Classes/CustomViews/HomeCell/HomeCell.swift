@@ -29,7 +29,7 @@ class HomeCell: BaseTableViewCell {
 
     func configureCell(video: Video) {
         thumbnailVideo.downloadImage(video.thumbnail)
-        thumbnailChannel.downloadImage(video.channelThumnail)
+        thumbnailChannel.downloadImage(video.channelThumbnail)
         nameVideoLabel.text = video.title
         nameChannelLabel.text = video.channelTitle
         numberViewLabel.text = Int(video.viewCount) > 1 ? "\(video.viewCount.getNumberView()) -" : "\(video.viewCount) view -"

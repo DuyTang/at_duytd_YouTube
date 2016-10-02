@@ -155,7 +155,7 @@ class SearchViewController: BaseViewController {
                                         parametersThumbnail["part"] = "snippet"
                                         parametersThumbnail["id"] = video?.channelId
                                         VideoService.getChannelThumbnail(parametersThumbnail, completion: { (response) in
-                                            video?.channelThumnail = response as? String ?? ""
+                                            video?.channelThumbnail = response as? String ?? ""
                                             self.listVideo.append(video!)
                                             self.videoSearchTableView.reloadData()
                                         })
