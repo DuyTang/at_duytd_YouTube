@@ -35,8 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let trendingNavi = BaseNavigationController(rootViewController: TrendingViewController())
         trendingNavi.setAttributeForNavigation(Tabbar.Trending, image: Tabbar.ImageTrending)
 
+        let playListNavi = BaseNavigationController(rootViewController: PlayListViewController())
+        playListNavi.setAttributeForNavigation(Tabbar.PlayList, image: Tabbar.ImageHome)
+
         tabBarController = CustomTabBarController()
-        tabBarController?.viewControllers = [homeNavi, trendingNavi, favoriteNavi, historyNavi]
+        tabBarController?.viewControllers = [homeNavi, trendingNavi, favoriteNavi, playListNavi, historyNavi]
         tabBarController?.selectedIndex = 0
 
         self.window?.rootViewController = tabBarController

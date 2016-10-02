@@ -12,6 +12,7 @@ enum ButtonItemType: Int {
     case Home = 0
     case Trending
     case Favorite
+    case PlayList
     case History
 
     var nonSelectImage: String {
@@ -24,6 +25,8 @@ enum ButtonItemType: Int {
             return "ic_trending"
         case .History:
             return "ic_history"
+        case .PlayList:
+            return "ic_chanel"
         }
     }
 
@@ -37,6 +40,8 @@ enum ButtonItemType: Int {
             return "ic_selecttrending"
         case .History:
             return "ic_selecthistory"
+        case .PlayList:
+            return "ic_selectchanel"
         }
     }
 }
